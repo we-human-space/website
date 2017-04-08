@@ -1,0 +1,332 @@
+body {
+  color: #e5d9ff;
+  /*background-color: #1e1a22;*/
+  font-family: "futura-pt",sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.topSection {
+  height: 50px;
+  background-color: #1e1a22;
+}
+
+.menuContainer768 {
+  display: none;
+}
+
+.menuContainer320 {
+  padding-top: 50px;
+  background-color: #1e1a22;
+  background-image: url(img/Pheasant-3percent.png);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.07rem;
+  line-height: 1.6rem;
+  font-weight: 600;
+}
+
+.colWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 77%;
+}
+
+.sectionTitle {
+  color: #5d00f8;
+}
+
+.separator {
+  margin-top: 10px;
+  width: 8px;
+  border: solid 1px #5d00f8;
+  border-radius: 5px;
+}
+
+.filterBy {
+  margin-top: 25px;
+}
+
+.ulBlock {
+  padding: 0;
+}
+
+.ulBlock li {
+  text-decoration: none;
+  list-style: none;
+}
+
+.ulBlock li a {
+  outline: 0;
+  text-decoration: none;
+  color: #e5d9ff
+}
+
+/*-----PHEASANT-----*/
+
+/*.menuPheasant {
+  height: 100%;
+  background-image: url(img/pheasant.svg);
+  background-position: center;
+  background-size: cover;
+  opacity: 0.03;
+  margin-left: -30px;
+}*/
+
+
+/*-----SOCIAL MEDIA-----*/
+
+.socialMediaMenu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -100px;
+  margin-left: 25px;
+  width: 100px;
+}
+
+.youtube {
+  width: 25px;
+  height: 20px;
+}
+
+.instagram {
+  width: 20px;
+  height: 24px;
+}
+
+.behance {
+  width: 25px;
+  height: 24px;
+}
+
+.socialIcons {
+  width: 100%;
+  height: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .menuContainer320 {
+    display: none;
+  }
+
+  .menuContainer768 {
+    padding-top: 60px;
+    background-color: #1e1a22;
+    background-image: url(img/Pheasant-3percent.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 69vh;
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    letter-spacing: 0.07rem;
+    line-height: 2rem;
+    font-weight: 600;
+  }
+
+  .filterBy {
+    margin-top: 0px;
+  }
+
+  /*-------BOTTOM--------*/
+
+  .socialMediaMenu {
+    display: none;
+  }
+
+  .bottom768 {
+    margin-top: -100px;
+    text-align: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.08rem;
+  }
+
+  .socialMediaBottom {
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+  .youtubeBtm {
+    width: 25px;
+    height: 19px;
+  }
+
+  .instagramBtm {
+    width: 20px;
+    height: 22px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .behanceBtm {
+    width: 25px;
+    height: 20px;
+  }
+
+  .allThreeIcons {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .socialIconsBtm {
+    width: 100%;
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .menuContainer768 {
+    display: none;
+  }
+
+  .menuContainer1024{
+    padding-right: 60px;
+    background-color: #1e1a22;
+    height: 96vh;
+    display: flex;
+    justify-content: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.07rem;
+    line-height: 2rem;
+    font-weight: 600;
+  }
+
+  .colWrapper {
+    padding-top: 13%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 6%;
+  }
+
+  .colLeft {
+    display: flex;
+    justify-content: space-between;
+    width: 53%;
+    margin-right: 7%;
+  }
+
+  .colWidth {
+    width: 149px;
+  }
+
+  .ulBlock {
+    font-size: 1.2rem;
+  }
+
+  .colRight {
+    width: 42%;
+  }
+
+  .padColRight {
+    padding-left: 8%;
+  }
+
+  .newletter {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+  }
+
+  .copySlogan {
+    margin-top: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1.65px;
+    margin-bottom: 0.7rem;
+    line-height: 1.3rem;
+  }
+
+  .emailInput {
+    margin-top: 25px;
+    width: 190px;
+    border: #e5d9ff solid 2px;
+    border-radius: 10px 0 0 10px;
+    background-color: transparent;
+    font-family: "futura-pt",sans-serif;
+    font-size: 1rem;
+    letter-spacing: 1.2px;
+    padding: 10px 5px 10px 15px;
+  }
+
+  .joinBtn {
+    margin-left: -8px;
+    width: 120px;
+    background-color: #e5d9ff;
+    border: #e5d9ff solid 2px;
+    border-radius: 0 10px 10px 0;
+    padding: 10px 5px 10px 8px;
+    font-family: "futura-pt",sans-serif;
+    font-size: 1rem;
+    color: #5d00f8;
+  }
+
+  .copyFollow768 {
+    margin-top: 1.2rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.10rem;
+    font-weight: 600;
+    line-height: 1.4rem;
+  }
+
+  .bottom768 {
+    margin-top: -130px;
+  }
+
+}
+
+
+@media (min-width: 1175px) {
+
+  .colWrapper {
+    padding-top: 12%;
+  }
+
+  .colLeft {
+    width: 45%;
+  }
+
+  .colRight {
+    width: 42%;
+  }
+
+  .padColRight {
+    padding-left: 12%;
+  }
+
+  .copySlogan {
+    font-size: 1rem;
+  }
+
+  .copySlogan br {
+    content: ' '
+  }
+
+  .copySlogan br:after {
+    content: ' '
+  }
+
+  .emailInput {
+    width: 210px;
+  }
+
+  .joinBtn {
+    width: 130px;
+  }
+
+  .copyFollow768 {
+    font-size: 0.85rem;
+  }
+
+}

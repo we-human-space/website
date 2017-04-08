@@ -1,0 +1,347 @@
+body {
+  color: #e5d9ff;
+  background-color: #1e1a22;
+  font-family: "futura-pt",sans-serif;
+}
+
+input {
+  outline: none;
+}
+
+
+.purpleStroke {
+  z-index: 2;
+  height: 1960px;
+  background-image: url(img/paint.png);
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.firstBird {
+  z-index: 1;
+  opacity: 0.03;
+  margin-top: -1085px;
+  margin-left: -100px;
+  width: 111%;
+}
+
+.headerContainer {
+  z-index: 3;
+  height: 100vh;
+  width: 70%;
+  display: flex;
+}
+
+.header {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+.headerContent {
+  margin-left: 9%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyHeadline {
+  font-size: 3.3rem;
+  letter-spacing: 0.005px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.copySlogan {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1.65px;
+  margin-bottom: 0.7rem;
+}
+
+.socialMedia {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.youtube {
+  width: 25px;
+  height: 20px;
+}
+
+.instagram {
+  width: 20px;
+  height: 24px;
+}
+
+.behance {
+  width: 25px;
+  height: 24px;
+}
+
+.socialIcons {
+  width: 100%;
+  height: 100%;
+}
+
+.emailInput {
+  width: 285px;
+  border: #e5d9ff solid 2px;
+  border-radius: 10px 0 0 10px;
+  background-color: transparent;
+  font-family: "futura-pt",sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1.2px;
+  padding: 13px 10px 13px 15px;
+}
+
+
+.joinBtn {
+  margin-left: -5px;
+  width: 150px;
+  background-color: #e5d9ff;
+  border: #e5d9ff solid 2px;
+  border-radius: 0 10px 10px 0;
+  padding: 13px 10px 13px 15px;
+  font-family: "futura-pt",sans-serif;
+  font-size: 1.1rem;
+  color: #5d00f8;
+}
+
+.copyFollow {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.10rem;
+  font-weight: 600;
+}
+
+/*_______________*/
+
+.valueProps {
+
+}
+
+.sectionOne {
+  text-align: center;
+}
+
+.copySectionBird1Container {
+  margin-top: 600px;
+}
+
+.copySeekers {
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+  font-weight: 600;
+}
+
+.copySelfMastery {
+  font-size: 1.7rem;
+  letter-spacing: 0.03rem;
+  margin-top: -22px;
+}
+
+.blogBtn {
+  display: inline-block;
+  margin-top: 15px;
+}
+
+.blogBtnStyle {
+  border: #e5d9ff solid 2px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #e5d9ff;
+  padding: 13.5px 30px;
+  font-family: "futura-pt",sans-serif;
+  letter-spacing: 0.08rem;
+}
+
+.copyAncient {
+  margin-top: 50px;
+  font-size: 1.2rem;
+  letter-spacing: 0.08rem;
+}
+
+.copyAncientUp {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/*----section 2----*/
+
+.sectionTwo {
+  /*text-align: center;*/
+}
+
+.tameYF {
+  margin-top: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.Dog {
+  background-image: url(img/Dog.png);
+  background-repeat: no-repeat;
+  height: 300px;
+}
+
+.copyTame {
+  font-size: 1.7rem;
+  letter-spacing: 0.03rem;
+  margin-left: 315px;
+  padding-top: 45px;
+}
+
+.copyTamePosition {
+  margin-top: -5px;
+  margin-left: 315px;
+}
+
+.copyTameExplain {
+  font-size: 1.1rem;
+  letter-spacing: 0.08rem;
+  line-height: 1.7rem;
+}
+
+.enterNR {
+  margin-top: 125px;
+  display: flex;
+  justify-content: center;
+}
+
+.sun {
+  background-image: url(img/Sun.png);
+  background-repeat: no-repeat;
+  background-position: right;
+  height: 350px;
+}
+
+.copyEnter {
+  font-size: 1.7rem;
+  letter-spacing: 0.03rem;
+  margin-right: 260px;
+  padding-top: 85px;
+}
+
+.copyEnterPosition {
+  margin-top: -10px;
+  margin-right: 260px;
+  text-align: right;
+}
+
+.copyEnterExplain {
+  font-size: 1.1rem;
+  letter-spacing: 0.08rem;
+  line-height: 1.7rem;
+}
+
+.liveYD {
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+}
+
+.manEagle {
+  background-image: url(img/ManEagle.png);
+  background-repeat: no-repeat;
+  height: 350px;
+}
+
+.copyLive {
+  font-size: 1.7rem;
+  letter-spacing: 0.03rem;
+  margin-left: 310px;
+  padding-top: 54px;
+}
+
+.copyLivePosition {
+  margin-top: -7px;
+  margin-left: 312px;
+}
+
+.copyLiveExplain {
+  font-size: 1.1rem;
+  letter-spacing: 0.08rem;
+  line-height: 1.7rem;
+}
+
+/*-----Bottom________*/
+
+.greatJourney {
+  margin-top: 310px;
+  text-align: center;
+}
+
+.copyGreat {
+  font-size: 1.7rem;
+  letter-spacing: 0.03rem;
+}
+
+.copyGreatExplain {
+  margin-top: -5px;
+  font-size: 1.2rem;
+  letter-spacing: 0.08rem;
+  margin-bottom: 35px;
+}
+
+.bottom {
+  margin-top: 195px;
+  text-align: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.08rem;
+}
+
+.copyBottom {
+  /*display: block;*/
+}
+
+.socialMediaBottom {
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+
+.youtubeBtm {
+  width: 25px;
+  height: 19px;
+}
+
+.instagramBtm {
+  width: 20px;
+  height: 22px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.behanceBtm {
+  width: 25px;
+  height: 20px;
+}
+
+.allThreeIcons {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialIconsBtm {
+  width: 100%;
+}
+
+
+/*______MEDIA QUERIES_____*/
+
+@media (min-width: 768px) {
+
+
+}
+
+@media (min-width: 992px) {
+
+
+}
