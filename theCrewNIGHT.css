@@ -319,6 +319,64 @@ a:hover, a:active, a:focus {
   margin: 5px 0;
 }
 
+.contentContainer {
+	padding-top: 60px;
+}
+
+.headline {
+	text-align: center;
+	font-size: 0.9rem;
+	letter-spacing: 0.04rem;
+}
+
+.crewIMG img {
+	width: 100%;
+}
+
+.imgExplain {
+	display: flex;
+	justify-content: center;
+}
+
+.imgExplainPlacement {
+	width: 90%;
+}
+
+.crewSubtitle {
+	text-align: center;
+	color: #8D45F2;
+	letter-spacing: 0.14rem;
+	font-size: 0.8rem;
+}
+
+.crewSubtitle h4 {
+	text-transform: uppercase;
+	margin: 50px 0 15px 0;
+}
+
+.crewSubtitle h1 {
+	letter-spacing: 0.06rem;
+	color: #e5d9ff;
+	margin: 0;
+	font-weight: 600;
+	font-size: 1.8rem;
+}
+
+.crewDescription {
+	margin-top: 40px;
+	font-size: 1.2rem;
+	line-height: 1.8rem;
+	letter-spacing: 0.04rem;
+}
+
+.sectionMember {
+	margin: 150px 0;
+}
+
+.memberImg img {
+	width: 100%;
+}
+
 /*----SOCIAL MEDIA-----*/
 
 .socialMedia {
@@ -524,6 +582,10 @@ a:hover, a:active, a:focus {
 
 	.logoPNG {
 		width: 100%;
+	}
+
+	.contentContainer {
+		padding-top: 80px;
 	}
 }
 
@@ -788,6 +850,11 @@ a:hover, a:active, a:focus {
 	}
 
 	/*------MENU END------*/
+
+	.contentContainer {
+		padding-top: 150px;
+		padding-right: 40px;
+	}
 
 }
 
