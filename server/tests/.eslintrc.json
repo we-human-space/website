@@ -1,0 +1,18 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "globals": {
+        "supertest": false,
+        "should": false,
+        "assert": false,
+        "chalk": false,
+        "config": false,
+        "path": false,
+        "models": false,
+        "xss": false,
+        "server": false
+    }
+}

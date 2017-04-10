@@ -1,0 +1,34 @@
+FROM mhart/alpine-node:6.2.0
+
+# Essentials
+RUN apk update &&\
+    apk upgrade &&\
+    apk add \
+#    gcc \
+#    g++ \
+    linux-headers \
+    ca-certificates \
+#     git \
+#     make \
+#     gnupg \
+#     openssl \
+#     curl \
+#     grep \
+#     mysql-client \
+#     tmux \
+     bash
+
+#Getting complete POSIX versions
+#RUN apk --update add \
+#    tar \
+#    wget
+
+RUN mkdir -p /var/www/futureboy
+WORKDIR /var/www/futureboy
+
+# Install nodemon for global use
+RUN npm install nodemon --global
+
+EXPOSE 8080
+
+CMD [ "/bin/sh", "./start.sh" ]

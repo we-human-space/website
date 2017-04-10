@@ -1,0 +1,37 @@
+{
+  "name": "futureboyhq",
+  "version": "1.0.0",
+  "description": "FutureboyHQ Official Website",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha ./test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/futureboyHQ/website.git"
+  },
+  "keywords": [
+    "futureboy"
+  ],
+  "author": "futureboyHQ",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/futureboyHQ/website/issues"
+  },
+  "homepage": "www.futureboyhq.com",
+  "dependencies": {
+    "body-parser": "1.15.2",
+    "express": "4.14.0",
+    "mongo-sanitize": "1.0.0",
+    "mongodb": "2.2.11",
+    "mongoose": "4.6.5",
+    "validator": "6.2.0"
+  },
+  "devDependencies": {
+    "inquirer": "1.2.2",
+    "mocha": "0.3.x",
+    "nodemon": "1.11.0",
+    "should": "^11.1.1",
+    "supertest": "^2.0.0"
+  }
+}

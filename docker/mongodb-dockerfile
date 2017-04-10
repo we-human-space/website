@@ -1,0 +1,11 @@
+FROM mongo:latest
+
+#Installing Node
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -y nodejs
+
+#Setting Up Mongo
+WORKDIR /var/www/db
+COPY ./.config/mongo /var/www/.config/mongo
