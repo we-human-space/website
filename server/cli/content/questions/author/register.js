@@ -13,6 +13,7 @@ module.exports = function(supermenu){
     var review = reviewer({
       target: author,
       callbacks: {
+        username: set_username,
         name: set_name,
         age: set_age,
         title: set_title,
@@ -26,6 +27,7 @@ module.exports = function(supermenu){
       }
     });
     return Promise.resolve(author)
+    .then(set_username)
     .then(set_name)
     .then(set_age)
     .then(set_title)
@@ -37,6 +39,7 @@ module.exports = function(supermenu){
     .then(set_url("website"))
     .then(set_country)
     .then(review)
+    .then(commit)
     .then(supermenu)
     .catch((err) => {
       console.log(err);
@@ -46,7 +49,7 @@ module.exports = function(supermenu){
   };
 };
 
-function set_name(author){
+function set_username(author){
   var q = {
     type: 'input',
     name: 'username'
@@ -54,13 +57,32 @@ function set_name(author){
   return inquire.looping(
     (a) => !a.username,
     (answer, first) => {
-      q.message = "What's the futurename? (Required)";
+      q.message = "What's the futurename (unique username, like github)? (Required)";
       if(!answer.username && !first) q.message = "Please enter a valid name.";
       return q;
     },
     {}
   ).then((answer) => {
-    author.name = answer.username;
+    author.username = answer.username;
+    return author;
+  });
+}
+
+function set_name(author){
+  var q = {
+    type: 'input',
+    name: 'fullname'
+  };
+  return inquire.looping(
+    (a) => !a.fullname,
+    (answer, first) => {
+      q.message = "What's their full name? (Required)";
+      if(!answer.fullname && !first) q.message = "Please enter a valid name.";
+      return q;
+    },
+    {}
+  ).then((answer) => {
+    author.name = answer.fullname;
     return author;
   });
 }
@@ -180,5 +202,15 @@ function set_country(author){
   ).then((answer) => {
     author.country = answer.country;
     return author;
+  });
+}
+
+function commit(author){
+  return author.save()
+  .then(() => {
+    return Author.findOne({username: author.username});
+  })
+  .then((a) => {
+    console.log(`  User ${a.username} was successfully saved to database!\n`);
   });
 }

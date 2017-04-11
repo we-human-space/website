@@ -9,7 +9,12 @@ module.exports = function(options){
     let copy = make_shallow_copy(target, Object.keys(callbacks));
     let commit = options.commit ?
                  options.commit :
-                 () => { commit_on_target(target, copy); return Promise.resolve(target); };
+                 (a) => {
+                   commit_on_target(target, q.copy);
+                   let ans = {};
+                   ans[q.name] = a;
+                   return ans;
+                 };
     let cancel = options.cancel ?
                  options.cancel :
                  () => { return Promise.reject(null); };
@@ -17,14 +22,19 @@ module.exports = function(options){
     let q = {
       type: 'list',
       name: 'choice',
-      message: 'Please review the entered information: '
+      message: 'Please review the entered information: ',
+      copy: copy,
     };
-    set_actions(q, copy, callbacks, commit, cancel);
+    set_actions(q, callbacks, commit, cancel);
     return inquire.looping(
-      (a) => {console.log("this is");console.log(a);console.log("sparta");return !(a.choice === ">> Commit" || a.choice === ">> Cancel");},
-      (t, first) => { if(!first) set_actions(q, t, callbacks, commit, cancel); return q; },
+      (a) => {
+        return a.choice === undefined || !(a.choice === ">> Commit" || a.choice === ">> Cancel");},
+      (ans, first) => {
+        if(!first) set_actions(q, callbacks, commit, cancel);
+        return q;
+      },
       {}
-    );
+    ).then(() => { return target; });
   };
 };
 
@@ -41,10 +51,10 @@ function make_shallow_copy(target, properties){
 }
 
 
-function set_actions(q, copy, callbacks, commit, cancel){
+function set_actions(q, callbacks, commit, cancel){
   q.actions = {};
   q.choices = undefined;
-  set_callback_actions(q, copy, callbacks);
+  set_callback_actions(q, q.copy, callbacks);
   //q.actions[">> Undo"] = () => { return; };/*TODO*/
   //q.actions[">> Redo"] = () => { return; };/*TODO*/
   q.actions[">> Commit"] = commit;
@@ -60,7 +70,14 @@ function set_callback_actions(q, target, callbacks){
     else value = target[key] + "";
     let shortened = value.length > 50 ? ' ...' : '';
     value = value.length > 50 ? value.substring(0,50): value;
-    q.actions[`${capitalize(key)}: ${value}${shortened}`] = () => callbacks[key](target);
+    q.actions[`${capitalize(key)}: ${value}${shortened}`] = (a) => {
+      return callbacks[key](target)
+      .then(() => {
+        let ans = {};
+        ans[q.name] = a;
+        return ans;
+      });
+    }
   }
 }
 

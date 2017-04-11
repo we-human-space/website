@@ -16,7 +16,7 @@ function ask(question){
   .then(function(answer){
     console.log(`  Answered: ${answer[question.name]}`);
     if(question.type === "rawlist" || question.type === "list"){
-      return question.actions[answer[question.name]]();
+      return question.actions[answer[question.name]](answer[question.name]);
     }else if(question.type === "input" || question.type === "confirm"){
       if(typeof question.actions === "object" &&
          typeof question.actions[question.name] === "function"){

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const cache = new WeakMap();
 
 var AuthorSchema = new Schema({
+  username: {type: String, required: true, index: true},
   name: {type: String, required: true, index: true},
   age: {type: Number, required: true},
   bio: {type: String, required: true},
@@ -14,7 +15,7 @@ var AuthorSchema = new Schema({
   instagram: {type: String, required: false},
   website: {type: String, required: false},
   country: {type: String, required: false},
-  imageURL: {type: String, required: true}
+  //imageURL: {type: String, required: true}
 });
 
 AuthorSchema.index({'name': 'text'});
