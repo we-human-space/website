@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const cache = new WeakMap();
 
 var AuthorSchema = new Schema({
-  name: {type: String, required: true},
+  name: {type: String, required: true, index: true},
   bio: {type: String, required: true},
   interests: {type: String, required: false},
   title: {type: String, required: true},
@@ -15,5 +16,13 @@ var AuthorSchema = new Schema({
 });
 
 AuthorSchema.index({'name': 'text'});
+
+AuthorSchema.methods.findFromCache = function(id) {
+  return cache.get(id);
+};
+
+AuthorSchema.methods.saveToCache = function(id, author) {
+  return cache.set(id, author);
+};
 
 module.exports = AuthorSchema;

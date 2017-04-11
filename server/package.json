@@ -21,10 +21,12 @@
   "homepage": "www.futureboyhq.com",
   "dependencies": {
     "body-parser": "1.15.2",
+    "consolidate": "0.14.5",
     "express": "4.14.0",
     "mongo-sanitize": "1.0.0",
     "mongodb": "2.2.11",
     "mongoose": "4.6.5",
+    "node-uuid": "1.4.8",
     "validator": "6.2.0"
   },
   "devDependencies": {
