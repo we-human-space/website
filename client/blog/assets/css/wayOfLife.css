@@ -1,14 +1,19 @@
 html, body {
   color: #e5d9ff;
   background-color: #221f29;
-  font-family:"futura-pt", sans-serif;
+  font-family: "futura-pt",sans-serif;
   max-width: 100%;
   overflow-x: hidden;
+  margin: 0;
 }
 
 input {
   outline: none;
   color: #e5d9ff;
+}
+
+::-webkit-input-placeholder {
+ color: #e5d9ff;
 }
 
 a {
@@ -21,8 +26,8 @@ a:hover, a:active, a:focus {
   outline: 0;
 }
 
-::-webkit-input-placeholder {
- color: #e5d9ff;
+header {
+  margin: 0;
 }
 
 /*-----ANIMATION-------*/
@@ -233,7 +238,7 @@ a:hover, a:active, a:focus {
 .menuContainer320 {
   padding-top: 60px;
   background-color: #221f29;
-  /*background-image: url(img/Pheasant-3percent.png);
+  /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;*/
@@ -302,11 +307,13 @@ a:hover, a:active, a:focus {
   display: none;
 }
 
+
+
 /*---END MENU---*/
 
-.hamburger {
-  padding: 10px;
-}
+
+
+
 
 .lineStyle {
   width: 25px;
@@ -319,114 +326,89 @@ a:hover, a:active, a:focus {
   margin: 5px 0;
 }
 
-.contentContainer {
-	padding-top: 60px;
+.headerContainer {
+  background-image: url(../img/NorthernLights-1440px.jpg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  margin-left: ;
 }
 
-.headline {
-	text-align: center;
-	font-size: 0.9rem;
-	letter-spacing: 0.04rem;
-}
-
-.crewIMG1024 {
-	display: none;
-}
-
-.crewIMG768 img {
-	width: 100%;
-}
-
-.img768 {
-	display: none;
-}
-
-.imgExplain {
-	display: flex;
-	justify-content: center;
-}
-
-.imgExplainPlacement {
-	width: 85%;
-}
-
-.crewSubtitle {
-	text-align: center;
-	color: #8D45F2;
-	letter-spacing: 0.14rem;
-	font-size: 0.8rem;
-}
-
-.crewSubtitle h4 {
-	text-transform: uppercase;
-	margin: 50px 0 15px 0;
-}
-
-.crewSubtitle h1 {
-	letter-spacing: 0.06rem;
-	color: #e5d9ff;
-	margin: 0;
-	font-weight: 600;
-	font-size: 1.6rem;
-}
-
-.crewDescription {
-	margin-top: 40px;
-	font-size: 1.2rem;
-	line-height: 1.8rem;
-	letter-spacing: 0.04rem;
-}
-
-.sectionMember {
-	margin: 150px 0;
-}
-
-.memberImg img {
-	width: 100%;
-}
-
-.blogBtn {
-	/*z-index: 10;*/
+.headerContent {
   display: flex;
-	justify-content: center;
-  margin-top: 50px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
 
-.blogBtnStyle {
-  border: #8D45F2 solid 2px;
-  border-radius: 10px;
+.title {
+  /*margin-top: -30px;*/
+	display: none;
+}
+
+.title h3 {
+  font-size: 1.1rem;
+  margin: 0;
+  letter-spacing: 0.04rem;
+  font-weight: 500;
+}
+
+.title h1 {
+  letter-spacing: 0.04rem;
+  margin: 0;
+  font-size: 3rem;
+}
+
+.sectionOne {
+  margin-top: -150px;
+  text-align: center;
   background-color: transparent;
-  color: #8D45F2;
-  padding: 13.5px 0;
-  font-family: "futura-pt",sans-serif;
-	font-weight: 600;
+}
+
+.thisSeek {
+  margin-bottom: 20px;
+}
+
+.thisSeek h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04rem;
+}
+
+.seekExplain {
+  font-weight: 400;
+  letter-spacing: 0.05rem;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.seekExplainPlacement {
+  width: 90%;
+}
+
+.p2 {
+  margin: 40px 0;
+}
+
+.principles {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.principleBox {
+  margin: 30px 0;
+}
+
+.principleTitle h1 {
+  font-size: 1.4rem;
   letter-spacing: 0.08rem;
-}
-
-.blogBtnStyle a {
-	padding: 13.5px 30px;
-	border-radius: 8px;
-}
-
-.blogBtnStyle a:hover {
-	color: #8D45F2;
-	background-color: #221f29;
-}
-
-.blogBtnStyle a:active {
-	color: #8D45F2;
-	background-color: #221f29;
-}
-
-.blogBtnStyle a:hover {
-	/*color: #8D45F2;*/
-}
-
-.btnInfo {
-	letter-spacing: 0.06rem;
-	margin-top: 25px;
-	text-align: center;
-	font-size: 1rem;
 }
 
 /*----SOCIAL MEDIA-----*/
@@ -496,7 +478,7 @@ a:hover, a:active, a:focus {
 /*----BOTTOM------*/
 
 .bottom {
-  margin-top: 50px;
+  margin-top: 75px;
   text-align: center;
   font-size: 1.1rem;
   letter-spacing: 0.08rem;
@@ -533,15 +515,7 @@ a:hover, a:active, a:focus {
   align-items: center;
 }
 
-.socialIconsBtm {
-  width: 100%;
-}
-
 @media (min-width: 361px) {
-
-	.crewSubtitle h1 {
-		font-size: 1.8rem;
-	}
 
   .menuContainer320 {
     font-size: 0.9rem;
@@ -560,9 +534,9 @@ a:hover, a:active, a:focus {
   }
 
   .menuContainer768 {
-    padding-top: 60px;
+    padding-top: 120px;
     background-color: #221f29;
-    /*background-image: url(img/Pheasant-3percent.png);
+    /*background-image: url(../img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;*/
@@ -574,6 +548,7 @@ a:hover, a:active, a:focus {
     line-height: 2rem;
     font-weight: 600;
 		flex-wrap: wrap;
+		margin-top: -60px;
   }
 
   .colWrapper {
@@ -611,7 +586,7 @@ a:hover, a:active, a:focus {
   .bottom768 {
     display: inline-block;
     position: fixed;
-		margin-top: 45px;
+		margin-top: 25px;
     text-align: center;
     font-size: 1.1rem;
     letter-spacing: 0.08rem;
@@ -623,60 +598,29 @@ a:hover, a:active, a:focus {
 
 	/*-----END MENU----*/
 
-	.imgExplainPlacement {
-		margin-top: 40px;
-		width: 75%;
-		/*margin-left: 20%:*/
-	}
-
-	.crewSubtitle {
-		text-align: left;
-		color: #8D45F2;
-		letter-spacing: 0.14rem;
-		font-size: 1rem;
-	}
-
-	.crewSubtitle h4 {
-		text-transform: uppercase;
-		margin: 50px 0 15px 0;
-	}
-
-	.crewSubtitle h1 {
-		letter-spacing: 0.08rem;
-		color: #e5d9ff;
-		margin: 0;
-		font-weight: 600;
-		font-size: 2.8rem;
-	}
-
-	.blogBtn {
-		/*z-index: 10;*/
-	  display: block;
-		text-align: left;
-	  margin-top: 50px;
-	}
-
-	.btnInfo {
-		letter-spacing: 0.06rem;
-		margin-top: 25px;
-		text-align: left;
-		font-size: 1.1rem;
-	}
-
-	.crewDescription {
-		margin-top: 40px;
-		font-size: 1.3rem;
-		line-height: 2rem;
-		letter-spacing: 0.06rem;
-	}
-
-
 }
 
 @media (min-width: 768px) {
 
+	.headerContainer {
+	  background-image: url(../img/NorthernLights-1440px.jpg);
+	  background-position: top;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  height: 100vh;
+	  margin-left: ;
+	}
+
+	.headerContent {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  text-align: center;
+	}
+
 	.navBar {
 		height: 80px;
+		background-color: transparent;
 	}
 
 	.logoFuture {
@@ -689,25 +633,65 @@ a:hover, a:active, a:focus {
 		width: 100%;
 	}
 
-	.contentContainer {
-		padding-top: 80px;
+	.seekExplainPlacement {
+	  width: 680px;
 	}
 
-	.img320 {
-		display: none;
+	.headerContent {
+	  height: 1440px;
 	}
 
-	.img768 {
-		display: block;
+	.title {
+	  margin-top: -30px;
 	}
 
-	.img768 img {
-		width: 100%;
+	.sectionOne {
+	  margin-top: -245px;
+	  text-align: center;
+	  background-color: transparent;
+	}
+
+	.thisSeek {
+	  margin-bottom: 20px;
+	}
+
+	.thisSeek h1 {
+	  font-size: 2.5rem;
+	  font-weight: 600;
+	  letter-spacing: 0.04rem;
+	}
+
+	.seekExplain {
+	  font-weight: 400;
+	  letter-spacing: 0.05rem;
+	  line-height: 1.9rem;
+	  font-size: 1.3rem;
+	}
+
+	.p2 {
+	  margin: 40px 0;
+	}
+
+	.principles {
+	  margin-top: 60px;
+	  display: flex;
+	  justify-content: center;
+	  text-align: center;
+	}
+
+	.principleBox {
+	  margin: 40px 0;
+	}
+
+	.principleTitle h1 {
+	  font-size: 1.6rem;
+	  letter-spacing: 0.08rem;
 	}
 
 }
 
 @media (min-width: 1024px) {
+
 
 	.logo1024 {
 		display: block;
@@ -719,6 +703,10 @@ a:hover, a:active, a:focus {
 
 	.logo1024 img {
 		width: 150px;
+	}
+
+	.contentContainer {
+		padding-right: 40px;
 	}
 
 	.navBar {
@@ -744,7 +732,7 @@ a:hover, a:active, a:focus {
 
 	.hamburger {
 		align-self: flex-start;
-		margin-top: 13px;
+		padding: 23px 26px;
 	}
 
 	.ul800 {
@@ -769,17 +757,18 @@ a:hover, a:active, a:focus {
 	}
 
 	.WoL {
-
 		text-decoration: none;
 		list-style: none;
 		width: 111px;
 		margin: 0 60px;
+		border-bottom: solid 2px #e5d9ff;
+		border-radius: 1px;
 	}
 
 
 	.WoL a:hover {
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
+		/*border-bottom: solid 2px #e5d9ff;
+		border-radius: 1px;*/
 	}
 
 	.FB a:hover {
@@ -806,13 +795,11 @@ a:hover, a:active, a:focus {
 		align-self: flex-start;
 		list-style: none;
 		width: 89px;
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
 	}
 
 	.TC a:hover {
-		/*border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;*/
+		border-bottom: solid 2px #e5d9ff;
+		border-radius: 1px;
 	}
 
 	/*------MENU-----*/
@@ -969,57 +956,38 @@ a:hover, a:active, a:focus {
 
 	/*------MENU END------*/
 
-	.crewIMG768 {
-		display: none;
-	}
 
-	.crewIMG1024 {
-		display: block;
-		background-image: url(img/Crew-Night-1440x.JPG);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		height: 100vh;
-	}
-
-	.img1024 img {
-		width: 100%;
-	}
-
-	.img1024 {
-		display: block;
-	}
-
-	.contentContainer {
-		padding-right: 0px;
-		padding-top: 0;
-	}
-
-	.sectionTwo {
-		margin-left: 42%;
-		width: 50%;
-	}
-
-	.imgExplain {
-		padding-left: 10%;
-	}
-
-	.imgExplainPlacement {
-		margin-top: 40px;
-		width: 85%;
-	}
-
-	.crewDescription {
-		max-width: 720px;
-		margin-top: 40px;
-		font-size: 1.3rem;
-		line-height: 2rem;
-		letter-spacing: 0.06rem;
-	}
 
 }
 
 @media (min-width: 1175px) {
+
+	.headerContainer {
+	  background-image: url(../img/NorthernLights-2560px.jpg);
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  height: 100vh;
+	  margin-left: ;
+	}
+
+	.headerContent {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  text-align: center;
+		position: relative;
+	}
+
+	.title {
+		display: none;
+	}
+
+
+	.sectionOne {
+		margin-top: -180px;
+	}
+
 
 	.colRight {
 		margin-left: 8%;
@@ -1053,4 +1021,12 @@ a:hover, a:active, a:focus {
 	.copyFollow768MENU {
 		font-size: 0.82rem;
 	}
+}
+
+@media (min-width: 1675px) {
+
+	.sectionOne {
+		margin-top: -120px;
+	}
+
 }

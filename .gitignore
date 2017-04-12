@@ -41,3 +41,6 @@ jspm_packages
 
 # Logger folder
 log
+
+# mac images
+.DS_Store
