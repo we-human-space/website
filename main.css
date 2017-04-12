@@ -5,10 +5,7 @@ html, body {
   font-family: "futura-pt",sans-serif;
   max-width: 100%;
   overflow-x: hidden;
-	background-image: url(img/BG-Export.jpg);
-	background-position: top;
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-color: #221f29;
 }
 
 input {
@@ -19,7 +16,7 @@ input {
 a {
   outline: 0;
   text-decoration: none;
-  color: #e5d9ff
+  color: #e5d9ff;
 }
 
 a:hover, a:active, a:focus {
@@ -27,13 +24,8 @@ a:hover, a:active, a:focus {
 }
 
 ::-webkit-input-placeholder {
- color: #d0cdfa;
+ color: #e5d9ff;
 }
-
-.landing {
-
-}
-
 
 /*-----ANIMATION-------*/
 
@@ -42,11 +34,11 @@ a:hover, a:active, a:focus {
 	animation-name: fadeIn;
 	-webkit-animation-name: fadeIn;
 
-	animation-duration: 3.5s;
-	-webkit-animation-duration: 3.5s;
+	animation-duration: 5s;
+	-webkit-animation-duration: 5s;
 
-	animation-timing-function: ease-in-out;
-	-webkit-animation-timing-function: ease-in-out;
+	animation-timing-function: cubic-bezier(0.335, 0.010, 1.000, -0.080);
+	-webkit-animation-timing-function: cubic-bezier(0.335, 0.010, 1.000, -0.080);
 
 	visibility: visible !important;
 }
@@ -100,7 +92,7 @@ a:hover, a:active, a:focus {
 
 @keyframes slideLeft {
 	0% {
-		opacity: 0.8;
+		opacity: 0.9;
 		transform: translateX(100%);
 	}
 
@@ -120,13 +112,79 @@ a:hover, a:active, a:focus {
 	}
 }
 
+.slideDown{
+	animation-name: slideDown;
+	-webkit-animation-name: slideDown;
+
+	animation-duration: 0.7s;
+	-webkit-animation-duration: 0.7s;
+
+	animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+
+	visibility: visible !important;
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-100%);
+	}
+
+	100% {
+		transform: translateY(0%);
+	}
+}
+
+@-webkit-keyframes slideDown {
+	0% {
+		-webkit-transform: translateY(-100%);
+	}
+
+	100% {
+		-webkit-transform: translateY(0%);
+	}
+}
+
+.slideUp{
+	animation-name: slideUp;
+	-webkit-animation-name: slideUp;
+
+	animation-duration: 0.7s;
+	-webkit-animation-duration: 0.7s;
+
+	animation-timing-function: ease;
+	-webkit-animation-timing-function: ease;
+
+	visibility: visible !important;
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(0%);
+	}
+
+	100% {
+		transform: translateY(-100%);
+	}
+}
+
+@-webkit-keyframes slideUp {
+	0% {
+		-webkit-transform: translateY(0%);
+	}
+
+	100% {
+		-webkit-transform: translateY(-100%);
+	}
+}
+
 /*-----END ANIMATION-------*/
 
 .navBar {
   position: fixed;
   z-index: 10;
   height: 60px;
-  background-color: #1e1a22;
+  background-color: #221f29;
   display: block;
   width: 100%;
   display: flex;
@@ -171,7 +229,7 @@ a:hover, a:active, a:focus {
 
 .menuContainer320 {
   padding-top: 60px;
-  background-color: #1e1a22;
+  background-color: #221f29;
   /*background-image: url(img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
@@ -192,13 +250,13 @@ a:hover, a:active, a:focus {
 }
 
 .sectionTitle {
-  color: #5d00f8;
+  color: #8D45F2;
 }
 
 .separator {
   margin-top: 10px;
   width: 8px;
-  border: solid 1px #5d00f8;
+  border: solid 1px #8D45F2;
   border-radius: 5px;
 }
 
@@ -222,10 +280,19 @@ a:hover, a:active, a:focus {
   color: #e5d9ff
 }
 
-.socialMediaMenu {
+.socialMediaMenu360 {
   position: fixed;
-  bottom: 0;
-  margin-left: 45px;
+  margin-top: 125%;
+	left: 45px;
+  /*margin-left: 45px;*/
+}
+
+.socialMedia360 {
+  width: 100px;
+  /*height: 50px;*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bottom768 {
@@ -250,16 +317,16 @@ a:hover, a:active, a:focus {
 }
 
 .purpleStroke {
-  /*z-index: 2;*/
-  height: 1960px;
-  /*background-image: url(img/paint.png);
+  z-index: 10;
+  height: 100vh;
+  background-image: url(img/WispyClouds-1440px.jpg);
   background-position: top;
   background-size: cover;
-  background-repeat: no-repeat;*/
+  background-repeat: no-repeat;
 }
 
 .headerContainer {
-  z-index: 3;
+  /*z-index: 3;*/
   height: 100vh;
   width: 100%;
   display: flex;
@@ -273,7 +340,7 @@ a:hover, a:active, a:focus {
 
 .headerContent {
   margin-left: 20px;
-  margin-top: 70px;
+  margin-top: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -283,15 +350,17 @@ a:hover, a:active, a:focus {
   font-size: 2.2rem;
   letter-spacing: 0.005px;
   font-weight: 700;
-  margin: 0;
+  margin-top: 30px;
+	margin-bottom: 0;
 }
 
 .copySlogan {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 1.65px;
-  margin-bottom: 0.7rem;
+  margin-bottom: 5px;
   line-height: 2rem;
+	margin-top: 10px;
 }
 
 .socialMedia {
@@ -329,6 +398,7 @@ a:hover, a:active, a:focus {
   border-radius: 10px 0 0 10px;
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
+	font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 1.2px;
   padding: 8px 10px 8px 15px;
@@ -342,6 +412,7 @@ a:hover, a:active, a:focus {
   border-radius: 0 10px 10px 0;
   padding: 8px 5px 8px 5px;
   font-family: "futura-pt",sans-serif;
+	font-weight: 500;
   font-size: 0.9rem;
   color: #5d00f8;
 }
@@ -350,29 +421,44 @@ a:hover, a:active, a:focus {
   margin-top: 1.2rem;
   font-size: 0.75rem;
   letter-spacing: 0.10rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2rem;
 }
 
-.copyFollow768 {
+.copyFollow700 {
   display: none;
 }
 
 /*_______________*/
 
 .valueProps {
-
+	margin-top: -500px;
+	z-index: 1;
 }
 
 .sectionOne {
-  text-align: center;
+	z-index: 1;
+	margin-top: 300px;
+	text-align: center;
 }
 
 .copySectionBird1Container {
-  margin-top: -400px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+	height: 1350px;
+	margin-top: 400px;
+	/*background-image: url(img/Pheasant-3percent.png);
+	background-position: top;
+	background-size: cover;
+	background-repeat: no-repeat;*/
+	z-index: -1;
 }
 
+
+
 .copySeekers {
+	margin-top: 450px;
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
   font-weight: 600;
@@ -391,24 +477,42 @@ a:hover, a:active, a:focus {
 }
 
 .blogBtnStyle {
-  border: #e5d9ff solid 2px;
+  border: #8D45F2 solid 2px;
   border-radius: 10px;
   background-color: transparent;
-  color: #e5d9ff;
-  padding: 13.5px 30px;
+  color: #5d00f8;
+  padding: 13.5px 0;
   font-family: "futura-pt",sans-serif;
+	font-weight: 600;
   letter-spacing: 0.08rem;
 }
 
-.blogBtnStyle:hover {
-	background-color: #e5d9ff;
-	color: #5d00f8;
+.blogBtnStyle a {
+	padding: 13.5px 30px;
+	border-radius: 8px;
 }
+
+.blogBtnStyle a:hover {
+  color: #8D45F2;
+	background-color: #221f29;
+}
+
+.blogBtnStyle a:active {
+  color: #8D45F2;
+	background-color: #221f29;
+}
+
+.blogBtnStyle a:hover {
+	/*color: #5d00f8;*/
+}
+
+
 
 .copyAncient {
   margin-top: 30px;
   font-size: 1rem;
   letter-spacing: 0.08rem;
+	font-weight: 500;
 }
 
 .copyAncientUp {
@@ -416,16 +520,8 @@ a:hover, a:active, a:focus {
   margin-bottom: 5px;
 }
 
-/*_____Section 2_____*/
-
-.sectionTwo {
-  text-align: center;
-}
-
 .tameYF {
-  margin-top: 400px;
-  /*display: flex;
-  justify-content: center;*/
+  margin-top: 250px;
 }
 
 .Dog {
@@ -447,6 +543,7 @@ a:hover, a:active, a:focus {
 }
 
 .copyTameExplain {
+	font-weight: 500;
   font-size: 1.05rem;
   letter-spacing: 0.08rem;
   line-height: 1.7rem;
@@ -456,8 +553,30 @@ a:hover, a:active, a:focus {
   display: none;
 }
 
+
+/*_____Section 2_____*/
+
+.sectionTwo {
+	margin-top: 1050px;
+	text-align: center;
+}
+
+.copySectionBird2Container {
+	padding-top: 100px;
+	padding-bottom: 20px;
+	width: 100%;
+	margin-top: -1000px;
+	height: 1350px;
+	/*background-image: url(img/Pheasant-3percent-Reversed.png);
+	background-position: top;
+	background-size: cover;
+	background-repeat: no-repeat;*/
+	z-index: -1;
+}
+
+
 .enterNR {
-  margin-top: 350px;
+  margin-top: 0px;
 }
 
 .sun {
@@ -481,6 +600,7 @@ a:hover, a:active, a:focus {
   font-size: 1.05rem;
   letter-spacing: 0.08rem;
   line-height: 1.7rem;
+	font-weight: 500;
 }
 
 .copyEnterExplain768 {
@@ -512,6 +632,7 @@ a:hover, a:active, a:focus {
   font-size: 1.05rem;
   letter-spacing: 0.08rem;
   line-height: 1.7rem;
+	font-weight: 500;
 }
 
 
@@ -519,7 +640,7 @@ a:hover, a:active, a:focus {
 
 .greatJourney {
 	z-index: 10;
-  margin-top: 600px;
+  margin-top: 450px;
   text-align: center;
 }
 
@@ -532,13 +653,15 @@ a:hover, a:active, a:focus {
   margin-top: 30px;
   font-size: 1rem;
   letter-spacing: 0.1rem;
+	font-weight: 500;
 }
 
 .bottom {
-  margin-top: 230px;
+  margin-top: 450px;
   text-align: center;
   font-size: 1.1rem;
   letter-spacing: 0.08rem;
+	font-weight: 600;
 }
 
 .socialMediaBottom {
@@ -585,10 +708,12 @@ a:hover, a:active, a:focus {
 
   .emailInput {
     width: 190px;
+		font-weight: 600;
   }
 
   .joinBtn {
     width: 110px;
+		font-weight: 600;
   }
 
   .copySelfMastery {
@@ -597,14 +722,17 @@ a:hover, a:active, a:focus {
 
   .copyTameExplain {
     font-size: 1.1rem;
+		font-weight: 500;
   }
 
   .copyEnterExplain {
     font-size: 1.1rem;
+		font-weight: 500;
   }
 
   .copyLiveExplain {
     font-size: 1.1rem;
+		font-weight: 500;
   }
 
   .menuContainer320 {
@@ -617,6 +745,23 @@ a:hover, a:active, a:focus {
 
 }
 
+@media (min-width: 410px) {
+
+	.copyFollow {
+		display: none;
+	}
+
+	.copyFollow700 {
+		display: inline-block;
+		margin-top: 1.2rem;
+	  font-size: 0.8rem;
+	  letter-spacing: 0.10rem;
+	  font-weight: 500;
+	  line-height: 1.2rem;
+	}
+
+}
+
 @media (min-width: 600px){
 
   .menuContainer320 {
@@ -625,7 +770,7 @@ a:hover, a:active, a:focus {
 
   .menuContainer768 {
     padding-top: 60px;
-    background-color: #1e1a22;
+    background-color: #221f29;
     /*background-image: url(img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
@@ -637,6 +782,7 @@ a:hover, a:active, a:focus {
     letter-spacing: 0.07rem;
     line-height: 2rem;
     font-weight: 600;
+		flex-wrap: wrap;
   }
 
   .colWrapper {
@@ -652,6 +798,7 @@ a:hover, a:active, a:focus {
   }
 
   .ulBlock {
+		line-height: 2rem;
     font-size: 1.1rem;
   }
 
@@ -660,7 +807,7 @@ a:hover, a:active, a:focus {
     border-radius: 1px;
   }
 
-  .socialMediaMenu {
+  .socialMediaMenu360 {
     display: none;
   }
 
@@ -673,7 +820,7 @@ a:hover, a:active, a:focus {
   .bottom768 {
     display: inline-block;
     position: fixed;
-    bottom: 0;
+		margin-top: 45px;
     text-align: center;
     font-size: 1.1rem;
     letter-spacing: 0.08rem;
@@ -683,6 +830,10 @@ a:hover, a:active, a:focus {
     margin-top: 0px;
   }
 }
+
+
+
+
 
 
 @media (min-width: 768px) {
@@ -701,6 +852,19 @@ a:hover, a:active, a:focus {
     width: 100%;
   }
 
+	.copyFollow {
+		display: none;
+	}
+
+	.copyFollow700 {
+		display: inline-block;
+		margin-top: 1.5rem;
+		font-size: 1rem;
+		letter-spacing: 0.10rem;
+		font-weight: 600;
+		line-height: 1.5rem;
+	}
+
 
   .headerContainer {
     z-index: 3;
@@ -716,6 +880,7 @@ a:hover, a:active, a:focus {
   }
 
   .headerContent {
+		margin-top: 93vh;
     margin-left: 9%;
     display: flex;
     justify-content: center;
@@ -750,6 +915,7 @@ a:hover, a:active, a:focus {
     border-radius: 10px 0 0 10px;
     background-color: transparent;
     font-family: "futura-pt",sans-serif;
+		font-weight: 600;
     font-size: 1.1rem;
     letter-spacing: 1.2px;
     padding: 13px 10px 13px 15px;
@@ -764,28 +930,19 @@ a:hover, a:active, a:focus {
     border-radius: 0 10px 10px 0;
     padding: 13px 10px 13px 15px;
     font-family: "futura-pt",sans-serif;
+		font-weight: 600;
     font-size: 1.1rem;
     color: #5d00f8;
   }
 
-  .copyFollow {
-    display: none;
-  }
-
-  .copyFollow768 {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    letter-spacing: 0.10rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-  }
 
   .copySectionBird1Container {
-    margin-top:-100px;
+		height: 1550px;
+    margin-top: 300px;
   }
 
   .copySeekers {
+		margin-top: 650px;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
     font-weight: 600;
@@ -815,6 +972,9 @@ a:hover, a:active, a:focus {
 
   /*----section 2----*/
 
+	.tameYF {
+	  margin-top: 300px;
+	}
 
   .Dog {
     height: 175px;
@@ -835,10 +995,16 @@ a:hover, a:active, a:focus {
 
   .copyTameExplain768 {
     display: inline-block;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.08rem;
     line-height: 1.7rem;
+		font-weight: 500;
   }
+
+	.copySectionBird2Container {
+		height: 1550px;
+		/*margin-top: 300px;*/
+	}
 
   .sun {
     height: 200px;
@@ -847,6 +1013,10 @@ a:hover, a:active, a:focus {
   .sunLogo {
     height: 100%;
   }
+
+	.enterNR {
+		margin-top: 280px;
+	}
 
   .copyEnter {
     font-size: 1.7rem;
@@ -859,9 +1029,10 @@ a:hover, a:active, a:focus {
 
   .copyEnterExplain768 {
     display: inline-block;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.08rem;
     line-height: 1.7rem;
+		font-weight: 500;
   }
 
   .manEagle {
@@ -872,13 +1043,26 @@ a:hover, a:active, a:focus {
     height: 100%;
   }
 
+
+	.liveYD {
+	  margin-top: 500px;
+	}
+
   .copyLive {
     font-size: 1.7rem;
     letter-spacing: 0.03rem;
   }
 
+	.copyLiveExplain {
+		display: inline-block;
+		font-size: 1.2rem;
+		letter-spacing: 0.08rem;
+		line-height: 1.7rem;
+		font-weight: 500;
+	}
+
   .greatJourney {
-    margin-top: 500px;
+    margin-top: 600px;
     text-align: center;
   }
 
@@ -892,10 +1076,11 @@ a:hover, a:active, a:focus {
     font-size: 1.2rem;
     letter-spacing: 0.08rem;
     margin-bottom: 35px;
+		font-weight: 500;
   }
 
   .bottom {
-    margin-top: 150px;
+    margin-top: 1000px;
     text-align: center;
     font-size: 1.1rem;
     letter-spacing: 0.08rem;
@@ -913,7 +1098,7 @@ a:hover, a:active, a:focus {
     z-index: 5;
     height: 100vh;
     width: 80px;
-    background-color: #1e1a22;
+    background-color: #221f29;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -927,6 +1112,10 @@ a:hover, a:active, a:focus {
     width: 100%;
   }
 
+	.purpleStroke {
+	  height: 1000px;
+	}
+
 
   .hamburger {
     align-self: flex-start;
@@ -935,32 +1124,34 @@ a:hover, a:active, a:focus {
   .ul800 {
     position: absolute;
     top: 50%;
-    right: -121px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
+		margin-top:
     margin: 0;
     transform: rotate(-90deg);
     z-index: 6;
     font-size: 1.2rem;
     letter-spacing: 0.1rem;
+		font-weight: 600;
   }
 
   .WoL {
     text-decoration: none;
-    align-self: flex-start;
+    /*align-self: flex-start;*/
     list-style: none;
-    width: 120px;
+    width: 111px;
+		margin: 0 60px;
   }
 
   .WoL a:hover {
-    border-bottom: solid 3px #e5d9ff;
+    border-bottom: solid 2px #e5d9ff;
     border-radius: 1px;
   }
 
   .FB a:hover {
-    border-bottom: solid 3px #e5d9ff;
+    border-bottom: solid 2px #e5d9ff;
     border-radius: 1px;
   }
 
@@ -968,12 +1159,30 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     align-self: flex-end;
     list-style: none;
-    margin-right: 100px;
+		width: 83px;
+    /*margin-right: 140px;*/
   }
 
   .FB a {
-    padding-bottom: 2px;
+    /*padding-bottom: 2px;*/
   }
+
+	.TC {
+		/*margin-left: 60px;*/
+		text-decoration: none;
+		align-self: flex-start;
+		list-style: none;
+		width: 89px;
+	}
+
+	.TC a:hover {
+		border-bottom: solid 2px #e5d9ff;
+		border-radius: 1px;
+	}
+
+	/*.TC a {
+		padding-bottom: 2px;
+	}*/
 
   /*------MENU-----*/
 
@@ -989,7 +1198,7 @@ a:hover, a:active, a:focus {
 
   .menuWrapper1024 {
     padding-right: 80px;
-    background-color: #1e1a22;
+    background-color: #221f29;
     height: 100vh;
     font-size: 1.1rem;
     letter-spacing: 0.07rem;
@@ -1044,6 +1253,7 @@ a:hover, a:active, a:focus {
 
   .ulBlock {
     font-size: 1.2rem;
+		line-height: 2rem;
   }
 
   .resonateWith {
@@ -1082,6 +1292,7 @@ a:hover, a:active, a:focus {
     border-radius: 10px 0 0 10px;
     background-color: transparent;
     font-family: "futura-pt",sans-serif;
+		font-weight: 500;
     font-size: 1rem;
     letter-spacing: 1.2px;
     padding: 10px 5px 10px 15px;
@@ -1095,6 +1306,7 @@ a:hover, a:active, a:focus {
     border-radius: 0 10px 10px 0;
     padding: 10px 5px 10px 8px;
     font-family: "futura-pt",sans-serif;
+		font-weight: 600;
     font-size: 1rem;
     color: #5d00f8;
   }
@@ -1111,9 +1323,32 @@ a:hover, a:active, a:focus {
     margin-top: -130px;
   }
 
+	.bottom768 {
+		display: none;
+	}
+
+	.bottom1024 {
+		display: inline-block;
+		position: fixed;
+		bottom: 0;
+		text-align: center;
+		font-size: 1.1rem;
+		letter-spacing: 0.08rem;
+	}
+
   /*------MENU END------*/
 
-  .blogBtn {
+	.copySectionBird1Container {
+		margin-top: -850px;
+		height: 1850px;
+	}
+
+	.copySeekers {
+		margin-top: 900px;
+	}
+
+
+	.blogBtn {
     margin-top: 5px;
   }
 
@@ -1121,16 +1356,13 @@ a:hover, a:active, a:focus {
     display: none;
   }
 
-	.copySectionBird1Container {
-		margin-top: -400px;
-	}
 
   .sectionTwo {
     text-align: inherit;
   }
 
   .tameYF {
-    margin-top: 380px;
+    margin-top: 420px;
     display: flex;
     justify-content: center;
   }
@@ -1144,23 +1376,28 @@ a:hover, a:active, a:focus {
   .copyTame {
     font-size: 1.7rem;
     letter-spacing: 0.03rem;
-    margin-left: 315px;
+    margin-left: 225px;
     padding-top: 45px;
   }
 
   .copyTamePosition {
     margin-top: -5px;
     margin-left: 315px;
+		text-align: left;
   }
 
   .copyTameExplain {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.08rem;
     line-height: 1.7rem;
   }
 
+	.copySectionBird2Container {
+		height: 1850px;
+	}
+
   .enterNR {
-    margin-top: 125px;
+    margin-top: 0px;
     display: flex;
     justify-content: center;
   }
@@ -1190,7 +1427,7 @@ a:hover, a:active, a:focus {
   }
 
   .copyEnterExplain {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.08rem;
     line-height: 1.7rem;
   }
@@ -1224,7 +1461,7 @@ a:hover, a:active, a:focus {
   }
 
   .copyLiveExplain {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.08rem;
     line-height: 1.7rem;
   }
@@ -1242,7 +1479,7 @@ a:hover, a:active, a:focus {
   }
 
   .bottom {
-    margin-top: 195px;
+    margin-top: 150px;
   }
 }
 
@@ -1256,9 +1493,21 @@ a:hover, a:active, a:focus {
     content: ' '
   }
 
+	.copySloganMENU br {
+		content: ' '
+	}
+
+	.copySloganMENU br:after {
+		content: ' '
+	}
+
 }
 
 @media (min-width: 1175px) {
+
+	.purpleStroke {
+		height: 1300px;
+	}
 
 
   .colRight {

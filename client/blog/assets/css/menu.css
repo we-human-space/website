@@ -18,7 +18,7 @@ body {
 .menuContainer320 {
   padding-top: 50px;
   background-color: #1e1a22;
-  background-image: url(img/Pheasant-3percent.png);
+  background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -71,7 +71,7 @@ body {
 
 /*.menuPheasant {
   height: 100%;
-  background-image: url(img/pheasant.svg);
+  background-image: url(../img/pheasant.svg);
   background-position: center;
   background-size: cover;
   opacity: 0.03;
@@ -118,7 +118,7 @@ body {
   .menuContainer768 {
     padding-top: 60px;
     background-color: #1e1a22;
-    background-image: url(img/Pheasant-3percent.png);
+    background-image: url(../img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
