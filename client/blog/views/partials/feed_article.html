@@ -1,0 +1,54 @@
+<div class="article">
+
+  <div class="postIMG">
+    <div class="{{img_class}}"> <!---PLEASE DELETE THE IMG CLASS YOU WON'T USE--->
+      <a href="{{article.url}}"><img src="{{article.thumbnail_url}}" alt=""></a>
+      <div class="overlay">
+        <div class="overlayPlacement">
+          <div class="hover">
+            <div class="postData">
+              <div class="postTitle">
+                <a href="#"><h1>{{article.title}}</h1></a>
+              </div>
+              <div class="post">
+                <div class="postCategories">
+                  <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author.displayName}}</a></span>
+                </div>
+                <div class="postSummary">
+                  <div class="postSummaryFlex widerSummaryFlex"> <!---DONT KEEP BOTH widerSummaryFlex for images > 900px PLEASE DELETE THE OTHER ONE)--->
+                    <h4>{{article.summary}}</h4>
+                  </div>
+                </div>
+                <div class="postReadBtn">
+                  <a href="#"><span>> </span> &nbspRead more</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lower1024">
+    <div class="postData">
+      <div class="postTitle">
+        <a href="#"><h1>{{article.title}}</h1></a>
+      </div>
+      <div class="post">
+        <div class="postCategories">
+          <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author}}</a></span>
+        </div>
+        <div class="postSummary">
+          <div class="postSummaryFlex">
+            <h4>{{article.summary}}</h4>
+          </div>
+        </div>
+        <div class="postReadBtn">
+          <a href="#"><span>> </span> &nbspRead more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

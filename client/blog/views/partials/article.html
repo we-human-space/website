@@ -1,0 +1,34 @@
+{{> header}}
+  <div class="contentLanding">
+    {{> navbar}}
+
+    <div class="content">
+      <div class="contentContainer">
+
+        <div class="logo1024">
+          <a href="index.html"><img src="../../assets/img/FutureboyLogo-v2.png" alt=""></a>
+        </div>
+
+        <div class="articleIMG">
+          <div class="articleImgPlacement">
+            <img src="{{article.thumbnail_url}}" alt="">
+          </div>
+        </div>
+
+          <div class="articleData">
+            <div class="articleDataPlacement">
+              <div class="postCategories">
+                <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author.displayName}}</a></span>
+              </div>
+              <div class="postTitle">
+                <a href="#"><h1>{{article.title}}</h1></a>
+              </div>
+              <div class="text">
+                {{> article}}
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+{{> footer}}
