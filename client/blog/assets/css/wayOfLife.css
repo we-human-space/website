@@ -238,7 +238,7 @@ header {
 .menuContainer320 {
   padding-top: 60px;
   background-color: #221f29;
-  /*background-image: url(img/Pheasant-3percent.png);
+  /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;*/
@@ -327,7 +327,7 @@ header {
 }
 
 .headerContainer {
-  background-image: url(img/NorthernLights-1440px.jpg);
+  background-image: url(../img/NorthernLights-1440px.jpg);
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -536,7 +536,7 @@ header {
   .menuContainer768 {
     padding-top: 120px;
     background-color: #221f29;
-    /*background-image: url(img/Pheasant-3percent.png);
+    /*background-image: url(../img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;*/
@@ -603,7 +603,7 @@ header {
 @media (min-width: 768px) {
 
 	.headerContainer {
-	  background-image: url(img/NorthernLights-1440px.jpg);
+	  background-image: url(../img/NorthernLights-1440px.jpg);
 	  background-position: top;
 	  background-repeat: no-repeat;
 	  background-size: cover;
@@ -963,7 +963,7 @@ header {
 @media (min-width: 1175px) {
 
 	.headerContainer {
-	  background-image: url(img/NorthernLights-2560px.jpg);
+	  background-image: url(../img/NorthernLights-2560px.jpg);
 	  background-position: center;
 	  background-repeat: no-repeat;
 	  background-size: cover;

@@ -230,7 +230,7 @@ a:hover, a:active, a:focus {
 .menuContainer320 {
   padding-top: 60px;
   background-color: #221f29;
-  /*background-image: url(img/Pheasant-3percent.png);
+  /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;*/
@@ -319,7 +319,7 @@ a:hover, a:active, a:focus {
 .purpleStroke {
   z-index: 10;
   height: 100vh;
-  background-image: url(img/WispyClouds-1440px.jpg);
+  background-image: url(../img/WispyClouds-1440px.jpg);
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -448,7 +448,7 @@ a:hover, a:active, a:focus {
 	width: 100%;
 	height: 1350px;
 	margin-top: 400px;
-	/*background-image: url(img/Pheasant-3percent.png);
+	/*background-image: url(../img/Pheasant-3percent.png);
 	background-position: top;
 	background-size: cover;
 	background-repeat: no-repeat;*/
@@ -567,7 +567,7 @@ a:hover, a:active, a:focus {
 	width: 100%;
 	margin-top: -1000px;
 	height: 1350px;
-	/*background-image: url(img/Pheasant-3percent-Reversed.png);
+	/*background-image: url(../img/Pheasant-3percent-Reversed.png);
 	background-position: top;
 	background-size: cover;
 	background-repeat: no-repeat;*/
@@ -771,7 +771,7 @@ a:hover, a:active, a:focus {
   .menuContainer768 {
     padding-top: 60px;
     background-color: #221f29;
-    /*background-image: url(img/Pheasant-3percent.png);
+    /*background-image: url(../img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;*/
@@ -1368,7 +1368,7 @@ a:hover, a:active, a:focus {
   }
 
   .Dog {
-    background-image: url(img/Dog.png);
+    background-image: url(../img/Dog.png);
     background-repeat: no-repeat;
     height: 300px;
   }
@@ -1407,7 +1407,7 @@ a:hover, a:active, a:focus {
   }
 
   .sun {
-    background-image: url(img/Sun.png);
+    background-image: url(../img/Sun.png);
     background-repeat: no-repeat;
     background-position: right;
     height: 350px;
@@ -1443,7 +1443,7 @@ a:hover, a:active, a:focus {
   }
 
   .manEagle {
-    background-image: url(img/ManEagle.png);
+    background-image: url(../img/ManEagle.png);
     background-repeat: no-repeat;
     height: 350px;
   }

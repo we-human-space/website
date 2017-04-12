@@ -233,7 +233,7 @@ a:hover, a:active, a:focus {
 .menuContainer320 {
   padding-top: 60px;
   background-color: #221f29;
-  /*background-image: url(img/Pheasant-3percent.png);
+  /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;*/
@@ -562,7 +562,7 @@ a:hover, a:active, a:focus {
   .menuContainer768 {
     padding-top: 60px;
     background-color: #221f29;
-    /*background-image: url(img/Pheasant-3percent.png);
+    /*background-image: url(../img/Pheasant-3percent.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;*/
@@ -975,7 +975,7 @@ a:hover, a:active, a:focus {
 
 	.crewIMG1024 {
 		display: block;
-		background-image: url(img/Crew-Night-1440x.JPG);
+		background-image: url(../img/Crew-Night-1440x.JPG);
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
