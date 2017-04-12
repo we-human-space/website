@@ -1,5 +1,6 @@
 # Blog articles
 client/blog/views/articles/*
+client/blog/views/uploads/*
 
 # Logs
 logs

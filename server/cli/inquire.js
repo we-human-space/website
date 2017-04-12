@@ -14,7 +14,7 @@ module.exports = {
 function ask(question){
   return prompt([question])
   .then(function(answer){
-    console.log(`  Answered: ${answer[question.name]}`);
+    //console.log(`  Answered: ${answer[question.name]}`);
     if(question.type === "rawlist" || question.type === "list"){
       return question.actions[answer[question.name]](answer[question.name]);
     }else if(question.type === "input" || question.type === "confirm"){
@@ -48,5 +48,16 @@ function ask_many(questions){
 }
 
 function looping(condition, question, base_value){
-  return loop(condition, (value, first) => ask(question(value, first)) , base_value);
+  return loop(
+    condition,
+    (value, first) => {
+      let q = question(value, first);
+      if(q instanceof Promise){
+        return q.then((res) => { return ask(res); });
+      }else{
+        return ask(question(value, first))
+      }
+    },
+    base_value
+  );
 }
