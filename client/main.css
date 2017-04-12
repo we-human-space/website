@@ -1397,7 +1397,7 @@ a:hover, a:active, a:focus {
 	}
 
   .enterNR {
-    margin-top: 0px;
+    margin-top: 250px;
     display: flex;
     justify-content: center;
   }
@@ -1433,7 +1433,7 @@ a:hover, a:active, a:focus {
   }
 
   .liveYD {
-    margin-top: 200px;
+    margin-top: 300px;
     display: flex;
     justify-content: center;
   }
@@ -1475,11 +1475,11 @@ a:hover, a:active, a:focus {
   }
 
   .greatJourney {
-    margin-top: 400px;
+    margin-top: 350px;
   }
 
   .bottom {
-    margin-top: 150px;
+    margin-top: 400px;
   }
 }
 
@@ -1507,6 +1507,38 @@ a:hover, a:active, a:focus {
 
 	.purpleStroke {
 		height: 1300px;
+	}
+
+	.copyHeadline {
+		margin-top: 480px;
+	}
+
+	.copyHeadline br {
+		content: ' '
+	}
+
+	.copyHeadline br:after {
+		content: ' '
+	}
+
+	.sectionOne {
+		margin-top: 500px;
+	}
+
+	.enterNR {
+		margin-top: 375px;
+	}
+
+	.liveYD {
+		margin-top: 500px;
+	}
+
+	.greatJourney {
+		margin-top: 500px;
+	}
+
+	.bottom {
+		margin-top: 1000px;
 	}
 
 
