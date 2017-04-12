@@ -10,7 +10,8 @@ function xss(value){
 
 function xssStringEscape(text) {
    return text.replace(/&/g, '&amp;').
-     replace(/</g, '&lt;').  // it's not necessary to escape >
+     replace(/</g, '&lt;').
+     replace(/>/g, '&gt;').
      replace(/"/g, '&quot;').
      replace(/'/g, '&#039;');
 }

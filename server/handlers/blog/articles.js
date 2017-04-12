@@ -3,10 +3,10 @@
 const path = require('path');
 const mongo_sanitize = require('mongo-sanitize');
 const env = process.env.NODE_ENV || 'development';
-const config = require('../.config/server/index')[env];
-const hash = require('../services/secure/hash');
-const xss = require('../services/secure/xss');
-const models = require('../models/index');
+const config = require('../../../.config/server/index')[env];
+const hash = require('../../services/secure/hash');
+const xss = require('../../services/secure/xss');
+const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
 
