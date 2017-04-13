@@ -6,11 +6,13 @@ services:
       dockerfile: ./server-dockerfile
     container_name: futureserver
     ports:
-     - "8888:8080"
+      - "5000:8080"
     links:
+      - nginx:nginx
       - mongodb:mongodb
     depends_on:
-     - mongodb
+      - nginx
+      - mongodb
   #   - rsyslog
   #  logging:
   #    driver: syslog
@@ -19,7 +21,7 @@ services:
   #      syslog-facility: daemon
   #      tag: smqserver
     volumes:
-     - ../:/var/www/futureboy/
+      - ../:/var/www/futureboy/
   mongodb:
     build:
       context: ../
@@ -33,7 +35,7 @@ services:
   #      syslog-facility: daemon
   #      tag: smqmongodb
     volumes:
-     - /data/db
+      - /data/db
   #rsyslog:
   #  image: voxxit/rsyslog
   #  container_name: smqrsyslog
@@ -41,3 +43,13 @@ services:
   #    - "5514:514/udp"
   #  volumes:
   #    - /tmp:/var/log/syslog
+  nginx:
+    image: nginx:alpine
+    container_name: futurenginx
+    ports:
+      - "8888:80"
+    volumes:
+      - ../client/:/usr/share/nginx/html:ro
+      - ../.config/nginx/sites-available:/etc/nginx/sites-available:ro
+      - ../.config/nginx/sites-enabled:/etc/nginx/sites-enabled:ro
+      - ../.config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
