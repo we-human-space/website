@@ -19,8 +19,7 @@ services:
   #      syslog-facility: daemon
   #      tag: smqserver
     volumes:
-     - ../server:/var/www/futureboy
-     - ../.config:/var/www/.config
+     - ../:/var/www/futureboy/
   mongodb:
     build:
       context: ../

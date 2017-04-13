@@ -1,0 +1,27 @@
+{
+  "requests": {
+    "/": {
+      "path": "partials/index.html",
+      "partials": ["head", "foot", "navbar"]
+    },
+    "/crew": {
+      "path": "partials/theCrew.html",
+      "partials": ["head", "foot", "navbar"]
+    },
+    "/life": {
+      "path": "partials/wayOfLife.html",
+      "partials": ["head", "foot", "navbar"]
+    },
+    "/blog": {
+      "path": "partials/feed.html",
+      "partials": ["head", "foot", "navbar"]
+    }
+  },
+  "partials": {
+    "head": "partials/header.html",
+    "foot": "partials/footer.html",
+    "navbar": "partials/navbar.html",
+    "feed_article": "partials/feed_article.html",
+    "article": "partials/article.html"
+  }
+}
