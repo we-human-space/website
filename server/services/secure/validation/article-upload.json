@@ -1,0 +1,48 @@
+{
+  "properties": {
+    "title": {
+      "type": "string",
+      "maxLength": 150,
+      "minLength": 1
+    },
+    "author": {
+      "type": "string",
+      "maxLength": 30,
+    },
+    "subject": {
+      "type": "string",
+      "maxLength": 30,
+    },
+    "category": {
+      "type": "string",
+      "maxLength": 30,
+    },
+    "tags": {
+      "type": "array",
+      "items": {"type": "string", "maxLength": 30},
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "thumbnail": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 450,
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 200,
+        }
+      }
+    }
+  },
+  "additionalProperties": {
+    "recipients": {
+      "type": "array",
+      "items": {"type": "string", "format": "email"},
+    }
+  }
+}

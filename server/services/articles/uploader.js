@@ -86,7 +86,7 @@ function validate_folder(data) {
               rejected = true;
               reject(new Error("Multiple html files uploaded"));
             }
-          }else if(path.extname(file) === ".yaml"){
+          }else if(path.extname(file) === ".yaml" || path.extname(file) === ".yml"){
             if(!yaml_file) yaml_file = file;
             else {
               rejected = true;
