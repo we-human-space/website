@@ -11,7 +11,7 @@ const config = require('../../../.config/server/index')[env];
 const auschema = require('../secure/validation/article-upload.json');
 const hash = require('../secure/hash');
 const mailer = require('../mail/mailer');
-const models = require('../models/index');
+const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
 

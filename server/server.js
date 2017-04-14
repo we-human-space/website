@@ -7,9 +7,13 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../.config/server/index')[env];
 const routes = require('./routes/routes');
 const models = require('./models/index');
+const uploader = require('./services/articles/uploader');
 
-//Setting some config points
+// Setting some config points
 config.views.path = path.join(process.argv[1], config.views.path);
+
+// CMS Service
+uploader.watch();
 
 // App
 const app = express();

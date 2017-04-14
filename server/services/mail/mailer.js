@@ -1,7 +1,6 @@
 const fs = require('fs');
 const nodemailer = require('nodemailer');
-const consolidate = require('consolidate');
-const mustache = consolidate.mustache;
+const mustache = require('mustache');
 const mailgun_transport = require('nodemailer-mailgun-transport');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../../.config/server/index')[env];
