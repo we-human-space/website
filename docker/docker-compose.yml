@@ -6,12 +6,10 @@ services:
       dockerfile: ./server-dockerfile
     container_name: futureserver
     ports:
-      - "5000:8080"
+      - 8080
     links:
-      - nginx:nginx
-      - mongodb:mongodb
+      - mongodb
     depends_on:
-      - nginx
       - mongodb
   #   - rsyslog
   #  logging:
@@ -44,10 +42,16 @@ services:
   #  volumes:
   #    - /tmp:/var/log/syslog
   nginx:
-    image: nginx:alpine
+    build:
+      context: ../
+      dockerfile: ./docker/nginx-dockerfile
     container_name: futurenginx
     ports:
       - "8888:80"
+    depends_on:
+      - server
+    links:
+      - server:node
     volumes:
       - ../client/:/usr/share/nginx/html:ro
       - ../.config/nginx/sites-available:/etc/nginx/sites-available:ro

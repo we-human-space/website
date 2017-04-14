@@ -2,18 +2,22 @@
   "requests": {
     "/": {
       "path": "partials/index.html",
+      "stylesheet": "/assets/css/main.css",
       "partials": ["head", "foot", "navbar"]
     },
     "/crew": {
       "path": "partials/theCrew.html",
+      "stylesheet": "/assets/css/theCrewNIGHT.css",
       "partials": ["head", "foot", "navbar"]
     },
     "/life": {
       "path": "partials/wayOfLife.html",
+      "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "foot", "navbar"]
     },
     "/blog": {
       "path": "partials/feed.html",
+      "stylesheet": "/assets/css/blogNIGHT.css",
       "partials": ["head", "foot", "navbar"]
     }
   },

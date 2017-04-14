@@ -38,7 +38,13 @@ function render(req, res, next){
         })
       );
     }).then(() => {
-      res.send(mustache.render(page.content, {}, partials));
+      res.send(
+        mustache.render(
+          page.content,
+          {stylesheet: views.requests[req.path].stylesheet},
+          partials
+        )
+      );
     }).catch((err) => {
       res.sendStatus(500);
     });
