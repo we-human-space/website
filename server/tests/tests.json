@@ -1,2 +1,6 @@
 {
+  "upload": {
+    "name": "Unit test for article uploader",
+    "path": "./tests/uploader"
+  }
 }
