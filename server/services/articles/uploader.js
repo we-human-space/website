@@ -18,9 +18,11 @@ const Author = models.Author;
 const UPLOAD_PATH = path.join(__dirname, '../../../', config.views.path, config.views.articles.uploads);
 const ARTICLE_DIR = path.join(__dirname, '../../../', config.views.path, config.views.articles.path);
 const IMAGE_EXT_REGEXP = /\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
+const devcache = {};
 
 module.exports = {
-  watch: watch
+  watch: watch,
+  report: report
 };
 
 function watch() {
@@ -29,6 +31,16 @@ function watch() {
     console.log(`New article uploaded in ${p}`);
     return extract(p);
   });
+}
+
+function report(filename){
+  for(let key in devcache){
+    if(devcache.hasOwnProperty(key) && key.match(filename)){
+      return devcache[key];
+    }else{
+      return Promise.reject(new Error(`Could not find ${filename}`));
+    }
+  }
 }
 
 function extract(source) {
@@ -50,7 +62,7 @@ function extract(source) {
     });
   });
 
-  return extraction
+  let upload = extraction
   .then(validate_folder)
   .then(validate_yaml)
   .then(generate_article)
@@ -61,11 +73,21 @@ function extract(source) {
   .catch((err) => {
     console.log(data);
     console.error(err);
-    // return notify_failure({
-    //   data: JSON.stringify(data),
-    //   error: JSON.stringify(err)
-    // });
+    return clear(data)
+    .then(() => {
+      return notify_failure({
+        data: JSON.stringify(data),
+        error: JSON.stringify(err)
+      });
+    });
   });
+
+  if(env === "development"){
+    devcache[path.basename(source)] = upload;
+  }
+
+  return upload;
+
 }
 
 function validate_folder(data) {
@@ -130,7 +152,11 @@ function validate_yaml(data) {
       if(a === null){
         return Promise.reject(new Error(`Author with username ${fields.author} was not found`));
       }else{
-        data.recipients = fields.recipients;
+        //Adding recipients to the default list and removing duplicates
+        data.recipients = fields.recipients.concat(config.upload.default_recipients);
+        data.recipients.push(a.email);
+        data.recipients.filter((v, i, a) => a.indexOf(v) === i);
+        //
         data.content = {
           title: fields.title,
           subject: fields.subject,
@@ -245,6 +271,18 @@ function notify_success(data) {
     data: {
       article: data.content
     }
+  }).then((res) => {
+    if(env === "development"){
+      return Promise.resolve({result: res, error: null, data: data});
+    }else{
+      return Promise.resolve(res);
+    }
+  }).catch((err) => {
+    if(env === "development"){
+      return Promise.reject({result: null, error: err, data: data});
+    }else{
+      return Promise.reject(err);
+    }
   });
 }
 
@@ -256,6 +294,18 @@ function notify_failure(data) {
     data: {
       data: data.data,
       error: data.error
+    }
+  }).then((res) => {
+    if(env === "development"){
+      return Promise.resolve({result: res, error: null, data: data});
+    }else{
+      return Promise.resolve(res);
+    }
+  }).catch((err) => {
+    if(env === "development"){
+      return Promise.reject({result: null, error: err, data: data});
+    }else{
+      return Promise.reject(err);
     }
   });
 }

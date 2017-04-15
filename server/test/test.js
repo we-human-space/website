@@ -10,7 +10,6 @@ function importTest(name, path) {
 }
 
 describe("Futureboy Testing Suite", function () {
-  before(function(done){ clearUserDb(done); });
   if(process.env.TESTS){
     let envtests = process.env.TESTS.split(",");
     for(let key in tests){

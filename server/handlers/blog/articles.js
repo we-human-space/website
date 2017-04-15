@@ -6,12 +6,14 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../../../.config/server/index')[env];
 const hash = require('../../services/secure/hash');
 const xss = require('../../services/secure/xss');
+const uploader = require('../../services/articles/uploader');
 const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
 
 module.exports = {
-  read: read
+  read: read,
+  test: test
 };
 
 function read(req, res, next) {
@@ -60,5 +62,14 @@ function read(req, res, next) {
     }else{
       next();
     }
+  });
+}
+
+function test(req, res){
+  uploader.report(req.body.filename)
+  .then((result) => {
+    res.json(result);
+  }).catch((result) => {
+    res.json(result);
   });
 }

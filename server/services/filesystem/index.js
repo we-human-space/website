@@ -1,5 +1,7 @@
 const read = require('./read');
+const copy = require('./copy');
 
 module.exports = {
-  read: read
+  read: read,
+  copy: copy,
 };

@@ -17,7 +17,7 @@ function render(req, res, next){
     next();
   }else{
     let page = {
-      path: path.join(config.views.path, views.requests[req.path].path),
+      path: path.join('../', config.views.path, views.requests[req.path].path),
       content: undefined
     }
     let partials = {};
@@ -29,7 +29,7 @@ function render(req, res, next){
           if(!views.partials[p]){
             return Promise.reject(p);
           }else{
-            return fswrapper.read(path.join(config.views.path, views.partials[p]))
+            return fswrapper.read(path.join('../', config.views.path, views.partials[p]))
             .then((content) => {
               partials[p] = content;
               return Promise.resolve();
