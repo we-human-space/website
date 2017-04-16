@@ -5,8 +5,8 @@ const cache = new WeakMap();
 //TODO: Add a way to update the cache when an author is saved
 
 var AuthorSchema = new Schema({
-  username: {type: String, required: true, index: true},
-  name: {type: String, required: true, index: true},
+  username: {type: String, required: true, unique: true, index: true},
+  name: {type: String, required: true, unique: true, index: true},
   age: {type: Number, required: true},
   bio: {type: String, required: true},
   interests: {type: String, required: false},

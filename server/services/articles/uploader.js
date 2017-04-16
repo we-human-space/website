@@ -26,21 +26,23 @@ module.exports = {
 };
 
 function watch() {
+  console.log(`Watching ${UPLOAD_PATH}`);
   let watcher = chokidar.watch(UPLOAD_PATH, { depth: 1, awaitWriteFinish: true});
-  watcher.on('add', function(p) {
-    console.log(`New article uploaded in ${p}`);
-    return extract(p);
-  });
+  watcher
+    .on('add', function(p) {
+      console.log(`New article uploaded in ${p}`);
+      return extract(p);
+    })
+    .on('error', (error) => { console.error(error); });
 }
 
 function report(filename){
   for(let key in devcache){
     if(devcache.hasOwnProperty(key) && key.match(filename)){
       return devcache[key];
-    }else{
-      return Promise.reject(new Error(`Could not find ${filename}`));
     }
   }
+  return Promise.reject(new Error(`Could not find ${filename}`));
 }
 
 function extract(source) {
@@ -68,7 +70,7 @@ function extract(source) {
   .then(generate_article)
   .then(move)
   .then(persist)
-  .then(clear)
+//  .then(clear)
   .then(notify_success)
   .catch((err) => {
     console.log(data);

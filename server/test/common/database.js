@@ -13,34 +13,45 @@ function query(context, filepath, cb) {
     let key = keys[i];
     if(action.hasOwnProperty(key)){
       console.log(action[key]);
-      let p = models[key].collection.bulkWrite(action[key])
-              .catch((err) => { console.log(err); console.log(key); console.log(action[key]); return Promise.reject(err);});
-      promises.push(p);
+      promises.push(new Promise((resolve, reject) => {
+        console.log("About to write");
+        models[key].collection.bulkWrite(action[key], (err, res) => {
+          console.log("Has written");
+          if(err){
+            console.log(err);
+            reject(err);
+          }else{
+            console.log(res);
+            resolve(res);
+          }
+        });
+      }));
     }
   }
   if(typeof cb === "function"){
     return Promise.all(promises)
     .then((res) => {
-      console.log("Hullooo");
+      console.log("Callback Then");
       console.log(res);
       cb(null, Promise.resolve(res.map((r, i) => {
         return {key: keys[i], result: r};
       })));
     }).catch((err) => {
+      console.log("Callback Catch");
       console.log(err);
       cb(err, null);
     });
   }else{
     return Promise.all(promises)
     .then((res) => {
-      console.log("Well hellooooooo");
+      console.log("No Callback Then");
       console.log(res);
       return Promise.resolve(res.map((r, i) => {
         return {key: keys[i], result: r};
       }));
     }).catch((err) => {
-      console.log("Well fuck u");
-      //console.log(err);
+      console.log("No Callback Catch");
+      console.log(err);
       return Promise.reject(err);
     });
   }

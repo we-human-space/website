@@ -68,8 +68,13 @@ function read(req, res, next) {
 function test(req, res){
   uploader.report(req.body.filename)
   .then((result) => {
+    console.log("then");
+    console.log(result);
     res.json(result);
   }).catch((result) => {
+    console.log("catch");
+    console.log(result);
+    res.status = 404;
     res.json(result);
   });
 }
