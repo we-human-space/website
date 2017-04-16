@@ -13,19 +13,7 @@ function query(context, filepath, cb) {
     let key = keys[i];
     if(action.hasOwnProperty(key)){
       console.log(action[key]);
-      promises.push(new Promise((resolve, reject) => {
-        console.log("About to write");
-        models[key].collection.bulkWrite(action[key], (err, res) => {
-          console.log("Has written");
-          if(err){
-            console.log(err);
-            reject(err);
-          }else{
-            console.log(res);
-            resolve(res);
-          }
-        });
-      }));
+      promises.push(models[key].collection.bulkWrite(action[key]));
     }
   }
   if(typeof cb === "function"){

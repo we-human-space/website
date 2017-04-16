@@ -40,7 +40,7 @@ it("should return the correct dataset for the specified article upload", functio
     console.log(all);
     // if(!all.length){
     //   return database.query(context, insert)
-    //   .then(() => { return Article.find(); })
+    //   .then(() => { return Article.find(); });
     // }else{
       return Article.find();
     // }
@@ -77,13 +77,12 @@ it("should return the correct dataset for the specified article upload", functio
             resolve(res.body.data);
           }
         });
-    }).then((data) => {
-      console.log(data);
-      done();
-    }).catch((err) => {
-      console.log(err);
-      done(err);
     });
-
-  })
+  }).then((data) => {
+    console.log(data);
+    done();
+  }).catch((err) => {
+    console.log(err);
+    done(err);
+  });
 });
