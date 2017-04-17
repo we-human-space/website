@@ -1,5 +1,10 @@
+# Blog articles
+client/blog/views/articles/*
+client/blog/views/uploads/*
+
 # Logs
 logs
+log
 *.log
 npm-debug.log*
 
@@ -39,5 +44,5 @@ jspm_packages
 # Configuration folder
 .config
 
-# Logger folder
-log
+# Development Files Cache
+.devcache
