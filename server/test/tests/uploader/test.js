@@ -100,7 +100,7 @@ function get_report(data){
         }else if(!res.body.data){
           reject(new Error("Body is empty"));
         }else{
-          resolve(res.body.data);
+          resolve(res.body.data.data);
         }
       });
   });

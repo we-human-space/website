@@ -76,21 +76,20 @@ function upload(source) {
   .then(generate_article)
   .then(move)
   .then(persist)
-  .then(clear_files)
   .then(clear_processing)
-  //.then(notify_success)
+  .then(clear_files)
+  .then(notify_success)
   .catch((err) => {
-    console.log(data);
     console.error(err);
     clear_processing(data);
     return clear_files(data)
-    // .then(() => {
-    //   if(!data.recipients || (Array.isArray(data.recipients) && !data.recipients.length)){
-    //     data.recipients = config.upload.default_recipients;
-    //   }
-    //   data.error = err;
-    //   return notify_failure(data);
-    // });
+    .then(() => {
+      if(!data.recipients || (Array.isArray(data.recipients) && !data.recipients.length)){
+        data.recipients = config.upload.default_recipients;
+      }
+      data.error = err;
+      return notify_failure(data);
+    });
   });
 
   if(env === "development"){
@@ -199,7 +198,7 @@ function validate_yaml(data) {
         if(fields.recipients){
           data.recipients = fields.recipients.concat(config.upload.default_recipients);
         }else{
-          data.recipients = [];
+          data.recipients = config.upload.default_recipients;
         }
 
         data.recipients.push(a.email);
@@ -241,8 +240,6 @@ function generate_article(data) {
   article.hash = hash.shortener(content);
   article.url = `${sanitize_title(content.title)}-${article.hash}`;
   content.url = article.url;
-  console.log("Result:");
-  console.log(article);
   data.article = article;
   return data;
 }
@@ -270,7 +267,6 @@ function move(data){
       }
     }
   }
-  console.log(files);
   return new Promise((resolve, reject) => {
     fs.mkdir(path.join(ARTICLE_DIR, data.article.url),function(e){
       if(e && ! e.code === 'EEXIST'){
@@ -340,6 +336,7 @@ function clear_processing(data){
 
 function notify_success(data) {
   console.log("Emailing upload success notification");
+  console.log(data.recipients);
   return mailer.renderAndSend({
     to: data.recipients,
     subject: "New Article Successfully Uploaded",

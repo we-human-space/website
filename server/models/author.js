@@ -7,6 +7,7 @@ const cache = new WeakMap();
 var AuthorSchema = new Schema({
   username: {type: String, required: true, unique: true, index: true},
   name: {type: String, required: true, unique: true, index: true},
+  email: {type: String, required: true, unique: true},
   age: {type: Number, required: true},
   bio: {type: String, required: true},
   interests: {type: String, required: false},

@@ -5,6 +5,7 @@
         "document": {
           "username": "test-author",
           "name": "Test Author",
+          "email": "futureboyhq@gmail.com",
           "age": 20,
           "bio": "This is a test bio",
           "title": "Zesty Testy",
