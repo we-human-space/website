@@ -31,7 +31,8 @@ module.exports = (function() {
   router.get('/blog/:article', blog.articles.read);
 
   if(env === "development"){
-    router.get('/test/uploader/report', blog.articles.test);
+    router.get('/test/uploader/report', blog.articles.test.report);
+    router.get('/test/uploader/clear', blog.articles.test.clear);
   }
 
   router.use(function(req, res, next) {

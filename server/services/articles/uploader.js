@@ -8,6 +8,7 @@ const yaml = require('js-yaml');
 const Ajv = require('ajv');
 const env = process.env.NODE_ENV || 'development';
 const config = require('../../../.config/server/index')[env];
+const fswrapper = require('../filesystem/index');
 const auschema = require('../secure/validation/article-upload.json');
 const hash = require('../secure/hash');
 const mailer = require('../mail/mailer');
@@ -15,10 +16,12 @@ const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
 
-const UPLOAD_PATH = path.join(__dirname, '../../../', config.views.path, config.views.articles.uploads);
-const ARTICLE_DIR = path.join(__dirname, '../../../', config.views.path, config.views.articles.path);
+const UPLOAD_PATH = path.join(__dirname, '../../', config.views.path, config.views.articles.uploads);
+const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);
 const IMAGE_EXT_REGEXP = /\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
+const THUMBNAIL_EXT_REGEXP = /thumbnail\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const devcache = {};
+const processing = [];
 
 module.exports = {
   watch: watch,
@@ -27,11 +30,24 @@ module.exports = {
 
 function watch() {
   console.log(`Watching ${UPLOAD_PATH}`);
-  let watcher = chokidar.watch(UPLOAD_PATH, { depth: 1, awaitWriteFinish: true});
+  let watcher =
+    chokidar.watch(
+      UPLOAD_PATH,
+      { depth: 1,
+        awaitWriteFinish: {
+          stabilityThreshold: 2000,
+          pollInterval: 50
+        }
+      }
+    );
   watcher
+    //.on('all', (e, p) => console.log(`Catched ${e} event for path ${p}`))
     .on('add', function(p) {
-      console.log(`New article uploaded in ${p}`);
-      return extract(p);
+      if(processing.indexOf(p) === -1){
+        console.log(`New article uploaded in ${p}`);
+        processing.push(p);
+        return upload(p);
+      }
     })
     .on('error', (error) => { console.error(error); });
 }
@@ -45,43 +61,36 @@ function report(filename){
   return Promise.reject(new Error(`Could not find ${filename}`));
 }
 
-function extract(source) {
+function upload(source) {
   console.log(`Extracting ${source}`);
-  let destination = path.join(path.dirname(source), path.basename(source, path.extname(source)));
-  var data;
-  var unzip = spawn('unzip', ['-d' , destination, source]);
-  var extraction = new Promise((resolve, reject) => {
-    unzip.on('close', (code) => {
-      console.log(`unzip process exited with code ${code}`);
-      if(!code){
-        data = {folder: destination, zip: source};
-        resolve(data);
-      }else{
-        let err = new Error(`unzip process exited with code ${code}`);
-        err.code = code;
-        reject(err);
-      }
-    });
-  });
+  var data = {
+    zip: source,
+    folder: path.join(path.dirname(source), path.basename(source, path.extname(source)))
+  };
 
-  let upload = extraction
+  let upload =
+  fswrapper.mkdir(data.folder)
+  .then(() => extract(data))
   .then(validate_folder)
   .then(validate_yaml)
   .then(generate_article)
   .then(move)
   .then(persist)
-//  .then(clear)
-  .then(notify_success)
+  .then(clear_files)
+  .then(clear_processing)
+  //.then(notify_success)
   .catch((err) => {
     console.log(data);
     console.error(err);
-    return clear(data)
-    .then(() => {
-      return notify_failure({
-        data: JSON.stringify(data),
-        error: JSON.stringify(err)
-      });
-    });
+    clear_processing(data);
+    return clear_files(data)
+    // .then(() => {
+    //   if(!data.recipients || (Array.isArray(data.recipients) && !data.recipients.length)){
+    //     data.recipients = config.upload.default_recipients;
+    //   }
+    //   data.error = err;
+    //   return notify_failure(data);
+    // });
   });
 
   if(env === "development"){
@@ -92,16 +101,45 @@ function extract(source) {
 
 }
 
+function extract(data){
+  let source = data.zip;
+  let destination = path.dirname(source);
+  console.log(`source: ${source}`);
+  console.log(`destination: ${destination}`);
+  var unzip = spawn('unzip', ['-o', '-d' , destination, source]);
+  unzip.stdout.on('data', (data) => {
+    console.log(`unzip stdout:\n${data}`);
+  });
+  unzip.stderr.on('data', (data) => {
+    console.log(`unzip stderr:\n${data}`);
+  });
+
+  return new Promise((resolve, reject) => {
+    unzip.on('close', (code) => {
+      console.log(`unzip process exited with code ${code}`);
+      if(!code){
+        resolve(data);
+      }else{
+        let err = new Error(`unzip process exited with code ${code}`);
+        data.error = err;
+        err.code = code;
+        reject(err);
+      }
+    });
+  });
+}
+
 function validate_folder(data) {
-  var folder = data.folder;
-  console.log(`Validating ${folder}`);
+  console.log(`Validating ${data.folder}`);
   return new Promise((resolve, reject) => {
     var content;
     var thumbnail;
     var yaml_file;
+    var images = [];
     var rejected = false;
-    fs.readdir(folder, (err, files) => {
+    fs.readdir(data.folder, (err, files) => {
       files.forEach(file => {
+        console.log(file);
         if(!rejected){
           //Find all the necessary files
           if(path.extname(file) === ".html"){
@@ -116,12 +154,14 @@ function validate_folder(data) {
               rejected = true;
               reject(new Error("Multiple yaml files uploaded"));
             }
-          }else if(file.match(IMAGE_EXT_REGEXP)){
+          }else if(file.match(THUMBNAIL_EXT_REGEXP)){
             if(!thumbnail) thumbnail = file;
             else {
               rejected = true;
-              reject(new Error("Multiple image files uploaded"));
+              reject(new Error("Multiple thumbnail files uploaded"));
             }
+          }else if(file.match(IMAGE_EXT_REGEXP)){
+            images.push(file);
           }
         }
       });
@@ -135,7 +175,8 @@ function validate_folder(data) {
           data.files = {
             content: content,
             thumbnail: thumbnail,
-            yaml_file: yaml_file
+            yaml_file: yaml_file,
+            images: images
           };
           resolve(data);
         }
@@ -147,7 +188,7 @@ function validate_folder(data) {
 function validate_yaml(data) {
   console.log(`Validating yaml file`);
   var ajv = new Ajv();
-  var fields = yaml.safeLoad(fs.readFileSync(data.files.yaml_file, 'utf-8'));
+  var fields = yaml.safeLoad(fs.readFileSync(path.join(data.folder, data.files.yaml_file), 'utf-8'));
   if(ajv.validate(auschema, fields)){
     return Author.findOne({username: fields.author})
     .then((a) => {
@@ -155,10 +196,14 @@ function validate_yaml(data) {
         return Promise.reject(new Error(`Author with username ${fields.author} was not found`));
       }else{
         //Adding recipients to the default list and removing duplicates
-        data.recipients = fields.recipients.concat(config.upload.default_recipients);
+        if(fields.recipients){
+          data.recipients = fields.recipients.concat(config.upload.default_recipients);
+        }else{
+          data.recipients = [];
+        }
+
         data.recipients.push(a.email);
         data.recipients.filter((v, i, a) => a.indexOf(v) === i);
-        //
         data.content = {
           title: fields.title,
           subject: fields.subject,
@@ -211,9 +256,23 @@ function sanitize_title(title) {
 
 function move(data){
   console.log(`Moving files to ${ARTICLE_DIR}`);
-  var files = Object.values(data.files);
+  var files = [];
+  for(let key in data.files){
+    if(data.files.hasOwnProperty(key)){
+      if(key === "images"){
+        files.concat(
+          data.files[key].map((f) => {
+            return path.join(data.folder, f);
+          })
+        );
+      }else{
+        files.push(path.join(data.folder, data.files[key]));
+      }
+    }
+  }
+  console.log(files);
   return new Promise((resolve, reject) => {
-    fs.mkdir(path,function(e){
+    fs.mkdir(path.join(ARTICLE_DIR, data.article.url),function(e){
       if(e && ! e.code === 'EEXIST'){
         reject(e);
       }else if(e && e.code === 'EEXIST'){
@@ -258,14 +317,29 @@ function persist(data) {
   });
 }
 
-function clear(data) {
+function clear_files(data) {
   console.log("Clearing old files");
-  return remove(data.folder)
-  .then(() => remove(data.zip))
+  let promises = [];
+  if(data.folder){
+    promises.push(fswrapper.remove(data.folder));
+  }
+  if(data.zip){
+    promises.push(fswrapper.remove(data.zip));
+  }
+  return Promise.all(promises)
   .then(() => data);
 }
 
+function clear_processing(data){
+  let index = processing.indexOf(data.source);
+  if(index !== -1){
+    processing.splice(index);
+  }
+  return data;
+}
+
 function notify_success(data) {
+  console.log("Emailing upload success notification");
   return mailer.renderAndSend({
     to: data.recipients,
     subject: "New Article Successfully Uploaded",
@@ -274,12 +348,16 @@ function notify_success(data) {
       article: data.content
     }
   }).then((res) => {
+    console.log("Successfully emailed upload success notification");
+
     if(env === "development"){
       return Promise.resolve({result: res, error: null, data: data});
     }else{
       return Promise.resolve(res);
     }
   }).catch((err) => {
+    console.log("Failed to email upload success notification");
+
     if(env === "development"){
       return Promise.reject({result: null, error: err, data: data});
     }else{
@@ -289,94 +367,31 @@ function notify_success(data) {
 }
 
 function notify_failure(data) {
+  console.log("Emailing upload failure notification");
+  console.log(data.recipients);
+  let error = data.error;
+  data.error = undefined;
   return mailer.renderAndSend({
     to: data.recipients,
     subject: "New Article Failed to Upload",
     path: path.join(__dirname, '../../emails/blog/upload-failure.html'),
     data: {
-      data: data.data,
-      error: data.error
+      data: JSON.stringify(data, null, 2),
+      error: error.toString()
     }
   }).then((res) => {
+    console.log("Successfully emailed upload failure notification");
     if(env === "development"){
       return Promise.resolve({result: res, error: null, data: data});
     }else{
       return Promise.resolve(res);
     }
   }).catch((err) => {
+    console.log("Failed to email upload failure notification");
     if(env === "development"){
       return Promise.reject({result: null, error: err, data: data});
     }else{
       return Promise.reject(err);
-    }
-  });
-}
-
-function remove(path){
-  return new Promise((resolve, reject) => {
-    //Found at https://gist.github.com/jorritd/1722941
-    removeRecursive(path, (err, success) => {
-      if(err) reject(err);
-      else resolve(success);
-    });
-  });
-}
-
-//From https://gist.github.com/jorritd/1722941
-function removeRecursive(path, cb){
-  fs.stat(path, function(err, stats) {
-    if(err){
-      cb(err,stats);
-      return;
-    }
-    if(stats.isFile()){
-      fs.unlink(path, function(err) {
-        if(err) {
-          cb(err,null);
-        }else{
-          cb(null,true);
-        }
-        return;
-      });
-    }else if(stats.isDirectory()){
-      fs.readdir(path, function(err, files) {
-        if(err){
-          cb(err,null);
-          return;
-        }
-        var f_length = files.length;
-        var f_delete_index = 0;
-        var checkStatus = function(){
-          if(f_length===f_delete_index){
-            fs.rmdir(path, function(err) {
-              if(err){
-                cb(err,null);
-              }else{
-                cb(null,true);
-              }
-            });
-            return true;
-          }
-          return false;
-        };
-        if(!checkStatus()){
-          for(var i=0;i<f_length;i++){
-            (function(){
-              var filePath = path + '/' + files[i];
-              removeRecursive(filePath, function removeRecursiveCB(err){
-                if(!err){
-                  f_delete_index ++;
-                  checkStatus();
-                }else{
-                  cb(err,null);
-                  return;
-                }
-              });
-
-            })();
-          }
-        }
-      });
     }
   });
 }

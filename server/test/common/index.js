@@ -8,4 +8,4 @@ global.models = require("../../models/index");
 
 // This agent refers to PORT where program is running.
 
-global.server = supertest.agent("http://172.20.0.3:8080");
+global.server = supertest.agent(`${config.global.host}:${config.global.port}`);

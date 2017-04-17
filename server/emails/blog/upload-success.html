@@ -5,13 +5,12 @@
 <body>
 <p>Hi,</p>
 <p>This is to inform you that the following article has been successfully uploaded to the FutureboyHQ blog:</p>
-<p>
-  Title: {{article.title}}</br> +
-  URL: futureboyhq.com/blog/{{article.url}}</br> +
-  {{article.subject}} - {{article.category}} - {{article.author.username}}</br> +
-  Summary: </br>
-  {{article.summary}};
-</p>
-<p>
+<ul style="list-style-type: none;">
+  <li>Title: {{article.title}}</li>
+  <li>URL: futureboyhq.com/blog/{{article.url}}</li>
+  <li>{{article.subject}} - {{article.category}} - {{article.author.username}}</li>
+  <li>Summary:</li>
+  <li>{{article.summary}}</li>
+<ul>
 </body>
 </html>

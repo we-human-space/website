@@ -43,9 +43,9 @@ function send(options){
   var nmmg = nodemailer.createTransport(mailgun_transport(mailgun_auth));
   var mail = {
     from: options.sender || config.mailgun.auth.sender,
-    to: options.recipients,
+    to: options.to.join(", "),
     subject: options.subject,
-    text: options.body,
+    html: options.body,
   };
   return new Promise((resolve, reject) => {
     nmmg.sendMail(mail, (err, res) => {

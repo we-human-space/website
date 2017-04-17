@@ -6,14 +6,20 @@ const env = process.env.NODE_ENV || 'development';
 const config = require('../../../.config/server/index')[env];
 const hash = require('../../services/secure/hash');
 const xss = require('../../services/secure/xss');
+const fswrapper = require('../../services/filesystem/index');
 const uploader = require('../../services/articles/uploader');
 const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
 
+const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);
+
 module.exports = {
   read: read,
-  test: test
+  test: {
+    report: report,
+    clear: clear
+  }
 };
 
 function read(req, res, next) {
@@ -65,16 +71,27 @@ function read(req, res, next) {
   });
 }
 
-function test(req, res){
+function report(req, res){
   uploader.report(req.body.filename)
-  .then((result) => {
-    console.log("then");
-    console.log(result);
-    res.json(result);
-  }).catch((result) => {
-    console.log("catch");
-    console.log(result);
+  .then((data) => {
+    res.json({data: data});
+  }).catch((err) => {
     res.status = 404;
-    res.json(result);
+    res.json({error: err});
+  });
+}
+
+function clear(req, res){
+  Article.find({subject: /Test/})
+  .then((articles) => {
+    if(articles.length){
+      return Promise.all(articles.map((a) => {
+        return fswrapper.remove(path.join(ARTICLE_DIR, a.url));
+      }));
+    }else{
+      res.sendStatus(404);
+    }
+  }).then(() => {
+    res.sendStatus(200);
   });
 }
