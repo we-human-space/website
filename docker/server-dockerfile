@@ -8,6 +8,7 @@ RUN apk update &&\
 #    g++ \
     linux-headers \
     ca-certificates \
+    inotify-tools \
 #     git \
 #     make \
 #     gnupg \
