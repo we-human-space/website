@@ -10,7 +10,7 @@ const models = require('./models/index');
 const uploader = require('./services/articles/uploader');
 
 // Setting some config points
-config.views.path = path.join(process.argv[1], config.views.path);
+config.views.path = path.join(process.argv[1], '../', config.views.path);
 
 // CMS Service
 uploader.watch();
