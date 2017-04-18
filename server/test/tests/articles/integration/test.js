@@ -10,8 +10,8 @@ const Author = models.Author;
 const context = __dirname;
 const INSERT_DATA = 'insert.json';
 const REMOVE_DATA = 'remove.json';
-const SOURCE_PATH = path.join(__dirname, "./test-file-1.zip");
-const DESTINATION_PATH = path.join(__dirname, "../../../../", config.views.path, "/uploads/test-file-1.zip");
+const SOURCE_PATH = path.join(__dirname, "./{{filename}}.zip");
+const DESTINATION_PATH = path.join(__dirname, "../../../../", config.views.path, "/uploads/{{filename}}.zip");
 
 var articles = [];
 var authors;
@@ -67,9 +67,29 @@ it("should be able to read the article from the browser", function(done) {
   });
 });
 
+it("should be able to render the article with all the images in the browser", function(done) {
+  this.timeout(4000);
+  var data;
+  upload({filename: "test-file-2"})
+  .then(get_report)
+  .then((result) => data = result)
+  .then(test_in_browser(this))
+  .then((data) => {
+    articles.push(data);
+    done();
+  }).catch((err) => {
+    if(!err) err = new Error("Issue found");
+    articles.push(data);
+    console.log(err);
+    done(err);
+  });
+});
+
 function upload(data){
+  const source = SOURCE_PATH.replace("{{filename}}", data.filename);
+  const destination = DESTINATION_PATH.replace("{{filename}}", data.filename);
   return new Promise((resolve, reject) => {
-    fswrapper.copy(SOURCE_PATH, DESTINATION_PATH, function(err) {
+    fswrapper.copy(source, destination, function(err) {
       if(err){
         reject(err);
       }else{

@@ -85,7 +85,7 @@ function read_article(data){
   return fswrapper.read(path.join(ARTICLE_DIR, data.req.article.hash, 'index.html'))
   .then((content) => {
     console.log("Article file - read");
-    data.partials["article"] = content.replace('/blog/article/', `/blog/${data.req.article.hash}/`);
+    data.partials["article"] = content.replace(/\/blog\/article\//g, `/blog/${data.req.article.hash}/`);
     return Promise.resolve(data);
   });
 }

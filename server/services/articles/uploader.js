@@ -254,11 +254,12 @@ function sanitize_title(title) {
 
 function move(data){
   console.log(`Moving files to ${ARTICLE_DIR}`);
+  //Loading all filenames to move
   var files = [];
   for(let key in data.files){
     if(data.files.hasOwnProperty(key)){
       if(key === "images"){
-        files.concat(
+        files = files.concat(
           data.files[key].map((f) => {
             return path.join(data.folder, f);
           })
@@ -268,6 +269,7 @@ function move(data){
       }
     }
   }
+  //Making the destination directory
   return new Promise((resolve, reject) => {
     fs.mkdir(path.join(ARTICLE_DIR, data.article.hash),function(e){
       if(e && ! e.code === 'EEXIST'){
@@ -279,6 +281,7 @@ function move(data){
       }
     });
   }).then(() => {
+    //Moving all files to new directory
     return Promise.all(files.map((file) => {
       let old_path = file;
       let new_path;
@@ -286,12 +289,15 @@ function move(data){
       //Renaming file
       if(extname === ".html"){
         new_path = path.join(ARTICLE_DIR, data.article.hash, "index.html");
-      }else if(extname.match(IMAGE_EXT_REGEXP)){
+      }else if(old_path.match(THUMBNAIL_EXT_REGEXP)){
         new_path = path.join(ARTICLE_DIR, data.article.hash, `thumbnail${extname}`);
+      }else if(old_path.match(IMAGE_EXT_REGEXP)){
+        new_path = path.join(ARTICLE_DIR, data.article.hash, path.basename(old_path));
       }else if(extname === ".yaml"){
         return Promise.resolve();
       }
       return new Promise((resolve, reject) => {
+        console.log(`mv ${old_path} ${new_path}`);
         fs.rename(old_path, new_path, function(err){
           if(err) reject(err);
           else resolve();
