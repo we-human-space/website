@@ -22,11 +22,11 @@ module.exports = (function() {
     next();
   });
 
-  router.get('/', renderer.render);
+  router.get('/', renderer.renderPage);
 
-  router.get('/crew', renderer.render);
+  router.get('/crew', renderer.renderPage);
 
-  router.get('/life', renderer.render);
+  router.get('/life', renderer.renderPage);
 
   router.get('/blog/:article', blog.articles.read);
 

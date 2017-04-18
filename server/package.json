@@ -23,6 +23,7 @@
     "ajv": "4.11.6",
     "body-parser": "1.15.2",
     "chokidar": "1.6.1",
+    "co": "4.6.0",
     "consolidate": "0.14.5",
     "express": "4.14.0",
     "ip": "1.1.5",

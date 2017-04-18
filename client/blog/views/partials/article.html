@@ -10,14 +10,14 @@
 
         <div class="articleIMG">
           <div class="articleImgPlacement">
-            <img src="{{article.thumbnail_url}}" alt="">
+            <img src="{{article.thumbnail.src}}" alt="">
           </div>
         </div>
 
           <div class="articleData">
             <div class="articleDataPlacement">
               <div class="postCategories">
-                <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author.displayName}}</a></span>
+                <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author.username}}</a></span>
               </div>
               <div class="postTitle">
                 <a href="#"><h1>{{article.title}}</h1></a>

@@ -8,6 +8,7 @@ const hash = require('../../services/secure/hash');
 const xss = require('../../services/secure/xss');
 const fswrapper = require('../../services/filesystem/index');
 const uploader = require('../../services/articles/uploader');
+const renderer = require('../../services/renderer/index');
 const models = require('../../models/index');
 const Article = models.Article;
 const Author = models.Author;
@@ -23,6 +24,7 @@ module.exports = {
 };
 
 function read(req, res, next) {
+  console.log(`Receiving article reading request: ${req.url}`);
   let param = mongo_sanitize(req.params.article);
   let query = {};
   if(hash.isBase62Hash(param)){
@@ -33,41 +35,32 @@ function read(req, res, next) {
 
   Article.findOne(query)
   .then((article) => {
-    //Fetching author from cache/database
-    //Saving to cache if not in it already, for faster later reload
-    let authorid = article.author;
-    let cached = Author.findFromCache(article.author);
-    if(cached){
-      return Promise.resolve(cached);
-    }else{
+    console.log(`Found article ${query.url || query.hash}`);
+    if(article){
       return new Promise((resolve, reject) => {
-        article.populate({path: 'author'}, (err, author) => {
+        article.populate({path: 'author'}, (err, article) => {
           if(err) reject(err);
-          else resolve(author);
+          else resolve(article);
         });
-      }).then((author) => {
-        Author.saveToCache(authorid, author);
-        return author;
       });
+    }else{
+      next();
     }
-  })
-  .then((article) => {
+  }).then((article) => {
+    console.log(`Found author ${article.author.username}`);
     //If found, render
     if(article){
-      article = xss({
-        title: article.title,
-        url: path.join(config.views.articles.path, article.url, 'index.html'),
-        subject: article.subject,
-        category: article.category,
-        summary: article.summary,
-        author: article.author,
-        thumbnail: article.thumbnail
-      });
-      res.render(config.views.articles.template, article);
+      let art = article.export();
+      //req.article = xss(art);
+      req.article = art;
+      return renderer.renderArticle(req, res, next);
     //Else next to 404
     }else{
       next();
     }
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(500);
   });
 }
 
@@ -86,12 +79,14 @@ function clear(req, res){
   .then((articles) => {
     if(articles.length){
       return Promise.all(articles.map((a) => {
-        return fswrapper.remove(path.join(ARTICLE_DIR, a.url));
+        return fswrapper.remove(path.join(ARTICLE_DIR, a.hash));
       }));
     }else{
       res.sendStatus(404);
     }
   }).then(() => {
     res.sendStatus(200);
+  }).catch(() => {
+    res.sendStatus(500);
   });
 }

@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const cache = new WeakMap();
-
-//TODO: Add a way to update the cache when an author is saved
 
 var AuthorSchema = new Schema({
   username: {type: String, required: true, unique: true, index: true},
@@ -18,17 +15,23 @@ var AuthorSchema = new Schema({
   instagram: {type: String, required: false},
   website: {type: String, required: false},
   country: {type: String, required: false},
-  //imageURL: {type: String, required: true}
 });
 
-AuthorSchema.index({'name': 'text'});
-
-AuthorSchema.methods.findFromCache = function(id) {
-  return cache.get(id);
-};
-
-AuthorSchema.methods.saveToCache = function(id, author) {
-  return cache.set(id, author);
+AuthorSchema.methods.export = function(){
+  return {
+    username: this.username,
+    name: this.name,
+    email: this.email,
+    age: this.age,
+    interests: this.interests,
+    title: this.title,
+    twitter: this.twitter,
+    behance: this.behance,
+    youtube: this.youtube,
+    instagram: this.instagram,
+    website: this.website,
+    country: this.country
+  };
 };
 
 module.exports = AuthorSchema;

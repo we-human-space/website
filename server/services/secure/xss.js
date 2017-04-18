@@ -1,6 +1,7 @@
 module.exports = xss;
 
 function xss(value){
+  console.log("escaping");
   if(typeof value === "object" && value !== null){
     return xssObjectEscape(value);
   }else if(typeof value === "string"){
@@ -18,6 +19,7 @@ function xssStringEscape(text) {
 
 function xssObjectEscape(object) {
   for (var prop in object) {
+    console.log(prop);
     if(typeof object[prop] === "string"){
       object[prop] = xssStringEscape(object[prop]);
     }else if(Array.isArray(object[prop])){

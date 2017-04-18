@@ -19,6 +19,11 @@
       "path": "partials/feed.html",
       "stylesheet": "/assets/css/blogNIGHT.css",
       "partials": ["head", "foot", "navbar"]
+    },
+    "/blog/article": {
+      "path": "partials/article.html",
+      "stylesheet": "/assets/css/contentNIGHT.css",
+      "partials": ["head", "foot", "navbar"]
     }
   },
   "partials": {

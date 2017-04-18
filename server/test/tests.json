@@ -1,6 +1,10 @@
 {
-  "uploader": {
-    "name": "Unit test for article uploader",
-    "path": "./tests/uploader/test.js"
+  "articles/uploader": {
+    "name": "Unit tests for article uploader",
+    "path": "./tests/articles/uploader/test.js"
+  },
+  "articles/integration": {
+    "name": "Integration tests for articles",
+    "path": "./tests/articles/integration/test.js"
   }
 }
