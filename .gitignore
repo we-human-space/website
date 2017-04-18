@@ -1,5 +1,10 @@
+# Blog articles
+client/blog/views/articles/*
+client/blog/views/uploads/*
+
 # Logs
 logs
+log
 *.log
 npm-debug.log*
 
@@ -44,3 +49,6 @@ log
 
 # mac images
 .DS_Store
+
+# Development Files Cache
+.devcache

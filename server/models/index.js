@@ -10,7 +10,7 @@ const config = require('../../.config/server/index')[env];
 //Setting up Mongoose ES6 Promises
 mongoose.Promise = global.Promise;
 // Database Connection
-logger.log(`Initiating connection to mongodb @ ${config.mongodb.host}:${config.mongodb.port}`);
+console.log(`Initiating connection to mongodb @ ${config.mongodb.host}:${config.mongodb.port}`);
 //mongoose.connect(`mongodb://${config.mongodb.user}:${config.mongodb.password}@${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.dbname}`);
 mongoose.connect(`mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.dbname}`);
 

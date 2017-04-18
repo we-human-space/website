@@ -8,6 +8,7 @@ RUN apk update &&\
 #    g++ \
     linux-headers \
     ca-certificates \
+    inotify-tools \
 #     git \
 #     make \
 #     gnupg \
@@ -23,8 +24,8 @@ RUN apk update &&\
 #    tar \
 #    wget
 
-RUN mkdir -p /var/www/futureboy
-WORKDIR /var/www/futureboy
+RUN mkdir -p /var/www/futureboy/server
+WORKDIR /var/www/futureboy/server
 
 # Install nodemon for global use
 RUN npm install nodemon --global
