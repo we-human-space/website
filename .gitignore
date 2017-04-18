@@ -44,5 +44,9 @@ jspm_packages
 # Configuration folder
 .config
 
+
 # Development Files Cache
 .devcache
+
+# Logger folder
+log
