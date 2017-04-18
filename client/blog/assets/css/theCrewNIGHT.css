@@ -496,16 +496,89 @@ a:hover, a:active, a:focus {
 /*----BOTTOM------*/
 
 .bottom {
-  margin-top: 50px;
+  margin-top: 75px;
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   letter-spacing: 0.08rem;
+	/*font-weight: 600;*/
+}
+
+.copyFollow700 {
+	display: none;
+}
+
+.marketing {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+
+}
+
+.marketingPlacement {
+	/*border: 3px solid #e5d9ff;
+	border-radius: 20px;*/
+	margin-top: 50px;
+	width: 90%;
+	/*display: flex;*/
+	/*justify-content: space-between;*/
+	/*align-items: center;*/
+}
+
+.copyFollow320 {
+	text-align: center;
+  /*margin-top: 25px;*/
 	font-weight: 600;
+	font-size: 1.3rem;
+	letter-spacing: 0.1rem;
+	line-height: 1.8rem;
+}
+
+.copyFollow320 p {
+	text-align: center;
+  /*margin-top: 25px;*/
+	font-weight: 300;
+	font-size: 1.25rem;
+	color: #8D45F2;
+	margin: 30px 0 40px 0;
+}
+
+.emailForm {
+	margin-bottom: 50px;
+}
+
+.emailInputBottom {
+  width: 250px;
+  border: #e5d9ff solid 2px;
+  border-radius: 10px;
+  background-color: transparent;
+  font-family: "futura-pt",sans-serif;
+	font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 1.2px;
+  padding: 11px 10px 10px 15px;
+}
+
+.joinBtnBottom {
+	margin-top: 20px;
+  width: 150px;
+  background-color: #e5d9ff;
+  border: #e5d9ff solid 2px;
+  border-radius: 10px;
+  padding: 10px 25px 11px 25px;
+  font-family: "futura-pt",sans-serif;
+	font-weight: 600;
+  font-size: 1.1rem;
+  color: #5d00f8;
+}
+
+.copyBottom {
+	margin-top: 100px;
+	font-size: 1rem;
 }
 
 .socialMediaBottom {
 	z-index: 2;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-bottom: 30px;
 }
 
@@ -551,6 +624,15 @@ a:hover, a:active, a:focus {
     display: none;
   }
 
+}
+
+@media (min-width: 410px) {
+	.copyFollow320 span br {
+		content: " "
+	}
+	.copyFollow320 span br:after {
+		content: " "
+	}
 }
 
 @media (min-width: 600px){
@@ -705,6 +787,91 @@ a:hover, a:active, a:focus {
 		width: 100%;
 	}
 
+	.bottom {
+		margin-top: 350px;
+		text-align: center;
+		font-size: 1.3rem;
+		letter-spacing: 0.08rem;
+		/*font-weight: 600;*/
+	}
+
+	.emailForm {
+		margin-bottom: 250px;
+	}
+
+	.copyFollow320 {
+		display: none;
+	}
+
+	.copyFollow700 {
+		display: block;
+	}
+
+	.marketing {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 50px;
+
+	}
+
+	.marketingPlacement {
+		/*border: 3px solid #e5d9ff;
+		border-radius: 20px;*/
+		width: 80%;
+		/*display: flex;*/
+		/*justify-content: space-between;*/
+		/*align-items: center;*/
+	}
+
+	.copyFollow700 {
+		text-align: center;
+		/*margin-top: 25px;*/
+		font-weight: 600;
+		font-size: 1.5rem;
+		letter-spacing: 0.1rem;
+		line-height: 2rem;
+	}
+
+	.copyFollow700 p {
+		text-align: center;
+		/*margin-top: 25px;*/
+		font-weight: 300;
+		font-size: 1.4rem;
+		color: #8D45F2;
+		margin: 20px 0 40px 0;
+		line-height: 1.5rem;
+	}
+
+	.emailInputBottom {
+		width: 250px;
+		border: #e5d9ff solid 2px;
+		border-radius: 10px;
+		background-color: transparent;
+		font-family: "futura-pt",sans-serif;
+		font-weight: 500;
+		font-size: 1rem;
+		letter-spacing: 1.2px;
+		padding: 11px 10px 10px 15px;
+	}
+
+	.joinBtnBottom {
+		margin-top: 0;
+		margin-left: 5px;
+		width: 150px;
+		background-color: #e5d9ff;
+		border: #e5d9ff solid 2px;
+		border-radius: 10px;
+		padding: 10px 15px 11px 15px;
+		font-family: "futura-pt",sans-serif;
+		font-weight: 600;
+		font-size: 1.1rem;
+		color: #5d00f8;
+	}
+
+	.copyBottom {
+		font-size: 1rem;
+	}
+
 }
 
 @media (min-width: 1024px) {
@@ -805,7 +972,7 @@ a:hover, a:active, a:focus {
 		text-decoration: none;
 		align-self: flex-start;
 		list-style: none;
-		width: 89px;
+		width: 120px;
 		border-bottom: solid 2px #e5d9ff;
 		border-radius: 1px;
 	}
