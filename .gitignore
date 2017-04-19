@@ -1,7 +1,3 @@
-# Blog articles
-client/blog/views/articles/*
-client/blog/views/uploads/*
-
 # Logs
 logs
 log
@@ -50,3 +46,13 @@ jspm_packages
 
 # Logger folder
 log
+
+# Blog articles
+client/blog/views/articles/*
+client/blog/views/uploads/*
+
+#Compiled JS
+client/blog/dist
+
+#Coverage
+coverage

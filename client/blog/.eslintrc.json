@@ -1,0 +1,39 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "globals": {
+      "__DEV__"      : false,
+      "__TEST__"     : false,
+      "__PROD__"     : false,
+      "__COVERAGE__" : false
+    },
+    "rules": {
+        "indent": ["warn", 2],
+        "keyword-spacing": ["error", {
+          "before": false,
+          "after": false,
+          "overrides": {
+            "from": {"after": true, "before": true},
+            "function": {"after": true, "before": true},
+            "import": {"after": true},
+            "return": {"after": true}
+          }
+        }],
+        "no-multiple-empty-lines": [0],
+        "space-before-function-paren": [0],
+        "jsx-quotes": [2, "prefer-single"],
+        "linebreak-style": ["error", "unix"],
+        "semi": ["error", "always"],
+        "no-unused-vars": ["warn"],
+        "no-console": "off"
+    }
+}

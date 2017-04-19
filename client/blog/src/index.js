@@ -1,5 +1,4 @@
 (function () {
-
   const hamburger = document.getElementsByClassName('hamburger')[0];
   const menu = document.getElementsByClassName('menu')[0];
   const menu320 = document.querySelector('.slideDown');
@@ -12,14 +11,7 @@
   const FB = document.getElementsByClassName('FB')[0];
   const TC = document.getElementsByClassName('TC')[0];
 
-  // console.log(hamburger);
-  // console.log(menu);
-  // console.log(line1);
-  // console.log(WoL);
-  console.log(menu320);
-
   hamburger.addEventListener("click", clickedMenu, preventDefault, preventDefaultForScrollKeys, disableScroll);
-  // menu.addEventListener("animationend", menuTime);
 
   function clickedMenu (e) {
     if (menu.style.display === "block") {
@@ -53,31 +45,19 @@
     }
   }
 
-  // function menuTime (e) {
-  //   console.log(e);
-  //   console.log("menuTime");
-  //   if (menu.style.display === 'block') {
-  //     menu320.style.animationName = 'slideUp';
-  //   } else {
-  //     menu320.style.animationName = 'slideDown';
-  //   }
-  // }
-
-
-  var keys = {37: 1, 38: 1, 39: 1, 40: 1};
+  function preventDefaultForScrollKeys(e) {
+    var keys = [37, 38, 39, 40];
+    if (keys.indexOf(e.keyCode) !== -1) {
+      preventDefault(e);
+      return false;
+    }
+  }
 
   function preventDefault(e) {
     e = e || window.event;
     if (e.preventDefault)
         e.preventDefault();
     e.returnValue = false;
-  }
-
-  function preventDefaultForScrollKeys(e) {
-      if (keys[e.keyCode]) {
-          preventDefault(e);
-          return false;
-      }
   }
 
   function disableScroll() {
@@ -97,16 +77,35 @@
       window.ontouchmove = null;
       document.onkeydown = null;
   }
-
-
-  // var themeChosen = false;
-  // var currentThemeClass = "dayclass";
-  //
-  // setInterval(function(){
-  //   let timeOfDay = new Date().getUTCTime();
-  //   if(timeOfDay > ...  && 1 themeChosen){
-  //     document.getElementsByClassName("dayclass").class("nightclass");
-  //   }
-  // }, 60*20000)
-
 })();
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import NavSections from './components/navmenu/NavSections';
+import NavSubjects from './components/navmenu/NavSubjects';
+import NavAuthors from './components/navmenu/NavAuthors';
+// import { createStore } from 'redux';
+// import counter from './reducers';
+
+// const store = createStore(counter);
+const render = () => {
+  toArray(document.getElementsByClassName('exploreSection')).forEach((e) => {
+    ReactDOM.render(<NavSections />, e);
+  });
+  toArray(document.getElementsByClassName('filterBy')).forEach((e) => {
+    ReactDOM.render(<NavAuthors />, e);
+  });
+  toArray(document.getElementsByClassName('resonateWith')).forEach((e) => {
+    ReactDOM.render(<NavSubjects />, e);
+  });
+  // ReactDOM.render(<NavMenu />, menu);
+};
+
+function toArray(x) {
+  for(var i = 0, a = []; i < x.length; i++){
+    a.push(x[i]);
+  }
+  return a;
+}
+
+render();
