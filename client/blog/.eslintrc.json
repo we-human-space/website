@@ -28,8 +28,9 @@
             "return": {"after": true}
           }
         }],
-        "no-multiple-empty-lines": [0],
-        "space-before-function-paren": [0],
+        "no-multiple-empty-lines": 0,
+        "space-before-function-paren": 0,
+        "camelcase": 0,
         "jsx-quotes": [2, "prefer-single"],
         "linebreak-style": ["error", "unix"],
         "semi": ["error", "always"],
