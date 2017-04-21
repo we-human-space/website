@@ -8,7 +8,11 @@
       "standard-react"
     ],
     "parserOptions": {
-        "sourceType": "module"
+        "sourceType": "module",
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
     },
     "globals": {
       "__DEV__"      : false,
