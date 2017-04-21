@@ -56,7 +56,7 @@ function feed(state = initial_state.feed, action) {
 function query(state = initial_state.query, action){
   switch(action.type) {
   case ActionTypes.UPDATE_QUERY:
-    return { ...state }
+    return { ...state };
   default:
     return state;
   }

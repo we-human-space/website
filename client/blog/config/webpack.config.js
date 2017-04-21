@@ -15,11 +15,7 @@ const webpack_config = {
     path: project.paths.dist(),
     filename: `bundle.js`
   },
-  module: {
-    // rules: [
-    //  {test: /\.(js|jsx)$/, use: 'babel-loader'}
-    // ]
-  },
+  module: {},
   plugins: []
 };
 
@@ -29,7 +25,7 @@ webpack_config.module.loaders = [{
   loader: 'babel-loader'
 }, {
   test: /\.json$/,
-  loader: 'json'
+  loader: 'json-loader'
 }];
 
 webpack_config.externals = {};

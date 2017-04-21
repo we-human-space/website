@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import configure_store from '/redux/store/configure';
+import configure_store from './redux/store/configure';
 import FeedContainer from './containers/feed/FeedContainer';
 import HamburgerIcon from './components/navmenu/HamburgerIcon';
 import NavSections from './components/navmenu/NavSections';
