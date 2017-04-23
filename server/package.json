@@ -4,6 +4,7 @@
   "description": "FutureboyHQ Official Website",
   "main": "server.js",
   "scripts": {
+    "start": "babel-node server.js",
     "test": "mocha ./test/test.js"
   },
   "repository": {
@@ -38,8 +39,14 @@
     "validator": "6.2.0"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-config-standard-react": "^4.0.0",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-promise": "^3.0.0",
+    "eslint-plugin-react": "^6.0.0",
+    "eslint-plugin-standard": "^2.0.0",
     "inquirer": "1.2.2",
-    "mocha": "0.3.x",
     "nodemon": "1.11.0",
     "should": "^11.1.1",
     "supertest": "^2.0.0"

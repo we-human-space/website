@@ -1,0 +1,36 @@
+{
+  "properties": {
+    "action": {
+      "type": "string",
+      "pattern": "^(REFRESH|REQUEST_INITIAL|REQUEST_PAGES|REQUEST_MORE)$"
+    }
+  },
+  "additionalProperties": {
+    "query": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "subject": { "type": "string" },
+        "author": { "type": "string" }
+      }
+    },
+    "pages": {
+      "items": { "type": "integer", "minimum": 1 },
+      "minItems": 1
+    },
+    "cached": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        },
+        "pages": {
+          "items": { "type": "integer", "minimum": 1 },
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

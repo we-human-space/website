@@ -28,6 +28,8 @@ module.exports = (function() {
 
   router.get('/life', renderer.renderPage);
 
+  router.post('/feed/', blog.feed);
+
   router.get('/blog/:article', blog.articles.read);
 
   if(env === "development"){
