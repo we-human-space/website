@@ -4,10 +4,14 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const env = process.env.NODE_ENV || 'development';
-const config = require('../.config/server/index')[env];
+const config = require('./config');
 const routes = require('./routes/routes');
 const models = require('./models/index');
 const uploader = require('./services/articles/uploader');
+
+global.__PROD__ = env === 'production';
+global.__DEV__ = env === 'development';
+global.__TEST__ = env === 'test';
 
 // Setting some config points
 config.views.path = path.join(process.argv[1], '../', config.views.path);
