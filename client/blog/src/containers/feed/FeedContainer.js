@@ -1,5 +1,6 @@
 import fetch from 'whatwg-fetch';
 import { connect } from 'react-redux';
+import config from '../../config';
 import Feed from '../../components/feed/Feed';
 import {
   request_articles,
@@ -8,7 +9,6 @@ import {
   receive_feed_update
 } from '../../redux/reducers/index';
 
-const config = require('../../config');
 const SERVER_PATH = `${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 
 const FeedContainer = connect(

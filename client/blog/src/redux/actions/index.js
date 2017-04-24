@@ -1,5 +1,3 @@
-import config from '../../config';
-
 export const ActionTypes = {
   REQUEST_TAGS_AND_AUTHORS: 'REQUEST_TAGS_AND_AUTHORS', // Request all tags and authors for menu display
   RECEIVE_TAGS_AND_AUTHORS: 'RECEIVE_TAGS_AND_AUTHORS', // Receive all tags and authors for menu display
@@ -14,10 +12,6 @@ export const ActionTypes = {
   REQUEST_AUTHORS: 'REQUEST_AUTHORS', // Request a list of authors
   RECEIVE_AUTHORS: 'RECEIVE_AUTHORS', // Receive the list of authors
   NEWSLETTER_SUBSCRIPTION: 'NEWSLETTER_SUBSCRIPTION' // Subscribe to the newsletter
-};
-
-const PATHS = {
-  REST_SERVER: `${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`
 };
 
 export function request_articles() {

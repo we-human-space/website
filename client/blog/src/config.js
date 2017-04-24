@@ -1,4 +1,3 @@
-const env = process.NODE_ENV || 'development';
-const config = require('../../../.config/client/index')[env];
+import config from '../../../.config/client/index';
 
-export default config;
+module.exports = config[process.NODE_ENV || 'development'];

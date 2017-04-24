@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FeedPage from './FeedPage';
 import config from '../../config';
+import FeedPage from './FeedPage';
 
 export default class Feed extends React.Component {
 

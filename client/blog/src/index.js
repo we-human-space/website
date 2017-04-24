@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import config from './config';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -9,7 +10,7 @@ import NavSections from './components/navmenu/NavSections';
 import NavSubjects from './components/navmenu/NavSubjects';
 import NavAuthors from './components/navmenu/NavAuthors';
 
-console.log('Hello world');
+
 
 const store = configure_store();
 
