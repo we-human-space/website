@@ -1,5 +1,5 @@
 const Ajv = require('ajv');
-const mongo_sanitize = require('mongo_sanitize');
+const mongo_sanitize = require('mongo-sanitize');
 const models = require("../../models");
 const reqschema = require('../../services/secure/validation/feed-fetch.json');
 const Article = models.Article;

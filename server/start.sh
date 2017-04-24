@@ -1,2 +1,2 @@
 yarn
-yarn run deploy:dev
+yarn run dev:src

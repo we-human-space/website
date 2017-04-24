@@ -29,7 +29,7 @@ AuthorSchema.statics.findFromCache = function(query){
     }
     return found;
   });
-}
+};
 
 AuthorSchema.pre('save', function(next) {
   let self = this;
