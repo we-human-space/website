@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 const path = require("path");
-const database = require('../../common/database');
-const fswrapper = require('../../../services/filesystem/index');
-const models = require('../../../models/index');
+const database = require('../../../common/database');
+const fswrapper = require('../../../../services/filesystem/index');
+const models = require('../../../../models/index');
 const Author = models.Author;
 const Article = models.Article;
 
@@ -12,8 +12,8 @@ const context = __dirname;
 const INSERT_DATA = 'insert.json';
 const REMOVE_DATA = 'remove.json';
 const SOURCE_PATH = path.join(__dirname, "./test-file-1.zip");
-const DESTINATION_PATH = path.join(__dirname, "../../../", config.views.path, "/uploads/test-file-1.zip");
-const ARTICLE_DIR = path.join(__dirname, "../../../", config.views.path, config.views.articles.path);
+const DESTINATION_PATH = path.join(__dirname, "../../../../", config.views.path, "/uploads/test-file-1.zip");
+const ARTICLE_DIR = path.join(__dirname, "../../../../", config.views.path, config.views.articles.path);
 const THUMBNAIL_EXT_REGEXP = /thumbnail\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 
 var articles = [];

@@ -212,6 +212,7 @@ function validate_yaml(data) {
           thumbnail: fields.thumbnail,
           summary: fields.summary
         };
+        data.content.thumbnail.mime = path.extname(data.files.thumbnail);
         return Promise.resolve(data);
       }
     });
@@ -253,11 +254,12 @@ function sanitize_title(title) {
 
 function move(data){
   console.log(`Moving files to ${ARTICLE_DIR}`);
+  //Loading all filenames to move
   var files = [];
   for(let key in data.files){
     if(data.files.hasOwnProperty(key)){
       if(key === "images"){
-        files.concat(
+        files = files.concat(
           data.files[key].map((f) => {
             return path.join(data.folder, f);
           })
@@ -267,8 +269,9 @@ function move(data){
       }
     }
   }
+  //Making the destination directory
   return new Promise((resolve, reject) => {
-    fs.mkdir(path.join(ARTICLE_DIR, data.article.url),function(e){
+    fs.mkdir(path.join(ARTICLE_DIR, data.article.hash),function(e){
       if(e && ! e.code === 'EEXIST'){
         reject(e);
       }else if(e && e.code === 'EEXIST'){
@@ -278,19 +281,23 @@ function move(data){
       }
     });
   }).then(() => {
+    //Moving all files to new directory
     return Promise.all(files.map((file) => {
       let old_path = file;
       let new_path;
       let extname = path.extname(file);
       //Renaming file
       if(extname === ".html"){
-        new_path = path.join(ARTICLE_DIR, data.article.url, "index.html");
-      }else if(extname.match(IMAGE_EXT_REGEXP)){
-        new_path = path.join(ARTICLE_DIR, data.article.url, `thumbnail${extname}`);
+        new_path = path.join(ARTICLE_DIR, data.article.hash, "index.html");
+      }else if(old_path.match(THUMBNAIL_EXT_REGEXP)){
+        new_path = path.join(ARTICLE_DIR, data.article.hash, `thumbnail${extname}`);
+      }else if(old_path.match(IMAGE_EXT_REGEXP)){
+        new_path = path.join(ARTICLE_DIR, data.article.hash, path.basename(old_path));
       }else if(extname === ".yaml"){
         return Promise.resolve();
       }
       return new Promise((resolve, reject) => {
+        console.log(`mv ${old_path} ${new_path}`);
         fs.rename(old_path, new_path, function(err){
           if(err) reject(err);
           else resolve();
@@ -335,60 +342,77 @@ function clear_processing(data){
 }
 
 function notify_success(data) {
-  console.log("Emailing upload success notification");
-  console.log(data.recipients);
-  return mailer.renderAndSend({
-    to: data.recipients,
-    subject: "New Article Successfully Uploaded",
-    path: path.join(__dirname, '../../emails/blog/upload-success.html'),
-    data: {
-      article: data.content
-    }
-  }).then((res) => {
-    console.log("Successfully emailed upload success notification");
+  if(config.upload.notify.success){
+    console.log("Emailing upload success notification");
+    console.log(data.recipients);
+    return mailer.renderAndSend({
+      to: data.recipients,
+      subject: "New Article Successfully Uploaded",
+      path: path.join(__dirname, '../../emails/blog/upload-success.html'),
+      data: {
+        article: data.content
+      }
+    }).then((res) => {
+      console.log("Successfully emailed upload success notification");
 
+      if(env === "development"){
+        return Promise.resolve({result: res, error: null, data: data});
+      }else{
+        return Promise.resolve(res);
+      }
+    }).catch((err) => {
+      console.log("Failed to email upload success notification");
+
+      if(env === "development"){
+        return Promise.reject({result: null, error: err, data: data});
+      }else{
+        return Promise.reject(err);
+      }
+    });
+  }else{
     if(env === "development"){
-      return Promise.resolve({result: res, error: null, data: data});
+      return Promise.resolve({result: "Success notification is disabled", error: null, data: data});
     }else{
       return Promise.resolve(res);
     }
-  }).catch((err) => {
-    console.log("Failed to email upload success notification");
+  }
 
-    if(env === "development"){
-      return Promise.reject({result: null, error: err, data: data});
-    }else{
-      return Promise.reject(err);
-    }
-  });
 }
 
 function notify_failure(data) {
-  console.log("Emailing upload failure notification");
-  console.log(data.recipients);
-  let error = data.error;
-  data.error = undefined;
-  return mailer.renderAndSend({
-    to: data.recipients,
-    subject: "New Article Failed to Upload",
-    path: path.join(__dirname, '../../emails/blog/upload-failure.html'),
-    data: {
-      data: JSON.stringify(data, null, 2),
-      error: error.toString()
-    }
-  }).then((res) => {
-    console.log("Successfully emailed upload failure notification");
+  if(config.upload.notify.failure){
+    console.log("Emailing upload failure notification");
+    console.log(data.recipients);
+    let error = data.error;
+    data.error = undefined;
+    return mailer.renderAndSend({
+      to: data.recipients,
+      subject: "New Article Failed to Upload",
+      path: path.join(__dirname, '../../emails/blog/upload-failure.html'),
+      data: {
+        data: JSON.stringify(data, null, 2),
+        error: error.toString()
+      }
+    }).then((res) => {
+      console.log("Successfully emailed upload failure notification");
+      if(env === "development"){
+        return Promise.resolve({result: res, error: null, data: data});
+      }else{
+        return Promise.resolve(res);
+      }
+    }).catch((err) => {
+      console.log("Failed to email upload failure notification");
+      if(env === "development"){
+        return Promise.reject({result: null, error: err, data: data});
+      }else{
+        return Promise.reject(err);
+      }
+    });
+  }else{
     if(env === "development"){
-      return Promise.resolve({result: res, error: null, data: data});
+      return Promise.resolve({result: "Failure notification is disabled", error: null, data: data});
     }else{
       return Promise.resolve(res);
     }
-  }).catch((err) => {
-    console.log("Failed to email upload failure notification");
-    if(env === "development"){
-      return Promise.reject({result: null, error: err, data: data});
-    }else{
-      return Promise.reject(err);
-    }
-  });
+  }
 }
