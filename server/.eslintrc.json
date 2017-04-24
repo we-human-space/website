@@ -11,6 +11,11 @@
             "experimentalObjectRestSpread": true
         }
     },
+    "globals": {
+        "__DEV__": false,
+        "__PROD__": false,
+        "__TEST__": false
+    },
     "rules": {
         "indent": [
             "error",

@@ -1,2 +1,2 @@
-npm install
-nodemon
+yarn
+yarn run deploy:dev

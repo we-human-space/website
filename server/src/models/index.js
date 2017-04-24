@@ -4,8 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const basename = path.basename(module.filename);
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../.config/server/index')[env];
+const config = require('../config');
 
 //Setting up Mongoose ES6 Promises
 mongoose.Promise = global.Promise;

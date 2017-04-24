@@ -53,6 +53,7 @@ client/blog/views/uploads/*
 
 #Compiled JS
 client/blog/dist
+server/dist
 
 #Coverage
 coverage

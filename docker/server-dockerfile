@@ -4,31 +4,21 @@ FROM mhart/alpine-node:6.2.0
 RUN apk update &&\
     apk upgrade &&\
     apk add \
-#    gcc \
-#    g++ \
     linux-headers \
     ca-certificates \
-    inotify-tools \
-#     git \
-#     make \
-#     gnupg \
-#     openssl \
-#     curl \
-#     grep \
-#     mysql-client \
-#     tmux \
-     bash
+    inotify-tools
+#    bash
 
-#Getting complete POSIX versions
-#RUN apk --update add \
-#    tar \
-#    wget
+# Installing Yarn
+RUN apk add --no-cache curl && \
+  mkdir -p /opt && \
+  curl -sL https://yarnpkg.com/latest.tar.gz | tar xz -C /opt && \
+  mv /opt/dist /opt/yarn && \
+  ln -s /opt/yarn/bin/yarn /usr/local/bin && \
+  apk del --purge curl
 
 RUN mkdir -p /var/www/futureboy/server
 WORKDIR /var/www/futureboy/server
-
-# Install nodemon for global use
-RUN npm install nodemon --global
 
 EXPOSE 8080
 

@@ -5,7 +5,7 @@ const mustache = require('mustache');
 const fswrapper = require('../filesystem/index');
 const views = require('../../static/partials.json');
 const env = process.env.NODE_ENV || 'development';
-const config = require('../../../.config/server/index')[env];
+const config = require('../../config');
 
 const ARTICLE_DIR = path.join(__dirname, "../../", config.views.path, config.views.articles.path);
 

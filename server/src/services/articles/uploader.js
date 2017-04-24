@@ -6,8 +6,7 @@ const chokidar = require('chokidar');
 const spawn = require('child_process').spawn;
 const yaml = require('js-yaml');
 const Ajv = require('ajv');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../../.config/server/index')[env];
+const config = require('../../config');
 const fswrapper = require('../filesystem/index');
 const auschema = require('../secure/validation/article-upload.json');
 const hash = require('../secure/hash');
@@ -92,7 +91,7 @@ function upload(source) {
     });
   });
 
-  if(env === "development"){
+  if(__DEV__ || __TEST__){
     devcache[path.basename(source)] = upload;
   }
 
@@ -348,14 +347,14 @@ function notify_success(data) {
     return mailer.renderAndSend({
       to: data.recipients,
       subject: "New Article Successfully Uploaded",
-      path: path.join(__dirname, '../../emails/blog/upload-success.html'),
+      path: path.join(__dirname, '../../../static/emails/upload-success.html'),
       data: {
         article: data.content
       }
     }).then((res) => {
       console.log("Successfully emailed upload success notification");
 
-      if(env === "development"){
+      if(__DEV__ || __TEST__){
         return Promise.resolve({result: res, error: null, data: data});
       }else{
         return Promise.resolve(res);
@@ -363,14 +362,14 @@ function notify_success(data) {
     }).catch((err) => {
       console.log("Failed to email upload success notification");
 
-      if(env === "development"){
+      if(__DEV__ || __TEST__){
         return Promise.reject({result: null, error: err, data: data});
       }else{
         return Promise.reject(err);
       }
     });
   }else{
-    if(env === "development"){
+    if(__DEV__ || __TEST__){
       return Promise.resolve({result: "Success notification is disabled", error: null, data: data});
     }else{
       return Promise.resolve(res);
@@ -388,28 +387,28 @@ function notify_failure(data) {
     return mailer.renderAndSend({
       to: data.recipients,
       subject: "New Article Failed to Upload",
-      path: path.join(__dirname, '../../emails/blog/upload-failure.html'),
+      path: path.join(__dirname, '../../../static/emails/upload-failure.html'),
       data: {
         data: JSON.stringify(data, null, 2),
         error: error.toString()
       }
     }).then((res) => {
       console.log("Successfully emailed upload failure notification");
-      if(env === "development"){
+      if(__DEV__ || __TEST__){
         return Promise.resolve({result: res, error: null, data: data});
       }else{
         return Promise.resolve(res);
       }
     }).catch((err) => {
       console.log("Failed to email upload failure notification");
-      if(env === "development"){
+      if(__DEV__ || __TEST__){
         return Promise.reject({result: null, error: err, data: data});
       }else{
         return Promise.reject(err);
       }
     });
   }else{
-    if(env === "development"){
+    if(__DEV__ || __TEST__){
       return Promise.resolve({result: "Failure notification is disabled", error: null, data: data});
     }else{
       return Promise.resolve(res);

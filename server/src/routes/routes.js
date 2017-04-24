@@ -2,7 +2,6 @@
 const uuid = require("node-uuid");
 const express = require('express');
 const renderer = require('../services/renderer/index');
-const env = process.env.NODE_ENV || 'development';
 const blog = require('../handlers/blog/index');
 
 module.exports = (function() {
@@ -32,7 +31,7 @@ module.exports = (function() {
 
   router.get('/blog/:article', blog.articles.read);
 
-  if(env === "development"){
+  if(__DEV__){
     router.get('/test/uploader/report', blog.articles.test.report);
     router.get('/test/uploader/clear', blog.articles.test.clear);
   }

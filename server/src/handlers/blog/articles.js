@@ -2,8 +2,7 @@
 
 const path = require('path');
 const mongo_sanitize = require('mongo-sanitize');
-const env = process.env.NODE_ENV || 'development';
-const config = require('../../../.config/server/index')[env];
+const config = require('../../config');
 const hash = require('../../services/secure/hash');
 const xss = require('../../services/secure/xss');
 const fswrapper = require('../../services/filesystem/index');
