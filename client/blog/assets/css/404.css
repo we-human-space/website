@@ -1,0 +1,127 @@
+html, body {
+  color: #e5d9ff;
+  background-color: #221f29;
+  font-family: "futura-pt",sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+input {
+  outline: none;
+  color: #e5d9ff;
+}
+
+::-webkit-input-placeholder {
+ color: #e5d9ff;
+}
+
+a {
+  outline: 0;
+  text-decoration: none;
+  color: #e5d9ff
+}
+
+a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+header {
+  margin: 0;
+}
+
+
+/*----BOTTOM------*/
+
+.bottom {
+  margin-top: 75px;
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 0.08rem;
+	/*font-weight: 600;*/
+}
+
+.marketing {
+	display: flex;
+	justify-content: center;
+  align-items: center;
+	height: 80vh;
+
+}
+
+.marketingPlacement {
+	/*border: 3px solid #e5d9ff;
+	border-radius: 20px;*/
+	width: 90%;
+	/*display: flex;*/
+	/*justify-content: space-between;*/
+	/*align-items: center;*/
+}
+
+.copyFollow700 {
+	text-align: center;
+  /*margin-top: 25px;*/
+	font-weight: 600;
+	font-size: 2rem;
+	letter-spacing: 0.1rem;
+	line-height: 1.8rem;
+}
+
+.copyFollow700 p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.08rem;
+  line-height: 2rem;
+
+}
+
+.copyBottom {
+	font-size: 1rem;
+}
+
+
+
+.blogBtn {
+	/*z-index: 10;*/
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.blogBtnStyle {
+  border: #8D45F2 solid 2px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: #5d00f8;
+  padding: 13.5px 0;
+  font-family: "futura-pt",sans-serif;
+	font-weight: 500;
+  letter-spacing: 0.08rem;
+}
+
+.blogBtnStyle a {
+	padding: 13.5px 30px;
+	border-radius: 8px;
+}
+
+.blogBtnStyle a:hover {
+  color: #8D45F2;
+	background-color: #221f29;
+}
+
+.blogBtnStyle a:active {
+  color: #8D45F2;
+	background-color: #221f29;
+}
+
+.blogBtnStyle a:hover {
+	/*color: #5d00f8;*/
+}
+
+
+@media (min-width: 700px) {
+
+  .marketing {
+  	height: 80vh;
+  }
+
+}

@@ -542,19 +542,40 @@ a:hover, a:active, a:focus {
 }
 
 .emailInputBottom {
-  width: 250px;
-  border: #e5d9ff solid 2px;
-  border-radius: 10px;
+  width: 275px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 2px solid #e5d9ff;
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
 	font-weight: 500;
   font-size: 1rem;
-  letter-spacing: 1.2px;
-  padding: 11px 10px 10px 15px;
+  letter-spacing: 2px;
+  padding: 11px 10px 10px 0px;
+}
+
+.nameInputBottom {
+  width: 275px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+  border-bottom: 2px solid #e5d9ff;
+  /*border-radius: 10px;*/
+  background-color: transparent;
+  font-family: "futura-pt",sans-serif;
+	font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  padding: 11px 10px 10px 0px;
+}
+
+.lastNameInput {
+	margin: 20px 0;
 }
 
 .joinBtnBottom {
-	margin-top: 20px;
+	margin-top: 40px;
   width: 150px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
@@ -800,43 +821,64 @@ a:hover, a:active, a:focus {
 
 		.copyFollow700 {
 			text-align: center;
-		  /*margin-top: 25px;*/
+			/*margin-top: 25px;*/
 			font-weight: 600;
 			font-size: 1.5rem;
 			letter-spacing: 0.1rem;
-			line-height: 2rem;
+			line-height: 2.2rem;
 		}
 
 		.copyFollow700 p {
 			text-align: center;
-		  /*margin-top: 25px;*/
+			/*margin-top: 25px;*/
 			font-weight: 300;
 			font-size: 1.4rem;
 			color: #8D45F2;
-			margin: 20px 0 40px 0;
-			line-height: 1.5rem;
+			margin: 40px 0 20px 0;
+			line-height: 2rem;
 		}
 
 		.emailInputBottom {
-		  width: 250px;
-		  border: #e5d9ff solid 2px;
-		  border-radius: 10px;
+		  width: 415px;
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+			border-bottom: 2px solid #e5d9ff;
 		  background-color: transparent;
 		  font-family: "futura-pt",sans-serif;
 			font-weight: 500;
 		  font-size: 1rem;
-		  letter-spacing: 1.2px;
-		  padding: 11px 10px 10px 15px;
+		  letter-spacing: 2px;
+		  padding: 11px 10px 10px 0px;
+			margin-top: 5px;
+		}
+
+		.nameInputBottom {
+		  width: 190px;
+			border-top: 0;
+			border-left: 0;
+			border-right: 0;
+		  border-bottom: 2px solid #e5d9ff;
+		  /*border-radius: 10px;*/
+		  background-color: transparent;
+		  font-family: "futura-pt",sans-serif;
+			font-weight: 400;
+		  font-size: 1rem;
+		  letter-spacing: 2px;
+		  padding: 11px 10px 10px 0px;
+		}
+
+		.lastNameInput {
+			margin: 20px 0px 20px 20px;
 		}
 
 		.joinBtnBottom {
-			margin-top: 0;
-			margin-left: 5px;
+			margin-top: 50px;
 		  width: 150px;
 		  background-color: #e5d9ff;
 		  border: #e5d9ff solid 2px;
 		  border-radius: 10px;
-		  padding: 10px 15px 11px 15px;
+		  padding: 10px 25px 11px 25px;
 		  font-family: "futura-pt",sans-serif;
 			font-weight: 600;
 		  font-size: 1.1rem;
@@ -914,50 +956,51 @@ a:hover, a:active, a:focus {
 	    color: #e5d9ff;
 	  }
 
-	  .WoL {
+    .WoL {
+      text-decoration: none;
+      list-style: none;
+      width: 61px;
+      margin: 0 100px;
+      /*border-bottom: solid 2px #e5d9ff;
+      border-radius: 1px;*/
+    }
 
-	    text-decoration: none;
-	    list-style: none;
-	    width: 111px;
-	    margin: 0 60px;
-	  }
 
+    .WoL a:hover {
+      border-bottom: solid 2px #e5d9ff;
+      border-radius: 1px;
+    }
 
-	  .WoL a:hover {
-	    border-bottom: solid 2px #e5d9ff;
-	    border-radius: 1px;
-	  }
+    .FB a:hover {
+      border-bottom: solid 2px #e5d9ff;
+      border-radius: 1px;
+    }
 
-	  .FB a:hover {
-	    border-bottom: solid 2px #e5d9ff;
-	    border-radius: 1px;
-	  }
+    .FB {
+      text-decoration: none;
+      align-self: flex-end;
+      list-style: none;
+      width: 43px;
+      /*border-bottom: solid 2px #e5d9ff;
+      border-radius: 1px;*/
+    }
 
-	  .FB {
-	    text-decoration: none;
-	    align-self: flex-end;
-	    list-style: none;
-	    width: 83px;
-			/*border-bottom: solid 2px #e5d9ff;
-			border-radius: 1px;*/
-	  }
+    .FB a {
+      padding-bottom: 2px;
+    }
 
-	  .FB a {
-	    padding-bottom: 2px;
-	  }
+    .TC {
+      /*margin-left: 60px;*/
+      text-decoration: none;
+      align-self: flex-start;
+      list-style: none;
+      width: 50px;
+    }
 
-	  .TC {
-	    /*margin-left: 60px;*/
-	    text-decoration: none;
-	    align-self: flex-start;
-	    list-style: none;
-	    width: 120px;
-	  }
-
-	  .TC a:hover {
-	    border-bottom: solid 2px #e5d9ff;
-	    border-radius: 1px;
-	  }
+    .TC a:hover {
+      border-bottom: solid 2px #e5d9ff;
+      border-radius: 1px;
+    }
 
 		/*------MENU-----*/
 

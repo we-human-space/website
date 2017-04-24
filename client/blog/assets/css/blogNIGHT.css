@@ -747,7 +747,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX img {
-		width: 100%;
+		width: 70%;
 	}
 
 	.imgWIDER750PX img {
@@ -958,11 +958,12 @@ a:hover, a:active, a:focus {
   }
 
   .WoL {
-
     text-decoration: none;
     list-style: none;
-    width: 111px;
-    margin: 0 60px;
+    width: 61px;
+    margin: 0 100px;
+    /*border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;*/
   }
 
 
@@ -971,23 +972,22 @@ a:hover, a:active, a:focus {
     border-radius: 1px;
   }
 
-  /*.FB a:hover {
-    border-bottom: solid 2px #e5d9ff;
-    border-radius: 1px;
-  }*/
+  .FB a:hover {
+    /*border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;*/
+  }
 
   .FB {
     text-decoration: none;
     align-self: flex-end;
     list-style: none;
-    width: 83px;
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
-		/*padding-bottom: 2px;*/
+    width: 43px;
+    border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;
   }
 
   .FB a {
-    /*padding-bottom: 2px;*/
+    padding-bottom: 2px;
   }
 
   .TC {
@@ -995,7 +995,7 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     align-self: flex-start;
     list-style: none;
-    width: 120px;
+    width: 50px;
   }
 
   .TC a:hover {
@@ -1166,7 +1166,7 @@ a:hover, a:active, a:focus {
 		letter-spacing: 0.12rem;
 		text-align: left;
 		line-height: 3.1rem;
-		height: 60vh;
+		height: 80vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -1224,8 +1224,12 @@ a:hover, a:active, a:focus {
 		width: 50%;
 	}
 
+	.imgLESS750PX img {
+		width: 100%;
+	}
+
   .imgWIDER750PX img {
-    max-width: 1200px;
+    max-width: 1050px;
   }
 
 	.imgLESS750PX:hover .upper1024 {

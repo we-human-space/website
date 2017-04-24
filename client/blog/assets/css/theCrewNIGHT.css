@@ -547,19 +547,40 @@ a:hover, a:active, a:focus {
 }
 
 .emailInputBottom {
-  width: 250px;
-  border: #e5d9ff solid 2px;
-  border-radius: 10px;
+  width: 275px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 2px solid #e5d9ff;
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
 	font-weight: 500;
   font-size: 1rem;
-  letter-spacing: 1.2px;
-  padding: 11px 10px 10px 15px;
+  letter-spacing: 2px;
+  padding: 11px 10px 10px 0px;
+}
+
+.nameInputBottom {
+  width: 275px;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+  border-bottom: 2px solid #e5d9ff;
+  /*border-radius: 10px;*/
+  background-color: transparent;
+  font-family: "futura-pt",sans-serif;
+	font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  padding: 11px 10px 10px 0px;
+}
+
+.lastNameInput {
+	margin: 20px 0;
 }
 
 .joinBtnBottom {
-	margin-top: 20px;
+	margin-top: 40px;
   width: 150px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
@@ -788,7 +809,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.bottom {
-		margin-top: 350px;
+		margin-top: 100px;
 		text-align: center;
 		font-size: 1.3rem;
 		letter-spacing: 0.08rem;
@@ -796,7 +817,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.emailForm {
-		margin-bottom: 250px;
+		margin-bottom: 230px;
 	}
 
 	.copyFollow320 {
@@ -829,7 +850,7 @@ a:hover, a:active, a:focus {
 		font-weight: 600;
 		font-size: 1.5rem;
 		letter-spacing: 0.1rem;
-		line-height: 2rem;
+		line-height: 2.2rem;
 	}
 
 	.copyFollow700 p {
@@ -838,39 +859,61 @@ a:hover, a:active, a:focus {
 		font-weight: 300;
 		font-size: 1.4rem;
 		color: #8D45F2;
-		margin: 20px 0 40px 0;
-		line-height: 1.5rem;
+		margin: 40px 0 20px 0;
+		line-height: 2rem;
 	}
 
 	.emailInputBottom {
-		width: 250px;
-		border: #e5d9ff solid 2px;
-		border-radius: 10px;
-		background-color: transparent;
-		font-family: "futura-pt",sans-serif;
+	  width: 415px;
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 2px solid #e5d9ff;
+	  background-color: transparent;
+	  font-family: "futura-pt",sans-serif;
 		font-weight: 500;
-		font-size: 1rem;
-		letter-spacing: 1.2px;
-		padding: 11px 10px 10px 15px;
+	  font-size: 1rem;
+	  letter-spacing: 2px;
+	  padding: 11px 10px 10px 0px;
+		margin-top: 5px;
+	}
+
+	.nameInputBottom {
+	  width: 190px;
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+	  border-bottom: 2px solid #e5d9ff;
+	  /*border-radius: 10px;*/
+	  background-color: transparent;
+	  font-family: "futura-pt",sans-serif;
+		font-weight: 400;
+	  font-size: 1rem;
+	  letter-spacing: 2px;
+	  padding: 11px 10px 10px 0px;
+	}
+
+	.lastNameInput {
+		margin: 20px 0px 20px 20px;
 	}
 
 	.joinBtnBottom {
-		margin-top: 0;
-		margin-left: 5px;
-		width: 150px;
-		background-color: #e5d9ff;
-		border: #e5d9ff solid 2px;
-		border-radius: 10px;
-		padding: 10px 15px 11px 15px;
-		font-family: "futura-pt",sans-serif;
+		margin-top: 50px;
+	  width: 150px;
+	  background-color: #e5d9ff;
+	  border: #e5d9ff solid 2px;
+	  border-radius: 10px;
+	  padding: 10px 25px 11px 25px;
+	  font-family: "futura-pt",sans-serif;
 		font-weight: 600;
-		font-size: 1.1rem;
-		color: #5d00f8;
+	  font-size: 1.1rem;
+	  color: #5d00f8;
 	}
 
 	.copyBottom {
 		font-size: 1rem;
 	}
+
 
 }
 
@@ -935,52 +978,52 @@ a:hover, a:active, a:focus {
 		color: #e5d9ff;
 	}
 
-	.WoL {
+  .WoL {
+    text-decoration: none;
+    list-style: none;
+    width: 61px;
+    margin: 0 100px;
 
-		text-decoration: none;
-		list-style: none;
-		width: 111px;
-		margin: 0 60px;
-	}
+  }
 
 
-	.WoL a:hover {
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
-	}
+  .WoL a:hover {
+    border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;
+  }
 
-	.FB a:hover {
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
-	}
+  .FB a:hover {
+    border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;
+  }
 
-	.FB {
-		text-decoration: none;
-		align-self: flex-end;
-		list-style: none;
-		width: 83px;
-		/*border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;*/
-	}
+  .FB {
+    text-decoration: none;
+    align-self: flex-end;
+    list-style: none;
+    width: 43px;
+    /*border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;*/
+  }
 
-	.FB a {
-		padding-bottom: 2px;
-	}
+  .FB a {
+    padding-bottom: 2px;
+  }
 
-	.TC {
-		/*margin-left: 60px;*/
-		text-decoration: none;
-		align-self: flex-start;
-		list-style: none;
-		width: 120px;
-		border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;
-	}
+  .TC {
+    /*margin-left: 60px;*/
+    text-decoration: none;
+    align-self: flex-start;
+    list-style: none;
+    width: 50px;
+    border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;
+  }
 
-	.TC a:hover {
-		/*border-bottom: solid 2px #e5d9ff;
-		border-radius: 1px;*/
-	}
+  .TC a:hover {
+    /*border-bottom: solid 2px #e5d9ff;
+    border-radius: 1px;*/
+  }
 
 	/*------MENU-----*/
 
@@ -1083,6 +1126,7 @@ a:hover, a:active, a:focus {
 		line-height: 1.3rem;
 	}
 
+
 	.emailInputMENU {
 		margin-top: 25px;
 		width: 190px;
@@ -1111,7 +1155,7 @@ a:hover, a:active, a:focus {
 
 	.copyFollow768MENU {
 		margin-top: 1.2rem;
-		font-size: 0.75rem;
+		font-size: 1rem;
 		letter-spacing: 0.10rem;
 		font-weight: 600;
 		line-height: 1.4rem;
