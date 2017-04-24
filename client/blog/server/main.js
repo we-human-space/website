@@ -5,10 +5,9 @@
 */
 
 const express = require('express');
-const debug = require('debug')('app:server');
 const path = require('path');
 const webpack = require('webpack');
-const webpackConfig = require('../config/webpack.config');
+const webpack_config = require('../config/webpack.config');
 const project = require('../config/project.config');
 const compress = require('compression');
 
@@ -20,12 +19,12 @@ app.use(compress());
 // ------------------------------------
 // Apply Webpack HMR Middleware
 // ------------------------------------
-if (project.env === 'development') {
-  const compiler = webpack(webpackConfig);
+if(project.env === 'development'){
+  const compiler = webpack(webpack_config);
 
-  debug('Enabling webpack dev and HMR middleware');
+  console.log('Enabling webpack dev and HMR middleware');
   app.use(require('webpack-dev-middleware')(compiler, {
-    publicPath: webpackConfig.output.publicPath || "",
+    publicPath: webpack_config.output.publicPath || '',
     contentBase: project.paths.src(),
     hot: true,
     quiet: project.compiler.quiet,
@@ -49,7 +48,7 @@ if (project.env === 'development') {
   app.use('*', function (req, res, next) {
     const filename = path.join(compiler.outputPath, 'index.html');
     compiler.outputFileSystem.readFile(filename, (err, result) => {
-      if (err) {
+      if(err){
         return next(err);
       }
       res.set('content-type', 'text/html');
@@ -57,8 +56,8 @@ if (project.env === 'development') {
       res.end();
     });
   });
-} else {
-  debug(
+}else{
+  console.log(
     'Server is being run outside of live development mode, meaning it will ' +
     'only serve the compiled application bundle in ~/dist. Generally you ' +
     'do not need an application server for this and can instead use a web ' +

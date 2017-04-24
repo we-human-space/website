@@ -18,6 +18,7 @@ const config = {
 };
 
 config.compiler = {
+  public_path: '/',
   vendors: [
     'react',
     'react-redux',
