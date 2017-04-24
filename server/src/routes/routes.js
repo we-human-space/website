@@ -22,11 +22,13 @@ module.exports = (function() {
 
   router.get('/', renderer.renderPage);
 
-  router.get('/crew', renderer.renderPage);
+  router.get('/team', renderer.renderPage);
 
-  router.get('/life', renderer.renderPage);
+  router.get('/vision', renderer.renderPage);
 
   router.post('/feed/', blog.feed);
+
+  router.get('/blog/', renderer.renderPage);
 
   router.get('/blog/:article', blog.articles.read);
 

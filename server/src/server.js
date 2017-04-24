@@ -7,7 +7,8 @@ import models from './models/index';
 import uploader from './services/articles/uploader';
 
 // Setting some config points
-config.views.path = path.join(process.argv[1], '../', config.views.path);
+config.views.path = path.join(process.argv[1], '../../', config.views.path);
+console.log(config.views.path);
 
 // CMS Service
 uploader.watch();

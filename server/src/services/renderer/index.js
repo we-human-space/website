@@ -4,10 +4,9 @@ import path from 'path';
 import mustache from 'mustache';
 import fswrapper from '../filesystem/index';
 import views from '../../static/partials.json';
-const env = process.env.NODE_ENV || 'development';
 import config from '../../config';
 
-const ARTICLE_DIR = path.join(__dirname, "../../", config.views.path, config.views.articles.path);
+const ARTICLE_DIR = path.join(__dirname, "../../../", config.views.path, config.views.articles.path);
 
 module.exports = {
   renderPage: render_page,

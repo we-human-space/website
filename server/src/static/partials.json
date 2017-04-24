@@ -15,7 +15,7 @@
       "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/blog": {
+    "/blog/": {
       "path": "partials/feed.html",
       "stylesheet": "/assets/css/blogNIGHT.css",
       "partials": ["head", "foot", "navbar"]
