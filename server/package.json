@@ -44,7 +44,7 @@
       }
     },
     "dev:dist": {
-      "command": "yarn run build:dev && node dist/server.js",
+      "command": "yarn run build:dev && node --version && node --inspect dist/server.js",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
