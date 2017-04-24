@@ -1,7 +1,7 @@
-const Ajv = require('ajv');
-const mongo_sanitize = require('mongo-sanitize');
+import Ajv from 'ajv';
+import mongo_sanitize from 'mongo-sanitize';
 const models = require("../../models");
-const reqschema = require('../../services/secure/validation/feed-fetch.json');
+import reqschema from '../../services/secure/validation/feed-fetch.json';
 const Article = models.Article;
 
 export default function handler(req, res, next){

@@ -1,17 +1,17 @@
 "use strict";
 
-const fs = require('fs');
-const path = require('path');
-const chokidar = require('chokidar');
+import fs from 'fs';
+import path from 'path';
+import chokidar from 'chokidar';
 const spawn = require('child_process').spawn;
-const yaml = require('js-yaml');
-const Ajv = require('ajv');
-const config = require('../../config');
-const fswrapper = require('../filesystem/index');
-const auschema = require('../secure/validation/article-upload.json');
-const hash = require('../secure/hash');
-const mailer = require('../mail/mailer');
-const models = require('../../models/index');
+import yaml from 'js-yaml';
+import Ajv from 'ajv';
+import config from '../../config';
+import fswrapper from '../filesystem/index';
+import auschema from '../secure/validation/article-upload.json';
+import hash from '../secure/hash';
+import mailer from '../mail/mailer';
+import models from '../../models/index';
 const Article = models.Article;
 const Author = models.Author;
 

@@ -1,18 +1,10 @@
-'use strict';
-
-const path = require('path');
-const express = require('express');
-const bodyParser = require('body-parser');
-const config = require('./config');
-const routes = require('./routes/routes');
-const models = require('./models/index');
-const uploader = require('./services/articles/uploader');
-
-const env = process.NODE_ENV || 'development';
-
-global.__PROD__ = env === 'production';
-global.__DEV__ = env === 'development';
-global.__TEST__ = env === 'test';
+import config from './config';
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import routes from './routes/routes';
+import models from './models/index';
+import uploader from './services/articles/uploader';
 
 // Setting some config points
 config.views.path = path.join(process.argv[1], '../', config.views.path);

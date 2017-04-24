@@ -5,8 +5,8 @@
  * single server. So a refactoring is in order when we will scale.
 **/
 
-const hash = require('object-hash');
-const mongoose = require('mongoose');
+import hash from 'object-hash';
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 /**

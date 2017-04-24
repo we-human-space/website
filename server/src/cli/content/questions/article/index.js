@@ -1,7 +1,7 @@
 "use strict";
 
-const inquire = require('../../../inquire');
-//const delete = require('./delete');
+import inquire from '../../../inquire';
+//import delete from './delete';
 
 module.exports = function(supermenu){
   let q = {

@@ -1,7 +1,7 @@
 "use strict";
 
-const print = require('../print');
-const main = require('./questions/main');
+import print from '../print';
+import main from './questions/main';
 
 print("start");
 main();

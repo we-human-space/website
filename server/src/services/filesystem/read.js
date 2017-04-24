@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 module.exports = function read(file) {
   return new Promise((resolve, reject) => {

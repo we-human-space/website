@@ -1,8 +1,7 @@
-'use strict';
-const uuid = require("node-uuid");
-const express = require('express');
-const renderer = require('../services/renderer/index');
-const blog = require('../handlers/blog/index');
+import uuid from 'uuid';
+import express from 'express';
+import renderer from '../services/renderer/index';
+import blog from '../handlers/blog/index';
 
 module.exports = (function() {
 

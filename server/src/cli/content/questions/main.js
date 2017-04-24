@@ -1,9 +1,9 @@
 "use strict";
 
-const print = require('../../print');
-const inquire = require('../../inquire');
-//const article = require('./article');
-const author = require('./author/index');
+import print from '../../print';
+import inquire from '../../inquire';
+//import article from './article';
+import author from './author/index';
 
 module.exports = function(supermenu) {
   let q = {

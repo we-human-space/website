@@ -1,10 +1,10 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const mongoose = require('mongoose');
+import fs from 'fs';
+import path from 'path';
+import mongoose from 'mongoose';
 const basename = path.basename(module.filename);
-const config = require('../config');
+import config from '../config';
 
 //Setting up Mongoose ES6 Promises
 mongoose.Promise = global.Promise;

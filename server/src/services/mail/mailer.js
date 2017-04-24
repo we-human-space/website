@@ -1,8 +1,8 @@
-const fs = require('fs');
-const nodemailer = require('nodemailer');
-const mustache = require('mustache');
-const mailgun_transport = require('nodemailer-mailgun-transport');
-const config = require('../../config');
+import fs from 'fs';
+import nodemailer from 'nodemailer';
+import mustache from 'mustache';
+import mailgun_transport from 'nodemailer-mailgun-transport';
+import config from '../../config';
 
 const mailgun_auth = {
   auth: {

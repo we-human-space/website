@@ -1,11 +1,11 @@
 "use strict";
 
-const path = require('path');
-const mustache = require('mustache');
-const fswrapper = require('../filesystem/index');
-const views = require('../../static/partials.json');
+import path from 'path';
+import mustache from 'mustache';
+import fswrapper from '../filesystem/index';
+import views from '../../static/partials.json';
 const env = process.env.NODE_ENV || 'development';
-const config = require('../../config');
+import config from '../../config';
 
 const ARTICLE_DIR = path.join(__dirname, "../../", config.views.path, config.views.articles.path);
 

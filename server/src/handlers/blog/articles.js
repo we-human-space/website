@@ -1,14 +1,14 @@
 "use strict";
 
-const path = require('path');
-const mongo_sanitize = require('mongo-sanitize');
-const config = require('../../config');
-const hash = require('../../services/secure/hash');
-const xss = require('../../services/secure/xss');
-const fswrapper = require('../../services/filesystem/index');
-const uploader = require('../../services/articles/uploader');
-const renderer = require('../../services/renderer/index');
-const models = require('../../models/index');
+import path from 'path';
+import mongo_sanitize from 'mongo-sanitize';
+import config from '../../config';
+import hash from '../../services/secure/hash';
+import xss from '../../services/secure/xss';
+import fswrapper from '../../services/filesystem/index';
+import uploader from '../../services/articles/uploader';
+import renderer from '../../services/renderer/index';
+import models from '../../models/index';
 const Article = models.Article;
 
 const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);

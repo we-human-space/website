@@ -1,9 +1,9 @@
 "use strict";
 
-const inquirer = require('inquirer');
+import inquirer from 'inquirer';
 const prompt = inquirer.createPromptModule();
-const print = require('./print');
-const loop = require('../utilities/loop');
+import print from './print';
+import loop from '../utilities/loop';
 
 module.exports = {
   single: ask,

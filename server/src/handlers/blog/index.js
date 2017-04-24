@@ -1,6 +1,7 @@
-"use strict";
+import articles from './articles';
+import feed from './feed';
 
 module.exports = {
-  articles: require('./articles'),
-  feed: require('./feed')
+  articles,
+  feed
 };

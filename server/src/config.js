@@ -1,4 +1,8 @@
-const env = process.NODE_ENV || 'development';
-const config = require('../../.config/server/index')[env];
+import config from '../../.config/server/index';
 
-module.exports = config;
+global.__ENV__ = process.NODE_ENV || 'development';
+global.__PROD__ = __ENV__ == 'production';
+global.__DEV__ = __ENV__ == 'development';
+global.__TEST__ = __ENV__ == 'test';
+
+module.exports = config[process.NODE_ENV || 'development'];

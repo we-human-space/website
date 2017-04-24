@@ -1,10 +1,10 @@
 "use strict";
 
-const models = require('../../../../models/index');
-const countries = require('../../../../static/countries.json');
-const inquire = require('../../../inquire');
-const print = require('../../../print');
-const reviewer = require('../../../reviewer');
+import models from '../../../../models/index';
+import countries from '../../../../static/countries.json';
+import inquire from '../../../inquire';
+import print from '../../../print';
+import reviewer from '../../../reviewer';
 const Author = models.Author;
 
 module.exports = function(supermenu){

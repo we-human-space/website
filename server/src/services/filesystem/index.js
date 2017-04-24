@@ -1,8 +1,8 @@
-const read = require('./read');
-const copy = require('./copy');
-const mkdir = require('./mkdir');
-const remove = require('./remove');
-const chmod = require('./chmod');
+import read from './read';
+import copy from './copy';
+import mkdir from './mkdir';
+import remove from './remove';
+import chmod from './chmod';
 
 module.exports = {
   read: read,
