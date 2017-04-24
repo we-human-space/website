@@ -10,7 +10,6 @@ const uploader = require('../../services/articles/uploader');
 const renderer = require('../../services/renderer/index');
 const models = require('../../models/index');
 const Article = models.Article;
-const Author = models.Author;
 
 const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);
 

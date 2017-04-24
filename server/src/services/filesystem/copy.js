@@ -14,15 +14,15 @@ function copy(source, target, cb) {
   wr.on("error", function(err) {
     done(err);
   });
-  wr.on("close", function(ex) {
-    done();
+  wr.on("close", function(err) {
+    done(err);
   });
   rd.pipe(wr);
 
   function done(err) {
     if(err){
       console.log(err);
-    }    
+    }
     if(typeof cb === "function"){
       if (!cbCalled) {
         cb(err, null);
@@ -33,4 +33,4 @@ function copy(source, target, cb) {
       }
     }
   }
-}
+};

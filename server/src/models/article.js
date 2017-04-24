@@ -78,7 +78,7 @@ ArticleSchema.statics.getPageFromCache = function(page){
 
 ArticleSchema.statics.setPageToCache = function(pages) {
   cache = { ...cache, ...pages };
-}
+};
 
 /**
  * Fetches articles according to their paging

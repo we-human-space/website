@@ -6,7 +6,8 @@ module.exports = {
   shortener: generate_base_62_hash,
   hash: generate_pwd_hash,
   match: validate_pwd_hash,
-  isBase62Hash: is_base_62_hash
+  isBase62Hash: is_base_62_hash,
+  base62ToDec: base62_to_dec
 };
 
 function generate_base_62_hash(data) {
@@ -33,7 +34,7 @@ function hex_to_base62(hexstr){
     b62str = base62.charAt(mod) + b62str;
     num = Math.floor(num);
   }while(num !== 0);
-  return b62str
+  return b62str;
 }
 
 function base62_to_dec(b62str){
@@ -51,7 +52,7 @@ function generate_pwd_hash(password) {
 }
 
 function validate_pwd_hash(password, salt, hash){
-  var password = sha256(password, salt);
+  password = sha256(password, salt);
   return password.hash === hash;
 }
 

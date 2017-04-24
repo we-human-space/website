@@ -55,7 +55,7 @@ function looping(condition, question, base_value){
       if(q instanceof Promise){
         return q.then((res) => { return ask(res); });
       }else{
-        return ask(question(value, first))
+        return ask(question(value, first));
       }
     },
     base_value

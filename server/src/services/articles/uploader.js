@@ -372,7 +372,7 @@ function notify_success(data) {
     if(__DEV__ || __TEST__){
       return Promise.resolve({result: "Success notification is disabled", error: null, data: data});
     }else{
-      return Promise.resolve(res);
+      return Promise.resolve();
     }
   }
 
@@ -411,7 +411,7 @@ function notify_failure(data) {
     if(__DEV__ || __TEST__){
       return Promise.resolve({result: "Failure notification is disabled", error: null, data: data});
     }else{
-      return Promise.resolve(res);
+      return Promise.resolve();
     }
   }
 }

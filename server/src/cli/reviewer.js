@@ -77,7 +77,7 @@ function set_callback_actions(q, target, callbacks){
         ans[q.name] = a;
         return ans;
       });
-    }
+    };
   }
 }
 
