@@ -15,8 +15,8 @@ import models from '../../models/index';
 const Article = models.Article;
 const Author = models.Author;
 
-const UPLOAD_PATH = path.join(__dirname, '../../', config.views.path, config.views.articles.uploads);
-const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);
+const UPLOAD_PATH = path.join(__dirname, '../../../', config.views.path, config.views.articles.uploads);
+const ARTICLE_DIR = path.join(__dirname, '../../../', config.views.path, config.views.articles.path);
 const IMAGE_EXT_REGEXP = /\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const THUMBNAIL_EXT_REGEXP = /thumbnail\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const devcache = {};
@@ -310,6 +310,8 @@ function move(data){
 
 function persist(data) {
   console.log(`Persisting "${data.article.title}" to database`);
+  data.article.setPaging();
+  data.article.setPropsToCache();
   return data.article.save()
   .then(() => {
     return Article.findOne({hash: data.article.hash});

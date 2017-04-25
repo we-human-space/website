@@ -6,5 +6,9 @@
   "articles/integration": {
     "name": "Integration tests for articles",
     "path": "./tests/articles/integration/test.js"
+  },
+  "feed/generate": {
+    "name": "Article Generator to manually test the feed functionalities",
+    "path": "./tests/feed/test.js"
   }
 }

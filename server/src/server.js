@@ -13,6 +13,8 @@ console.log(config.views.path);
 // CMS Service
 uploader.watch();
 
+models.Article.initCache();
+
 // App
 const app = express();
 //Adding bodyParser

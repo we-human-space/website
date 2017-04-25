@@ -99,6 +99,7 @@
     "co": "4.6.0",
     "consolidate": "0.14.5",
     "express": "4.14.0",
+    "hooker": "^0.2.3",
     "ip": "1.1.5",
     "js-yaml": "3.8.3",
     "mongo-sanitize": "^1.0.0",
@@ -123,6 +124,7 @@
     "inquirer": "1.2.2",
     "nodemon": "^1.11.0",
     "should": "^11.1.1",
-    "supertest": "^2.0.0"
+    "supertest": "^2.0.0",
+    "write-yaml": "^1.0.0"
   }
 }

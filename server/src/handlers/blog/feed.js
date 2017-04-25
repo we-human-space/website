@@ -6,6 +6,7 @@ const Article = models.Article;
 
 export default function handler(req, res, next){
   //Sanitizing
+  console.log(req.body);
   Promise.resolve(mongo_sanitize(req.body))
   //Validating
   .then((body) => {
@@ -52,10 +53,9 @@ function get_pages(payload){
     // Refactor - this case shouldn't happen, but no check established,
     // so left this instead
     }else if(payload.action == "REQUEST_INITIAL") {
-      return Article.getPage(Math.max.apply(null, payload.cached.pages));
+      return Article.getPage();
     }else if(payload.action == "REQUEST_MORE") {
       let page = Math.min.apply(null, payload.cached.pages);
-      page = page-1 ? page-1 : page;
       if(page-1){
         return Article.getPage(page-1);
       }else{

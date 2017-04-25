@@ -1,16 +1,17 @@
 "use strict";
 
 const path = require("path");
-const database = require('../../../common/database');
-const fswrapper = require('../../../../dist/services/filesystem/index');
-const stop = require('../../../common/stop');
+const database = require('../../common/database');
+const generate_article = require('../../common/article');
+const fswrapper = require('../../../dist/services/filesystem/index');
+const stop = require('../../common/stop');
 const Author = models.Author;
 
 const context = __dirname;
 const INSERT_DATA = 'insert.json';
 const REMOVE_DATA = 'remove.json';
-const SOURCE_PATH = path.join(__dirname, "./{{filename}}.zip");
-const DESTINATION_PATH = path.join(__dirname, "../../../../", config.views.path, "/uploads/{{filename}}.zip");
+const SOURCE_PATH = path.join(__dirname, "../../common/tmp/{{filename}}.zip");
+const DESTINATION_PATH = path.join(__dirname, "../../../", config.views.path, "/uploads/{{filename}}.zip");
 
 var articles = [];
 var authors;
@@ -48,37 +49,28 @@ after(function(done){
   });
 });
 
-it("should be able to read the article from the browser", function(done) {
-  this.timeout(4000);
-  var data;
-  upload({filename: "test-file-1"})
-  .then(get_report)
-  .then((result) => data = result)
-  .then(test_in_browser(this))
-  .then((data) => {
-    articles.push(data);
-    done();
-  }).catch((err) => {
-    if(!err) err = new Error("Issue found");
-    articles.push(data);
-    console.log(err);
-    done(err);
-  });
-});
+it("upload articles to the server", function(done) {
+  this.timeout(10000);
+  var generated_articles = [];
 
-it("should be able to render the article with all the images in the browser", function(done) {
-  this.timeout(4000);
-  var data;
-  upload({filename: "test-file-2"})
-  .then(get_report)
-  .then((result) => data = result)
+  var promises = [];
+  for(let count = 0 ; count < 13; count++){
+    promises.push(
+      generate_article(authors[count % 2].username)
+      .then((result) => {
+        generated_articles.push(result.article);
+        return upload({filename: result.folder})
+        .then(get_report)
+        .then((a) => { articles.push(a); return result.clear(); });
+      })
+    );
+  }
+  Promise.all(promises)
+  .then(() => articles)
   .then(test_in_browser(this))
-  .then((data) => {
-    articles.push(data);
-    done();
-  }).catch((err) => {
+  .then(() => done)
+  .catch((err) => {
     if(!err) err = new Error("Issue found");
-    articles.push(data);
     console.log(err);
     done(err);
   });
@@ -123,10 +115,11 @@ function get_report(data){
 }
 
 function test_in_browser(self){
-  return (data) => {
+  return (articles) => {
     console.log("Go test in the browser, see if everything is fine");
-    console.log(`Your URL is: localhost:8888/blog/${data.article.url}`);
-    console.log(`Your shortened URL is: localhost:8888/blog/${data.article.hash}`);
+    articles.forEach((a, i) => {
+      console.log(`${i+1}: URL: localhost:8888/blog/${a.article.hash}`);
+    });
     return stop.confirm.apply(self);
   };
 }
@@ -134,6 +127,7 @@ function test_in_browser(self){
 function dump(){
   Author.find({username: /^test-/})
   .then((all) => {
+    console.log(all);
     authors = all;
     return Promise.resolve();
   });

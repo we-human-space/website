@@ -5,12 +5,12 @@
       "stylesheet": "/assets/css/main.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/crew": {
+    "/team": {
       "path": "partials/theCrew.html",
       "stylesheet": "/assets/css/theCrewNIGHT.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/life": {
+    "/vision": {
       "path": "partials/wayOfLife.html",
       "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "foot", "navbar"]

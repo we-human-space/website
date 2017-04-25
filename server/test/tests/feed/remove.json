@@ -1,0 +1,12 @@
+{
+  "Author": [
+    {
+      "deleteOne": { "filter": { "username": "test-author" }} 
+    }
+  ],
+  "Article": [
+    {
+      "deleteMany": { "filter": { "subject": "Test Subject" }}
+    }
+  ]
+}

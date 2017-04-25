@@ -1,0 +1,30 @@
+{
+  "Author": [
+    {
+      "insertOne": {
+        "document": {
+          "username": "test-author-one",
+          "name": "Test Author One",
+          "email": "futureboyhq@gmail.com",
+          "age": 20,
+          "bio": "This is a test bio",
+          "title": "Zesty Testy",
+          "country": "CA"
+        }
+      }
+    },
+    {
+      "insertOne": {
+        "document": {
+          "username": "test-author-two",
+          "name": "Test Author Two",
+          "email": "philippe.hebert.qc@gmail.com",
+          "age": 20,
+          "bio": "This is a test bio",
+          "title": "Yanky Wookie",
+          "country": "CA"
+        }
+      }
+    }
+  ]
+}
