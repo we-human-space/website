@@ -1,6 +1,4 @@
 export const ActionTypes = {
-  REQUEST_TAGS_AND_AUTHORS: 'REQUEST_TAGS_AND_AUTHORS', // Request all tags and authors for menu display
-  RECEIVE_TAGS_AND_AUTHORS: 'RECEIVE_TAGS_AND_AUTHORS', // Receive all tags and authors for menu display
   REQUEST_INITIAL_ARTICLES: 'REQUEST_INITIAL_ARTICLES', // Request latest articles
   RECEIVE_INITIAL_ARTICLES: 'RECEIVE_INITIAL_ARTICLES', // Receive latest articles
   REQUEST_MORE_ARTICLES: 'REQUEST_MORE_ARTICLES', // Request articles starting at article X for criteria Y
@@ -9,21 +7,6 @@ export const ActionTypes = {
   REQUEST_REFRESH_ARTICLES: 'REQUEST_REFRESH_ARTICLES', // Request a feed update (new articles)
   RECEIVE_REFRESH_ARTICLES: 'RECEIVE_REFRESH_ARTICLES' // Receive a non-empty response for feed update
 };
-
-export function request_tags_and_authors() {
-  return {
-    type: ActionTypes.REQUEST_TAGS_AND_AUTHORS
-  };
-}
-
-export function receive_tags_and_authors(data) {
-  return {
-    type: ActionTypes.RECEIVE_TAGS_AND_AUTHORS,
-    payload: {
-      result: data
-    }
-  };
-}
 
 export function request_articles(cache) {
   if(cache){

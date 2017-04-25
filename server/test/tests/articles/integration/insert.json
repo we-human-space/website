@@ -4,7 +4,8 @@
       "insertOne": {
         "document": {
           "username": "test-author",
-          "name": "Test Author",
+          "firstname": "Test One",
+          "lastname": "Author One",
           "email": "futureboyhq@gmail.com",
           "age": 20,
           "bio": "This is a test bio",

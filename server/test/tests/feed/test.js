@@ -54,9 +54,11 @@ it("upload articles to the server", function(done) {
   var generated_articles = [];
 
   var promises = [];
-  for(let count = 0 ; count < 13; count++){
+  var count = Math.round(Math.random()*55+10);
+  console.log(`Generating ${count} articles`);
+  for(let c = 0 ; c < count; c++){
     promises.push(
-      generate_article(authors[count % 2].username)
+      generate_article(authors[c % 2].username)
       .then((result) => {
         generated_articles.push(result.article);
         return upload({filename: result.folder})

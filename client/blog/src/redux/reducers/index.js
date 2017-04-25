@@ -9,8 +9,10 @@ const initial_state = {
   },
   query: {},
   entities: {
+    subjects: {},
     pages: {},
-    authors: {}
+    authors: {},
+    navlinks: []
   },
   feed: {}
 };
@@ -73,6 +75,7 @@ function query(state = initial_state.query, action){
 function update_pages(state, action) {
   let pages = action.payload.pages;
   return {
+    ...state,
     pages: { ...state.pages, ...pages },
     authors: { ...state.authors }
   };

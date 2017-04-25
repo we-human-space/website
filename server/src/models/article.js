@@ -17,12 +17,12 @@ var cache = {};
 /**
 * subject_cache = [string, ...]
 **/
-const subject_cache = {};
+const subject_cache = [];
 
 /**
 * tag_cache = [string, ...]
 **/
-const tag_cache = {};
+const tag_cache = [];
 
 /**
 * query_cache = { int: [ {index: int, hash: string }, ... ] , ...}
@@ -52,7 +52,7 @@ var ArticleSchema = new Schema({
  * To be called on server start
  */
 ArticleSchema.statics.initCache = function(){
-  console.log("Initializing Cache");
+  console.log("Initializing Article Cache");
   this
     .find()
     .sort({page: -1, pageIndex: -1})
@@ -62,7 +62,16 @@ ArticleSchema.statics.initCache = function(){
         a.setPropsToCache();
       });
       reduce_to_pages(articles, cache);
-    });
+    })
+    .then(() => console.log("Article Cache initialized"));
+};
+
+ArticleSchema.statics.getCachedTags = function(){
+  return tag_cache.slice();
+};
+
+ArticleSchema.statics.getCachedSubjects = function(){
+  return subject_cache.slice();
 };
 
 ArticleSchema.statics.getPageFromCache = function(page){
@@ -357,8 +366,8 @@ ArticleSchema.methods.setPaging = function(){
  * Updates the subject cache
  **/
 ArticleSchema.methods.setPropsToCache = function(){
-  subject_cache[this.subject] = 1;
-  this.tags.forEach((t) => (tag_cache[t] = 1));
+  if(subject_cache.indexOf(this.subject) === -1) subject_cache.push(this.subject);
+  this.tags.forEach((t) => { if(tag_cache.indexOf(t) === -1) tag_cache.push(t); });
 }
 
 ArticleSchema.methods.export = function(){

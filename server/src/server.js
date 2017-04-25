@@ -13,6 +13,7 @@ console.log(config.views.path);
 // CMS Service
 uploader.watch();
 
+models.Author.initCache();
 models.Article.initCache();
 
 // App

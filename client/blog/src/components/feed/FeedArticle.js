@@ -7,7 +7,7 @@ export default function FeedArticle(props){
       <div className='postIMG'>
         <div className={props.img_class}>
           <a href={props.article.url}><img src={`/blog/${props.article.hash}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
-          <div className='overlay'>
+          <div className='upper1024'>
             <div className='overlayPlacement'>
               <div className='hover'>
                 <div className='postData'>

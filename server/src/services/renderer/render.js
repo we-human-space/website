@@ -1,8 +1,13 @@
 import path from 'path';
 import mustache from 'mustache';
+import serialize from 'serialize-javascript';
 import fswrapper from '../filesystem/index';
 import views from '../../static/partials.json';
 import config from '../../config';
+import models from '../../models';
+
+const Article = models.Article;
+const Author = models.Author;
 
 module.exports = {
   render: render,
@@ -24,12 +29,34 @@ function get_request_key(req){
          .find(regexp => req.path.match(regexp));
 }
 
+function get_preloaded_state(req){
+  return serialize({
+    fetching: {
+      refresh: false,
+      initial: false,
+      load_more: false
+    },
+    query: req.query || {},
+    entities: {
+      subjects: Article.getCachedSubjects().map((s) => ({key: capitalize(s), text: capitalize(s), query: {'subject': s}})),
+      pages: {},
+      authors: Author.getCachedAuthors(true),
+      navlinks: [
+        {key:'Blog',text: 'Blog'},
+        {key:'Team', text: 'Team'},
+        {key:'Vision', text: 'Vision'}
+      ]
+    },
+    feed: {}
+  }, {isJSON: true});
+}
+
 function render_page(req, res, next){
   if(!views.partials[req.partial]){
     console.log("render: view not found");
     next();
   }else{
-    let data = req.data || {};
+    let data = { ...req.data, preloaded_state: get_preloaded_state(req)};
     data.stylesheet = data.stylesheet || views.partials[req.partial].stylesheet;
     return render_partial([detail_page(req.partial), data])
     .then((result) => {
@@ -66,7 +93,6 @@ function get_children([page, data]) {
 function render_children([page, data]) {
   return Promise.all(page.children.map((p) => render_partial([p, data])))
   .then(() => {
-    if(page.key == 'vision') console.log(page);
     return [page, data];
   });
 }
@@ -100,4 +126,8 @@ function render_file([page, data]) {
 function serve(req, res, next){
   if(req.html) res.send(req.html);
   else next();
+}
+
+function capitalize(str) {
+  return str.split(' ').map((s) => s.charAt(0).toUpperCase()+s.substr(1).toLowerCase()).join(' ');
 }

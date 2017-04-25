@@ -1,21 +1,18 @@
 import 'babel-polyfill';
-import config from './config';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configure_store from './redux/store/configure';
 import FeedContainer from './containers/feed/FeedContainer';
 import HamburgerIcon from './components/navmenu/HamburgerIcon';
-import NavSections from './components/navmenu/NavSections';
-import NavSubjects from './components/navmenu/NavSubjects';
-import NavAuthors from './components/navmenu/NavAuthors';
+import NavLinksContainer from './containers/navmenu/NavLinksContainer';
 
 // Browser Window Configuration
 window.onload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
 window.onbeforeunload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
 
 // Store Configuration
-const store = configure_store();
+const store = configure_store(window.__PRELOADED_STATE__);
 
 let render = () => {
   if(window.location.pathname.match(/^(\/blog\/)(\?.+)?$/)){
@@ -28,16 +25,29 @@ let render = () => {
   }
   ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
 
-  // TODO: Refactor the following three in a single component to which important
-  // class names & text are passed
   toArray(document.getElementsByClassName('exploreSection')).forEach((e) => {
-    ReactDOM.render(<NavSections />, e);
+    ReactDOM.render(
+      <Provider store={store}>
+        <NavLinksContainer type='navlinks' />
+      </Provider>,
+      e
+    );
   });
   toArray(document.getElementsByClassName('filterBy')).forEach((e) => {
-    ReactDOM.render(<NavAuthors />, e);
+    ReactDOM.render(
+      <Provider store={store}>
+        <NavLinksContainer type='authors' />
+      </Provider>,
+      e
+    );
   });
   toArray(document.getElementsByClassName('resonateWith')).forEach((e) => {
-    ReactDOM.render(<NavSubjects />, e);
+    ReactDOM.render(
+      <Provider store={store}>
+        <NavLinksContainer type='subjects' />
+      </Provider>,
+      e
+    );
   });
 };
 
