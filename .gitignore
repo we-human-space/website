@@ -40,6 +40,8 @@ jspm_packages
 # Configuration folder
 .config
 
+# mac images
+.DS_Store
 
 # Development Files Cache
 .devcache
