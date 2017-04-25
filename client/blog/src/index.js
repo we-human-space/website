@@ -15,13 +15,14 @@ import NavAuthors from './components/navmenu/NavAuthors';
 const store = configure_store();
 
 let render = () => {
-  // ReactDOM.render(
-  //   <Provider store={store}>
-  //     <FeedContainer />
-  //   </Provider>,
-  //   document.getElementById('feed')
-  // );
-
+  if(window.location.pathname.match(/^(\/blog\/)(\?.+)?$/)){
+    ReactDOM.render(
+      <Provider store={store}>
+        <FeedContainer />
+      </Provider>,
+      document.getElementById('feed')
+    );
+  }
   ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
 
   // TODO: Refactor the following three in a single component to which important

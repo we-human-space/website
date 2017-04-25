@@ -1,60 +1,90 @@
 export const ActionTypes = {
   REQUEST_TAGS_AND_AUTHORS: 'REQUEST_TAGS_AND_AUTHORS', // Request all tags and authors for menu display
   RECEIVE_TAGS_AND_AUTHORS: 'RECEIVE_TAGS_AND_AUTHORS', // Receive all tags and authors for menu display
-  REQUEST_ARTICLES: 'REQUEST_ARTICLES', // Request articles starting at article X for criteria Y
-  RECEIVE_ARTICLES: 'RECEIVE_ARTICLES', // Receive articles stareting at article X for criteria Y
+  REQUEST_INITIAL_ARTICLES: 'REQUEST_INITIAL_ARTICLES', // Request latest articles
+  RECEIVE_INITIAL_ARTICLES: 'RECEIVE_INITIAL_ARTICLES', // Receive latest articles
+  REQUEST_MORE_ARTICLES: 'REQUEST_MORE_ARTICLES', // Request articles starting at article X for criteria Y
+  RECEIVE_MORE_ARTICLES: 'RECEIVE_MORE_ARTICLES', // Receive articles stareting at article X for criteria Y
   UPDATE_QUERY: 'UPDATE_QUERY', // An update to the query has been issued.
-  EXPIRE_FEED: 'EXPIRE_FEED', // Expresses that it is time to update the feed
-  REQUEST_FEED_UPDATE: 'REQUEST_FEED_UPDATE', // Request a feed update (new articles)
-  RECEIVE_FEED_UPDATE: 'RECEIVE_FEED_UPDATE', // Receive a non-empty response for feed update
-  REQUEST_SEARCH_ARTICLES: 'SEARCH_ARTICLES', // Issue a search query
-  RECEIVE_SEARCH_RESULTS: 'SEARCH_RESULTS', // Receive the search results
-  REQUEST_AUTHORS: 'REQUEST_AUTHORS', // Request a list of authors
-  RECEIVE_AUTHORS: 'RECEIVE_AUTHORS', // Receive the list of authors
-  NEWSLETTER_SUBSCRIPTION: 'NEWSLETTER_SUBSCRIPTION' // Subscribe to the newsletter
+  REQUEST_REFRESH_ARTICLES: 'REQUEST_REFRESH_ARTICLES', // Request a feed update (new articles)
+  RECEIVE_REFRESH_ARTICLES: 'RECEIVE_REFRESH_ARTICLES' // Receive a non-empty response for feed update
 };
 
-export function request_articles() {
+export function request_tags_and_authors() {
   return {
-    type: ActionTypes.REQUEST_ARTICLES
+    type: ActionTypes.REQUEST_TAGS_AND_AUTHORS
   };
 }
 
-export function receive_articles(json) {
+export function receive_tags_and_authors(data) {
   return {
-    type: ActionTypes.RECEIVE_ARTICLES,
+    type: ActionTypes.RECEIVE_TAGS_AND_AUTHORS,
     payload: {
-      result: json.data.children.map(child => child.data)
+      result: data
     }
   };
 }
 
-export function request_authors() {
+export function request_articles(cache) {
+  if(cache){
+    return request_more_articles();
+  }else{
+    return request_initial_articles();
+  }
+}
+
+export function receive_articles(props, data) {
+  if(props.cache){
+    return receive_more_articles(props.query, data);
+  }else{
+    return receive_initial_articles(props.query, data);
+  }
+}
+
+function request_more_articles() {
   return {
-    type: ActionTypes.REQUEST_AUTHORS
+    type: ActionTypes.REQUEST_MORE_ARTICLES
   };
 }
 
-export function receive_authors(json) {
+function receive_more_articles(query, data) {
   return {
-    type: ActionTypes.RECEIVE_AUTHORS,
+    type: ActionTypes.RECEIVE_MORE_ARTICLES,
     payload: {
-      authors: json.data.children.map(child => child.data)
+      query,
+      ...data
     }
   };
 }
 
-export function request_feed_update() {
+function request_initial_articles() {
   return {
-    type: ActionTypes.REQUEST_FEED_UPDATE,
+    type: ActionTypes.REQUEST_INITIAL_ARTICLES
   };
 }
 
-export function receive_feed_update(json) {
+function receive_initial_articles(query, data) {
   return {
-    type: ActionTypes.REQUEST_FEED_UPDATE,
+    type: ActionTypes.RECEIVE_INITIAL_ARTICLES,
     payload: {
-      articles: json.data.children.map(child => child.data)
+      query,
+      ...data
+    }
+  };
+}
+
+export function request_refresh_articles() {
+  return {
+    type: ActionTypes.REQUEST_REFRESH_ARTICLES
+  };
+}
+
+export function receive_refresh_articles(query, data) {
+  return {
+    type: ActionTypes.RECEIVE_REFRESH_ARTICLES,
+    payload: {
+      query,
+      ...data
     }
   };
 }

@@ -20,8 +20,8 @@ export default function FeedPage(props) {
   );
 };
 
-FeedArticle.propTypes = {
-  article: PropTypes.shape({
+FeedPage.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.shape({
     hash: PropTypes.string.isRequired,
     page: PropTypes.number.isRequired,
     pageIndex: PropTypes.number.isRequired,
@@ -34,7 +34,7 @@ FeedArticle.propTypes = {
     thumbnail: PropTypes.shape({
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,
-      src: PropTypes.string.isRequired,
+      mime: PropTypes.string.isRequired
     })
-  }).isRequired
+  })).isRequired
 };

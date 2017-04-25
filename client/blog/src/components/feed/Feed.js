@@ -63,25 +63,49 @@ export default class Feed extends React.Component {
 }
 
 Feed.propTypes = {
-  query: PropTypes.object.isRequired,
+  query: PropTypes.object,
+  cache: PropTypes.object,
   isLoadingMore: PropTypes.func.isRequired,
   isRefreshing: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
   expireFeed: PropTypes.func.isRequired,
-  pages: PropTypes.arrayOf(PropTypes.shape({
-    hash: PropTypes.string.isRequired,
-    page: PropTypes.number.isRequired,
-    pageIndex: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    subject: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    thumbnail: PropTypes.shape({
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-      src: PropTypes.string.isRequired
-    })
-  })).isRequired
+  pages: PropTypes.objectOf(function(props, propName, componentName) {
+    let error;
+    let page = props[propName];
+    if(Array.isArray(page)){
+      page.forEach((a, i) => {
+        /*eslint-disable*/
+        if(!typeof a.hash === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].hash supplied to \`${componentName}\`. Validation failed.`);
+        if(!Number.isInteger(a.page))
+          error = new Error(`Invalid prop pages[${propName}][${i}].page supplied to \`${componentName}\`. Validation failed.`);
+        if(!Number.isInteger(a.pageIndex))
+          error = new Error(`Invalid prop pages[${propName}][${i}].pageIndex supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.title === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].title supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.url === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].url supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.subject === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].subject supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.category === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].Error supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.summary === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].summary supplied to \`${componentName}\`. Validation failed.`);
+        if(!typeof a.author === 'string')
+          error = new Error(`Invalid prop pages[${propName}][${i}].author supplied to \`${componentName}\`. Validation failed.`);
+        if(typeof a.thumbnail === 'object'){
+          if(!Number.isInteger(a.thumbnail.width))
+            error = new Error(`Invalid prop pages[${propName}][${i}].thumbnail.width supplied to \`${componentName}\`. Validation failed.`);
+          if(!Number.isInteger(a.thumbnail.height))
+            error = new Error(`Invalid prop pages[${propName}][${i}].thumbnail.height supplied to \`${componentName}\`. Validation failed.`);
+          if(!typeof a.thumbnail.mime === 'string')
+            error = new Error(`Invalid prop pages[${propName}][${i}].thumbnail.mime supplied to \`${componentName}\`. Validation failed.`);
+        }else{
+          error = new Error(`Invalid prop pages[${propName}][${i}].thumbnail supplied to \`${componentName}\`. Validation failed.`);
+        }
+        /*eslint-enable*/
+      });
+    }
+    return error;
+  })
 };

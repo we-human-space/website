@@ -4,6 +4,7 @@ import { ActionTypes } from '../actions/index';
 const initial_state = {
   fetching: {
     refresh: false,
+    initial: false,
     load_more: false
   },
   query: {},
@@ -16,12 +17,15 @@ const initial_state = {
 
 function fetching(state = initial_state.fetching, action) {
   switch(action.type) {
-  case ActionTypes.REQUEST_ARTICLES:
-  case ActionTypes.RECEIVE_ARTICLES:
-    return {refresh: state.refresh, load_more: !state.load_more};
-  case ActionTypes.REQUEST_FEED_UPDATE:
-  case ActionTypes.RECEIVE_FEED_UPDATE:
-    return {refresh: !state.refresh, load_more: state.load_more};
+  case ActionTypes.REQUEST_MORE_ARTICLES:
+  case ActionTypes.RECEIVE_MORE_ARTICLES:
+    return { ...state, load_more: !state.load_more };
+  case ActionTypes.REQUEST_INITIAL_ARTICLES:
+  case ActionTypes.RECEIVE_INITIAL_ARTICLES:
+    return { ...state, initial: !state.initial };
+  case ActionTypes.REQUEST_REFRESH_ARTICLES:
+  case ActionTypes.RECEIVE_REFRESH_ARTICLES:
+    return { ...state, refresh: !state.refresh };
   default:
     return state;
   }
@@ -29,11 +33,13 @@ function fetching(state = initial_state.fetching, action) {
 
 function entities(state = initial_state.entities, action) {
   switch(action.type) {
-  case ActionTypes.REQUEST_ARTICLES:
-  case ActionTypes.REQUEST_FEED_UPDATE:
+  case ActionTypes.REQUEST_MORE_ARTICLES:
+  case ActionTypes.REQUEST_INITIAL_ARTICLES:
+  case ActionTypes.REQUEST_REFRESH_ARTICLES:
     return { ...state };
-  case ActionTypes.RECEIVE_ARTICLES:
-  case ActionTypes.RECEIVE_FEED_UPDATE:
+  case ActionTypes.RECEIVE_MORE_ARTICLES:
+  case ActionTypes.RECEIVE_INITIAL_ARTICLES:
+  case ActionTypes.RECEIVE_REFRESH_ARTICLES:
     return update_pages(state, action);
   default:
     return state;
@@ -42,11 +48,13 @@ function entities(state = initial_state.entities, action) {
 
 function feed(state = initial_state.feed, action) {
   switch(action.type) {
-  case ActionTypes.REQUEST_ARTICLES:
-  case ActionTypes.REQUEST_FEED_UPDATE:
+  case ActionTypes.REQUEST_MORE_ARTICLES:
+  case ActionTypes.REQUEST_INITIAL_ARTICLES:
+  case ActionTypes.REQUEST_REFRESH_ARTICLES:
     return { ...state };
-  case ActionTypes.RECEIVE_ARTICLES:
-  case ActionTypes.RECEIVE_FEED_UPDATE:
+  case ActionTypes.RECEIVE_MORE_ARTICLES:
+  case ActionTypes.RECEIVE_INITIAL_ARTICLES:
+  case ActionTypes.RECEIVE_REFRESH_ARTICLES:
     return update_feed(state, action);
   default:
     return state;
@@ -63,7 +71,7 @@ function query(state = initial_state.query, action){
 }
 
 function update_pages(state, action) {
-  let pages = action.payload.result.pages;
+  let pages = action.payload.pages;
   return {
     pages: { ...state.pages, ...pages },
     authors: { ...state.authors }
@@ -71,12 +79,15 @@ function update_pages(state, action) {
 }
 
 function update_feed(state, action) {
-  let match = action.payload.result.match;
+  let match = action.payload.match;
+  let search = Array.isArray(state[window.location.search])
+               ? state[window.location.search].slice()
+               : [];
   return {
     ...state,
     [window.location.search]: Array.isArray(match)
-                              ? state[window.location.search].concat(...action.payload.result.match)
-                              : state[window.location.search].slice()
+                              ? search.concat(...action.payload.match)
+                              : search
   };
 }
 

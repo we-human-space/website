@@ -1,15 +1,15 @@
-import fetch from 'whatwg-fetch';
+import superagent from 'superagent';
 import { connect } from 'react-redux';
 import config from '../../config';
 import Feed from '../../components/feed/Feed';
 import {
   request_articles,
   receive_articles,
-  request_feed_update,
-  receive_feed_update
-} from '../../redux/reducers/index';
+  request_refresh_articles,
+  receive_refresh_articles
+} from '../../redux/actions/index';
 
-const SERVER_PATH = `${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
+const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 
 const FeedContainer = connect(
   mapStateToProps,
@@ -45,7 +45,7 @@ function summarize_cache(state){
     return {
       pages: page_ids,
       index: index
-    }
+    };
   }
   return;
 }
@@ -74,32 +74,24 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchArticles: () => {
-      dispatch(request_articles());
-      return fetch(
-        `${SERVER_PATH}/feed/`,
-        {
-          method: 'POST',
-          body: {
-            action: 'LOAD_MORE',
-            cached: ownProps.cache,
-            query: ownProps.query
-          }
-        }).then(res => res.json())
-        .then(json => dispatch(receive_articles(json)));
+      dispatch(request_articles(ownProps.cache));
+      return superagent
+        .post(`${SERVER_PATH}/feed/`)
+        .send({
+          action: ownProps.cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+          cached: ownProps.cache || undefined,
+          query: ownProps.query
+        }).then(res => { console.log(res.body); dispatch(receive_articles(ownProps, res.body)); });
     },
     expireFeed: () => {
-      dispatch(request_feed_update());
-      return fetch(
-        `${SERVER_PATH}/feed/`,
-        {
-          method: 'POST',
-          body: {
-            action: 'REFRESH',
-            cached: ownProps.cache,
-            query: ownProps.query
-          }
-        }).then(res => res.json())
-        .then(json => dispatch(receive_feed_update(json)));
+      dispatch(request_refresh_articles(ownProps.cache));
+      return superagent
+        .post(`${SERVER_PATH}/feed/`)
+        .send({
+          action: ownProps.cache ? 'REFRESH' : 'REQUEST_INITIAL',
+          cached: ownProps.cache,
+          query: ownProps.query
+        }).then(res => { console.log(res.body); dispatch(receive_refresh_articles(ownProps, res.body)); });
     }
   };
 }

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function FeedArticle(props){
   return (
     <div className='article'>
       <div className='postIMG'>
         <div className={props.img_class}>
-          <a href={props.article.url}><img src={props.article.thumbnail.src} alt='' /></a>
+          <a href={props.article.url}><img src={`/blog/${props.article.hash}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
           <div className='overlay'>
             <div className='overlayPlacement'>
               <div className='hover'>
@@ -58,3 +59,24 @@ export default function FeedArticle(props){
 
   );
 }
+
+FeedArticle.propTypes = {
+  article: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    page: PropTypes.number.isRequired,
+    pageIndex: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    subject: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    thumbnail: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+      mime: PropTypes.string.isRequired
+    })
+  }).isRequired,
+  img_class: PropTypes.string.isRequired,
+  summary_class: PropTypes.string.isRequired
+};

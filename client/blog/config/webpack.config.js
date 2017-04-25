@@ -15,7 +15,7 @@ const webpack_config = {
   /* BASE CONFIG */
   name: 'client',
   target: 'web',
-  entry: project.paths.src(),
+  entry: [project.paths.src()],
   output: {
     path: project.paths.dist(),
     filename: 'bundle.js',

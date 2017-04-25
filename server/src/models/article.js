@@ -52,12 +52,15 @@ var ArticleSchema = new Schema({
  * To be called on server start
  */
 ArticleSchema.statics.initCache = function(){
+  console.log("Initializing Cache");
   this
     .find()
     .sort({page: -1, pageIndex: -1})
     .limit(200)
     .then((articles) => {
-      articles.forEach((a) => a.setPropsToCache());
+      articles.forEach((a) => {
+        a.setPropsToCache();
+      });
       reduce_to_pages(articles, cache);
     });
 };
@@ -339,6 +342,7 @@ ArticleSchema.methods.setPaging = function(){
   }
   // Adding new page to cache
   if(!cache[this.page]){
+
     cache[this.page] = [this];
   // Ensure that we are not inserting a duplicata in the cache
   }else if(!cache[this.page].some((e) => e._id === this._id)){
