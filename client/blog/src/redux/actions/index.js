@@ -33,11 +33,11 @@ export function request_articles(cache) {
   }
 }
 
-export function receive_articles(props, data) {
-  if(props.cache){
-    return receive_more_articles(props.query, data);
+export function receive_articles(cache, query, data) {
+  if(cache){
+    return receive_more_articles(query, data);
   }else{
-    return receive_initial_articles(props.query, data);
+    return receive_initial_articles(query, data);
   }
 }
 

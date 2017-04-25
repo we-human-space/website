@@ -21,7 +21,14 @@ export default class Feed extends React.Component {
       config.feed.refresh_timeout
     );
     // Load More articles
-    window.addEventListener('scroll', () => this.onScroll());
+    let self = this;
+    window.addEventListener('scroll', () => {
+      // To ensure that the scroll position is checked only after reflow of DOM
+      // http://stackoverflow.com/a/34999925/4442749
+      setTimeout(function () {
+        window.requestAnimationFrame(() => self.onScroll());
+      }, 0);
+    });
   }
 
   componentWillUnmount() {
@@ -34,7 +41,7 @@ export default class Feed extends React.Component {
 
   onScroll() {
     var wtop = window.pageYOffset || document.documentElement.scrollTop;
-    var fetching = !this.props.isLoadingMore();
+    var fetching = this.props.isLoadingMore() || this.props.isLoadingInitial();
     var dh = Math.max(document.body.scrollHeight,
                       document.body.offsetHeight,
                       document.documentElement.clientHeight,
@@ -42,8 +49,11 @@ export default class Feed extends React.Component {
     var wh = 'innerHeight' in window
               ? window.innerHeight
               : document.documentElement.offsetHeight;
-    if(!fetching && wtop > dh - wh - config.feed.scroll_point) {
-      this.props.fetchArticles(this.generateQuery);
+    // !fetching => wait until fetch is done
+    // wtop => to avoid trigger for the browser config of scroll to top onload
+    // wtop > dh - wh - config.feed.scroll_point => To check if at the bottom
+    if(!fetching && wtop && wtop > dh - wh - config.feed.scroll_point) {
+      this.props.fetchArticles();
     }
   }
 
@@ -63,9 +73,8 @@ export default class Feed extends React.Component {
 }
 
 Feed.propTypes = {
-  query: PropTypes.object,
-  cache: PropTypes.object,
   isLoadingMore: PropTypes.func.isRequired,
+  isLoadingInitial: PropTypes.func.isRequired,
   isRefreshing: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
   expireFeed: PropTypes.func.isRequired,

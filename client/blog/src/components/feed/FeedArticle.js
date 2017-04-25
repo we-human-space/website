@@ -16,7 +16,7 @@ export default function FeedArticle(props){
                   </div>
                   <div className='post'>
                     <div className='postCategories'>
-                      <span><a href='#'>{props.article.subject}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.category}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.author.firstName}</a></span>
+                      <span><a href='#'>{props.article.subject}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.category}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.author}</a></span>
                     </div>
                     <div className='postSummary'>
                       <div className={props.summary_class}>
@@ -24,7 +24,7 @@ export default function FeedArticle(props){
                       </div>
                     </div>
                     <div className='postReadBtn'>
-                      <a href='#'><span>> </span> &nbspRead more</a>
+                      <a href='#'><span>> </span> {'\u00A0Read more'}</a>
                     </div>
                   </div>
                 </div>

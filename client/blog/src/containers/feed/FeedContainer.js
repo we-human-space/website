@@ -10,6 +10,8 @@ import {
 } from '../../redux/actions/index';
 
 const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
+var cache;
+var query;
 
 const FeedContainer = connect(
   mapStateToProps,
@@ -36,7 +38,7 @@ function filter_articles(pages, feed) {
  * for processing when fetching new articles
  **/
 function summarize_cache(state){
-  let page_ids = Object.keys(state.entities.pages);
+  let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
   if(page_ids.length){
     let index = state.entities.pages[Math.max.apply(null, page_ids)]
                 .reduce((i, article) => {
@@ -52,46 +54,37 @@ function summarize_cache(state){
 
 
 function mapStateToProps(state, ownProps) {
-  let cache = summarize_cache(state);
-  if(cache) {
-    return {
-      query: Object.keys(state.query).length ? state.query : undefined,
-      cached: cache,
-      pages: filter_articles(state.entities.pages, state.feed),
-      isLoadingMore: () => state.fetching.load_more,
-      isRefreshing: () => state.fetching.refresh
-    };
-  }else{
-    return {
-      query: Object.keys(state.query).length ? state.query : undefined,
-      pages: filter_articles(state.entities.pages, state.feed),
-      isLoadingMore: () => state.fetching.load_more,
-      isRefreshing: () => state.fetching.refresh
-    };
-  }
+  cache = summarize_cache(state);
+  query = Object.keys(state.query).length ? state.query : undefined;
+  return {
+    pages: filter_articles(state.entities.pages, state.feed),
+    isLoadingMore: () => state.fetching.load_more,
+    isLoadingInitial: () => state.fetching.initial,
+    isRefreshing: () => state.fetching.refresh
+  };
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchArticles: () => {
-      dispatch(request_articles(ownProps.cache));
+      dispatch(request_articles(cache));
       return superagent
         .post(`${SERVER_PATH}/feed/`)
         .send({
-          action: ownProps.cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
-          cached: ownProps.cache || undefined,
-          query: ownProps.query
-        }).then(res => { console.log(res.body); dispatch(receive_articles(ownProps, res.body)); });
+          action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+          cached: cache,
+          query: query
+        }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
     },
     expireFeed: () => {
-      dispatch(request_refresh_articles(ownProps.cache));
+      dispatch(request_refresh_articles(cache));
       return superagent
         .post(`${SERVER_PATH}/feed/`)
         .send({
-          action: ownProps.cache ? 'REFRESH' : 'REQUEST_INITIAL',
-          cached: ownProps.cache,
-          query: ownProps.query
-        }).then(res => { console.log(res.body); dispatch(receive_refresh_articles(ownProps, res.body)); });
+          action: cache ? 'REFRESH' : 'REQUEST_INITIAL',
+          cached: cache,
+          query: query
+        }).then(res => { dispatch(receive_refresh_articles(cache, query, res.body)); });
     }
   };
 }

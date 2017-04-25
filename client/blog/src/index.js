@@ -10,8 +10,11 @@ import NavSections from './components/navmenu/NavSections';
 import NavSubjects from './components/navmenu/NavSubjects';
 import NavAuthors from './components/navmenu/NavAuthors';
 
+// Browser Window Configuration
+window.onload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
+window.onbeforeunload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
 
-
+// Store Configuration
 const store = configure_store();
 
 let render = () => {

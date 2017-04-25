@@ -8,8 +8,8 @@ export default function FeedPage(props) {
       <FeedArticle
         key={`${article.pageIndex}-${article.hash}`}
         article={article}
-        img_class={article.thumbnail.width > 750 ? 'imgWIDER750PX' : 'imgLESS750PX'}
-        summary_class={article.thumbnail.width > 900 ? 'postSummaryFlex' : 'widerSummaryFlex'}
+        img_class={article.thumbnail.width >= 750 ? 'imgWIDER750PX' : 'imgLESS750PX'}
+        summary_class={article.thumbnail.width >= 900 ? 'postSummaryFlex' : 'widerSummaryFlex'}
       />
     );
   });
