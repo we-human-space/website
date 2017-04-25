@@ -1,36 +1,61 @@
 {
   "requests": {
-    "/": {
+    "^/$": "root",
+    "^/team$": "team",
+    "^/vision$": "vision",
+    "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
+    "^/blog/([a-zA-Z0-9\\-]{10,})$": "article"
+  },
+  "partials": {
+    "index": {
       "path": "partials/index.html",
       "stylesheet": "/assets/css/main.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/team": {
+    "team": {
       "path": "partials/theCrew.html",
       "stylesheet": "/assets/css/theCrewNIGHT.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/vision": {
+    "vision": {
       "path": "partials/wayOfLife.html",
       "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/blog/": {
+    "blog": {
       "path": "partials/feed.html",
       "stylesheet": "/assets/css/blogNIGHT.css",
       "partials": ["head", "foot", "navbar"]
     },
-    "/blog/article": {
+    "article": {
       "path": "partials/article.html",
       "stylesheet": "/assets/css/contentNIGHT.css",
-      "partials": ["head", "foot", "navbar"]
+      "partials": ["head", "article_content", "foot", "navbar"]
+    },
+    "head": {
+      "path": "partials/header.html",
+      "stylesheet": null,
+      "partials": []
+    },
+    "foot": {
+      "path": "partials/footer.html",
+      "stylesheet": null,
+      "partials": []
+    },
+    "navbar": {
+      "path": "partials/navbar.html",
+      "stylesheet": null,
+      "partials": []
+    },
+    "article_content": {
+      "path": "articles/{{hash}}/index.html",
+      "stylesheet": null,
+      "partials": []
+    },
+    "feed_article": {
+      "path": "partials/feed_article.html",
+      "stylesheet": null,
+      "partials": []
     }
-  },
-  "partials": {
-    "head": "partials/header.html",
-    "foot": "partials/footer.html",
-    "navbar": "partials/navbar.html",
-    "feed_article": "partials/feed_article.html",
-    "article": "partials/article.html"
   }
 }

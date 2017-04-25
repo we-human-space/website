@@ -371,7 +371,10 @@ ArticleSchema.methods.export = function(){
     category: this.category,
     author: typeof this.author === "object" && this.author ? this.author.export() : null,
     summary: this.summary,
-    thumbnail: this.thumbnail
+    thumbnail: {
+      ...(this.thumbnail),
+      src: `/blog/${this.hash}/thumbnail${this.thumbnail.mime}`
+    }
   };
 };
 

@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import express from 'express';
-import renderer from '../services/renderer/index';
+import renderer from '../services/renderer/render';
 import blog from '../handlers/blog/index';
 
 module.exports = (function() {
@@ -20,15 +20,15 @@ module.exports = (function() {
     next();
   });
 
-  router.get('/', renderer.renderPage);
+  router.get('/', renderer.render);
 
-  router.get('/team', renderer.renderPage);
+  router.get('/team', renderer.render);
 
-  router.get('/vision', renderer.renderPage);
+  router.get('/vision', renderer.render);
 
   router.post('/feed/', blog.feed);
 
-  router.get('/blog/', renderer.renderPage);
+  router.get('/blog/', renderer.render);
 
   router.get('/blog/:article', blog.articles.read);
 

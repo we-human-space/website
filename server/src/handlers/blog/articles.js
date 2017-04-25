@@ -50,8 +50,8 @@ function read(req, res, next) {
     if(article){
       let art = article.export();
       //req.article = xss(art);
-      req.article = art;
-      return renderer.renderArticle(req, res, next);
+      req.data = {article: art};
+      return renderer.render(req, res, next);
     //Else next to 404
     }else{
       next();
