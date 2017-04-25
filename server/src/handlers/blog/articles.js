@@ -7,7 +7,7 @@ import hash from '../../services/secure/hash';
 import xss from '../../services/secure/xss';
 import fswrapper from '../../services/filesystem/index';
 import uploader from '../../services/articles/uploader';
-import renderer from '../../services/renderer/index';
+import renderer from '../../services/renderer/render';
 import models from '../../models/index';
 const Article = models.Article;
 

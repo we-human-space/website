@@ -5,7 +5,8 @@ import views from '../../static/partials.json';
 import config from '../../config';
 
 module.exports = {
-  render: render
+  render: render,
+  serve: serve
 };
 
 function render(req, res, next){
@@ -13,7 +14,7 @@ function render(req, res, next){
   if(!key){
     next();
   }else{
-    req.partial = key;
+    req.partial = views.requests[key];
     return render_page(req, res, next);
   }
 }
@@ -24,11 +25,13 @@ function get_request_key(req){
 }
 
 function render_page(req, res, next){
-  if(!views[req.partial]){
+  if(!views.partials[req.partial]){
     console.log("render: view not found");
     next();
   }else{
-    return render_partial(detail_page(req), req.data)
+    let data = req.data || {};
+    data.stylesheet = data.stylesheet || views.partials[req.partial].stylesheet;
+    return render_partial([detail_page(req.partial), data])
     .then((result) => {
       req.html = result;
       next();
@@ -36,7 +39,8 @@ function render_page(req, res, next){
   }
 }
 
-function render_partial(page, data) {
+function render_partial([page, data]) {
+  page.stylesheet = page.stylesheet || data.stylesheet;
   return Promise.resolve([page, data])
   .then(get_children)
   .then(render_children)
@@ -44,39 +48,37 @@ function render_partial(page, data) {
   .then(render_file);
 }
 
-function detail_page(req){
+function detail_page(key){
   return {
-    key: req.partial,
-    path: path.join(config.views.path, views.partials[req.partial].path),
+    key,
+    path: path.join(config.views.path, views.partials[key].path),
+    stylesheet: views.partials[key].stylesheet,
     content: undefined
   };
 }
 
 function get_children([page, data]) {
-  console.log(`Reading partials info for ${page.key}`);
   page.children = views.partials[page.key].partials
                   .map(detail_page);
   return Promise.resolve([page, data]);
 }
 
 function render_children([page, data]) {
-  Promise.all(page.children.map((p) => { render_partial(p, data); }))
-  .then((partials) => {
-    page.partials = partials;
+  return Promise.all(page.children.map((p) => render_partial([p, data])))
+  .then(() => {
+    if(page.key == 'vision') console.log(page);
     return [page, data];
   });
 }
 
 function read_file([page, data]) {
-  console.log(`Reading partial ${page.key}`);
-  if(page.key == "article_content"){
-    page.path.replace('{{hash}}', data.article.hash);
+  if(page.key == 'article_content'){
+    page.path = page.path.replace('{{hash}}', data.article.hash);
   }
   return fswrapper.read(page.path)
   .then((content) => {
-    if(page.key == "article_content"){
-      console.log("Article file - read");
-      content.replace(/\/blog\/article\//g, `/blog/${data.article.hash}/`);
+    if(page.key == 'article_content'){
+      content = content.replace(/\/blog\/article\//g, `/blog/${data.article.hash}/`);
     }
     page.content = content;
     return Promise.resolve([page, data]);
@@ -84,9 +86,18 @@ function read_file([page, data]) {
 }
 
 function render_file([page, data]) {
+  page.partials = page.children.reduce((acc, p) => {
+    acc[p.key] = p.content;
+    return acc;
+  }, {});
   return mustache.render(
     page.content,
-    {stylesheet: views.requests[page.key].stylesheet, ...data },
+    { ...data, stylesheet: page.stylesheet },
     page.partials
   );
+}
+
+function serve(req, res, next){
+  if(req.html) res.send(req.html);
+  else next();
 }

@@ -20,17 +20,17 @@ module.exports = (function() {
     next();
   });
 
-  router.get('/', renderer.render);
+  router.get('/', renderer.render, renderer.serve);
 
-  router.get('/team', renderer.render);
+  router.get('/team', renderer.render, renderer.serve);
 
-  router.get('/vision', renderer.render);
+  router.get('/vision', renderer.render, renderer.serve);
 
   router.post('/feed/', blog.feed);
 
-  router.get('/blog/', renderer.render);
+  router.get('/blog/', renderer.render, renderer.serve);
 
-  router.get('/blog/:article', blog.articles.read);
+  router.get('/blog/:article', blog.articles.read, renderer.serve);
 
   if(__DEV__){
     router.get('/test/uploader/report', blog.articles.test.report);
