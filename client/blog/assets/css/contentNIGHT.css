@@ -212,6 +212,10 @@ a:hover, a:active, a:focus {
   width: 100%;
 }
 
+.filters {
+	display: none;
+}
+
 .ul800 {
   display: none;
 }
@@ -330,7 +334,11 @@ a:hover, a:active, a:focus {
 	/*margin-top: 50px;*/
 }
 
-.articleImgPlacement img {
+.articleImgPlacementLESS750PX img {
+	width: 100%;
+}
+
+.articleImgPlacementWIDER750PX img {
 	width: 100%;
 }
 
@@ -747,6 +755,22 @@ a:hover, a:active, a:focus {
 			/*margin-top: 50px;*/
 		}
 
+		.articleIMG {
+			width: 100%;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+		}
+
+		.articleImgPlacementLESS750PX {
+			max-width: 750px;
+		}
+
+		.articleImgPlacementWIDER750PX {
+			width: 80%;
+			max-width: 1050px;
+		}
+
 
 		.articleData {
 			display: flex;
@@ -904,6 +928,38 @@ a:hover, a:active, a:focus {
 		.logo1024 img {
 			width: 150px;
 		}
+
+		.filters {
+			display: block;
+		}
+
+	  .ulTop1024 {
+	    position: absolute;
+	    top: 53px;
+			left: 240px;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
+	    padding: 0;
+	    margin: 0;
+	    z-index: 6;
+	    font-size: 0.8rem;
+	    letter-spacing: 0.1rem;
+	    font-weight: 400;
+			text-decoration: none;
+			list-style: none;
+			/*width: 50%;*/
+			width: 630px;
+	  }
+
+		.ulTop1024 li a:hover {
+			border-bottom: solid 1px #e5d9ff;
+		}
+
+		.ulTop1024 li a:active {
+			border-bottom: solid 1px #e5d9ff;
+		}
+
 
 		/*.contentContainer {
 			padding-right: 40px;
@@ -1168,11 +1224,11 @@ a:hover, a:active, a:focus {
 			justify-content: center;
 		}
 
-		.articleImgPlacement {
-			width: 80%;
-			max-width: 1150px;
-
+		.articleImgPlacementLESS750PX {
+			/*width: 60%;*/
+			max-width: 750px;
 		}
+
 
 		.articleDataPlacement {
 			max-width: 700px;
@@ -1186,6 +1242,11 @@ a:hover, a:active, a:focus {
 
 		@media (min-width: 1175px) {
 
+			.ulTop1024 {
+				top: 50px;
+				font-size: 1rem;
+				width: 750px;
+			}
 
 		  .colRight {
 		    margin-left: 8%;
