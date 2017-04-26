@@ -925,7 +925,7 @@ a:hover, a:active, a:focus {
     align-items: center;
     padding: 0;
     margin: 0;
-    z-index: 6;
+    z-index: 3;
     font-size: 0.8rem;
     letter-spacing: 0.1rem;
     font-weight: 400;
@@ -939,9 +939,9 @@ a:hover, a:active, a:focus {
 		border-bottom: solid 1px #e5d9ff;
 	}
 
-	.ulTop1024 li a:active {
-		border-bottom: solid 1px #e5d9ff;
-	}
+  .liActive {
+    border-bottom: solid 1px #e5d9ff;
+  }
 
 
 	.contentContainer {

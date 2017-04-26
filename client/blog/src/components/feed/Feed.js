@@ -100,7 +100,7 @@ Feed.propTypes = {
           error = new Error(`Invalid prop pages[${propName}][${i}].Error supplied to \`${componentName}\`. Validation failed.`);
         if(!typeof a.summary === 'string')
           error = new Error(`Invalid prop pages[${propName}][${i}].summary supplied to \`${componentName}\`. Validation failed.`);
-        if(!typeof a.author === 'string')
+        if(!typeof a.author === 'object')
           error = new Error(`Invalid prop pages[${propName}][${i}].author supplied to \`${componentName}\`. Validation failed.`);
         if(typeof a.thumbnail === 'object'){
           if(!Number.isInteger(a.thumbnail.width))

@@ -16,7 +16,7 @@ export default function FeedArticle(props){
                   </div>
                   <div className='post'>
                     <div className='postCategories'>
-                      <span><a href='#'>{props.article.subject}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.category}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.author}</a></span>
+                      <span><a href='#'>{props.article.subject}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.category}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.author.firstname}</a></span>
                     </div>
                     <div className='postSummary'>
                       <div className={props.summary_class}>
@@ -41,7 +41,7 @@ export default function FeedArticle(props){
           </div>
           <div className='post'>
             <div className='postCategories'>
-              <span><a href='#'>{props.article.subject}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.category}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.author}</a></span>
+              <span><a href='#'>{props.article.subject}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.category}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.author.firstname}</a></span>
             </div>
             <div className='postSummary'>
               <div className='postSummaryFlex'>
@@ -70,7 +70,7 @@ FeedArticle.propTypes = {
     subject: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.object.isRequired,
     thumbnail: PropTypes.shape({
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,

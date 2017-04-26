@@ -12,11 +12,24 @@ import {
 const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 var cache;
 var query;
+var bottom = false;
 
 const FeedContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Feed);
+
+function apply_authorship(authors, pages) {
+  return Object.keys(pages).reduce((acc, p) => {
+    acc[p] = pages[p].map((a) => {
+      return {
+        ...a,
+        author: authors[a.author]
+      };
+    });
+    return acc;
+  }, {});
+}
 
 function filter_articles(pages, feed) {
   let filter = window.location.search;
@@ -24,7 +37,7 @@ function filter_articles(pages, feed) {
     let filtered = {};
     for(let i in pages) {
       filtered[i] = pages[i].filter((article) => {
-        return feed[filter].articles.findIndex(article.hash) !== -1;
+        return feed[filter][i] && feed[filter][i].findIndex((a) => a.hash === article.hash) !== -1;
       });
     }
     return filtered;
@@ -57,7 +70,7 @@ function mapStateToProps(state, ownProps) {
   cache = summarize_cache(state);
   query = Object.keys(state.query).length ? state.query : undefined;
   return {
-    pages: filter_articles(state.entities.pages, state.feed),
+    pages: apply_authorship(state.entities.authors, filter_articles(state.entities.pages, state.feed)),
     isLoadingMore: () => state.fetching.load_more,
     isLoadingInitial: () => state.fetching.initial,
     isRefreshing: () => state.fetching.refresh
@@ -67,14 +80,16 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchArticles: () => {
-      dispatch(request_articles(cache));
-      return superagent
-        .post(`${SERVER_PATH}/feed/`)
-        .send({
-          action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
-          cached: cache,
-          query: query
-        }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
+      if(!bottom) {
+        dispatch(request_articles(cache));
+        return superagent
+          .post(`${SERVER_PATH}/feed/`)
+          .send({
+            action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+            cached: cache,
+            query: query
+          }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
+      }
     },
     expireFeed: () => {
       dispatch(request_refresh_articles(cache));

@@ -82,16 +82,20 @@ function update_pages(state, action) {
 }
 
 function update_feed(state, action) {
+  console.log('update_feed');
+  console.log(action.payload.match);
+  console.log(window.location.search);
+  console.log(state[window.location.search]);
   let match = action.payload.match;
   let search = Array.isArray(state[window.location.search])
                ? state[window.location.search].slice()
                : [];
-  return {
+  let newfeed = {
     ...state,
-    [window.location.search]: Array.isArray(match)
-                              ? search.concat(...action.payload.match)
-                              : search
+    [window.location.search]: { ...(state[window.location.search]), ...match }
   };
+  console.log(newfeed);
+  return newfeed;
 }
 
 const reducer = combineReducers({

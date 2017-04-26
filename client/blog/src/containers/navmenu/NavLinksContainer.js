@@ -1,44 +1,84 @@
-// import superagent from 'superagent';
+import superagent from 'superagent';
 import { connect } from 'react-redux';
 import config from '../../config';
 import NavLinks from '../../components/navmenu/NavLinks';
 import { author_link, nav_link, subject_link } from './link-helper';
-// import {
-//   request_articles,
-//   receive_articles,
-//   request_refresh_articles,
-//   receive_refresh_articles
-// } from '../../redux/actions/index';
+import {update_query, request_articles, receive_articles} from '../../redux/actions/index';
 
-// const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
+const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 const helpers = {
   'authors': author_link,
   'navlinks': nav_link,
   'subjects': subject_link
 };
+var cache;
 
 const NavLinksContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(NavLinks);
 
+/**
+ * Summarizes the state of the pages loaded (cached page) in order to send to backend
+ * for processing when fetching new articles
+ **/
+function summarize_cache(state){
+  let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
+  if(page_ids.length){
+    let index = state.entities.pages[Math.max.apply(null, page_ids)]
+                .reduce((i, article) => {
+                  return Math.max(article.pageIndex, i);
+                }, 1);
+    return {
+      pages: page_ids,
+      index: index
+    };
+  }
+  return;
+}
+
 
 function mapStateToProps(state, ownProps) {
-  let type = ownProps.type;
-  return helpers[type](state.entities[type]);
+  cache = summarize_cache(state);
+  return helpers[ownProps.type](state.entities[ownProps.type], ownProps.render_type);
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onClick: function(e){
-      // dispatch(request_articles(cache));
-      // return superagent
-      //   .post(`${SERVER_PATH}/feed/`)
-      //   .send({
-      //     action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
-      //     cached: cache,
-      //     query: query
-      //   }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
+    onClickWrapper: function(data){
+      return function(e){
+        // Changing the window.location without reloading
+        e.preventDefault();
+        window.history.replaceState({}, data.title, data.url);
+
+        // Close the nav menu
+        if(data.render_type === 'navigation'){
+          document.getElementsByClassName('hamburger')[0].click();
+        }
+
+        // Dispatching events
+        dispatch(update_query(data.query));
+        dispatch(request_articles(cache));
+
+        // Updating articles
+        return superagent
+          .post(`${SERVER_PATH}/feed/`)
+          .send({
+            action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+            cached: cache,
+            query: data.query
+          }).then(res => {
+            dispatch(receive_articles(cache, data.query, res.body));
+
+            // McGiver Stuff
+            let quote_of_day = document.getElementsByClassName('quoteOfDay');
+            if(quote_of_day[0]) {
+              let contentContainer = quote_of_day[0].parentNode;
+              contentContainer.style.margin = '-150px 0 0 0';
+              contentContainer.removeChild(quote_of_day[0]);
+            }
+          });
+      };
     }
   };
 }

@@ -22,13 +22,19 @@ let render = () => {
       </Provider>,
       document.getElementById('feed')
     );
+    ReactDOM.render(
+      <Provider store={store}>
+        <NavLinksContainer type='subjects' render_type='filter' />
+      </Provider>,
+      document.getElementsByClassName('filters')[0]
+    );
   }
   ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
 
   toArray(document.getElementsByClassName('exploreSection')).forEach((e) => {
     ReactDOM.render(
       <Provider store={store}>
-        <NavLinksContainer type='navlinks' />
+        <NavLinksContainer type='navlinks' render_type='navigation' />
       </Provider>,
       e
     );
@@ -36,7 +42,7 @@ let render = () => {
   toArray(document.getElementsByClassName('filterBy')).forEach((e) => {
     ReactDOM.render(
       <Provider store={store}>
-        <NavLinksContainer type='authors' />
+        <NavLinksContainer type='authors' render_type='navigation' />
       </Provider>,
       e
     );
@@ -44,7 +50,7 @@ let render = () => {
   toArray(document.getElementsByClassName('resonateWith')).forEach((e) => {
     ReactDOM.render(
       <Provider store={store}>
-        <NavLinksContainer type='subjects' />
+        <NavLinksContainer type='subjects' render_type='navigation' />
       </Provider>,
       e
     );

@@ -30,7 +30,7 @@ FeedPage.propTypes = {
     subject: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.object.isRequired,
     thumbnail: PropTypes.shape({
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,

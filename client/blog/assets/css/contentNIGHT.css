@@ -942,7 +942,7 @@ a:hover, a:active, a:focus {
 	    align-items: center;
 	    padding: 0;
 	    margin: 0;
-	    z-index: 6;
+	    z-index: 3;
 	    font-size: 0.8rem;
 	    letter-spacing: 0.1rem;
 	    font-weight: 400;
