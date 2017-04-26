@@ -1,7 +1,7 @@
 "use strict";
 
-import inquire from '../../../inquire';
-import register from './register';
+const inquire = require('../../../inquire');
+const register = require('./register');
 //import delete from './delete';
 
 module.exports = function(supermenu){

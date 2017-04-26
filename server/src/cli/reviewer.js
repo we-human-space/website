@@ -1,6 +1,6 @@
 "use strict";
 
-import inquire from './inquire';
+const inquire = require('./inquire');
 
 module.exports = function(options){
   return function(){

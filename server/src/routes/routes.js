@@ -20,7 +20,7 @@ module.exports = (function() {
     next();
   });
 
-  router.get('/', renderer.render, renderer.serve);
+  router.get('/', (req,res) => { res.redirect('/vision'); });
 
   router.get('/team', renderer.render, renderer.serve);
 
@@ -37,10 +37,11 @@ module.exports = (function() {
     router.get('/test/uploader/clear', blog.articles.test.clear);
   }
 
-  router.use(function(req, res, next) {
-    //TODO 404
-    res.sendStatus(404);
-  });
+  router.get('/*', renderer.not_found, renderer.serve);
+  router.post('/*', renderer.not_found, renderer.serve);
+  router.put('/*', renderer.not_found, renderer.serve);
+  router.delete('/*', renderer.not_found, renderer.serve);
+
 
   return router;
 

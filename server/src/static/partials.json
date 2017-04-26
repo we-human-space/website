@@ -4,9 +4,15 @@
     "^/team$": "team",
     "^/vision$": "vision",
     "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
-    "^/blog/([a-zA-Z0-9\\-]{10,})$": "article"
+    "^/blog/([a-zA-Z0-9\\-]{10,})$": "article",
+    "404": "404"
   },
   "partials": {
+    "404": {
+      "path": "partials/404.html",
+      "stylesheet": "/assets/css/404.css",
+      "partials": ["head"]
+    },
     "index": {
       "path": "partials/index.html",
       "stylesheet": "/assets/css/main.css",

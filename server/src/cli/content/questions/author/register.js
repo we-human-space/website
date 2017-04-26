@@ -1,10 +1,10 @@
 "use strict";
 
-import models from '../../../../models/index';
-import countries from '../../../../static/countries.json';
-import inquire from '../../../inquire';
-import print from '../../../print';
-import reviewer from '../../../reviewer';
+const models = require('../../../../../dist/models/index');
+const countries = require('../../../../static/countries.json');
+const inquire = require('../../../inquire');
+const print = require('../../../print');
+const reviewer = require('../../../reviewer');
 const Author = models.Author;
 
 module.exports = function(supermenu){
@@ -14,7 +14,8 @@ module.exports = function(supermenu){
       target: author,
       callbacks: {
         username: set_username,
-        name: set_name,
+        firstname: set_firstname,
+        lastname: set_lastname,
         age: set_age,
         title: set_title,
         bio: set_bio,
@@ -28,7 +29,9 @@ module.exports = function(supermenu){
     });
     return Promise.resolve(author)
     .then(set_username)
-    .then(set_name)
+    .then(set_firstname)
+    .then(set_lastname)
+    .then(set_email)
     .then(set_age)
     .then(set_title)
     .then(set_bio)
@@ -68,21 +71,59 @@ function set_username(author){
   });
 }
 
-function set_name(author){
+function set_email(author){
   var q = {
     type: 'input',
-    name: 'fullname'
+    name: 'email'
   };
   return inquire.looping(
-    (a) => !a.fullname,
+    (a) => !a.email,
     (answer, first) => {
-      q.message = "What's their full name? (Required)";
-      if(!answer.fullname && !first) q.message = "Please enter a valid name.";
+      q.message = "What's their email? (Required)";
+      if(!answer.email && !first) q.message = "Please enter a valid name.";
       return q;
     },
     {}
   ).then((answer) => {
-    author.name = answer.fullname;
+    author.email = answer.email;
+    return author;
+  });
+}
+
+function set_lastname(author){
+  var q = {
+    type: 'input',
+    name: 'lastname'
+  };
+  return inquire.looping(
+    (a) => !a.lastname,
+    (answer, first) => {
+      q.message = "What's their last name? (Required)";
+      if(!answer.lastname && !first) q.message = "Please enter a valid name.";
+      return q;
+    },
+    {}
+  ).then((answer) => {
+    author.lastname = answer.lastname;
+    return author;
+  });
+}
+
+function set_firstname(author){
+  var q = {
+    type: 'input',
+    name: 'firstname'
+  };
+  return inquire.looping(
+    (a) => !a.firstname,
+    (answer, first) => {
+      q.message = "What's their first name? (Required)";
+      if(!answer.firstname && !first) q.message = "Please enter a valid name.";
+      return q;
+    },
+    {}
+  ).then((answer) => {
+    author.firstname = answer.firstname;
     return author;
   });
 }

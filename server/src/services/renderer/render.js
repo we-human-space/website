@@ -11,6 +11,7 @@ const Author = models.Author;
 
 module.exports = {
   render: render,
+  not_found: not_found,
   serve: serve
 };
 
@@ -22,6 +23,11 @@ function render(req, res, next){
     req.partial = views.requests[key];
     return render_page(req, res, next);
   }
+}
+
+function not_found(req, res, next){
+  req.partial = views.requests["404"];
+  return render_page(req, res, next);
 }
 
 function get_request_key(req){
@@ -52,18 +58,22 @@ function get_preloaded_state(req){
 }
 
 function render_page(req, res, next){
+  console.log(req.partial);
+  let data;
   if(!views.partials[req.partial]){
     console.log("render: view not found");
-    next();
+    req.partial = "404";
+    data = { preloaded_state: "{}" };
   }else{
-    let data = { ...req.data, preloaded_state: get_preloaded_state(req)};
-    data.stylesheet = data.stylesheet || views.partials[req.partial].stylesheet;
-    return render_partial([detail_page(req.partial), data])
-    .then((result) => {
-      req.html = result;
-      next();
-    });
+    data = { ...req.data, preloaded_state: get_preloaded_state(req)};
   }
+
+  data.stylesheet = data.stylesheet || views.partials[req.partial].stylesheet;
+  return render_partial([detail_page(req.partial), data])
+  .then((result) => {
+    req.html = result;
+    next();
+  });
 }
 
 function render_partial([page, data]) {
