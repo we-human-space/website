@@ -21,12 +21,12 @@
     "team": {
       "path": "partials/theCrew.html",
       "stylesheet": "/assets/css/theCrewNIGHT.css",
-      "partials": ["head", "foot", "navbar"]
+      "partials": ["head", "footer_marketing", "navbar"]
     },
     "vision": {
       "path": "partials/wayOfLife.html",
       "stylesheet": "/assets/css/wayOfLife.css",
-      "partials": ["head", "foot", "navbar"]
+      "partials": ["head", "footer_marketing", "navbar"]
     },
     "blog": {
       "path": "partials/feed.html",
@@ -45,6 +45,11 @@
     },
     "foot": {
       "path": "partials/footer.html",
+      "stylesheet": null,
+      "partials": []
+    },
+    "footer_marketing": {
+      "path": "partials/footerMarketing.html",
       "stylesheet": null,
       "partials": []
     },
