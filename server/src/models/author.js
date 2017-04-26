@@ -29,7 +29,6 @@ AuthorSchema.statics.initCache = function() {
 };
 
 AuthorSchema.statics.getCachedAuthors = function(should_export) {
-  console.log(export_cache);
   if(should_export){
     return export_cache;
   }else{
@@ -64,7 +63,6 @@ AuthorSchema.statics.findFromCache = function(query){
 AuthorSchema.methods.setToCache = function() {
   if(!cache[this._id.toString()]) cache[this._id.toString()] = this;
   if(!export_cache[this._id.toString()]) export_cache[this._id.toString()] = this.export();
-  console.log(this);
 };
 
 AuthorSchema.methods.export = function(){

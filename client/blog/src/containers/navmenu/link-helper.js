@@ -1,6 +1,5 @@
 
 export function author_link(authors) {
-  console.log(authors);
   let results = {
     links: Object.keys(authors).map((id) => ({
       key: authors[id].username,
@@ -11,12 +10,10 @@ export function author_link(authors) {
     class: 'filterBy',
     subtitle: 'Filter by Author'
   };
-  console.log(results);
   return results;
 }
 
 export function nav_link(links) {
-  console.log(links);
   let results = {
     links: links.map((link) => ({
       ...link,
@@ -25,7 +22,6 @@ export function nav_link(links) {
     class: 'exploreSection',
     subtitle: 'Explore Sections'
   };
-  console.log(results);
   return results;
 }
 

@@ -116,7 +116,7 @@ ArticleSchema.statics.setPageToCache = function(pages) {
  **/
 ArticleSchema.statics.getPage = function(page) {
   if(page){
-    let cached = ArticleSchema.statics.getPageFromCache(page);
+    let cached = this.getPageFromCache(page);
     if(cached.complete){
       let pages = cached.pages;
       return Promise.resolve({ ...pages });
@@ -152,7 +152,7 @@ ArticleSchema.statics.getPage = function(page) {
           return acc;
         }, {});
       }).then((pages) => {
-        ArticleSchema.statics.setPageToCache(pages);
+        this.setPageToCache(pages);
         return { ...cached.pages, ...pages };
       });
     }
@@ -190,17 +190,17 @@ ArticleSchema.statics.filterArticles = function(payload) {
                     Math.max.apply(null, payload.cached.pages) +1:
                     Math.max.apply(null, payload.cached.pages);
       return Promise.all([
-        ArticleSchema.statics.getQueryResults(payload.query, "eq", maxpage),
-        ArticleSchema.statics.getPage(maxpage)
+        this.getQueryResults(payload.query, "eq", maxpage),
+        this.getPage(maxpage)
       ]).then(([match, pages]) => ({pages, match}));
     }else{
-      return ArticleSchema.statics.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
+      return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
     }
   }else if(payload.action == "REQUEST_INITIAL") {
     if(payload.cached) {
       let maxpage = Math.max.apply(null, payload.cached.pages)+1;
       let match;
-      return ArticleSchema.statics.getQueryResults(payload.query, "lt", maxpage)
+      return this.getQueryResults(payload.query, "lt", maxpage, true)
       .then((matches) => {
         match = matches;
         let match_pages = Object.keys(matches);
@@ -212,10 +212,10 @@ ArticleSchema.statics.filterArticles = function(payload) {
     }else{
       let maxpage = Math.max.apply(null, Object.keys(cache))+1;
       let match;
-      return ArticleSchema.statics.getQueryResults(payload.query, "lt", maxpage)
+      return this.getQueryResults(payload.query, "lt", maxpage)
       .then((matches) => {
         match = matches;
-        return ArticleSchema.statics.getPage({$in: Object.keys(match)});
+        return this.getPage({$in: Object.keys(match)});
       }).then((pages) =>  ({pages, match}));
     }
     // TODO: This should not happen
@@ -223,24 +223,21 @@ ArticleSchema.statics.filterArticles = function(payload) {
     if(payload.cached) {
       let maxpage = Math.min.apply(null, payload.cached.pages);
       let match;
-      return ArticleSchema.statics.getQueryResults(payload.query, "lt", maxpage)
+      return this.getQueryResults(payload.query, "lt", maxpage)
       .then((matches) => {
         match = matches;
-        return ArticleSchema.statics.getPage({$in: Object.keys(matches)});
+        return this.getPage({$in: Object.keys(matches)});
       }).then((pages) =>  ({pages, match}));
     }else{
-      return ArticleSchema.statics.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
+      return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
     }
   }
 };
 
 ArticleSchema.statics.getQueryResults = function(query, op, page) {
-  var cached;
-  if(page < Math.max.apply(null, Object.keys(cache))){
-    cached = ArticleSchema.statics.getQueryResultsFromCache(query, op, page);
-  }
+  var cached = this.getQueryResultsFromCache(query, op, page);
   if(!cached) {
-    return ArticleSchema.statics.findQueryResult(query, op, page);
+    return this.findQueryResult(query, op, page);
   }else{
     let count_articles = 0;
     let reached_bottom = false;
@@ -250,7 +247,7 @@ ArticleSchema.statics.getQueryResults = function(query, op, page) {
       reached_bottom = pg == 1 ? true : false;
     }
     if(count_articles < 10 && !reached_bottom){
-      return ArticleSchema.statics.findQueryResult(query, op, page)
+      return this.findQueryResult(query, op, page)
       .then((matches) => {
         let pages = Object.keys(matches);
         return pages.reduce((result, page) => {
@@ -277,9 +274,12 @@ ArticleSchema.statics.findQueryResult  = function(query, op, page) {
   .then((articles) => {
     let count_matches = 0;
     let match = articles.reduce((acc, article) => {
+      //Returns maximum 19 items, sorted by pages
+      //Does not create a new page once >= 10 articles have been taken
+      //Hence creates full pages
       if(!acc[article.page] && count_matches < 10){
         acc[article.page] = [{index: article.pageIndex, hash: article.hash}];
-      }else{
+      }else if(acc[article.page]){
         acc[article.page].push({index: article.pageIndex, hash: article.hash});
       }
       count_matches++;
@@ -293,7 +293,6 @@ ArticleSchema.statics.findQueryResult  = function(query, op, page) {
 
 ArticleSchema.statics.getQueryResultsFromCache = function(query, op, page) {
   let hashkey = hash(query);
-  console.log(`hashkey works: ${hashkey === hash({ ...query })}`); //to check for consistency
   if(query_cache[hashkey]){
     let result;
     let count = 0;

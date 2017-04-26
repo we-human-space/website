@@ -26,7 +26,6 @@ export default function handler(req, res, next){
       .then((p) => ({pages: p}));
     }
   }).then((result) => {
-    console.log(result);
     res.json(result);
   }).catch((err) => {
     console.log(err);
