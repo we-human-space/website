@@ -23,18 +23,26 @@ const NavLinksContainer = connect(
  * for processing when fetching new articles
  **/
 function summarize_cache(state){
-  let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
-  if(page_ids.length){
-    let index = state.entities.pages[Math.max.apply(null, page_ids)]
-                .reduce((i, article) => {
-                  return Math.max(article.pageIndex, i);
-                }, 1);
-    return {
-      pages: page_ids,
-      index: index
-    };
-  }
-  return;
+ let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
+ let filter = window.location.search;
+ let cursor;
+ if(filter){
+   if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
+   else cursor = page_ids[page_ids.length - 1];
+ }
+ console.log(`cursor: ${cursor}`);
+ if(page_ids.length){
+   let index = state.entities.pages[Math.max.apply(null, page_ids)]
+               .reduce((i, article) => {
+                 return Math.max(article.pageIndex, i);
+               }, 1);
+   return {
+     pages: page_ids,
+     index,
+     cursor
+   };
+ }
+ return;
 }
 
 

@@ -38,15 +38,13 @@ const categories = [
   "TestCategory10"
 ];
 const subjects = [
-  "TestMusic",
-  "TestVisualArts",
-  "TestSocialDynamics",
-  "TestTravel",
-  "TestHealth",
-  "TestStartupJourney",
-  "TestTech",
-  "TestSpirituality",
-  "TestFlow"
+  "Books",
+  "Consciousness",
+  "Good Food",
+  "Music",
+  "Startup journey",
+  "Travel",
+  "Visual Arts"
 ];
 
 module.exports = function generate(author) {
@@ -103,8 +101,8 @@ function generate_article(author){
             tags: tags.filter(() => Math.round(Math.random())),
             author: author,
             thumbnail: default_thumbnails[Math.floor(Math.random()*default_thumbnails.length)],
-            summary: wiki_article.extract.length > 150
-                     ? wiki_article.extract.substr(0,150)
+            summary: wiki_article.extract.length > 100
+                     ? wiki_article.extract.substr(0,100)
                      : wiki_article.extract
           }
         });

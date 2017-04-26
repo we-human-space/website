@@ -184,6 +184,7 @@ ArticleSchema.statics.validatePage = function(page) {
 };
 
 ArticleSchema.statics.filterArticles = function(payload) {
+  console.log(payload);
   if(payload.action == "REFRESH"){
     if(payload.cached) {
       let maxpage = payload.cached.index === 10?
@@ -205,10 +206,18 @@ ArticleSchema.statics.filterArticles = function(payload) {
         match = matches;
         let match_pages = Object.keys(matches);
         // Check if there is a need for pages to be sent to the frontend
-        let new_pages = match_pages.filter(p => payload.cached.pages.indexOf(p) == -1);
+        let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
         if(new_pages.length) return ArticleSchema.statics.getPage({$in: new_pages});
         else return Promise.resolve({});
-      }).then((pages) =>  ({pages, match}));
+      }).then((pages) =>  {
+        let page_ids = Object.keys(pages);
+        let cursor = page_ids.length ? parseInt(page_ids.reverse()[0]) : undefined;
+        return {
+          pages,
+          match,
+          cursor
+        };
+      });
     }else{
       let maxpage = Math.max.apply(null, Object.keys(cache))+1;
       let match;
@@ -221,13 +230,25 @@ ArticleSchema.statics.filterArticles = function(payload) {
     // TODO: This should not happen
   }else if(payload.action == "REQUEST_MORE") {
     if(payload.cached) {
-      let maxpage = Math.min.apply(null, payload.cached.pages);
+      let maxpage = payload.cached.cursor || Math.min.apply(null, payload.cached.pages);
       let match;
       return this.getQueryResults(payload.query, "lt", maxpage)
       .then((matches) => {
         match = matches;
-        return this.getPage({$in: Object.keys(matches)});
-      }).then((pages) =>  ({pages, match}));
+        let match_pages = Object.keys(matches);
+        // Check if there is a need for pages to be sent to the frontend
+        let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
+        if(new_pages.length) return ArticleSchema.statics.getPage({$in: new_pages});
+        else return Promise.resolve({});
+      }).then((pages) =>  {
+        let page_ids = Object.keys(pages);
+        let cursor = page_ids.length ? parseInt(page_ids.reverse()[0]) : undefined;
+        return {
+          pages,
+          match,
+          cursor
+        };
+      });
     }else{
       return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
     }
@@ -235,6 +256,7 @@ ArticleSchema.statics.filterArticles = function(payload) {
 };
 
 ArticleSchema.statics.getQueryResults = function(query, op, page) {
+  console.log(`${JSON.stringify(query)}, ${op}, ${page}`);
   var cached = this.getQueryResultsFromCache(query, op, page);
   if(!cached) {
     return this.findQueryResult(query, op, page);
@@ -381,7 +403,8 @@ ArticleSchema.methods.export = function(){
     summary: this.summary,
     thumbnail: {
       ...(this.thumbnail),
-      src: `/blog/${this.hash}/thumbnail${this.thumbnail.mime}`
+      src: `/blog/${this.hash}/thumbnail${this.thumbnail.mime}`,
+      class: this.thumbnail.width < 750 ? 'articleImgPlacementLESS750PX' : 'articleImgPlacementWIDER750PX'
     }
   };
 };

@@ -38,7 +38,7 @@ function get_preloaded_state(req){
     },
     query: req.query || {},
     entities: {
-      subjects: Article.getCachedSubjects().map((s) => ({key: capitalize(s), text: capitalize(s), query: {'subject': s}})),
+      subjects: Article.getCachedSubjects().map((s) => ({key: s, text: s, query: {'subject': s}})),
       pages: {},
       authors: Author.getCachedAuthors(true),
       navlinks: [

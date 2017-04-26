@@ -12,7 +12,6 @@ import {
 const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 var cache;
 var query;
-var bottom = false;
 
 const FeedContainer = connect(
   mapStateToProps,
@@ -52,6 +51,13 @@ function filter_articles(pages, feed) {
  **/
 function summarize_cache(state){
   let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
+  let filter = window.location.search;
+  let cursor;
+  if(filter){
+    if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
+    else cursor = page_ids[page_ids.length - 1];
+  }
+  console.log(`cursor: ${cursor}`);
   if(page_ids.length){
     let index = state.entities.pages[Math.max.apply(null, page_ids)]
                 .reduce((i, article) => {
@@ -59,7 +65,8 @@ function summarize_cache(state){
                 }, 1);
     return {
       pages: page_ids,
-      index: index
+      index,
+      cursor
     };
   }
   return;
@@ -80,16 +87,20 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchArticles: () => {
-      if(!bottom) {
-        dispatch(request_articles(cache));
-        return superagent
-          .post(`${SERVER_PATH}/feed/`)
-          .send({
-            action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
-            cached: cache,
-            query: query
-          }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
-      }
+      console.log('payload');
+      console.log({
+        action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+        cached: cache,
+        query: query
+      });
+      dispatch(request_articles(cache));
+      return superagent
+        .post(`${SERVER_PATH}/feed/`)
+        .send({
+          action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+          cached: cache,
+          query: query
+        }).then(res => { dispatch(receive_articles(cache, query, res.body)); });
     },
     expireFeed: () => {
       dispatch(request_refresh_articles(cache));

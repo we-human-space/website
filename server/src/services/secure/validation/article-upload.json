@@ -30,7 +30,7 @@
       "properties": {
         "width": {
           "type": "integer",
-          "minimum": 450
+          "minimum": 500
         },
         "height": {
           "type": "integer",
