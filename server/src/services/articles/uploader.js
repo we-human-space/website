@@ -19,6 +19,8 @@ const UPLOAD_PATH = path.join(__dirname, '../../../', config.views.path, config.
 const ARTICLE_DIR = path.join(__dirname, '../../../', config.views.path, config.views.articles.path);
 const IMAGE_EXT_REGEXP = /\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const THUMBNAIL_EXT_REGEXP = /thumbnail\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
+const HTML_REGEXP = /.*\.(html|hml)/;
+const YAML_REGEXP = /.*\.(yaml|yml)/;
 const devcache = {};
 const processing = [];
 
@@ -101,7 +103,7 @@ function upload(source) {
 
 function extract(data){
   let source = data.zip;
-  let destination = path.dirname(source);
+  let destination = data.folder;
   console.log(`source: ${source}`);
   console.log(`destination: ${destination}`);
   var unzip = spawn('unzip', ['-o', '-d' , destination, source]);
@@ -140,13 +142,13 @@ function validate_folder(data) {
         console.log(file);
         if(!rejected){
           //Find all the necessary files
-          if(path.extname(file) === ".html"){
+          if(file.match(HTML_REGEXP)){
             if(!content) content = file;
             else {
               rejected = true;
               reject(new Error("Multiple html files uploaded"));
             }
-          }else if(path.extname(file) === ".yaml" || path.extname(file) === ".yml"){
+          }else if(file.match(YAML_REGEXP)){
             if(!yaml_file) yaml_file = file;
             else {
               rejected = true;

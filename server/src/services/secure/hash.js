@@ -5,6 +5,7 @@ import crypto from 'crypto';
 module.exports = {
   shortener: generate_base_62_hash,
   hash: generate_pwd_hash,
+  generateSalt: genSalt,
   match: validate_pwd_hash,
   isBase62Hash: is_base_62_hash,
   base62ToDec: base62_to_dec
