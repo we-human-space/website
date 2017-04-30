@@ -369,7 +369,7 @@ header {
 }
 
 .principleBox {
-  margin: 30px 0;
+  margin: 60px 0;
 }
 
 .principleTitle h1 {
@@ -843,6 +843,10 @@ header {
 	  margin: 40px 0;
 	}
 
+	.sectionMember {
+		margin: 300px 0;
+	}
+
 	.principles {
 	  margin-top: 200px;
 	  display: flex;
@@ -851,7 +855,7 @@ header {
 	}
 
 	.principleBox {
-	  margin: 40px 0;
+	  margin: 120px 0;
 	}
 
 	.principleTitle h1 {
@@ -868,7 +872,7 @@ header {
 	}
 
 	.emailForm {
-		margin-bottom: 250px;
+		margin-bottom: 150px;
 	}
 
 	.copyFollow320 {
@@ -979,7 +983,7 @@ header {
 	}
 
 	.logo1024 img {
-		width: 150px;
+		width: 130px;
 	}
 
 	.contentContainer {
