@@ -338,7 +338,7 @@ a:hover, a:active, a:focus {
 	letter-spacing: 0.04rem;
 	text-align: center;
 	line-height: 2.3rem;
-	height: 60vh;
+	height: 70vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -359,7 +359,7 @@ a:hover, a:active, a:focus {
 /*------ARTICLE-------*/
 
 .article {
-	margin-top: 100px;
+	margin-top: 300px;
 	padding: 0 5%;
 	align-items: center;
 }
@@ -919,7 +919,7 @@ a:hover, a:active, a:focus {
   .ulTop1024 {
     position: absolute;
     top: 53px;
-		left: 240px;
+		left: 220px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1303,20 +1303,82 @@ a:hover, a:active, a:focus {
 
 	.overlayPlacement {
 		height: 100%;
-		display: flex;
-		align-items: center;
 	}
 
-	.hover {
+
+
+	.superAnchor {
 		background-color: #221f29;
 		height: 100%;
 		width: 100%;
 		display: flex;
+		justify-content: center;
 		align-items: center;
+		flex-wrap: wrap;
 	}
 
+	.anchorPLACEMENT {
+		display: block;
+		align-items: center;
+		text-align: center;
+	}
 
+	.articleTITLE {
+		display: flex;
+		justify-content: center;
+	}
 
+	.articleTitlePLACEMENT {
+		font-size: 1.5rem;
+		width: 80%;
+		margin-bottom: 40px;
+	}
+
+	.articleTitlePLACEMENT h1 {
+		margin: 0;
+	}
+
+	.articleCATEGORIES {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.articleCategoriesPLACEMENT {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.04rem;
+		text-transform: uppercase;
+		color: #8D45F2;
+	}
+
+	.articleSUMMARY {
+		display: flex;
+		justify-content: center;
+	}
+
+	.articleSummaryPLACEMENT {
+		width: 60%;
+		margin-bottom: 20px;
+	}
+
+	.articleSummaryPLACEMENT h4 {
+		font-size: 1rem;
+		letter-spacing: 0.08rem;
+		line-height: 1.6rem;
+		font-weight: 500;
+		margin: 0;
+	}
+
+	.readMORE {
+		width: 100%;
+		color: #8D45F2;
+		font-weight: 500;
+		/*margin-bottom: 40px;*/
+	}
+
+	.readMORE span {
+		border-bottom: solid 2px #8D45F2;
+	}
 
 
 

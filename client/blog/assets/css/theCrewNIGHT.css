@@ -914,6 +914,10 @@ a:hover, a:active, a:focus {
 		font-size: 1rem;
 	}
 
+	.sectionMember {
+		margin-top: 300px;
+	}
+
 
 }
 
@@ -1226,6 +1230,10 @@ a:hover, a:active, a:focus {
 		font-size: 1.3rem;
 		line-height: 2rem;
 		letter-spacing: 0.06rem;
+	}
+
+	.bottom {
+		margin: 300px 0 0 0;
 	}
 
 }

@@ -5,39 +5,47 @@
       <a href="{{article.url}}"><img src="{{article.thumbnail_url}}" alt=""></a>
       <div class="upper1024">
         <div class="overlayPlacement">
-          <div class="hover">
-            <div class="postData">
-              <div class="postTitle">
-                <a href="#"><h1>{{article.title}}</h1></a>
+
+
+          <a href="blog.html" class="superAnchor">
+            <div class="anchorPLACEMENT">
+              <div class="articleTITLE">
+                <div class="articleTitlePLACEMENT">
+                  <h1>{{article.title}}</h1>
+                </div>
               </div>
-              <div class="post">
-                <div class="postCategories">
-                  <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author.displayName}}</a></span>
+              <div class="articleCATEGORIES">
+                <div class="articleCategoriesPLACEMENT">
+                  <span>{{article.subject}} &nbsp&nbsp • &nbsp&nbsp {{article.category}} &nbsp&nbsp • &nbsp&nbsp {{article.author.displayName}}</span>
                 </div>
-                <div class="postSummary">
-                  <div class="postSummaryFlex widerSummaryFlex"> <!---DONT KEEP BOTH widerSummaryFlex for images > 900px PLEASE DELETE THE OTHER ONE)--->
-                    <h4>{{article.summary}}</h4>
-                  </div>
+              </div>
+              <div class="articleSUMMARY">
+                <div class="articleSummaryPLACEMENT">
+                  <h4>{{article.summary}}</h4>
                 </div>
-                <div class="postReadBtn">
-                  <a href="#"><span>> </span> &nbspRead more</a>
-                </div>
+              </div>
+              <div class="readMORE">
+                <span>Read more</span>
               </div>
             </div>
-          </div>
+          </a>
+
+
         </div>
       </div>
     </div>
   </div>
 
+  
+
   <div class="lower1024">
     <div class="postData">
       <div class="postTitle">
-        <a href="#"><h1>{{article.title}}</h1></a>
+        <a href="{{article.url}}"><h1>{{article.title}}</h1></a>
       </div>
       <div class="post">
         <div class="postCategories">
-          <span><a href="#">{{article.subject}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.category}}</a>&nbsp&nbsp • &nbsp&nbsp<a href="#">{{article.author}}</a></span>
+          <span>{{article.subject}}&nbsp&nbsp • &nbsp&nbsp{{article.category}}&nbsp&nbsp • &nbsp&nbsp{{article.author}}</span>
         </div>
         <div class="postSummary">
           <div class="postSummaryFlex">
@@ -45,7 +53,7 @@
           </div>
         </div>
         <div class="postReadBtn">
-          <a href="#"><span>> </span> &nbspRead more</a>
+          <a href="{{article.url}}"><span>> </span> &nbspRead more</a>
         </div>
       </div>
     </div>

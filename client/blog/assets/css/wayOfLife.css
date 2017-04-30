@@ -848,14 +848,14 @@ header {
 	}
 
 	.principles {
-	  margin-top: 200px;
+	  margin-top: 50px;
 	  display: flex;
 	  justify-content: center;
 	  text-align: center;
 	}
 
 	.principleBox {
-	  margin: 120px 0;
+	  margin: 220px 0;
 	}
 
 	.principleTitle h1 {
