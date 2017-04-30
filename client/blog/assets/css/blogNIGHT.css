@@ -719,7 +719,7 @@ a:hover, a:active, a:focus {
 		letter-spacing: 0.08rem;
 		text-align: left;
 		line-height: 2.5rem;
-		height: 60vh;
+		height: 70vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -741,7 +741,7 @@ a:hover, a:active, a:focus {
 	/*------ARTICLE-------*/
 
 	.article {
-		margin-top: 150px;
+		margin-top: 300px;
 		padding: 0 5%;
 		align-items: center;
 	}
