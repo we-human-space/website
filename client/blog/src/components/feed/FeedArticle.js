@@ -9,26 +9,30 @@ export default function FeedArticle(props){
           <a href={props.article.url}><img src={`/blog/${props.article.hash}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
           <div className='upper1024'>
             <div className='overlayPlacement'>
-              <div className='hover'>
-                <div className='postData'>
-                  <div className='postTitle'>
-                    <a href={props.article.url}><h1>{props.article.title}</h1></a>
+
+              <a href="{{article.url}}" class="superAnchor">
+                <div class="anchorPLACEMENT">
+                  <div class="articleTITLE">
+                    <div class="articleTitlePLACEMENT">
+                      <h1>{props.article.title}</h1>
+                    </div>
                   </div>
-                  <div className='post'>
-                    <div className='postCategories'>
-                      <span><a href='#'>{props.article.subject}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.category}</a>{'\u00A0\u00A0•\u00A0\u00A0'}<a href='#'>{props.article.author.firstname}</a></span>
+                  <div class="articleCATEGORIES">
+                    <div class="articleCategoriesPLACEMENT">
+                      <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
                     </div>
-                    <div className='postSummary'>
-                      <div className={props.summary_class}>
-                        <h4>{props.article.summary}</h4>
-                      </div>
+                  </div>
+                  <div class="articleSUMMARY">
+                    <div class="articleSummaryPLACEMENT">
+                      <h4>{props.article.summary}</h4>
                     </div>
-                    <div className='postReadBtn'>
-                      <a href='#'><span>> </span> {'\u00A0Read more'}</a>
-                    </div>
+                  </div>
+                  <div class="readMORE">
+                    <span>Read more</span>
                   </div>
                 </div>
-              </div>
+              </a>
+
             </div>
           </div>
         </div>
@@ -37,11 +41,11 @@ export default function FeedArticle(props){
       <div className='lower1024'>
         <div className='postData'>
           <div className='postTitle'>
-            <a href='#'><h1>{props.article.title}</h1></a>
+            <a href='{props.article.url}'><h1>{props.article.title}</h1></a>
           </div>
           <div className='post'>
             <div className='postCategories'>
-              <span><a href='#'>{props.article.subject}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.category}</a>&nbsp&nbsp • &nbsp&nbsp<a href='#'>{props.article.author.firstname}</a></span>
+              <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
             </div>
             <div className='postSummary'>
               <div className='postSummaryFlex'>
@@ -49,7 +53,7 @@ export default function FeedArticle(props){
               </div>
             </div>
             <div className='postReadBtn'>
-              <a href='#'><span>> </span> &nbspRead more</a>
+              <a href='{props.article.url}'><span>> </span> {'\u00A0Read more'}</a>
             </div>
           </div>
         </div>
