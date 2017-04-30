@@ -972,7 +972,7 @@ header {
 
 	.logo1024 {
 		display: block;
-		position: fixed;
+		position: absolute;
 		top: 40px;
 		left: 50px;
 		z-index: 2;
