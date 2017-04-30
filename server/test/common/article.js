@@ -65,7 +65,7 @@ module.exports = function generate(author) {
       create_html(absolute_folder, wiki_article.extract),
       copy_thumbnail(generated_article.thumbnail, absolute_folder)
     ]);
-  }).then(() => create_archive(folder, path.join(__dirname, 'tmp')))
+  }).then(() => create_archive(folder, path.join(__dirname, 'tmp', folder)))
   .then(() => {
     return {
       clear: clear_files.bind(null, absolute_folder),
@@ -167,7 +167,7 @@ function copy_thumbnail(thumbnail, folder) {
 }
 
 function create_archive(source, cwd){
-  var zip = spawn('zip', ['-r', `${source}.zip`, source], {cwd: cwd});
+  var zip = spawn('zip', ['-r', `../${source}.zip`, '.'], {cwd: cwd});
   zip.stdout.on('data', (data) => {
     console.log(`unzip stdout:\n${data}`);
   });
