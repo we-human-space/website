@@ -6,11 +6,11 @@ export default function FeedArticle(props){
     <div className='article'>
       <div className='postIMG'>
         <div className={props.img_class}>
-          <a href={props.article.url}><img src={`/blog/${props.article.hash}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
+          <a href='{props.article.url}'><img src={`/blog/${props.article.hash}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
           <div className='upper1024'>
             <div className='overlayPlacement'>
 
-              <a href="{{article.url}}" class="superAnchor">
+              <a href='{props.article.url}' class="superAnchor">
                 <div class="anchorPLACEMENT">
                   <div class="articleTITLE">
                     <div class="articleTitlePLACEMENT">
