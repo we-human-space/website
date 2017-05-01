@@ -10,6 +10,7 @@ export default function FeedArticle(props){
           <div className='upper1024'>
             <div className='overlayPlacement'>
 
+
               <a href='{props.article.url}' class="superAnchor">
                 <div class="anchorPLACEMENT">
                   <div class="articleTITLE">
@@ -17,17 +18,17 @@ export default function FeedArticle(props){
                       <h1>{props.article.title}</h1>
                     </div>
                   </div>
-                  <div class="articleCATEGORIES">
-                    <div class="articleCategoriesPLACEMENT">
-                      <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
+                  <div className='articleCATEGORIES'>
+                    <div className='articleCategoriesPLACEMENT'>
+                      <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
                     </div>
                   </div>
-                  <div class="articleSUMMARY">
-                    <div class="articleSummaryPLACEMENT">
+                  <div className='articleSUMMARY'>
+                    <div className='articleSummaryPLACEMENT'>
                       <h4>{props.article.summary}</h4>
                     </div>
                   </div>
-                  <div class="readMORE">
+                  <div className='readMORE'>
                     <span>Read more</span>
                   </div>
                 </div>
