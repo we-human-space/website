@@ -14,6 +14,7 @@ const SOURCE_PATH = path.join(__dirname, "../../common/tmp/{{filename}}.zip");
 const DESTINATION_PATH = path.join(__dirname, "../../../", config.views.path, "/uploads/{{filename}}.zip");
 
 var articles = [];
+var clears = [];
 var authors;
 
 before(function(done){
@@ -63,13 +64,14 @@ it("upload articles to the server", function(done) {
         generated_articles.push(result.article);
         return upload({filename: result.folder})
         .then(get_report)
-        .then((a) => { articles.push(a); return result.clear(); });
+        .then((a) => { articles.push(a); clears.push(result.clear); });
       })
     );
   }
   Promise.all(promises)
   .then(() => articles)
   .then(test_in_browser(this))
+  .then(() => clears.map(c => c()))
   .then(() => done)
   .catch((err) => {
     if(!err) err = new Error("Issue found");
@@ -118,11 +120,15 @@ function get_report(data){
 
 function test_in_browser(self){
   return (articles) => {
-    console.log("Go test in the browser, see if everything is fine");
-    articles.forEach((a, i) => {
-      console.log(`${i+1}: URL: localhost:8888/blog/${a.article.hash}`);
-    });
-    return stop.confirm.apply(self);
+    try{
+      let urls = articles.map((a, i) => `${i+1}: URL: localhost:8888/blog/${a.article.hash}`);
+      console.log("Go test in the browser, see if everything is fine");
+      console.log(urls.join('\n'));
+    }catch(err){
+      console.error(err);
+      return stop.stop.bind(self, "We got an error here. Take your time to debug, then press return.")();
+    }
+    return stop.confirm.bind(self)();
   };
 }
 

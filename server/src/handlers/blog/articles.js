@@ -33,7 +33,7 @@ function read(req, res, next) {
 
   Article.findOne(query)
   .then((article) => {
-    console.log(`Found article ${query.url || query.hash}`);
+    console.log(article ? `Found article ${query.url || query.hash}` : `Didn't find article ${query.url || query.hash}`);
     if(article){
       return new Promise((resolve, reject) => {
         article.populate({path: 'author'}, (err, article) => {
@@ -42,7 +42,9 @@ function read(req, res, next) {
         });
       });
     }else{
-      next();
+      let err = new Error("Article not found");
+      err.status = 404;
+      return Promise.reject(err)
     }
   }).then((article) => {
     console.log(`Found author ${article.author.username}`);
@@ -51,14 +53,20 @@ function read(req, res, next) {
       let art = article.export();
       //req.article = xss(art);
       req.data = {article: art};
-      return renderer.render(req, res, next);
+      next();
     //Else next to 404
     }else{
+      res.status = 404;
       next();
     }
   }).catch((err) => {
-    console.log(err);
-    res.sendStatus(500);
+    console.error(err);
+    if(err.status === 404){
+      res.status = 404;
+      next();
+    }else{
+      res.sendStatus(500);
+    }
   });
 }
 

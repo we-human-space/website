@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 import { connect } from 'react-redux';
-import config from '../../config';
 import Feed from '../../components/feed/Feed';
 import {
   request_articles,
@@ -9,7 +8,6 @@ import {
   receive_refresh_articles
 } from '../../redux/actions/index';
 
-const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 var cache;
 var query;
 
@@ -95,7 +93,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       });
       dispatch(request_articles(cache));
       return superagent
-        .post(`${SERVER_PATH}/feed/`)
+        .post(`/feed/`)
         .send({
           action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
           cached: cache,
@@ -105,7 +103,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     expireFeed: () => {
       dispatch(request_refresh_articles(cache));
       return superagent
-        .post(`${SERVER_PATH}/feed/`)
+        .post(`/feed/`)
         .send({
           action: cache ? 'REFRESH' : 'REQUEST_INITIAL',
           cached: cache,

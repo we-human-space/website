@@ -23,26 +23,25 @@ const NavLinksContainer = connect(
  * for processing when fetching new articles
  **/
 function summarize_cache(state){
- let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
- let filter = window.location.search;
- let cursor;
- if(filter){
-   if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
-   else cursor = page_ids[page_ids.length - 1];
- }
- console.log(`cursor: ${cursor}`);
- if(page_ids.length){
-   let index = state.entities.pages[Math.max.apply(null, page_ids)]
+  let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
+  let filter = window.location.search;
+  let cursor;
+  if(filter){
+    if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
+    else cursor = page_ids[page_ids.length - 1];
+  }
+  if(page_ids.length){
+    let index = state.entities.pages[Math.max.apply(null, page_ids)]
                .reduce((i, article) => {
                  return Math.max(article.pageIndex, i);
                }, 1);
-   return {
-     pages: page_ids,
-     index,
-     cursor
-   };
- }
- return;
+    return {
+      pages: page_ids,
+      index,
+      cursor
+    };
+  }
+  return;
 }
 
 
@@ -56,36 +55,38 @@ function mapDispatchToProps(dispatch, ownProps) {
     onClickWrapper: function(data){
       return function(e){
         // Changing the window.location without reloading
-        e.preventDefault();
-        window.history.replaceState({}, data.title, data.url);
+        if(data.location.pathname === window.location.pathname) {
+          e.preventDefault();
+          window.history.replaceState({}, data.title, data.url);
 
-        // Close the nav menu
-        if(data.render_type === 'navigation'){
-          document.getElementsByClassName('hamburger')[0].click();
+          // Close the nav menu
+          if(data.render_type === 'navigation'){
+            document.getElementsByClassName('hamburger')[0].click();
+          }
+
+          // Dispatching events
+          dispatch(update_query(data.query));
+          dispatch(request_articles(cache));
+
+          // Updating articles
+          return superagent
+            .post(`${SERVER_PATH}/feed/`)
+            .send({
+              action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+              cached: cache,
+              query: data.query
+            }).then(res => {
+              dispatch(receive_articles(cache, data.query, res.body));
+
+              // McGiver Stuff
+              let quote_of_day = document.getElementsByClassName('quoteOfDay');
+              if(quote_of_day[0]) {
+                let contentContainer = quote_of_day[0].parentNode;
+                contentContainer.style.margin = '-150px 0 0 0';
+                contentContainer.removeChild(quote_of_day[0]);
+              }
+            });
         }
-
-        // Dispatching events
-        dispatch(update_query(data.query));
-        dispatch(request_articles(cache));
-
-        // Updating articles
-        return superagent
-          .post(`${SERVER_PATH}/feed/`)
-          .send({
-            action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
-            cached: cache,
-            query: data.query
-          }).then(res => {
-            dispatch(receive_articles(cache, data.query, res.body));
-
-            // McGiver Stuff
-            let quote_of_day = document.getElementsByClassName('quoteOfDay');
-            if(quote_of_day[0]) {
-              let contentContainer = quote_of_day[0].parentNode;
-              contentContainer.style.margin = '-150px 0 0 0';
-              contentContainer.removeChild(quote_of_day[0]);
-            }
-          });
       };
     }
   };

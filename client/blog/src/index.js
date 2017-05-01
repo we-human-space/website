@@ -15,13 +15,17 @@ window.onbeforeunload = () => { document.body.scrollTop = document.documentEleme
 const store = configure_store(window.__PRELOADED_STATE__);
 
 let render = () => {
-  if(window.location.pathname.match(/^(\/blog\/)(\?.+)?$/)){
-    ReactDOM.render(
-      <Provider store={store}>
-        <FeedContainer />
-      </Provider>,
-      document.getElementById('feed')
-    );
+  //Feed and articles
+  if(window.location.pathname.match(/^\/blog\//)){
+    //Feed only
+    if(window.location.pathname.match(/^\/blog\/$/)){
+      ReactDOM.render(
+        <Provider store={store}>
+          <FeedContainer />
+        </Provider>,
+        document.getElementById('feed')
+      );
+    }
     ReactDOM.render(
       <Provider store={store}>
         <NavLinksContainer type='subjects' render_type='filter' />

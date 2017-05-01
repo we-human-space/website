@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import config from '../../config';
-
-const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 
 export default class NavLinks extends React.Component{
 
@@ -10,17 +7,8 @@ export default class NavLinks extends React.Component{
     return window.location.search && link.location.search && window.location.search.match(link.location.search);
   }
 
-  getURL(link){
-    if(link.type === 'navlinks'){
-      return `${SERVER_PATH}${link.location.pathname}`;
-    }else{
-      return `${SERVER_PATH}${window.location.pathname}?${link.location.search}`;
-    }
-  }
-
   render(){
     const list = this.props.links.map((link) => {
-      link.url = this.getURL(link);
       return (
         <li key={link.key}>
           <a href={link.url}
@@ -51,7 +39,6 @@ export default class NavLinks extends React.Component{
         </div>
       );
     }
-
   }
 }
 

@@ -30,7 +30,7 @@ module.exports = (function() {
 
   router.get('/blog/', renderer.render, renderer.serve);
 
-  router.get('/blog/:article', blog.articles.read, renderer.serve);
+  router.get('/blog/:article', blog.articles.read, renderer.render, renderer.serve);
 
   if(__DEV__){
     router.get('/test/uploader/report', blog.articles.test.report);
