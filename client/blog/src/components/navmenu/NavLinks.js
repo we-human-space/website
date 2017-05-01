@@ -1,14 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import config from '../../config';
 
 export default class NavLinks extends React.Component{
-
-  constructor(props){
-    super(props);
-    console.log(props.render_type);
-    console.log(props.links);
-  }
 
   isActive(link){
     return window.location.search && link.location.search && window.location.search.match(link.location.search);
