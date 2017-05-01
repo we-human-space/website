@@ -17,8 +17,8 @@ module.exports = {
 
 function render(req, res, next){
   let key = get_request_key(req);
-  if(!key){
-    next();
+  if(!key || res.status === 404){
+    not_found(req, res, next);
   }else{
     req.partial = views.requests[key];
     return render_page(req, res, next);
@@ -26,6 +26,7 @@ function render(req, res, next){
 }
 
 function not_found(req, res, next){
+
   req.partial = views.requests["404"];
   return render_page(req, res, next);
 }
@@ -58,13 +59,15 @@ function get_preloaded_state(req){
 }
 
 function render_page(req, res, next){
-  console.log(req.partial);
+  console.log(`render: ${req.partial}`);
   let data;
-  if(!views.partials[req.partial]){
-    console.log("render: view not found");
+  if(!views.partials[req.partial] || req.partial === "404"){
+    console.log("render: view not found; render as 404");
     req.partial = "404";
-    data = { preloaded_state: "{}" };
+    data = { preloaded_state: "{}" , not_found: views.requests[get_request_key(req)] === "article" ? "article": "page"};
+    console.log(`data.not_found: ${data.not_found}`);
   }else{
+    console.log("render: view found");
     data = { ...req.data, preloaded_state: get_preloaded_state(req)};
   }
 
