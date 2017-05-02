@@ -45,7 +45,7 @@ export default function FeedArticle(props){
           </div>
           <div className='post'>
             <div className='postCategories'>
-              <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'} • {'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
+              <span>{props.article.subject}{'\u00A0\u00A0•\u00A0\u00A0'}{props.article.category}{'\u00A0\u00A0•\u00A0\u00A0'}{props.article.author.firstname}</span>
             </div>
             <div className='postSummary'>
               <div className='postSummaryFlex'>
