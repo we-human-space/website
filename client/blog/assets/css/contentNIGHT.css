@@ -360,15 +360,10 @@ a:hover, a:active, a:focus {
 
 .postCategories span {
 	color: #8D45F2;
-	font-size: 0.7rem;
-}
-
-.postCategories a {
-	font-size: 0.8rem;
-	font-weight: 700;
-	letter-spacing: 0.04rem;
-	text-transform: uppercase;
-	color: #8D45F2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04rem;
+  text-transform: uppercase;
 }
 
 .text {
@@ -795,17 +790,13 @@ a:hover, a:active, a:focus {
 		}
 
 		.postCategories span {
-			color: #8D45F2;
-			font-size: 0.7rem;
-		}
-
-		.postCategories a {
 			font-size: 0.8rem;
 			font-weight: 700;
 			letter-spacing: 0.04rem;
 			text-transform: uppercase;
 			color: #8D45F2;
 		}
+
 
 		.text {
 			line-height: 1.8rem;
