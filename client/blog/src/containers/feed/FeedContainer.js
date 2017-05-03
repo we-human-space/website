@@ -51,9 +51,8 @@ function summarize_cache(state){
   let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
   let filter = window.location.search;
   let cursor;
-  if(filter){
-    if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
-    else cursor = page_ids[page_ids.length - 1];
+  if(filter && state.feed[filter]){
+    cursor = Object.keys(state.feed[filter]).map(i => parseInt(i)).reverse()[0];
   }
   console.log(`cursor: ${cursor}`);
   if(page_ids.length){
@@ -87,15 +86,25 @@ function mapDispatchToProps(dispatch, ownProps) {
     fetchArticles: () => {
       console.log('payload');
       console.log({
-        action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+        // cache + no query => initial already requested
+        // cache + query + no cursor => pages already cached, but query not cached, so ask initial
+        // cache + query + cursor => initial already requested for query
+        action: (cache && (!query || cache.cursor))
+                ? 'REQUEST_MORE'
+                : 'REQUEST_INITIAL',
         cached: cache,
         query: query
       });
-      dispatch(request_articles(cache));
+      dispatch(request_articles(cache, query));
       return superagent
         .post(`/feed/`)
         .send({
-          action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+          // cache + no query => initial already requested
+          // cache + query + no cursor => pages already cached, but query not cached, so ask initial
+          // cache + query + cursor => initial already requested for query
+          action: (cache && (!query || cache.cursor))
+                  ? 'REQUEST_MORE'
+                  : 'REQUEST_INITIAL',
           cached: cache,
           query: query
         }).then(res => { dispatch(receive_articles(cache, query, res.body)); });

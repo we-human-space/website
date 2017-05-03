@@ -1,11 +1,9 @@
 import superagent from 'superagent';
 import { connect } from 'react-redux';
-import config from '../../config';
 import NavLinks from '../../components/navmenu/NavLinks';
 import { author_link, nav_link, subject_link } from './link-helper';
 import {update_query, request_articles, receive_articles} from '../../redux/actions/index';
 
-const SERVER_PATH = `http://${config.server.rest.host}${config.server.rest.port ? `:${config.server.rest.port}` : ''}`;
 const helpers = {
   'authors': author_link,
   'navlinks': nav_link,
@@ -26,9 +24,8 @@ function summarize_cache(state){
   let page_ids = Object.keys(state.entities.pages).map(i => parseInt(i));
   let filter = window.location.search;
   let cursor;
-  if(filter){
-    if(state.feed[filter]) cursor = Object.keys(state.feed[filter]).reverse()[0];
-    else cursor = page_ids[page_ids.length - 1];
+  if(filter && state.feed[filter]){
+    cursor = Object.keys(state.feed[filter]).map(i => parseInt(i)).reverse()[0];
   }
   if(page_ids.length){
     let index = state.entities.pages[Math.max.apply(null, page_ids)]
@@ -70,9 +67,14 @@ function mapDispatchToProps(dispatch, ownProps) {
 
           // Updating articles
           return superagent
-            .post(`${SERVER_PATH}/feed/`)
+            .post(`/feed/`)
             .send({
-              action: cache ? 'REQUEST_MORE' : 'REQUEST_INITIAL',
+              // cache + no query => initial already requested
+              // cache + query + no cursor => pages already cached, but query not cached, so ask initial
+              // cache + query + cursor => initial already requested for query
+              action: (cache && cache.cursor)
+                      ? 'REQUEST_MORE'
+                      : 'REQUEST_INITIAL',
               cached: cache,
               query: data.query
             }).then(res => {
