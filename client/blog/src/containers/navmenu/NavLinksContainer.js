@@ -55,6 +55,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         if(data.location.pathname === window.location.pathname) {
           e.preventDefault();
           window.history.replaceState({}, data.title, data.url);
+          window.scrollTo(0, 0);
 
           // Close the nav menu
           if(data.render_type === 'navigation'){
