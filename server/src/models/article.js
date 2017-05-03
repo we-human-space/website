@@ -192,16 +192,12 @@ ArticleSchema.statics.filterArticles = function(payload) {
                     : Math.max.apply(null, payload.cached.pages) -1;
       return this.getQueryResultsAndProcessMatchPages(payload, "gt", minpage);
     }else{
-      return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
+      let maxpage = Math.max.apply(null, Object.keys(cache))+1;
+      return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
     }
   }else if(payload.action == "REQUEST_INITIAL") {
-    if(payload.cached) {
-      let maxpage = Math.max.apply(null, Object.keys(cache))+1;
-      return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
-    }else{
-      let maxpage = Math.max.apply(null, Object.keys(cache))+1;
-      return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
-    }
+    let maxpage = Math.max.apply(null, Object.keys(cache))+1;
+    return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
   }else if(payload.action == "REQUEST_MORE") {
     // No cache or cursor? Go to GO and do not get 200$. I mean, goto REQUEST_INITIAL.
     if(payload.cached && payload.cached.cursor) {
@@ -218,10 +214,14 @@ ArticleSchema.statics.getQueryResultsAndProcessMatchPages = function(payload, op
   .then((matches) => {
     match = matches;
     let match_pages = Object.keys(matches);
-    // Check if there is a need for pages to be sent to the frontend
-    let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
-    if(new_pages.length) return this.getPage({$in: new_pages});
-    else return Promise.resolve({});
+    if(payload.cached){
+      // Check if there is a need for pages to be sent to the frontend
+      let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
+      if(new_pages.length) return this.getPage({$in: new_pages});
+      else return Promise.resolve({});
+    }else{
+      return this.getPage({$in: match_pages});
+    }
   }).then((pages) =>  {
     let page_ids = Object.keys(pages);
     // Get the lowest query page sent
