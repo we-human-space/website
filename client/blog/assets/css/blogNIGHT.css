@@ -999,9 +999,6 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     list-style: none;
     width: 61px;
-    margin: 0 100px;
-    /*border-bottom: solid 2px #e5d9ff;
-    border-radius: 1px;*/
   }
 
 
@@ -1019,9 +1016,10 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     align-self: flex-end;
     list-style: none;
-    width: 43px;
     border-bottom: solid 2px #e5d9ff;
     border-radius: 1px;
+    width: 104px;
+    margin: 0 100px;
   }
 
   .FB a {
