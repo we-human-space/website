@@ -9,7 +9,7 @@ export function author_link(authors, render_type) {
       url: `/blog/?author=${authors[id]._id}`,
       location: {pathname: '/blog/', search: `author=${authors[id]._id}`},
       render_type: render_type
-    })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0),
+    })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),
     class: 'filterBy',
     subtitle: 'Filter by Author',
     type: 'authors',
@@ -27,7 +27,7 @@ export function nav_link(links, render_type) {
         location: {pathname: pathname},
         render_type: render_type
       };
-    }).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0),
+    }).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),
     class: 'exploreSection',
     subtitle: 'Explore Sections',
     type: 'navlinks',
@@ -37,16 +37,26 @@ export function nav_link(links, render_type) {
 
 export function subject_link(subjects, render_type) {
   return {
-    links: subjects.map((s) => ({
-      ...s,
-      url: `/blog/?subject=${encodeURI(s.text)}`,
-      location: {pathname: '/blog/', search: `subject=${encodeURI(s.text)}`},
-      title: `M A A T - Resonate with ${s.text}`,
+    links: subjects.map((link) => ({
+      ...link,
+      url: `/blog/?subject=${encodeURI(link.text)}`,
+      location: {pathname: '/blog/', search: `subject=${encodeURI(link.text)}`},
+      title: `M A A T - Resonate with ${link.text}`,
       render_type: render_type
-    })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0),
+    })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),
     class: 'resonateWith',
     subtitle: 'Resonate With',
     type: 'subjects',
     render_type: render_type
   };
+}
+
+function sort_by_key(a, b){
+  if(a.key < b.key){
+    return -1;
+  }else if(a.key === b.key){
+    return 0;
+  }else{
+    return 1;
+  }
 }
