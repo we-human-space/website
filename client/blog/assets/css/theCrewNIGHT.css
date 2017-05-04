@@ -378,7 +378,7 @@ a:hover, a:active, a:focus {
 }
 
 .sectionMember {
-	margin: 150px 0;
+	margin: 130px 0;
 }
 
 .memberImg img {
@@ -515,10 +515,11 @@ a:hover, a:active, a:focus {
 }
 
 .marketingPlacement {
-	/*border: 3px solid #e5d9ff;
+	/*border: 3px solid #8D45F2;
 	border-radius: 20px;*/
 	margin-top: 50px;
 	width: 90%;
+	/*background-color:#8D45F2; */
 	/*display: flex;*/
 	/*justify-content: space-between;*/
 	/*align-items: center;*/
@@ -527,7 +528,7 @@ a:hover, a:active, a:focus {
 .copyFollow320 {
 	text-align: center;
   /*margin-top: 25px;*/
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	line-height: 1.8rem;
@@ -539,7 +540,7 @@ a:hover, a:active, a:focus {
 	font-weight: 300;
 	font-size: 1.25rem;
 	color: #8D45F2;
-	margin: 30px 0 40px 0;
+	margin: 50px 0 40px 0;
 }
 
 .emailForm {
@@ -575,12 +576,12 @@ a:hover, a:active, a:focus {
   padding: 11px 10px 10px 0px;
 }
 
-.lastNameInput {
-	margin: 20px 0;
+.firstNameInput {
+	margin: 10px 0 20px 0;
 }
 
 .joinBtnBottom {
-	margin-top: 40px;
+	margin-top: 60px;
   width: 150px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
@@ -820,99 +821,99 @@ a:hover, a:active, a:focus {
 		margin-bottom: 150px;
 	}
 
-	.copyFollow320 {
-		display: none;
-	}
+  .copyFollow320 {
+    display: none;
+  }
 
-	.copyFollow700 {
-		display: block;
-	}
+  .copyFollow700 {
+    display: block;
+  }
 
-	.marketing {
-		display: flex;
-		justify-content: center;
-		margin-bottom: 50px;
+  .marketing {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
 
-	}
+  }
 
-	.marketingPlacement {
-		/*border: 3px solid #e5d9ff;
-		border-radius: 20px;*/
-		width: 80%;
-		/*display: flex;*/
-		/*justify-content: space-between;*/
-		/*align-items: center;*/
-	}
+  .marketingPlacement {
+    /*border: 3px solid #e5d9ff;
+    border-radius: 20px;*/
+    width: 80%;
+    /*display: flex;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+  }
 
-	.copyFollow700 {
-		text-align: center;
-		/*margin-top: 25px;*/
-		font-weight: 600;
-		font-size: 1.5rem;
-		letter-spacing: 0.1rem;
-		line-height: 2.2rem;
-	}
+  .copyFollow700 {
+    text-align: center;
+    /*margin-top: 25px;*/
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
+    line-height: 2.2rem;
+  }
 
-	.copyFollow700 p {
-		text-align: center;
-		/*margin-top: 25px;*/
-		font-weight: 300;
-		font-size: 1.4rem;
-		color: #8D45F2;
-		margin: 40px 0 20px 0;
-		line-height: 2rem;
-	}
+  .copyFollow700 p {
+    text-align: center;
+    /*margin-top: 25px;*/
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: #8D45F2;
+    margin: 50px 0 30px 0;
+    line-height: 2rem;
+  }
 
-	.emailInputBottom {
-	  width: 415px;
-		border-top: 0;
-		border-left: 0;
-		border-right: 0;
-		border-bottom: 2px solid #e5d9ff;
-	  background-color: transparent;
-	  font-family: "futura-pt",sans-serif;
-		font-weight: 500;
-	  font-size: 1rem;
-	  letter-spacing: 2px;
-	  padding: 11px 10px 10px 0px;
-		margin-top: 5px;
-	}
+  .emailInputBottom {
+    width: 415px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #e5d9ff;
+    background-color: transparent;
+    font-family: "futura-pt",sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 11px 10px 10px 0px;
+    margin-top: 5px;
+  }
 
-	.nameInputBottom {
-	  width: 190px;
-		border-top: 0;
-		border-left: 0;
-		border-right: 0;
-	  border-bottom: 2px solid #e5d9ff;
-	  /*border-radius: 10px;*/
-	  background-color: transparent;
-	  font-family: "futura-pt",sans-serif;
-		font-weight: 400;
-	  font-size: 1rem;
-	  letter-spacing: 2px;
-	  padding: 11px 10px 10px 0px;
-	}
+  .nameInputBottom {
+    width: 415px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 2px solid #e5d9ff;
+    /*border-radius: 10px;*/
+    background-color: transparent;
+    font-family: "futura-pt",sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 11px 10px 10px 0px;
+  }
 
-	.lastNameInput {
-		margin: 20px 0px 20px 20px;
-	}
+  .lastNameInput {
+    margin: 20px 0px 20px 20px;
+  }
 
-	.joinBtnBottom {
-		margin-top: 50px;
-	  width: 150px;
-	  background-color: #e5d9ff;
-	  border: #e5d9ff solid 2px;
-	  border-radius: 10px;
-	  padding: 10px 25px 11px 25px;
-	  font-family: "futura-pt",sans-serif;
-		font-weight: 600;
-	  font-size: 1.1rem;
-	  color: #5d00f8;
-	}
+  .joinBtnBottom {
+    margin-top: 50px;
+    width: 150px;
+    background-color: #e5d9ff;
+    border: #e5d9ff solid 2px;
+    border-radius: 10px;
+    padding: 10px 25px 11px 25px;
+    font-family: "futura-pt",sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #5d00f8;
+  }
 
-	.copyBottom {
-		font-size: 1rem;
-	}
+  .copyBottom {
+    font-size: 1rem;
+  }
 
 	.sectionMember {
 		margin-top: 300px;
@@ -986,7 +987,7 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     list-style: none;
     width: 61px;
-    margin: 0 100px;
+
 
   }
 
@@ -1005,7 +1006,8 @@ a:hover, a:active, a:focus {
     text-decoration: none;
     align-self: flex-end;
     list-style: none;
-    width: 43px;
+    width: 104px;
+		margin: 0 100px;
     /*border-bottom: solid 2px #e5d9ff;
     border-radius: 1px;*/
   }

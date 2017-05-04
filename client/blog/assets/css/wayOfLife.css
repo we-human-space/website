@@ -369,7 +369,7 @@ header {
 }
 
 .principleBox {
-  margin: 150px 0;
+  margin: 60px 0;
 }
 
 .principleTitle h1 {
@@ -401,7 +401,7 @@ header {
 	margin-top: 40px;
 	font-size: 1.2rem;
 	line-height: 1.8rem;
-	letter-spacing: 0.04rem;
+	letter-spacing: 0.06rem;
 }
 
 .sectionMember {
@@ -499,10 +499,11 @@ header {
 }
 
 .marketingPlacement {
-	/*border: 3px solid #e5d9ff;
+	/*border: 3px solid #8D45F2;
 	border-radius: 20px;*/
 	margin-top: 50px;
 	width: 90%;
+	/*background-color:#8D45F2; */
 	/*display: flex;*/
 	/*justify-content: space-between;*/
 	/*align-items: center;*/
@@ -511,7 +512,7 @@ header {
 .copyFollow320 {
 	text-align: center;
   /*margin-top: 25px;*/
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	line-height: 1.8rem;
@@ -523,7 +524,7 @@ header {
 	font-weight: 300;
 	font-size: 1.25rem;
 	color: #8D45F2;
-	margin: 30px 0 40px 0;
+	margin: 50px 0 40px 0;
 }
 
 .emailForm {
@@ -559,12 +560,12 @@ header {
   padding: 11px 10px 10px 0px;
 }
 
-.lastNameInput {
-	margin: 20px 0;
+.firstNameInput {
+	margin: 10px 0 20px 0;
 }
 
 .joinBtnBottom {
-	margin-top: 40px;
+	margin-top: 60px;
   width: 150px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
@@ -764,7 +765,7 @@ header {
 	}
 
 	.sectionThree {
-		margin-top: -160px;
+		margin-top: -100px;
 	}
 
 
@@ -844,7 +845,7 @@ header {
 	}
 
 	.sectionMember {
-		margin: 300px 0;
+		margin: 180px 0;
 	}
 
 	.principles {
@@ -855,7 +856,7 @@ header {
 	}
 
 	.principleBox {
-	  margin: 220px 0;
+	  margin: 60px 0;
 	}
 
 	.principleTitle h1 {
@@ -912,9 +913,9 @@ header {
 		text-align: center;
 		/*margin-top: 25px;*/
 		font-weight: 300;
-		font-size: 1.4rem;
+		font-size: 1.5rem;
 		color: #8D45F2;
-		margin: 40px 0 20px 0;
+		margin: 50px 0 30px 0;
 		line-height: 2rem;
 	}
 
@@ -934,7 +935,7 @@ header {
 	}
 
 	.nameInputBottom {
-	  width: 190px;
+	  width: 415px;
 		border-top: 0;
 		border-left: 0;
 		border-right: 0;
@@ -1042,7 +1043,7 @@ header {
 		text-decoration: none;
 		list-style: none;
 		width: 61px;
-		margin: 0 100px;
+		/*margin: 0 100px 0 90px;*/
 		border-bottom: solid 2px #e5d9ff;
 		border-radius: 1px;
 	}
@@ -1062,7 +1063,8 @@ header {
 		text-decoration: none;
 		align-self: flex-end;
 		list-style: none;
-		width: 43px;
+		width: 104px;
+		margin: 0 100px;
 		/*border-bottom: solid 2px #e5d9ff;
 		border-radius: 1px;*/
 	}
@@ -1259,7 +1261,7 @@ header {
 	}
 
 	.sectionThree {
-		margin-top: -230px;
+		margin-top: -100px;
 	}
 
 	.bottom {
