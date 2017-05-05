@@ -28,6 +28,10 @@ AuthorSchema.statics.initCache = function() {
     .then(() => console.log("Author Cache initialized"));
 };
 
+AuthorSchema.statics.isInCache = function(author) {
+  return !!cache[author._id.toString()];
+};
+
 AuthorSchema.statics.getCachedAuthors = function(should_export) {
   if(should_export){
     return export_cache;
