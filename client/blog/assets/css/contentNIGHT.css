@@ -358,13 +358,13 @@ a:hover, a:active, a:focus {
 	display: inline;
 }
 
-.postCategories span {
+/*.postCategories span {
 	color: #8D45F2;
 	font-size: 0.7rem;
-}
+}*/
 
-.postCategories a {
-	font-size: 0.8rem;
+.postCategories span {
+	font-size: 0.7rem;
 	font-weight: 700;
 	letter-spacing: 0.04rem;
 	text-transform: uppercase;
@@ -819,7 +819,7 @@ a:hover, a:active, a:focus {
 			font-size: 0.7rem;
 		}
 
-		.postCategories a {
+		.postCategories span {
 			font-size: 0.8rem;
 			font-weight: 700;
 			letter-spacing: 0.04rem;
