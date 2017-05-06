@@ -28,6 +28,8 @@ module.exports = (function() {
 
   router.get('/subscribed', renderer.render, renderer.serve);
 
+  router.get('/error', renderer.render, renderer.serve);
+
   router.post('/subscribe', handlers.newsletter.subscribe);
 
   router.post('/feed/', handlers.feed);

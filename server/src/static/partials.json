@@ -14,6 +14,11 @@
       "stylesheet": "/assets/css/404.css",
       "partials": ["head"]
     },
+    "error": {
+      "path": "partials/500.html",
+      "stylesheet": "/assets/css/404.css",
+      "partials": ["head"]
+    },
     "index": {
       "path": "partials/index.html",
       "stylesheet": "/assets/css/main.css",
@@ -31,6 +36,11 @@
     },
     "subscribed": {
       "path": "partials/joinedNewsletter.html",
+      "stylesheet": "/assets/css/joinedNewsletterNIGHT.css",
+      "partials": ["head"]
+    },
+    "error": {
+      "path": "partials/500.html",
       "stylesheet": "/assets/css/joinedNewsletterNIGHT.css",
       "partials": ["head"]
     },

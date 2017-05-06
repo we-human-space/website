@@ -8,7 +8,7 @@ import sub_schema from './subscribe.schema.json';
 const Subscriber = models.Subscriber;
 const freshmail = new FreshMail(config.freshmail.api.key, config.frehsmail.api.secret);
 
-export function subscribe(req, res, next) {
+export function subscribe(req, res) {
   var subscriber;
   // Sanitizing & Validating
   Promise.resolve(mongo_sanitize(req.body))
@@ -27,7 +27,7 @@ export function subscribe(req, res, next) {
   }).then(() => {
     return subscriber.save();
   }).then(() => {
-    next();
+    res.sendStatus(200);
   }).catch((err) => {
     console.log(err);
     res.status = err.status || 500;
