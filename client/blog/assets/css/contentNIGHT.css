@@ -4,7 +4,7 @@ html, body {
   font-family:"futura-pt", sans-serif;
   max-width: 100%;
   overflow-x: hidden;
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
 }
 
 input {
@@ -515,22 +515,41 @@ a:hover, a:active, a:focus {
 	display: none;
 }
 
-.marketing {
+.marketingContent {
 	display: flex;
 	justify-content: center;
+	margin-top: -90px;
 	margin-bottom: 50px;
 
 }
 
-.marketingPlacement {
-	/*border: 3px solid #8D45F2;
-	border-radius: 20px;*/
-	margin-top: 50px;
-	width: 90%;
-	/*background-color:#8D45F2; */
-	/*display: flex;*/
-	/*justify-content: space-between;*/
-	/*align-items: center;*/
+
+
+.marketingContentPlacement {
+	/*border-top: 1px solid #e5d9ff;*/
+	width: 85%;
+	padding-top: 50px;
+	text-align: left;
+	font-size: 1.1rem;
+	font-weight: 300;
+	line-height: 1.8rem;
+}
+
+.bottomMarketing1024 {
+	display: none;
+}
+
+.ctaSubscribeBottom {
+	/*display: block;*/
+	margin: 50px 0;
+}
+
+.ctaSubscribeBottom a {
+	padding: 10px 25px;
+	border: 2px solid #8D45F2;
+	border-radius: 10px;
+	background-color:;
+	color:  #8D45F2;
 }
 
 .copyFollow320 {
@@ -810,6 +829,8 @@ a:hover, a:active, a:focus {
 
 		.text {
 			line-height: 1.8rem;
+			font-size: 1.2rem;
+			font-weight: 300;
 		}
 
 		.subtitle {
@@ -833,21 +854,50 @@ a:hover, a:active, a:focus {
 			display: block;
 		}
 
-		.marketing {
+		.marketingContent {
 			display: flex;
 			justify-content: center;
+			margin-top: -90px;
 			margin-bottom: 50px;
 
 		}
 
-		.marketingPlacement {
-			/*border: 3px solid #e5d9ff;
-			border-radius: 20px;*/
-			width: 80%;
-			/*display: flex;*/
-			/*justify-content: space-between;*/
-			/*align-items: center;*/
+
+
+		.marketingContentPlacement {
+			/*border-top: 1px solid #e5d9ff;*/
+			width: 70%;
+			padding-top: 50px;
+			text-align: left;
+			font-size: 1.1rem;
+			font-weight: 300;
+			line-height: 1.8rem;
 		}
+
+		.bottomMarketing1024 {
+			display: none;
+		}
+
+		.ctaSubscribeBottom {
+			/*display: block;*/
+			margin: 50px 0;
+		}
+
+		.ctaSubscribeBottom a {
+			padding: 10px 25px;
+			border: 2px solid #8D45F2;
+			border-radius: 10px;
+			background-color:;
+			color:  #8D45F2;
+		}
+
+		/*.ctaSubscribeBottom a:hover:before {
+			content: ""
+		}*/
+
+		/*.ctaSubscribeBottom a:hover:after {
+			content: " Yes I am! Sign me up :)"
+		}*/
 
 		.copyFollow700 {
 			text-align: center;
@@ -1242,9 +1292,24 @@ a:hover, a:active, a:focus {
 			margin-top: 30px;
 		}
 
+		.marketingContentPlacement {
+			width: 715px;
+		}
+
+		.bottomMarketing1024 {
+			display: block;
+			font-size: 1.15rem;
+		}
+
+		.bottomMarketing320 {
+			display: none;
+		}
+
 		.bottom {
 			/*margin-right: 40px;*/
 		}
+
+
 
 		@media (min-width: 1175px) {
 
