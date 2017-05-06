@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import express from 'express';
 import renderer from '../services/renderer/render';
-import blog from '../handlers/blog/index';
+import handlers from '../handlers/index';
 
 module.exports = (function() {
 
@@ -26,15 +26,15 @@ module.exports = (function() {
 
   router.get('/vision', renderer.render, renderer.serve);
 
-  router.post('/feed/', blog.feed);
+  router.post('/feed/', handlers.feed);
 
   router.get('/blog/', renderer.render, renderer.serve);
 
-  router.get('/blog/:article', blog.articles.read, renderer.render, renderer.serve);
+  router.get('/blog/:article', handlers.articles.read, renderer.render, renderer.serve);
 
   if(__DEV__){
-    router.get('/test/uploader/report', blog.articles.test.report);
-    router.get('/test/uploader/clear', blog.articles.test.clear);
+    router.get('/test/uploader/report', handlers.articles.test.report);
+    router.get('/test/uploader/clear', handlers.articles.test.clear);
   }
 
   router.get('/*', renderer.not_found, renderer.serve);
