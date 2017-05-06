@@ -26,6 +26,10 @@ module.exports = (function() {
 
   router.get('/vision', renderer.render, renderer.serve);
 
+  router.get('/subscribed', renderer.render, renderer.serve);
+
+  router.post('/subscribe', handlers.newsletter.subscribe);
+
   router.post('/feed/', handlers.feed);
 
   router.get('/blog/', renderer.render, renderer.serve);

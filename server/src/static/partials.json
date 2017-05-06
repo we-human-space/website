@@ -5,6 +5,7 @@
     "^/vision$": "vision",
     "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
     "^/blog/([a-zA-Z0-9\\-]{10,})$": "article",
+    "^/subscribed": "subscribed",
     "404": "404"
   },
   "partials": {
@@ -27,6 +28,11 @@
       "path": "partials/wayOfLife.html",
       "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "footer_marketing", "navbar"]
+    },
+    "subscribed": {
+      "path": "partials/joinedNewsletter.html",
+      "stylesheet": "/assets/css/joinedNewsletterNIGHT.css",
+      "partials": ["head"]
     },
     "blog": {
       "path": "partials/feed.html",
