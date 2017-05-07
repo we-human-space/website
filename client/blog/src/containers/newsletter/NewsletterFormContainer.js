@@ -16,14 +16,17 @@ function mapDispatchToProps(dispatch, ownProps) {
         .post(`/subscribe`)
         .send(data)
         .then(res => {
-          console.log(res.status);
+          console.log(res);
           if(res.status === 200){
             window.location = '/subscribed';
+          }else if(res.status === 400){
+            window.location = '/error';
           }else{
             window.location = '/error';
           }
         }).catch((err) => {
-          window.location = '/error';
+          console.log(err);
+          // window.location = '/error';
         });
     }
   };

@@ -31,9 +31,8 @@ export function subscribe(req, res) {
   }).then(() => {
     res.sendStatus(200);
   }).catch((err) => {
-    console.error(err);
-    res.status = err.status || 500;
-    res.json({error: err});
+    console.log(err);
+    res.status(err.status === 555 ? 400 : 500).send({error: err.payload});
   });
 }
 
