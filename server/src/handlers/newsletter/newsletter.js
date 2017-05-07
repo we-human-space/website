@@ -24,8 +24,9 @@ export function subscribe(req, res) {
     }
   }).then((validated) => {
     subscriber = new Subscriber();
-    Object.assign(subscriber, validated);
-    return freshmail.addSubscriber(subscriber.email, config.freshmail.newsletter.main.hash);
+    subscriber.email = validated.email;
+    subscriber.firstname = validated.firstname;
+    return freshmail.addSubscriber(subscriber.email, config.freshmail.newsletter.main.hash, 2, 1);
   }).then(() => {
     return subscriber.save();
   }).then(() => {

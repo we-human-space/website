@@ -15,18 +15,15 @@ function mapDispatchToProps(dispatch, ownProps) {
       return superagent
         .post(`/subscribe`)
         .send(data)
-        .then(res => {
-          console.log(res);
-          if(res.status === 200){
-            window.location = '/subscribed';
-          }else if(res.status === 400){
-            window.location = '/error';
-          }else{
-            window.location = '/error';
-          }
-        }).catch((err) => {
+        .then(() => { window.location = '/subscribed'; })
+        .catch((err) => {
           console.log(err);
-          // window.location = '/error';
+          window.location = '/error';
+          // if(err.status === 400){
+          //   window.location = '/error';
+          // }else{
+          //   window.location = '/error';
+          // }
         });
     }
   };
