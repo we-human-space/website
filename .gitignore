@@ -53,9 +53,13 @@ log
 client/blog/views/articles/*
 client/blog/views/uploads/*
 
-#Compiled JS
+# Compiled JS
 client/blog/dist
 server/dist
 
-#Coverage
+# Coverage
 coverage
+
+# Unpublished NPM Libraries' Source
+freshmail-js
+misstep

@@ -11,13 +11,14 @@ function mapStateToProps(state, ownProps) { return {}; }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    onSubscribe: function(data){
+    onSubmit: function(data){
       return superagent
         .post(`/subscribe`)
         .send(data)
         .then(res => {
+          console.log(res.status);
           if(res.status === 200){
-            window.location = '/suscribed';
+            window.location = '/subscribed';
           }else{
             window.location = '/error';
           }

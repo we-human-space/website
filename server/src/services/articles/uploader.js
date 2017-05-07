@@ -6,7 +6,7 @@ import yaml from 'js-yaml';
 import Ajv from 'ajv';
 import config from '../../config';
 import fswrapper from '../filesystem/index';
-import auschema from '../secure/validation/article-upload.json';
+import auschema from './uploader-yaml.schema.json';
 import hash from '../secure/hash';
 import mailer from '../mail/mailer';
 import models from '../../models/index';

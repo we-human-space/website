@@ -6,7 +6,7 @@ import configure_store from './redux/store/configure';
 import FeedContainer from './containers/feed/FeedContainer';
 import HamburgerIcon from './components/navmenu/HamburgerIcon';
 import NavLinksContainer from './containers/navmenu/NavLinksContainer';
-import NewsletterFormContainer from './containers/navmenu/NewsletterFormContainer';
+import NewsletterFormContainer from './containers/newsletter/NewsletterFormContainer';
 
 // Browser Window Configuration
 window.onload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
@@ -36,12 +36,15 @@ const render = () => {
   }
   // Newsletter Form
   if(window.location.pathname.match(/^\/(vision|team)/)){
+    console.log('rendering that sweet form');
     ReactDOM.render(
       <Provider store={store}>
         <NewsletterFormContainer />
       </Provider>,
       document.getElementsByClassName('emailForm')[0]
     );
+  }else{
+    console.log("where's my sweet form?");
   }
   // Navigation Menus
   ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
