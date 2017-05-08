@@ -19,8 +19,7 @@ const webpack_config = {
   entry: [project.paths.src()],
   output: {
     path: project.paths.dist(),
-    filename: 'bundle.js',
-    //filename: '[name].[hash].js',
+    filename: 'bundle.[hash].js',
     //chunkFilename: '[id].[chunkhash].js'
   },
   module: {},
@@ -50,10 +49,7 @@ webpack_config.plugins.push(
   new webpack.DefinePlugin(project.globals)
 );
 
-console.log('Getting there...');
-
 if(__PROD__){
-  console.log("Holy shit, that's the uglify plugin");
   webpack_config.plugins.push(
     new UglifyJSPlugin()
   );
