@@ -6,6 +6,7 @@
 
 const project = require('./project.config');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const __DEV__ = project.globals.__DEV__;
 const __PROD__ = project.globals.__PROD__;
 const __TEST__ = project.globals.__TEST__;
@@ -48,6 +49,15 @@ webpack_config.module.loaders = [{
 webpack_config.plugins.push(
   new webpack.DefinePlugin(project.globals)
 );
+
+console.log('Getting there...');
+
+if(__PROD__){
+  console.log("Holy shit, that's the uglify plugin");
+  webpack_config.plugins.push(
+    new UglifyJSPlugin()
+  );
+}
 
 // if(__DEV__){
 //   console.log('Enabling plugins for live development (HMR, NoErrors).');
