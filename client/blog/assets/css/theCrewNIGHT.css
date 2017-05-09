@@ -556,9 +556,13 @@ a:hover, a:active, a:focus {
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
 	font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   padding: 11px 10px 10px 0px;
+}
+
+.emailInputError {
+  border-bottom: 2px solid red;
 }
 
 .nameInputBottom {
@@ -571,7 +575,7 @@ a:hover, a:active, a:focus {
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
 	font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.2rem;
   letter-spacing: 2px;
   padding: 11px 10px 10px 0px;
 }
@@ -580,16 +584,20 @@ a:hover, a:active, a:focus {
 	margin: 10px 0 20px 0;
 }
 
+.firstNameError {
+	border-bottom: 2px solid red;
+}
+
 .joinBtnBottom {
 	margin-top: 60px;
-  width: 150px;
+  width: 200px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
   border-radius: 10px;
-  padding: 10px 25px 11px 25px;
+  padding: 10px 50px 11px 50px;
   font-family: "futura-pt",sans-serif;
 	font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #5d00f8;
 }
 
@@ -873,11 +881,15 @@ a:hover, a:active, a:focus {
     background-color: transparent;
     font-family: "futura-pt",sans-serif;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.2rem;
     letter-spacing: 2px;
     padding: 11px 10px 10px 0px;
     margin-top: 5px;
   }
+
+	.emailInputError {
+	  border-bottom: 2px solid red;
+	}
 
   .nameInputBottom {
     width: 415px;
@@ -889,10 +901,14 @@ a:hover, a:active, a:focus {
     background-color: transparent;
     font-family: "futura-pt",sans-serif;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.2rem;
     letter-spacing: 2px;
     padding: 11px 10px 10px 0px;
   }
+
+	.firstNameError {
+		border-bottom: 2px solid red;
+	}
 
   .lastNameInput {
     margin: 20px 0px 20px 20px;
@@ -900,14 +916,14 @@ a:hover, a:active, a:focus {
 
   .joinBtnBottom {
     margin-top: 50px;
-    width: 150px;
+    width: 200px;
     background-color: #e5d9ff;
     border: #e5d9ff solid 2px;
     border-radius: 10px;
-    padding: 10px 25px 11px 25px;
+    padding: 10px 50px 11px 50px;
     font-family: "futura-pt",sans-serif;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #5d00f8;
   }
 
@@ -916,7 +932,7 @@ a:hover, a:active, a:focus {
   }
 
 	.sectionMember {
-		margin-top: 300px;
+		margin-top: 200px;
 	}
 
 

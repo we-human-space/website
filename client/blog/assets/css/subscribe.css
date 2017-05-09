@@ -97,7 +97,6 @@ header {
 /*----BOTTOM------*/
 
 .bottom {
-  margin-top: 75px;
   text-align: center;
   font-size: 1.3rem;
   letter-spacing: 0.08rem;
@@ -114,7 +113,7 @@ header {
 .marketingPlacement {
 	/*border: 3px solid #8D45F2;
 	border-radius: 20px;*/
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	width: 90%;
 	/*background-color:#8D45F2; */
 	/*display: flex;*/
@@ -129,7 +128,7 @@ header {
 .copyFollow320 {
 	text-align: center;
   /*margin-top: 25px;*/
-	font-weight: 500;
+	font-weight: 300;
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	line-height: 1.8rem;
@@ -144,35 +143,80 @@ header {
 	margin: 50px 0 40px 0;
 }
 
+.firstPart {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondPart {
+  margin: 0 0 200px 0;
+}
+
+h1 {
+  font-size: 2rem;
+  margin: 10px 0 50px 0;
+}
+
+h3 {
+  color: #8D45F2;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0;
+}
+
+li {
+  margin: 50px 0;
+}
+
+.learning {
+  margin: 50px 0 50px 0;
+  font-size: 1.1rem;
+  /*text-transform: none;
+  font-weight: 400;*/
+}
+
+
 .emailForm {
 	margin-bottom: 50px;
 }
 
 .emailInputBottom {
   width: 275px;
-	border-top: 0;
-	border-left: 0;
-	border-right: 0;
-	border-bottom: 2px solid #e5d9ff;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 2px solid #e5d9ff;
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
-	font-weight: 500;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   padding: 11px 10px 10px 0px;
 }
 
+.emailInputError {
+  border-bottom: 2px solid red;
+}
+
 .nameInputBottom {
   width: 275px;
-	border-top: 0;
-	border-left: 0;
-	border-right: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
   border-bottom: 2px solid #e5d9ff;
   /*border-radius: 10px;*/
   background-color: transparent;
   font-family: "futura-pt",sans-serif;
-	font-weight: 400;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 1.3rem;
   letter-spacing: 2px;
   padding: 11px 10px 10px 0px;
 }
@@ -181,16 +225,20 @@ header {
 	margin: 10px 0 20px 0;
 }
 
+.firstNameError {
+  border-bottom: 2px solid red;
+}
+
 .joinBtnBottom {
-	margin-top: 60px;
-  width: 150px;
+  margin-top: 60px;
+  width: 250px;
   background-color: #e5d9ff;
   border: #e5d9ff solid 2px;
   border-radius: 10px;
-  padding: 10px 25px 11px 25px;
+  padding: 10px 50px 11px 50px;
   font-family: "futura-pt",sans-serif;
-	font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 600;
+  font-size: 1.3rem;
   color: #5d00f8;
 }
 
@@ -201,7 +249,7 @@ header {
 
 .socialMediaBottom {
 	z-index: 2;
-  margin-top: 15px;
+  margin-top: 0px;
   margin-bottom: 30px;
 }
 
@@ -265,20 +313,21 @@ header {
 	/*color: #5d00f8;*/
 }
 
-
-@media (min-width: 700px) {
-
-  .marketing {
-  	height: 80vh;
+@media (min-width: 359px) {
+  h1 {
+    font-size: 2.5rem;
   }
 
 }
 
-@media (min-width: 1024px) {
 
-  .marketing {
-  	height: 75vh;
-  }
+@media (min-width: 700px) {
+
+  /*.marketing {
+  	height: 100vh;
+    display: flex;
+    align-items: center;
+  }*/
 
   .copyFollow320 {
     display: none;
@@ -286,6 +335,49 @@ header {
 
   .copyFollow1024 {
     display: block;
+  }
+
+  h1 {
+    margin-top: 0;
+    font-size: 3.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  ul {
+    font-size: 1.8rem;
+  }
+
+  li {
+    margin: 100px 0;
+  }
+
+  span {
+    font-size: 1.8rem;
+  }
+
+  .secondPart {
+    margin: 0 0 400px 0;
+  }
+
+  .learning {
+    margin-top: 70px;
+    font-size: 1.2rem;
+  }
+
+  .nameInputBottom {
+    width: 375px;
+  }
+
+  .emailInputBottom {
+    width: 375px;
+  }
+
+  .joinBtnBottom {
+  	margin-top: 60px;
+    margin-bottom: 200px;
   }
 
 }
