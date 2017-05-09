@@ -8,7 +8,7 @@ import data_loaders from './data';
 var views = require('../../static/partials.json');
 
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
-const COMPILED_INDEX_FILE = path.join(__dirname, '../../../', '.config/server/compiled.json');
+const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
 views.compiled = require_or_fallback(COMPILED_INDEX_FILE, {});
 watch_views(COMPILED_INDEX_FILE, 'compiled');
 
@@ -42,7 +42,7 @@ function get_request_key(req){
 
 function catch_render_error(req, res, next){
   return (err) => {
-    console.error(err);
+    console.log(err);
     if(req.partial !== 'error'){
       console.log('redirecting to error');
       req.partial = 'error';
@@ -99,29 +99,34 @@ function detail_page(key){
   };
 }
 
-function set_assets(key, assets = { compiled: [], styles: [], scripts: { head: [], foot: [] } }){
+function set_assets(key, assets = { styles: [], scripts: { head: [], foot: [] } }){
   // Get the assets for partial {key}
   let newassets = views.partials[key].assets;
-  return {
-    styles: newassets.styles.length
+  assets.styles = newassets.styles.length
             ? [ ...newassets.styles.map(compile_name) , ...assets.styles ]
               .filter((e, i, a) => a.indexOf(e) === i)
-            : assets.styles,
-    scripts: {
-      head: newassets.scripts.head.length
-            ? [ ...newassets.scripts.head.map(compile_name) , ...assets.scripts.head ]
-              .filter((e, i, a) => a.indexOf(e) === i)
-            : assets.scripts.head,
-      foot: newassets.scripts.foot.length
-            ? [ ...newassets.scripts.foot.map(compile_name) , ...assets.scripts.foot ]
-              .filter((e, i, a) => a.indexOf(e) === i)
-            : assets.scripts.foot
-    }
+            : assets.styles;
+  assets.scripts = {
+    head: newassets.scripts.head && newassets.scripts.head.length
+          ? [ ...newassets.scripts.head.map(compile_name) , ...assets.scripts.head ]
+            .filter((e, i, a) => a.indexOf(e) === i)
+          : assets.scripts.head,
+    foot: newassets.scripts.foot && newassets.scripts.foot.length
+          ? [ ...newassets.scripts.foot.map(compile_name) , ...assets.scripts.foot ]
+            .filter((e, i, a) => a.indexOf(e) === i)
+          : assets.scripts.foot
   };
+
+  return assets;
 }
 
 function compile_name(name) {
+  console.log(name);
   let is_to_compile = name.match(COMPILED_NAME_REGEX);
+  if(is_to_compile){
+    console.log(`${name} is to compile from ${is_to_compile[1]}`);
+    console.log(views.compiled);
+  }
   return is_to_compile && views.compiled && views.compiled[is_to_compile[1]]
          ? views.compiled[is_to_compile[1]]
          : name;
@@ -163,19 +168,43 @@ function read_file([page, assets, data]) {
 }
 
 function render_file([page, assets, data]) {
+  console.log(`page: ${page.key}:${page.type}:${page.path}`);
+  console.log(`assets:`);
+  console.log(assets);
+
   page.partials = page.children.reduce((acc, p) => {
     acc[p.key] = p.content;
     return acc;
   }, {});
   // Gathering render data (data + assets)
-  let render_data = { ...data };
-  if(page.type === "foot" && assets.scripts.foot.length){
-    render_data.scripts = assets.scripts.foot;
-  }else if(page.type === "head"){
-    if(assets.scripts.head.length) render_data.scripts = assets.scripts.head;
-    if(assets.styles.length) render_data.styles = assets.styles;
+  let render_data;
+  if(page.type === 'foot'){
+    console.log('adding some footer scripts');
+    render_data = { ...data, scripts: assets.scripts.foot.slice()};
+  }else if(page.type === 'head'){
+    console.log('adding some header scripts and styles');
+    render_data = { ...data, scripts: assets.scripts.head.slice(), styles: assets.styles.slice()};
+  }else{
+    console.log('no scripts & style => type:body');
+    render_data = { ...data };
   }
+  console.log('render_data');
+  console.log(JSON.stringify(render_data, null, 2));
   return mustache.render(page.content, render_data, page.partials);
+}
+
+/**
+ * This function was created because array iteration with Mustache seemingly didn't work
+ * Instead the strings are concatenated here
+ **/
+function makeshift_template_iterator(type, items){
+  return items.reduce((acc, i) => {
+    if(type === 'script'){
+      return `${acc}<script src="${i}"></script>\n`;
+    }else if(type === 'style'){
+      return `${acc}<link rel="stylesheet" href="${i}">\n`;
+    }
+  }, '');
 }
 
 function serve(req, res, next){
@@ -207,17 +236,17 @@ function watch_views(path, prop) {
     .on('change', () => {
       console.log(`Changes detected on ${path} config file, updating...`);
       last = Date.now();
-      views[prop] = require(path);
+      views[prop] = require_or_fallback(path);
     })
-    .on('error', (error) => { console.error(error); });
+    .on('error', (error) => { console.log(error); });
   console.log(`Watching ${path} config file`);
   // This is because I don't fully trust the filesystem watch capabilities of NodeJS
   setInterval(() => {
     let curr = Date.now();
-    if(last - curr >= config.view.update_interval){
+    if(last - curr >= config.views.update_interval){
       console.log(`Polling interval reached for ${path} config file, updating...`);
       last = Date.now();
-      views = require(path);
+      views = require_or_fallback(path);
     }
-  }, config.view.update_interval);
+  }, config.views.update_interval);
 }

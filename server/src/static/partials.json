@@ -74,7 +74,8 @@
       "assets": {
         "styles": ["/assets/css/normalize.css"],
         "scripts": {"head": ["https://use.typekit.net/rer0env.js"]}
-      }
+      },
+      "partials": []
     },
     "foot": {
       "type": "foot",
