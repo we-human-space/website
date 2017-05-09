@@ -18,6 +18,9 @@ const config = {
 };
 
 config.compiler = {
+  versionning: {
+    file: '.versions.json'
+  },
   public_path: '/',
   vendors: [
     'react',
@@ -25,6 +28,13 @@ config.compiler = {
     'react-router',
     'redux'
   ]
+};
+
+config.clean = {
+  versionning: {
+    keep_count: 2,
+    file: '.versions.json'
+  }
 };
 
 config.paths = {

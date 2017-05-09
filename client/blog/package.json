@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "build:dev": "yarn run clean && yarn run compile:dev",
-    "clean": "rimraf dist",
+    "clean": "node bin/clean",
     "compile": "better-npm-run compile",
     "compile:dev": "better-npm-run compile:dev",
     "lint": "eslint bin build config server src tests",
