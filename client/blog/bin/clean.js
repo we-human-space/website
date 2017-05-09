@@ -17,7 +17,7 @@ const read_versionning_file = () => {
       fs.readFile(version_file, 'utf8', function (err, data) {
         if(err){
           // Write default value to file if not exist
-          if(err.code !== 'ENOENT'){
+          if(err.code === 'ENOENT'){
             let versions = [];
             fs.writeFile(version_file, JSON.stringify(versions), { flag: 'w' }, function(err, data) {
               if(err){

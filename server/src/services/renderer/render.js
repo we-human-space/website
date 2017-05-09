@@ -7,9 +7,10 @@ import config from '../../config';
 import data_loaders from './data';
 var views = require('../../static/partials.json');
 
-const COMPILED_ASSET_REGEX = /^\{\{(.*)\}\}$/;
-
-watch_views('../../static/partials.json');
+const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
+const COMPILED_INDEX_FILE = path.join(__dirname, '../../../', '.config/server/compiled.json');
+views.compiled = require_or_fallback(COMPILED_INDEX_FILE, {});
+watch_views(COMPILED_INDEX_FILE, 'compiled');
 
 module.exports = {
   render: render,
@@ -103,20 +104,27 @@ function set_assets(key, assets = { compiled: [], styles: [], scripts: { head: [
   let newassets = views.partials[key].assets;
   return {
     styles: newassets.styles.length
-            ? [ ...newassets.styles , ...assets.styles ]
+            ? [ ...newassets.styles.map(compile_name) , ...assets.styles ]
               .filter((e, i, a) => a.indexOf(e) === i)
             : assets.styles,
     scripts: {
       head: newassets.scripts.head.length
-            ? [ ...newassets.scripts.head , ...assets.scripts.head ]
+            ? [ ...newassets.scripts.head.map(compile_name) , ...assets.scripts.head ]
               .filter((e, i, a) => a.indexOf(e) === i)
             : assets.scripts.head,
       foot: newassets.scripts.foot.length
-            ? [ ...newassets.scripts.foot , ...assets.scripts.foot ]
+            ? [ ...newassets.scripts.foot.map(compile_name) , ...assets.scripts.foot ]
               .filter((e, i, a) => a.indexOf(e) === i)
             : assets.scripts.foot
     }
   };
+}
+
+function compile_name(name) {
+  let is_to_compile = name.match(COMPILED_NAME_REGEX);
+  return is_to_compile && views.compiled && views.compiled[is_to_compile[1]]
+         ? views.compiled[is_to_compile[1]]
+         : name;
 }
 
 function render_partial([page, assets, data]) {
@@ -175,12 +183,20 @@ function serve(req, res, next){
   else next();
 }
 
+function require_or_fallback(required, fallback) {
+  try{
+    return require(required)
+  }catch(err){
+    return fallback;
+  }
+}
+
 /**
  * Watches the filesystem for any externally-triggered changes in configuration
  * This prevents the need for complex asynchronous operations each time a
  * variably-named asset name is requested by a user (essentially every time).
  **/
-function watch_views(path) {
+function watch_views(path, prop) {
   var last = Date.now();
   // Watching the filesystem for changes in the partials.json config file
   console.log(`Starting ${path} config file watcher...`);
@@ -191,7 +207,7 @@ function watch_views(path) {
     .on('change', () => {
       console.log(`Changes detected on ${path} config file, updating...`);
       last = Date.now();
-      views = require(path);
+      views[prop] = require(path);
     })
     .on('error', (error) => { console.error(error); });
   console.log(`Watching ${path} config file`);

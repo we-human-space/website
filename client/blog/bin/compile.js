@@ -10,7 +10,7 @@ const webpack_compiler = (webpack_config) =>
     const compiler = webpack(webpack_config);
 
     compiler.run((err, stats) => {
-      if (err) {
+      if(err){
         console.log('Webpack compiler encountered a fatal error.', err);
         return reject(err);
       }
@@ -18,14 +18,14 @@ const webpack_compiler = (webpack_config) =>
       const jsonStats = stats.toJson();
       console.log('Webpack compile completed.');
 
-      if (jsonStats.errors.length > 0) {
+      if(jsonStats.errors.length > 0){
         console.log('Webpack compiler encountered errors.');
         console.log(jsonStats.errors.join('\n'));
         return reject(new Error('Webpack compiler encountered errors'));
-      } else if (jsonStats.warnings.length > 0) {
+      }else if(jsonStats.warnings.length > 0){
         console.log('Webpack compiler encountered warnings.');
         console.log(jsonStats.warnings.join('\n'));
-      } else {
+      }else{
         console.log('No errors or warnings encountered.');
       }
       resolve(jsonStats);
@@ -46,11 +46,28 @@ const create_public = () => {
 
 const update_versionning = (version) => {
   let version_file = project.paths.dist(project.compiler.versionning.file);
+  return read_and_write_to_json_file(version_file, (versions) => {
+    if(!versions) versions = [];
+    if(versions.indexOf(version) === -1) versions.push(version);
+    return versions;
+  });
+};
+
+const update_compiled = (versions) => {
+  let compiled_file = project.paths.config('server', project.compiler.versionning.compile_file);
+  return read_and_write_to_json_file(compiled_file, (compiled) => {
+    if(!compiled) compiled = {};
+    compiled.bundle = versions[versions.length -1];
+    return compiled;
+  });
+};
+
+const read_and_write_to_json_file = (file, cb) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(version_file, 'utf8', function (err, data) {
+    fs.readFile(file, 'utf8', function (err, data) {
       if(err){
-        if(err.code !== 'ENOENT'){
-          resolve([]);
+        if(err.code === 'ENOENT'){
+          resolve(null);
         }else{
           reject(err);
         }
@@ -58,20 +75,17 @@ const update_versionning = (version) => {
         resolve(JSON.parse(data.toString()));
       }
     });
-  }).then((versions) => {
-    if(versions.indexOf(version) === -1) versions.push(version);
+  }).then((content) => {
+    content = cb(content);
     return new Promise((resolve, reject) => {
-      fs.writeFile(version_file, JSON.stringify(versions), { flag: 'w' }, function(err, data) {
+      fs.writeFile(file, JSON.stringify(content), { flag: 'w' }, function(err, data) {
         if(err){
           reject(err);
         }else{
-          resolve(version);
+          resolve(content);
         }
       });
     });
-  }).then((version) => {
-    console.log('This should update the partials.compiled.json file');
-    return Promise.resolve();
   });
 };
 
@@ -85,6 +99,7 @@ const compile = () => {
       return Promise.resolve(webpack_config.output.filename.replace('[hash]', stats.hash));
     })
     .then(update_versionning)
+    .then(update_compiled)
     .then(() => {
       console.log('Compilation completed successfully.');
     })
