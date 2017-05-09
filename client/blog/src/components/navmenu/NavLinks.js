@@ -32,10 +32,13 @@ export default class NavLinks extends React.Component{
       );
     }else if(this.props.render_type === 'filter'){
       return (
-        <div className='filtersPlacement'>
-          <ul className='ulTop1024'>
-            { list }
-          </ul>
+        <div>
+          <div className='filtersPlacement'>
+            <ul className='ulTop1024'>
+              { list }
+            </ul>
+          </div>
+          <div><a className='ctaSubscribe' href='weeklypurpose.maat.space'>Dose Of Purpose</a></div>
         </div>
       );
     }
