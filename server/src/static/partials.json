@@ -52,7 +52,10 @@
     },
     "weeklypurpose": {
       "path": "partials/subscribe.html",
-      "stylesheet": "/assets/css/subscribe.css",
+      "assets": {
+        "styles": ["/assets/css/subscribe.css"],
+        "scripts": {"foot": ["{{bundle}}"]}
+      },
       "partials": ["head", "foot", "navbar"]
     },
     "blog": {

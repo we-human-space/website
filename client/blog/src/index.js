@@ -15,9 +15,9 @@ window.onbeforeunload = () => { document.body.scrollTop = document.documentEleme
 const store = configure_store(window.__PRELOADED_STATE__);
 
 let render = () => {
-  //Feed and articles
+  // Feed and articles
   if(window.location.pathname.match(/^\/blog\//)){
-    //Feed only
+    // Feed only
     if(window.location.pathname.match(/^\/blog\/$/)){
       ReactDOM.render(
         <Provider store={store}>
@@ -33,32 +33,35 @@ let render = () => {
       document.getElementsByClassName('filters')[0]
     );
   }
-  ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
 
-  toArray(document.getElementsByClassName('exploreSection')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='navlinks' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
-  toArray(document.getElementsByClassName('filterBy')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='authors' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
-  toArray(document.getElementsByClassName('resonateWith')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='subjects' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
+  if(document.getElementsByClassName('hamburger').length){
+    ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
+
+    toArray(document.getElementsByClassName('exploreSection')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='navlinks' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+    toArray(document.getElementsByClassName('filterBy')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='authors' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+    toArray(document.getElementsByClassName('resonateWith')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='subjects' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+  }
 };
 
 function toArray(x) {
