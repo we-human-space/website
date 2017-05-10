@@ -10,6 +10,7 @@ const config = {
   env: process.env.NODE_ENV || 'development',
   path_base: path.resolve(__dirname, '..'),
   server_port: 3000,
+  dir_config: '../../.config',
   dir_src: 'src',
   dir_dist: 'dist',
   dir_public: 'public',
@@ -18,6 +19,10 @@ const config = {
 };
 
 config.compiler = {
+  versionning: {
+    file: '.versions.json',
+    compile_file: 'compiled.json'
+  },
   public_path: '/',
   vendors: [
     'react',
@@ -27,8 +32,16 @@ config.compiler = {
   ]
 };
 
+config.clean = {
+  versionning: {
+    keep_count: 2,
+    file: '.versions.json'
+  }
+};
+
 config.paths = {
   base: base,
+  config: base.bind(null, config.dir_config),
   src: base.bind(null, config.dir_src),
   dist: base.bind(null, config.dir_dist),
   public: base.bind(null, config.dir_public)

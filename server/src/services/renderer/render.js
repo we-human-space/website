@@ -1,13 +1,16 @@
+import fs from 'fs';
 import path from 'path';
 import mustache from 'mustache';
-import serialize from 'serialize-javascript';
+import chokidar from 'chokidar';
 import fswrapper from '../filesystem/index';
-import views from '../../static/partials.json';
 import config from '../../config';
-import models from '../../models';
+import data_loaders from './data';
+var views = require('../../static/partials.json');
 
-const Article = models.Article;
-const Author = models.Author;
+const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
+const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
+views.compiled = require_or_fallback(COMPILED_INDEX_FILE, {});
+watch_views(COMPILED_INDEX_FILE, 'compiled');
 
 module.exports = {
   render: render,
@@ -21,14 +24,15 @@ function render(req, res, next){
     not_found(req, res, next);
   }else{
     req.partial = views.requests[key];
-    return render_page(req, res, next);
+    return render_page(req, res, next)
+    .catch(catch_render_error(req, res, next));
   }
 }
 
 function not_found(req, res, next){
-
   req.partial = views.requests["404"];
-  return render_page(req, res, next);
+  return render_page(req, res, next)
+  .catch(catch_render_error(req, res, next));
 }
 
 function get_request_key(req){
@@ -36,26 +40,29 @@ function get_request_key(req){
          .find(regexp => req.path.match(regexp));
 }
 
-function get_preloaded_state(req){
-  return serialize({
-    fetching: {
-      refresh: false,
-      initial: false,
-      load_more: false
-    },
-    query: req.query || {},
-    entities: {
-      subjects: Article.getCachedSubjects().map((s) => ({key: s, text: s, query: {'subject': s}})),
-      pages: {},
-      authors: Author.getCachedAuthors(true),
-      navlinks: [
-        {key:'Blog',text: 'Blog'},
-        {key:'Team', text: 'Team'},
-        {key:'Vision', text: 'Vision'}
-      ]
-    },
-    feed: {}
-  }, {isJSON: true});
+function catch_render_error(req, res, next){
+  return (err) => {
+    console.log(err);
+    if(req.partial !== 'error'){
+      console.log('redirecting to error');
+      req.partial = 'error';
+      return render_page(req, res, next);
+    }else{
+      console.log('redirecting to armageddon');
+      armageddon(req, res);
+    }
+  };
+}
+
+function armageddon(req, res){
+  fs.readFile(path.join(config.views.path, views.partials["500"].path), (err, data) => {
+    if(err){
+      res.sendStatus(500);
+    }else{
+      req.html = data;
+      serve(req, res, ()=>{ res.sendStatus(500); });
+    }
+  });
 }
 
 function render_page(req, res, next){
@@ -64,53 +71,87 @@ function render_page(req, res, next){
   if(!views.partials[req.partial] || req.partial === "404"){
     console.log("render: view not found; render as 404");
     req.partial = "404";
-    data = { preloaded_state: "{}" , not_found: views.requests[get_request_key(req)] === "article" ? "article": "page"};
-    console.log(`data.not_found: ${data.not_found}`);
+    data = {
+      preloaded_state: "{}",
+      not_found: views.requests[get_request_key(req)] === "article" ? "article": "page"
+    };
   }else{
     console.log("render: view found");
-    data = { ...req.data, preloaded_state: get_preloaded_state(req)};
+    data = {
+      ...req.data,
+      preloaded_state: data_loaders.preloaded_state(req)
+    };
   }
-
-  data.stylesheet = data.stylesheet || views.partials[req.partial].stylesheet;
-  return render_partial([detail_page(req.partial), data])
+  return render_partial([detail_page(req.partial), undefined, data])
   .then((result) => {
     req.html = result;
     next();
   });
 }
 
-function render_partial([page, data]) {
-  page.stylesheet = page.stylesheet || data.stylesheet;
-  return Promise.resolve([page, data])
+function detail_page(key){
+  return {
+    key,
+    type: views.partials[key].type,
+    path: path.join(config.views.path, views.partials[key].path),
+    content: undefined
+  };
+}
+
+function set_assets(key, assets = { styles: [], scripts: { head: [], foot: [] } }){
+  // Get the assets for partial {key}
+  let newassets = views.partials[key].assets;
+  assets.styles = newassets.styles.length
+            ? [ ...newassets.styles.map(compile_name) , ...assets.styles ]
+              .filter((e, i, a) => a.indexOf(e) === i)
+            : assets.styles;
+  assets.scripts = {
+    head: newassets.scripts.head && newassets.scripts.head.length
+          ? [ ...newassets.scripts.head.map(compile_name) , ...assets.scripts.head ]
+            .filter((e, i, a) => a.indexOf(e) === i)
+          : assets.scripts.head,
+    foot: newassets.scripts.foot && newassets.scripts.foot.length
+          ? [ ...newassets.scripts.foot.map(compile_name) , ...assets.scripts.foot ]
+            .filter((e, i, a) => a.indexOf(e) === i)
+          : assets.scripts.foot
+  };
+
+  return assets;
+}
+
+function compile_name(name) {
+  let is_to_compile = name.match(COMPILED_NAME_REGEX);
+  return is_to_compile && views.compiled && views.compiled[is_to_compile[1]]
+         ? views.compiled[is_to_compile[1]]
+         : name;
+}
+
+function render_partial([page, assets, data]) {
+  return Promise.resolve([page, set_assets(page.key, assets), data])
   .then(get_children)
   .then(render_children)
   .then(read_file)
   .then(render_file);
 }
 
-function detail_page(key){
-  return {
-    key,
-    path: path.join(config.views.path, views.partials[key].path),
-    stylesheet: views.partials[key].stylesheet,
-    content: undefined
-  };
-}
-
-function get_children([page, data]) {
+function get_children([page, assets, data]) {
   page.children = views.partials[page.key].partials
                   .map(detail_page);
-  return Promise.resolve([page, data]);
+  return Promise.resolve([page, assets, data]);
 }
 
-function render_children([page, data]) {
-  return Promise.all(page.children.map((p) => render_partial([p, data])))
-  .then(() => {
-    return [page, data];
+function render_children([page, assets, data]) {
+  return Promise.all(page.children.map((p) => render_partial([p, assets, data])))
+  .then((rendered) => {
+    page.children.map((p, i) => {
+      p.content = rendered[i];
+      return p;
+    });
+    return [page, assets, data];
   });
 }
 
-function read_file([page, data]) {
+function read_file([page, assets, data]) {
   if(page.key == 'article_content'){
     page.path = page.path.replace('{{hash}}', data.article.hash);
   }
@@ -120,20 +161,39 @@ function read_file([page, data]) {
       content = content.replace(/\/blog\/article\//g, `/blog/${data.article.hash}/`);
     }
     page.content = content;
-    return Promise.resolve([page, data]);
+    return Promise.resolve([page, assets, data]);
   });
 }
 
-function render_file([page, data]) {
+function render_file([page, assets, data]) {
   page.partials = page.children.reduce((acc, p) => {
     acc[p.key] = p.content;
     return acc;
   }, {});
-  return mustache.render(
-    page.content,
-    { ...data, stylesheet: page.stylesheet },
-    page.partials
-  );
+  // Gathering render data (data + assets)
+  let render_data;
+  if(page.type === 'foot'){
+    render_data = { ...data, scripts: assets.scripts.foot.slice()};
+  }else if(page.type === 'head'){
+    render_data = { ...data, scripts: assets.scripts.head.slice(), styles: assets.styles.slice()};
+  }else{
+    render_data = { ...data };
+  }
+  return mustache.render(page.content, render_data, page.partials);
+}
+
+/**
+ * This function was created because array iteration with Mustache seemingly didn't work
+ * Instead the strings are concatenated here
+ **/
+function makeshift_template_iterator(type, items){
+  return items.reduce((acc, i) => {
+    if(type === 'script'){
+      return `${acc}<script src="${i}"></script>\n`;
+    }else if(type === 'style'){
+      return `${acc}<link rel="stylesheet" href="${i}">\n`;
+    }
+  }, '');
 }
 
 function serve(req, res, next){
@@ -141,6 +201,41 @@ function serve(req, res, next){
   else next();
 }
 
-function capitalize(str) {
-  return str.split(' ').map((s) => s.charAt(0).toUpperCase()+s.substr(1).toLowerCase()).join(' ');
+function require_or_fallback(required, fallback) {
+  try{
+    return require(required);
+  }catch(err){
+    return fallback;
+  }
+}
+
+/**
+ * Watches the filesystem for any externally-triggered changes in configuration
+ * This prevents the need for complex asynchronous operations each time a
+ * variably-named asset name is requested by a user (essentially every time).
+ **/
+function watch_views(path, prop) {
+  var last = Date.now();
+  // Watching the filesystem for changes in the partials.json config file
+  console.log(`Starting ${path} config file watcher...`);
+  chokidar
+    .watch(
+      path, { depth: 1, awaitWriteFinish: { stabilityThreshold: 2000, pollInterval: 100 } }
+    )
+    .on('change', () => {
+      console.log(`Changes detected on ${path} config file, updating...`);
+      last = Date.now();
+      views[prop] = require_or_fallback(path);
+    })
+    .on('error', (error) => { console.log(error); });
+  console.log(`Watching ${path} config file`);
+  // This is because I don't fully trust the filesystem watch capabilities of NodeJS
+  setInterval(() => {
+    let curr = Date.now();
+    if(last - curr >= config.views.update_interval){
+      console.log(`Polling interval reached for ${path} config file, updating...`);
+      last = Date.now();
+      views = require_or_fallback(path);
+    }
+  }, config.views.update_interval);
 }
