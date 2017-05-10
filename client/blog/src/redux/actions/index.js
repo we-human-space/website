@@ -8,8 +8,11 @@ export const ActionTypes = {
   RECEIVE_REFRESH_ARTICLES: 'RECEIVE_REFRESH_ARTICLES' // Receive a non-empty response for feed update
 };
 
-export function request_articles(cache) {
-  if(cache){
+export function request_articles(cache, query) {
+  // cache + no query => initial already requested
+  // cache + query + no cursor => pages already cached, but query not cached, so ask initial
+  // cache + query + cursor => initial already requested for query
+  if(cache && (!query || cache.cursor)){
     return request_more_articles();
   }else{
     return request_initial_articles();

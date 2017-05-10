@@ -195,7 +195,11 @@ function validate_yaml(data) {
       if(a === null){
         return Promise.reject(new Error(`Author with username ${fields.author} was not found`));
       }else{
-        //Adding recipients to the default list and removing duplicates
+        // Updating cache in case db was updated indepedently
+        if(!Author.isInCache(a)){
+          a.setToCache(a);
+        }
+        // Adding recipients to the default list and removing duplicates
         if(fields.recipients){
           data.recipients = fields.recipients.concat(config.upload.default_recipients);
         }else{

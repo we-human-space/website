@@ -135,7 +135,7 @@ ArticleSchema.statics.getPage = function(page) {
       });
     }
   }else{
-    let cached = ArticleSchema.statics.getPageFromCache();
+    let cached = this.getPageFromCache();
     if(cached.complete){
       return Promise.resolve(cached.pages);
     }else{
@@ -187,72 +187,51 @@ ArticleSchema.statics.filterArticles = function(payload) {
   console.log(payload);
   if(payload.action == "REFRESH"){
     if(payload.cached) {
-      let maxpage = payload.cached.index === 10?
-                    Math.max.apply(null, payload.cached.pages) +1:
-                    Math.max.apply(null, payload.cached.pages);
-      return Promise.all([
-        this.getQueryResults(payload.query, "eq", maxpage),
-        this.getPage(maxpage)
-      ]).then(([match, pages]) => ({pages, match}));
-    }else{
-      return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
-    }
-  }else if(payload.action == "REQUEST_INITIAL") {
-    if(payload.cached) {
-      let maxpage = Math.max.apply(null, payload.cached.pages)+1;
-      let match;
-      return this.getQueryResults(payload.query, "lt", maxpage, true)
-      .then((matches) => {
-        match = matches;
-        let match_pages = Object.keys(matches);
-        // Check if there is a need for pages to be sent to the frontend
-        let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
-        if(new_pages.length) return ArticleSchema.statics.getPage({$in: new_pages});
-        else return Promise.resolve({});
-      }).then((pages) =>  {
-        let page_ids = Object.keys(pages);
-        let cursor = page_ids.length ? parseInt(page_ids.reverse()[0]) : undefined;
-        return {
-          pages,
-          match,
-          cursor
-        };
-      });
+      let minpage = payload.cached.index === 10
+                    ? Math.max.apply(null, payload.cached.pages)
+                    : Math.max.apply(null, payload.cached.pages) -1;
+      return this.getQueryResultsAndProcessMatchPages(payload, "gt", minpage);
     }else{
       let maxpage = Math.max.apply(null, Object.keys(cache))+1;
-      let match;
-      return this.getQueryResults(payload.query, "lt", maxpage)
-      .then((matches) => {
-        match = matches;
-        return this.getPage({$in: Object.keys(match)});
-      }).then((pages) =>  ({pages, match}));
+      return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
     }
-    // TODO: This should not happen
+  }else if(payload.action == "REQUEST_INITIAL") {
+    let maxpage = Math.max.apply(null, Object.keys(cache))+1;
+    return this.getQueryResultsAndProcessMatchPages(payload, "lt", maxpage);
   }else if(payload.action == "REQUEST_MORE") {
-    if(payload.cached) {
-      let maxpage = payload.cached.cursor || Math.min.apply(null, payload.cached.pages);
-      let match;
-      return this.getQueryResults(payload.query, "lt", maxpage)
-      .then((matches) => {
-        match = matches;
-        let match_pages = Object.keys(matches);
-        // Check if there is a need for pages to be sent to the frontend
-        let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
-        if(new_pages.length) return ArticleSchema.statics.getPage({$in: new_pages});
-        else return Promise.resolve({});
-      }).then((pages) =>  {
-        let page_ids = Object.keys(pages);
-        let cursor = page_ids.length ? parseInt(page_ids.reverse()[0]) : undefined;
-        return {
-          pages,
-          match,
-          cursor
-        };
-      });
+    // No cache or cursor? Go to GO and do not get 200$. I mean, goto REQUEST_INITIAL.
+    if(payload.cached && payload.cached.cursor) {
+      return this.getQueryResultsAndProcessMatchPages(payload, "lt", payload.cached.cursor);
     }else{
       return this.filterArticles({ ...payload, action: "REQUEST_INITIAL"});
     }
   }
+};
+
+ArticleSchema.statics.getQueryResultsAndProcessMatchPages = function(payload, op, page) {
+  let match;
+  return this.getQueryResults(payload.query, op, page)
+  .then((matches) => {
+    match = matches;
+    let match_pages = Object.keys(matches);
+    if(payload.cached){
+      // Check if there is a need for pages to be sent to the frontend
+      let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
+      if(new_pages.length) return this.getPage({$in: new_pages});
+      else return Promise.resolve({});
+    }else{
+      return this.getPage({$in: match_pages});
+    }
+  }).then((pages) =>  {
+    let page_ids = Object.keys(pages);
+    // Get the lowest query page sent
+    let cursor = payload.action === "REQUEST_MORE" && page_ids.length ? parseInt(Math.min.apply(null, page_ids)) : undefined;
+    return {
+      pages,
+      match,
+      cursor
+    };
+  });
 };
 
 ArticleSchema.statics.getQueryResults = function(query, op, page) {
@@ -261,54 +240,54 @@ ArticleSchema.statics.getQueryResults = function(query, op, page) {
   if(!cached) {
     return this.findQueryResult(query, op, page);
   }else{
-    let count_articles = 0;
-    let reached_bottom = false;
-    for(let pg in cached){
-      count_articles += cached[pg];
-      // to avoid calling db if we are already at the bottom of articles
-      reached_bottom = pg == 1 ? true : false;
-    }
-    if(count_articles < 10 && !reached_bottom){
+    if(this.needToUpdateQueryCache(cached, op, page)){
       return this.findQueryResult(query, op, page)
       .then((matches) => {
-        let pages = Object.keys(matches);
-        return pages.reduce((result, page) => {
-          if(count_articles > 10) {
+        return Object.keys(matches).reduce((result, page) => {
+          if(result.count > 10) {
             return result;
           }else{
-            result[page] = matches[page];
-            count_articles += matches[page].length;
+            result.pages[page] = matches[page];
+            result.count += matches[page].length;
+            return result;
           }
         }, cached);
       });
     }else{
-      return Promise.resolve(cached);
+      return Promise.resolve(cached.pages);
     }
   }
 };
 
-ArticleSchema.statics.findQueryResult  = function(query, op, page) {
+ArticleSchema.statics.needToUpdateQueryCache = function(qcache, op, page) {
+  let maxcached = Math.max.apply(Object.keys(cache));
+  let maxquerycached = Math.max.apply(Object.keys(qcache.pages));
+  // Update if
+  // - Cache is stale wrt latest pages not being queried & those pages being requested (REQUEST_INITIAL)
+  // - Cache is stale wrt latest page being incomplete and that page being requested (REFRESH)
+  // - Cache is incomplete (but not stale) wrt early pages not being loaded and those pages being requested (REQUEST_MORE)
+  return (maxquerycached < maxcached && (
+                                         (op === "lt" && page > maxquerycached) ||
+                                         (op === "gt" && page < maxquerycached && qcache.count < 10) ||
+                                         (op === "eq" && page == maxquerycached)
+                                        )) ||
+         (!qcache.complete && (
+                               (op === "lt" && page > maxquerycached) ||
+                               (op === "gt" && page < maxquerycached && qcache.count < 10) ||
+                               (op === "eq" && page == maxquerycached)
+                              )) ||
+         (qcache.count < 10 && !qcache.reached_bottom);
+};
+
+ArticleSchema.statics.findQueryResult = function(query, op, page) {
   let qpage;
   if(op == "eq") qpage = page;
   else qpage = { [`$${op}`]: page };
   let q = { ...query, page: qpage };
-  return this.find(q).limit(20)
+  return this.find(q).sort({ page:-1, pageIndex: -1 }).limit(20)
   .then((articles) => {
-    let count_matches = 0;
-    let match = articles.reduce((acc, article) => {
-      //Returns maximum 19 items, sorted by pages
-      //Does not create a new page once >= 10 articles have been taken
-      //Hence creates full pages
-      if(!acc[article.page] && count_matches < 10){
-        acc[article.page] = [{index: article.pageIndex, hash: article.hash}];
-      }else if(acc[article.page]){
-        acc[article.page].push({index: article.pageIndex, hash: article.hash});
-      }
-      count_matches++;
-      return acc;
-    }, {});
-
-    ArticleSchema.statics.setQueryResultsToCache(query, match);
+    let match = reduce_to_match_pages(articles);
+    this.setQueryResultsToCache(query, match);
     return match;
   });
 };
@@ -317,17 +296,24 @@ ArticleSchema.statics.getQueryResultsFromCache = function(query, op, page) {
   let hashkey = hash(query);
   if(query_cache[hashkey]){
     let result;
-    let count = 0;
-    for(let key in query_cache[hashkey].pages){
+    let maxcached = Math.max.apply(null, Object.keys(query_cache[hashkey].pages));
+    let maxcached_is_complete = query_cache[hashkey].complete;
+    // Latest matches should be returned first, thus the reverse
+    let keys = Object.keys(query_cache[hashkey].pages).reverse();
+    for(let i = 0 ; i < keys.length ; i++){
+      let key = keys[i];
       if((op == "eq" && key == page) ||
          (op == "lt" && key < page)  ||
          (op == "gt" && key > page)) {
         // updating the results
-        if(!result) result = {};
-        result[key] = query_cache[hashkey].pages[key];
+        if(!result) result = { pages: {}, count: 0, complete: true, reached_bottom: false };
+        result.pages[key] = query_cache[hashkey].pages[key];
+        // Updating reached_bottom & complete
+        if(key == 1) result.reached_bottom = true;
+        if(key == maxcached) result.complete = maxcached_is_complete;
         // counting number of matches - if >= 10, stop searching
-        count += result[key].length;
-        if(count >= 10) break;
+        result.count += result.pages[key].length;
+        if(result.count >= 10) break;
       }
     }
     return result;
@@ -337,10 +323,22 @@ ArticleSchema.statics.getQueryResultsFromCache = function(query, op, page) {
 
 ArticleSchema.statics.setQueryResultsToCache = function(query, pages) {
   let hashkey = hash(query);
+  let maxcached = Math.max.apply(null, Object.keys(cache));
+  let maxcached_is_complete = cache[maxcached].findIndex(a => a.pageIndex == 10) !== -1;
   if(query_cache[hashkey]){
+    // This overrides new changes to pages already cached since pages expansion
+    // is after query_cache[hashkey].pages expansion.
     query_cache[hashkey].pages = { ...query_cache[hashkey].pages, ...pages };
+    // Flag to ensure that the latest page query cache is not left stale afterwards
+    query_cache[hashkey].complete = pages[maxcached] ? maxcached_is_complete : true;
+    query_cache[hashkey].reached_bottom = Math.min.apply(null, Object.keys(query_cache[hashkey].pages)) == 1;
   }else{
-    query_cache[hashkey] = {query, pages};
+    query_cache[hashkey] = {
+      query,
+      pages,
+      complete: pages[maxcached] ? maxcached_is_complete : true,
+      reached_bottom: Math.min.apply(null, Object.keys(pages)) == 1
+    };
   }
 };
 
@@ -389,7 +387,7 @@ ArticleSchema.methods.setPaging = function(){
 ArticleSchema.methods.setPropsToCache = function(){
   if(subject_cache.indexOf(this.subject) === -1) subject_cache.push(this.subject);
   this.tags.forEach((t) => { if(tag_cache.indexOf(t) === -1) tag_cache.push(t); });
-}
+};
 
 ArticleSchema.methods.export = function(){
   return {
@@ -418,6 +416,44 @@ function reduce_to_pages(articles, accumulator = {}) {
     }
     return acc;
   }, accumulator);
+}
+
+function reduce_to_match_pages(articles, op, page) {
+  let count_matches = 0;
+  let match = articles.reduce((acc, article) => {
+    //Returns maximum 19 items, sorted by pages
+    //Does not create a new page once >= 10 articles have been taken
+    //Hence creates full pages
+    if(!acc[article.page] && count_matches < 10){
+      acc[article.page] = [{index: article.pageIndex, hash: article.hash}];
+    }else if(acc[article.page]){
+      acc[article.page].push({index: article.pageIndex, hash: article.hash});
+    }
+    count_matches++;
+    return acc;
+  }, {});
+
+  // Filling gaps in the results
+  // Pages that are in [minpage, maxpage] and that didn't return results will be replaced by empty arrays ([])
+  // This ensures that pages are not mapped twice
+  let minpage;
+  let maxpage;
+  if(op == "lt"){
+    maxpage = page-1;
+    // Assuming reverse order on articles
+    minpage = articles.length ? articles[articles.length -1].page : Math.min.apply(null, Object.keys(cache));
+  }else if(op == "gt"){
+    // Assuming reverse order on articles
+    maxpage = articles.length ? articles[0].page : Math.max.apply(null, Object.keys(cache));
+    minpage = page+1;
+  }else{
+    maxpage = page;
+    minpage = page;
+  }
+  for(let i = minpage; i < maxpage+1; i++){
+    if(!match[`${i}`]) match[`${i}`] = [];
+  }
+  return match;
 }
 
 module.exports = ArticleSchema;

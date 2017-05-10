@@ -8,6 +8,10 @@ export default class Feed extends React.Component {
   constructor(props){
     super(props);
     this.props.fetchArticles();
+    this.conditions = {
+      scroll: 0,
+      lastArticle: null
+    };
   }
 
   componentDidMount() {
@@ -40,20 +44,38 @@ export default class Feed extends React.Component {
   }
 
   onScroll() {
-    var wtop = window.pageYOffset || document.documentElement.scrollTop;
-    var fetching = this.props.isLoadingMore() || this.props.isLoadingInitial();
-    var dh = Math.max(document.body.scrollHeight,
-                      document.body.offsetHeight,
-                      document.documentElement.clientHeight,
-                      document.documentElement.scrollHeight);
-    var wh = 'innerHeight' in window
-              ? window.innerHeight
-              : document.documentElement.offsetHeight;
-    // !fetching => wait until fetch is done
-    // wtop => to avoid trigger for the browser config of scroll to top onload
-    // wtop > dh - wh - config.feed.scroll_point => To check if at the bottom
-    if(!fetching && wtop && wtop > dh - wh - config.feed.scroll_point) {
-      this.props.fetchArticles();
+    let prev_scroll = this.conditions.scroll;
+    let curr_scroll = window.pageYOffset || document.documentElement.scrollTop;
+    // Only trigger the action if scrolling direction is down
+    if(curr_scroll > prev_scroll){
+      let fetching = this.props.isLoadingMore() || this.props.isLoadingInitial();
+      let dh = Math.max(document.body.scrollHeight,
+                        document.body.offsetHeight,
+                        document.documentElement.clientHeight,
+                        document.documentElement.scrollHeight);
+      let wh = 'innerHeight' in window
+                ? window.innerHeight
+                : document.documentElement.offsetHeight;
+      // !fetching => wait until fetch is done
+      // curr_scroll => to avoid trigger for the browser config of scroll to top onload
+      // curr_scroll > dh - wh - config.feed.scroll_point => To check if at the bottom
+      if(!fetching && curr_scroll && curr_scroll > dh - wh - config.feed.scroll_point) {
+        // Valid attempt, but check if the last REQUEST_MORE has updated the articles
+        // before issuing another request
+        let prev_last_article = this.conditions.lastArticle;
+        let last_article;
+        // Assigns an integer ID value to the articles
+        if(this.props.pages){
+          let last_page = this.props.pages[Math.min.apply(null, Object.keys(this.props.pages))];
+          last_article = last_page[0].page * 10 + last_page.reduce((acc, a) => Math.max(acc, a.pageIndex), 0);
+        }
+        if((!prev_last_article && last_article) || (last_article < prev_last_article)){
+          this.props.fetchArticles();
+          this.conditions = { ...(this.conditions), scroll: curr_scroll, lastArticle: last_article };
+        }
+      }else{
+        this.conditions = { ...(this.conditions), scroll: curr_scroll };
+      }
     }
   }
 
