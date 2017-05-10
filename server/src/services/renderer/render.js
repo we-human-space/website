@@ -9,7 +9,7 @@ var views = require('../../static/partials.json');
 
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
 const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
-views.compiled = require_or_fallback(views, 'compiled', COMPILED_INDEX_FILE, views.compiled);
+require_or_fallback(views, 'compiled', COMPILED_INDEX_FILE, views.compiled);
 watch_views(COMPILED_INDEX_FILE, 'compiled');
 
 module.exports = {

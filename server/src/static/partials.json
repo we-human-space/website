@@ -65,7 +65,7 @@
         "styles": ["/assets/css/blogNIGHT.css"],
         "scripts": {"foot": ["{{bundle}}"]}
       },
-      "partials": ["head", "foot", "navbar"]
+      "partials": ["head", "footer_bare", "navbar"]
     },
     "article": {
       "type": "body",
@@ -89,6 +89,15 @@
     "foot": {
       "type": "foot",
       "path": "partials/footer.html",
+      "assets": {
+        "styles": [],
+        "scripts": {}
+      },
+      "partials": []
+    },
+    "footer_bare": {
+      "type": "foot",
+      "path": "partials/footerBare.html",
       "assets": {
         "styles": [],
         "scripts": {}
