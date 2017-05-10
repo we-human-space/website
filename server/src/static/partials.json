@@ -3,6 +3,7 @@
     "^/$": "root",
     "^/team$": "team",
     "^/vision$": "vision",
+    "^/weeklypurpose$": "weeklypurpose",
     "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
     "^/blog/([a-zA-Z0-9\\-]{10,})$": "article",
     "404": "404"
@@ -27,6 +28,11 @@
       "path": "partials/wayOfLife.html",
       "stylesheet": "/assets/css/wayOfLife.css",
       "partials": ["head", "footer_marketing", "navbar"]
+    },
+    "weeklypurpose": {
+      "path": "partials/subscribe.html",
+      "stylesheet": "/assets/css/subscribe.css",
+      "partials": ["head", "foot", "navbar"]
     },
     "blog": {
       "path": "partials/feed.html",
