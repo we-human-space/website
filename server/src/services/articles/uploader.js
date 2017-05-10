@@ -217,6 +217,9 @@ function validate_yaml(data) {
           thumbnail: fields.thumbnail,
           summary: fields.summary
         };
+        if(fields.createdAt && !isNaN(new Date(fields.createdAt).getTime())){
+          data.content.createdAt = fields.createdAt;
+        }
         data.content.thumbnail.mime = path.extname(data.files.thumbnail);
         return Promise.resolve(data);
       }

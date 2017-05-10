@@ -42,6 +42,7 @@ var ArticleSchema = new Schema({
   tags: [{type:String, index: true}],
   thumbnail: {
     mime: {type:String, required: true},
+    subtitle: {type:String},
     width: {type:Number, required: true, unique: false},
     height: {type:Number, required: true, unique: false},
   }
