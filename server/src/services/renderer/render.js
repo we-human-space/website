@@ -75,7 +75,6 @@ function render_page(req, res, next){
       preloaded_state: "{}",
       not_found: views.requests[get_request_key(req)] === "article" ? "article": "page"
     };
-    console.log(`data.not_found: ${data.not_found}`);
   }else{
     console.log("render: view found");
     data = {
@@ -121,12 +120,7 @@ function set_assets(key, assets = { styles: [], scripts: { head: [], foot: [] } 
 }
 
 function compile_name(name) {
-  console.log(name);
   let is_to_compile = name.match(COMPILED_NAME_REGEX);
-  if(is_to_compile){
-    console.log(`${name} is to compile from ${is_to_compile[1]}`);
-    console.log(views.compiled);
-  }
   return is_to_compile && views.compiled && views.compiled[is_to_compile[1]]
          ? views.compiled[is_to_compile[1]]
          : name;
@@ -137,14 +131,7 @@ function render_partial([page, assets, data]) {
   .then(get_children)
   .then(render_children)
   .then(read_file)
-  .then(render_file)
-  .then((r) => {
-    if(r.match('<link rel="stylesheet" href="&#x2F;assets&#x2F;css&#x2F;normalize.css">')){
-      console.log('Rendered page matches');
-      console.log(`Page ${page.key}:${page.type}:${page.path}`);
-    }
-    return r;
-  });
+  .then(render_file);
 }
 
 function get_children([page, assets, data]) {
@@ -179,8 +166,6 @@ function read_file([page, assets, data]) {
 }
 
 function render_file([page, assets, data]) {
-  console.log(`Rendering page ${page.key} with assets`);
-  console.log(assets);
   page.partials = page.children.reduce((acc, p) => {
     acc[p.key] = p.content;
     return acc;
