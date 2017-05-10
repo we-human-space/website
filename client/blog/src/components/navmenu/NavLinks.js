@@ -1,10 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const SUBSCRIPTION_PATHNAME = __DEV__ ? 'weeklypurpose' : '';
+const SUBSCRIPTION_HOSTNAME = __PROD__ ? 'weeklypurpose.maat.space' : '';
+
 export default class NavLinks extends React.Component{
 
   isActive(link){
     return window.location.search && link.location.search && window.location.search.match(link.location.search);
+  }
+
+  subscribeIsActive() {
+    return (__DEV__ && window.location.pathname === 'weeklypurpose') ||
+           (__PROD__ && window.location.hostname === 'weeklypurpose.maat.space');
+  }
+
+  renderSubscribe() {
+    if(this.props.class === 'resonateWith'){
+      return (
+        <li>
+          <a href={`${SUBSCRIPTION_HOSTNAME}/${SUBSCRIPTION_PATHNAME}`}
+            className={this.subscribeIsActive() ? 'navSubscribe liActive' : 'navSubscribe'}>
+            Subscribe
+          </a>
+        </li>
+      );
+    }
   }
 
   render(){
@@ -27,6 +48,7 @@ export default class NavLinks extends React.Component{
           <div className='separator blockTwo'></div>
           <ul className='ulBlock'>
             { list }
+            { this.renderSubscribe() }
           </ul>
         </div>
       );
@@ -38,7 +60,7 @@ export default class NavLinks extends React.Component{
               { list }
             </ul>
           </div>
-          <div><a className='ctaSubscribe' href='weeklypurpose.maat.space'>Dose Of Purpose</a></div>
+          <div><a className='ctaSubscribe' href='weeklypurpose.maat.space'>Subscribe</a></div>
         </div>
       );
     }

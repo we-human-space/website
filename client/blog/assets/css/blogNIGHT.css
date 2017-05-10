@@ -284,7 +284,13 @@ a:hover, a:active, a:focus {
 .ulBlock li a {
   outline: 0;
   text-decoration: none;
-  color: #e5d9ff
+  color: #e5d9ff;
+}
+
+.ulBlock li .navSubscribe {
+  outline: 0;
+  text-decoration: none;
+  color: #8D45F2;
 }
 
 .socialMediaMenu360 {
@@ -675,6 +681,11 @@ a:hover, a:active, a:focus {
     border-radius: 1px;
   }
 
+  .ulBlock li .navSubscribe:hover {
+    border-bottom: solid 2px #8D45F2;
+    border-radius: 1px;
+  }
+
   .socialMediaMenu360 {
     display: none;
   }
@@ -917,6 +928,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.ctaSubscribe {
+    color: #8D45F2;
 		position: absolute;
 		top: 53px;
 		left: 830px;
@@ -926,7 +938,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.ctaSubscribe:hover {
-		border-bottom: solid 1px #e5d9ff;
+		border-bottom: solid 1px #8D45F2;
 	}
 
   .ulTop1024 {
@@ -951,6 +963,10 @@ a:hover, a:active, a:focus {
 	.ulTop1024 li a:hover {
 		border-bottom: solid 1px #e5d9ff;
 	}
+
+  .navSubscribe.liActive {
+    border-bottom: solid 1px #8D45F2;
+  }
 
   .liActive {
     border-bottom: solid 1px #e5d9ff;
@@ -1400,6 +1416,7 @@ a:hover, a:active, a:focus {
 	}
 
 	.ctaSubscribe {
+    color: #8D45F2;
 		position: absolute;
 		top: 50px;
 		left: 972px;
