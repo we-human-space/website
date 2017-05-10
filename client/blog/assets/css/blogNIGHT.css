@@ -359,7 +359,8 @@ a:hover, a:active, a:focus {
 /*------ARTICLE-------*/
 
 .article {
-	margin-top: 300px;
+	margin-top: 50px;
+	margin-bottom: 250px;
 	padding: 0 5%;
 	align-items: center;
 }
@@ -741,7 +742,7 @@ a:hover, a:active, a:focus {
 	/*------ARTICLE-------*/
 
 	.article {
-		margin-top: 300px;
+		margin-bottom: 300px;
 		padding: 0 5%;
 		align-items: center;
 	}
@@ -923,10 +924,11 @@ a:hover, a:active, a:focus {
 		font-size: 0.9rem;
 		font-weight: 400;
 		letter-spacing: 0.1rem;
+		color: #8D45F2;
 	}
 
 	.ctaSubscribe:hover {
-		border-bottom: solid 1px #e5d9ff;
+		border-bottom: solid 1px #8D45F2;
 	}
 
   .ulTop1024 {
@@ -1209,8 +1211,6 @@ a:hover, a:active, a:focus {
 	/*-------QUOTE OF DAY-----*/
 
 	.quoteOfDay {
-		/*margin-top: 125px;
-		margin-bottom: 150px;*/
 		padding: 0 10px;
 		letter-spacing: 0.12rem;
 		text-align: left;
@@ -1221,10 +1221,16 @@ a:hover, a:active, a:focus {
 		align-items: center;
 		flex-wrap: wrap;
 		margin-top: 50px;
+
+	}
+
+	.quoteOfDayPlacement {
+		width: 75%;
+		max-width: 1075px;
 	}
 
 	.quoteOfDay h2 {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		width: 100%;
 	}
 
@@ -1245,13 +1251,13 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX {
-		margin: 200px 0;
+		margin: 80px 0;
 		position: relative;
 		display:inline-block;
 	}
 
 	.imgWIDER750PX {
-		margin: 200px 0;
+		margin: 80px 0;
 		position: relative;
 		display:inline-block;
 	}
