@@ -365,8 +365,7 @@ a:hover, a:active, a:focus {
 /*------ARTICLE-------*/
 
 .article {
-	margin-top: 50px;
-	margin-bottom: 250px;
+	margin-top: 300px;
 	padding: 0 5%;
 	align-items: center;
 }
@@ -753,7 +752,7 @@ a:hover, a:active, a:focus {
 	/*------ARTICLE-------*/
 
 	.article {
-		margin-bottom: 300px;
+		margin-top: 300px;
 		padding: 0 5%;
 		align-items: center;
 	}
@@ -814,8 +813,6 @@ a:hover, a:active, a:focus {
   .navBar {
     height: 80px;
   }
-
-
 
   .logoFuture {
     padding-top: 2px;
@@ -1267,13 +1264,13 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX {
-		margin: 80px 0;
+		margin: 100px 0;
 		position: relative;
 		display:inline-block;
 	}
 
 	.imgWIDER750PX {
-		margin: 80px 0;
+		margin: 100px 0;
 		position: relative;
 		display:inline-block;
 	}
