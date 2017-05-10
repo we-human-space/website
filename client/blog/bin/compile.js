@@ -57,7 +57,7 @@ const update_compiled = (versions) => {
   let compiled_file = project.paths.config('server', project.compiler.versionning.compile_file);
   return read_and_write_to_json_file(compiled_file, (compiled) => {
     if(!compiled) compiled = {};
-    compiled.bundle = versions[versions.length -1];
+    compiled.bundle = `/app/${versions[versions.length - 1]}`;
     return compiled;
   });
 };

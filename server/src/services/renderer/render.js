@@ -137,7 +137,14 @@ function render_partial([page, assets, data]) {
   .then(get_children)
   .then(render_children)
   .then(read_file)
-  .then(render_file);
+  .then(render_file)
+  .then((r) => {
+    if(r.match('<link rel="stylesheet" href="&#x2F;assets&#x2F;css&#x2F;normalize.css">')){
+      console.log('Rendered page matches');
+      console.log(`Page ${page.key}:${page.type}:${page.path}`);
+    }
+    return r;
+  });
 }
 
 function get_children([page, assets, data]) {
@@ -148,7 +155,11 @@ function get_children([page, assets, data]) {
 
 function render_children([page, assets, data]) {
   return Promise.all(page.children.map((p) => render_partial([p, assets, data])))
-  .then(() => {
+  .then((rendered) => {
+    page.children.map((p, i) => {
+      p.content = rendered[i];
+      return p;
+    });
     return [page, assets, data];
   });
 }
@@ -168,10 +179,8 @@ function read_file([page, assets, data]) {
 }
 
 function render_file([page, assets, data]) {
-  console.log(`page: ${page.key}:${page.type}:${page.path}`);
-  console.log(`assets:`);
+  console.log(`Rendering page ${page.key} with assets`);
   console.log(assets);
-
   page.partials = page.children.reduce((acc, p) => {
     acc[p.key] = p.content;
     return acc;
@@ -179,17 +188,12 @@ function render_file([page, assets, data]) {
   // Gathering render data (data + assets)
   let render_data;
   if(page.type === 'foot'){
-    console.log('adding some footer scripts');
     render_data = { ...data, scripts: assets.scripts.foot.slice()};
   }else if(page.type === 'head'){
-    console.log('adding some header scripts and styles');
     render_data = { ...data, scripts: assets.scripts.head.slice(), styles: assets.styles.slice()};
   }else{
-    console.log('no scripts & style => type:body');
     render_data = { ...data };
   }
-  console.log('render_data');
-  console.log(JSON.stringify(render_data, null, 2));
   return mustache.render(page.content, render_data, page.partials);
 }
 
@@ -214,7 +218,7 @@ function serve(req, res, next){
 
 function require_or_fallback(required, fallback) {
   try{
-    return require(required)
+    return require(required);
   }catch(err){
     return fallback;
   }
