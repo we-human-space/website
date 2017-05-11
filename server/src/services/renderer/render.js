@@ -198,6 +198,8 @@ function require_or_fallback(target, prop, path, fallback = {}) {
         target[prop] = fallback;
       }
     }
+    console.log(target[prop]);
+    console.log(`Updated views[${prop}].`);
   });
 }
 
@@ -216,18 +218,14 @@ function watch_views(path, prop) {
       path, { depth: 1, awaitWriteFinish: { stabilityThreshold: 2000, pollInterval: 1000 } }
     )
     .on('add', () => {
-      console.log(`Changes detected on ${path} config file, updating...`);
+      console.log(`Changes detected on ${path} config file.`);
       last = Date.now();
       require_or_fallback(views, prop, path, views[prop]);
-      console.log(views[prop]);
-      console.log(`Updated views[${prop}].`);
     })
     .on('change', () => {
-      console.log(`Changes detected on ${path} config file, updating...`);
+      console.log(`Changes detected on ${path} config file.`);
       last = Date.now();
       require_or_fallback(views, prop, path, views[prop]);
-      console.log(views[prop]);
-      console.log(`Updated views[${prop}].`);
     })
     .on('error', (error) => { console.log(error); });
 
@@ -238,8 +236,6 @@ function watch_views(path, prop) {
       console.log(`Polling interval reached for ${path} config file, updating...`);
       last = Date.now();
       require_or_fallback(views, prop, path, views[prop]);
-      console.log(views[prop]);
-      console.log(`Updated views[${prop}].`);
     }
   }, config.views.update_interval);
 
