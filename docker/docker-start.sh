@@ -1,17 +1,22 @@
 # Setting Environment
-: ${MAAT_ENV:?"development"};
-
+CURR_DIR=$(pwd);
+MAAT_ENV=$([ ! -z "$MAAT_ENV"  ] && echo "$MAAT_ENV" || echo "development");
 # Making the site-enabled folder
-if [ ! -d "../nginx/$MAAT_ENV/site-enabled" ]; then
-  mkdir -p "../nginx/$MAAT_ENV/site-enabled";
+if [ ! -d "../nginx/$MAAT_ENV/sites-enabled" ]; then
+  mkdir -p "../nginx/$MAAT_ENV/sites-enabled";
 fi
 
 # Setting NGINX site-enabled symbolic links
-for f in "../nginx/$MAAT_ENV/site-available/*.conf" ; do
-  ln "../nginx/$MAAT_ENV/site-available/$f" "../nginx/$MAAT_ENV/site-enabled/$f" ;
+
+cd "../nginx/$MAAT_ENV/sites-available/";
+for f in *.conf ; do
+  if ! [ -L "../sites-enabled/$f" ] ; then
+    ln -s "$f" "../sites-enabled/$f";
+  fi;
 done ;
+cd "$CURR_DIR";
 
 # Start the images by building and recreating them
-docker-compose down &&
-docker-compose build &&
-docker-compose up --force-recreate;
+env MAAT_ENV="$MAAT_ENV" docker-compose down && \
+env MAAT_ENV="$MAAT_ENV" docker-compose build && \
+env MAAT_ENV="$MAAT_ENV" docker-compose up --force-recreate;
