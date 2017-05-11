@@ -399,14 +399,14 @@ header {
 
 .crewDescription {
 	margin-top: 40px;
-	font-size: 1.2rem;
-	line-height: 1.8rem;
-	letter-spacing: 0.06rem;
+  line-height: 1.8rem;
+	font-size: 20px;
+	letter-spacing: 0.05rem;
 }
 
-.sectionMember {
+/*.sectionMember {
 	margin: 150px 0;
-}
+}*/
 
 .sectionThree {
 	margin-top: -125px;
@@ -738,7 +738,7 @@ header {
 	.crewSubtitle h4 {
 		text-align: left;
 		text-transform: uppercase;
-		margin: 50px 0 15px 0;
+		margin: 0px 0 15px 0;
 	}
 
 	.crewSubtitle h1 {
@@ -767,9 +767,8 @@ header {
 	.crewDescription {
 		text-align: left;
 		margin-top: 40px;
-		font-size: 1.3rem;
-		line-height: 2rem;
-		letter-spacing: 0.06rem;
+		line-height: 2.23rem;
+		font-size: 1.7rem;
 	}
 
 	.sectionThree {
@@ -826,7 +825,7 @@ header {
 	}
 
 	.sectionOne {
-	  margin-top: -245px;
+	  margin-top: -110px;
 	  text-align: center;
 	  background-color: transparent;
 	}
@@ -852,9 +851,9 @@ header {
 	  margin: 40px 0;
 	}
 
-	.sectionMember {
+	/*.sectionMember {
 		margin: 180px 0;
-	}
+	}*/
 
 	.principles {
 	  margin-top: 50px;
@@ -989,6 +988,15 @@ header {
 }
 
 @media (min-width: 1024px) {
+
+	.headerContainer {
+		background-image: url(../img/NorthernLights-2560px.jpg);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+		margin-left: ;
+	}
 
 
 	.logo1024 {
@@ -1256,32 +1264,37 @@ header {
 
 	/*------MENU END------*/
 
-	.sectionLeft {
-		margin-left: 9%;
+	.sectionOne {
+		margin-top: -100px;
 	}
 
 	.visionExplain {
-		width: 700px;
+		width: 900px;
 	}
 
 	.crewDescription {
-		width: 700px;
+		width: 800px;
 	}
 
 	.sectionWidth {
 		width: 100%;
 	}
 
-	.sectionRight {
-		margin-left: 9%;
+	.sectionTwo {
+		display: flex;
+		justify-content: center;
 	}
 
 	.sectionThree {
-		margin-top: -100px;
+		margin-top: -300px;
 	}
 
 	.bottom {
-		margin-top: 75px;
+		margin-top: 250px;
+	}
+
+	.imgExplainPlacement {
+		margin-bottom: 400px;
 	}
 
 
@@ -1289,14 +1302,7 @@ header {
 
 @media (min-width: 1175px) {
 
-	.headerContainer {
-	  background-image: url(../img/NorthernLights-2560px.jpg);
-	  background-position: center;
-	  background-repeat: no-repeat;
-	  background-size: cover;
-	  height: 100vh;
-	  margin-left: ;
-	}
+
 
 	.headerContent {
 	  display: flex;
@@ -1312,7 +1318,7 @@ header {
 
 
 	.sectionOne {
-		margin-top: -180px;
+		margin-top: -120px;
 	}
 
 
@@ -1351,14 +1357,8 @@ header {
 }
 
 @media (min-width: 1375px) {
-
-	.sectionRight {
-		margin-left: 50%;
-	}
-
-	.crewDescription {
-		width: 95%;
-		max-width: 700px;
+	.sectionOne {
+		margin-top: -110px;
 	}
 
 }

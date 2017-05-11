@@ -372,9 +372,9 @@ a:hover, a:active, a:focus {
 
 .crewDescription {
 	margin-top: 40px;
-	font-size: 1.2rem;
-	line-height: 1.8rem;
-	letter-spacing: 0.04rem;
+  line-height: 1.8rem;
+	font-size: 20px;
+	letter-spacing: 0.05rem;
 }
 
 .sectionMember {
@@ -765,21 +765,23 @@ a:hover, a:active, a:focus {
 		/*z-index: 10;*/
 	  display: block;
 		text-align: left;
-	  margin-top: 50px;
+	  margin-top: 60px;
+		margin-bottom: 30px;
+		font-size: 1.2rem;
 	}
 
 	.btnInfo {
 		letter-spacing: 0.06rem;
 		margin-top: 25px;
 		text-align: left;
-		font-size: 1.1rem;
+		font-size: 1.3rem;
 	}
 
 	.crewDescription {
 		margin-top: 40px;
-		font-size: 1.3rem;
-		line-height: 2rem;
-		letter-spacing: 0.06rem;
+		line-height: 2.23rem;
+		font-size: 1.7rem;
+		letter-spacing: 0.05rem;
 	}
 
 
@@ -932,7 +934,7 @@ a:hover, a:active, a:focus {
   }
 
 	.sectionMember {
-		margin-top: 200px;
+		margin-top: 300px;
 	}
 
 
@@ -1048,6 +1050,11 @@ a:hover, a:active, a:focus {
   }
 
 	/*------MENU-----*/
+
+	.contentContainer {
+		padding-right: 0px;
+		padding-top: 0;
+	}
 
 
 	.menuContainer768 {
@@ -1223,17 +1230,38 @@ a:hover, a:active, a:focus {
 		display: block;
 	}
 
-	.contentContainer {
-		padding-right: 0px;
-		padding-top: 0;
+	.imgExplain {
+		justify-content: center;
+		/*padding-left: 10%;*/
 	}
 
+	.imgExplainPlacement {
+		margin-top: 40px;
+		max-width: 770px;
+	}
+
+	.bottom {
+		margin: 250px 0 0 0;
+	}
+
+
+}
+
+@media (min-width: 1375px) {
+
+	.sectionOne {
+		text-align: left;
+	}
+
+
+
 	.sectionTwo {
-		margin-left: 42%;
-		width: 50%;
+		margin-left: 40%;
+		width: 52%;
 	}
 
 	.imgExplain {
+		justify-content: flex-start;
 		padding-left: 10%;
 	}
 
@@ -1243,20 +1271,20 @@ a:hover, a:active, a:focus {
 	}
 
 	.crewDescription {
-		max-width: 720px;
+		max-width: 750px;
 		margin-top: 40px;
-		font-size: 1.3rem;
-		line-height: 2rem;
+		/*font-size: 1.3rem;
+		line-height: 2rem;*/
 		letter-spacing: 0.06rem;
 	}
 
-	.bottom {
-		margin: 300px 0 0 0;
-	}
+
 
 }
 
-@media (min-width: 1175px) {
+
+
+@media (min-width: 1575px) {
 
 	.colRight {
 		margin-left: 8%;
