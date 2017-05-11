@@ -5,7 +5,7 @@ import chokidar from 'chokidar';
 import fswrapper from '../filesystem/index';
 import config from '../../config';
 import data_loaders from './data';
-var views = require('../../static/partials.json');
+import views from './partials/index';
 
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
 const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
