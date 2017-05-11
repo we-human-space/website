@@ -16,13 +16,12 @@
     "url": "https://github.com/futureboyHQ/website/issues"
   },
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
-    "build:dev": "yarn run clean && yarn run compile:dev",
+    "build": "yarn run clean && yarn run copy-assets && yarn run compile",
+    "build:dev": "yarn run clean && yarn run copy-assets && yarn run compile:dev",
     "clean": "rimraf dist",
-    "compile": "babel src -d dist && yarn run copy:static && yarn run copy:validation",
-    "compile:dev": "babel src -d dist -s && yarn run copy:static && yarn run copy:validation",
-    "copy:static": "cp -R src/static dist/static",
-    "copy:validation": "cp -R src/services/secure/validation dist/services/secure/validation",
+    "compile": "babel src -d dist && yarn run copy:validation",
+    "compile:dev": "babel src -d dist -s && yarn run copy:validation",
+    "copy-assets": "/bin/sh assets.sh",
     "lint": "eslint src test",
     "lint:fix": "yarn run lint -- --fix",
     "start": "better-npm-run start",

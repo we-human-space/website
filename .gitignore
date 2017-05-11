@@ -37,6 +37,10 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
+# Assets that cannot be under SVC
+.assets
+futura
+
 # Configuration folder
 .config
 

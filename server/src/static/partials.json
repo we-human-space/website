@@ -81,7 +81,7 @@
       "path": "partials/header.html",
       "javascript": [],
       "assets": {
-        "styles": ["/assets/css/normalize.css"],
+        "styles": ["/assets/css/fonts.css", "/assets/css/normalize.css"],
         "scripts": {"head": ["https://use.typekit.net/rer0env.js"]}
       },
       "partials": []
