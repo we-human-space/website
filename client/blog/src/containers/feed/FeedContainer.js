@@ -54,7 +54,6 @@ function summarize_cache(state){
   if(filter && state.feed[filter]){
     cursor = Object.keys(state.feed[filter]).map(i => parseInt(i)).reverse()[0];
   }
-  console.log(`cursor: ${cursor}`);
   if(page_ids.length){
     let index = state.entities.pages[Math.max.apply(null, page_ids)]
                 .reduce((i, article) => {
@@ -73,7 +72,9 @@ function summarize_cache(state){
 function mapStateToProps(state, ownProps) {
   cache = summarize_cache(state);
   query = Object.keys(state.query).length ? state.query : undefined;
+
   return {
+    subject: state.query.subject || 'default',
     pages: apply_authorship(state.entities.authors, filter_articles(state.entities.pages, state.feed)),
     isLoadingMore: () => state.fetching.load_more,
     isLoadingInitial: () => state.fetching.initial,
@@ -84,17 +85,6 @@ function mapStateToProps(state, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchArticles: () => {
-      console.log('payload');
-      console.log({
-        // cache + no query => initial already requested
-        // cache + query + no cursor => pages already cached, but query not cached, so ask initial
-        // cache + query + cursor => initial already requested for query
-        action: (cache && (!query || cache.cursor))
-                ? 'REQUEST_MORE'
-                : 'REQUEST_INITIAL',
-        cached: cache,
-        query: query
-      });
       dispatch(request_articles(cache, query));
       return superagent
         .post(`/feed/`)
