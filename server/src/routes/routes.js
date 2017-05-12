@@ -32,10 +32,6 @@ module.exports = (function() {
 
   router.get('/error', renderer.render, renderer.serve);
 
-  router.post('/subscribe', handlers.newsletter.subscribe);
-
-  router.post('/feed/', handlers.feed);
-
   router.get('/blog/', renderer.render, renderer.serve);
 
   router.get('/blog/:article', handlers.articles.read, renderer.render, renderer.serve);
@@ -46,7 +42,7 @@ module.exports = (function() {
 
   // AJAX Data Requests
 
-  router.post('/feed/', blog.feed);
+  router.post('/feed/', handlers.feed);
 
   // Testing Endpoints
 
