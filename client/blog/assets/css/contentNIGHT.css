@@ -4,8 +4,9 @@ html, body {
   font-family:"futura-pt", sans-serif;
   max-width: 100%;
   overflow-x: hidden;
-  padding-bottom: 50px;
+  /*padding-bottom: 50px;*/
 }
+
 
 input {
   outline: none;
@@ -358,12 +359,17 @@ a:hover, a:active, a:focus {
 	display: inline;
 }
 
-.postCategories span {
+/*.postCategories span {
 	color: #8D45F2;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04rem;
-  text-transform: uppercase;
+	font-size: 0.7rem;
+}*/
+
+.postCategories span {
+	font-size: 0.7rem;
+	font-weight: 700;
+	letter-spacing: 0.04rem;
+	text-transform: uppercase;
+	color: #8D45F2;
 }
 
 .text {
@@ -371,10 +377,15 @@ a:hover, a:active, a:focus {
 	text-align: left;
 	font-weight: 400;
 	font-style: normal;
-	line-height: 1.6rem;
-	font-size: 1.2rem;
+	line-height: 1.8rem;
+	font-size: 20px;
 	letter-spacing: 0.05rem;
 }
+
+
+/*.text p {
+	margin: 2rem 0;
+}*/
 
 .subtitle {
 	font-size: 1.4rem;
@@ -393,7 +404,8 @@ a:hover, a:active, a:focus {
 }
 
 .imgSubtitle {
-  text-align: left;
+  display: flex;
+	justify-content: center;
 	font-size: 0.8rem;
 	letter-spacing: 0.08rem;
 }
@@ -510,22 +522,41 @@ a:hover, a:active, a:focus {
 	display: none;
 }
 
-.marketing {
+.marketingContent {
 	display: flex;
 	justify-content: center;
+	margin-top: -90px;
 	margin-bottom: 50px;
 
 }
 
-.marketingPlacement {
-	/*border: 3px solid #8D45F2;
-	border-radius: 20px;*/
-	margin-top: 50px;
-	width: 90%;
-	/*background-color:#8D45F2; */
-	/*display: flex;*/
-	/*justify-content: space-between;*/
-	/*align-items: center;*/
+
+
+.marketingContentPlacement {
+	/*border-top: 1px solid #e5d9ff;*/
+	width: 85%;
+	padding-top: 50px;
+	text-align: left;
+	font-size: 1.1rem;
+	font-weight: 300;
+	line-height: 1.8rem;
+}
+
+.bottomMarketing1024 {
+	display: none;
+}
+
+.ctaSubscribeBottom {
+	/*display: block;*/
+	margin: 50px 0;
+}
+
+.ctaSubscribeBottom a {
+	padding: 10px 25px;
+	border: 2px solid #8D45F2;
+	border-radius: 10px;
+	background-color:;
+	color:  #8D45F2;
 }
 
 .copyFollow320 {
@@ -730,6 +761,7 @@ a:hover, a:active, a:focus {
 	.articleData {
 		text-align: left;
 	}
+}
 
 	@media (min-width: 768px) {
 
@@ -791,7 +823,7 @@ a:hover, a:active, a:focus {
 		}
 
 		.postCategories span {
-			font-size: 0.8rem;
+			font-size: 0.7rem;
 			font-weight: 700;
 			letter-spacing: 0.04rem;
 			text-transform: uppercase;
@@ -800,7 +832,14 @@ a:hover, a:active, a:focus {
 
 
 		.text {
-			line-height: 1.8rem;
+			margin-top: 60px;
+			line-height: 2.23rem;
+			font-size: 1.7rem;
+			font-weight: 300;
+		}
+
+		.text p {
+			margin: 2rem 0;
 		}
 
 		.subtitle {
@@ -824,21 +863,50 @@ a:hover, a:active, a:focus {
 			display: block;
 		}
 
-		.marketing {
+		.marketingContent {
 			display: flex;
 			justify-content: center;
+			margin-top: -90px;
 			margin-bottom: 50px;
 
 		}
 
-		.marketingPlacement {
-			/*border: 3px solid #e5d9ff;
-			border-radius: 20px;*/
-			width: 80%;
-			/*display: flex;*/
-			/*justify-content: space-between;*/
-			/*align-items: center;*/
+
+
+		.marketingContentPlacement {
+			/*border-top: 1px solid #e5d9ff;*/
+			width: 70%;
+			padding-top: 50px;
+			text-align: left;
+			font-size: 1.1rem;
+			font-weight: 300;
+			line-height: 1.8rem;
 		}
+
+		.bottomMarketing1024 {
+			display: none;
+		}
+
+		.ctaSubscribeBottom {
+			/*display: block;*/
+			margin: 50px 0;
+		}
+
+		.ctaSubscribeBottom a {
+			padding: 10px 25px;
+			border: 2px solid #8D45F2;
+			border-radius: 10px;
+			background-color:;
+			color:  #8D45F2;
+		}
+
+		/*.ctaSubscribeBottom a:hover:before {
+			content: ""
+		}*/
+
+		/*.ctaSubscribeBottom a:hover:after {
+			content: " Yes I am! Sign me up :)"
+		}*/
 
 		.copyFollow700 {
 			text-align: center;
@@ -923,30 +991,43 @@ a:hover, a:active, a:focus {
 		}
 
 		.logo1024 img {
-			width: 150px;
+			width: 130px;
 		}
 
 		.filters {
 			display: block;
 		}
 
-	  .ulTop1024 {
+    .ctaSubscribe {
+      position: absolute;
+      top: 53px;
+      left: 842px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.1rem;
+    }
+
+    .ctaSubscribe:hover {
+      border-bottom: solid 1px #e5d9ff;
+    }
+
+		.ulTop1024 {
 	    position: absolute;
 	    top: 53px;
-			left: 240px;
+			left: 220px;
 	    display: flex;
 	    justify-content: space-between;
 	    align-items: center;
 	    padding: 0;
 	    margin: 0;
 	    z-index: 3;
-	    font-size: 0.8rem;
+	    font-size: 0.9rem;
 	    letter-spacing: 0.1rem;
 	    font-weight: 400;
 			text-decoration: none;
 			list-style: none;
 			/*width: 50%;*/
-			width: 630px;
+			width: 600px;
 	  }
 
 		.ulTop1024 li a:hover {
@@ -1233,16 +1314,40 @@ a:hover, a:active, a:focus {
 			margin-top: 30px;
 		}
 
+		.marketingContentPlacement {
+			width: 715px;
+		}
+
+		.bottomMarketing1024 {
+			display: block;
+			font-size: 1.15rem;
+		}
+
+		.bottomMarketing320 {
+			display: none;
+		}
+
 		.bottom {
 			/*margin-right: 40px;*/
 		}
+
+
 
 		@media (min-width: 1175px) {
 
 			.ulTop1024 {
 				top: 50px;
 				font-size: 1rem;
-				width: 750px;
+				width: 730px;
+			}
+
+			.ctaSubscribe {
+				position: absolute;
+				top: 50px;
+				left: 983px;
+				font-size: 1rem;
+				font-weight: 400;
+				letter-spacing: 0.1rem;
 			}
 
 		  .colRight {

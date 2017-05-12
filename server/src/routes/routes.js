@@ -20,6 +20,8 @@ module.exports = (function() {
     next();
   });
 
+  // Static Page Rendering
+
   router.get('/', (req,res) => { res.redirect('/vision'); });
 
   router.get('/team', renderer.render, renderer.serve);
@@ -38,16 +40,27 @@ module.exports = (function() {
 
   router.get('/blog/:article', handlers.articles.read, renderer.render, renderer.serve);
 
+  if(__DEV__ || __TEST__) {
+    router.get('/weeklypurpose', renderer.render, renderer.serve);
+  }
+
+  // AJAX Data Requests
+
+  router.post('/feed/', blog.feed);
+
+  // Testing Endpoints
+
   if(__DEV__){
     router.get('/test/uploader/report', handlers.articles.test.report);
     router.get('/test/uploader/clear', handlers.articles.test.clear);
   }
 
+  // 404 Handlers
+
   router.get('/*', renderer.not_found, renderer.serve);
   router.post('/*', renderer.not_found, renderer.serve);
   router.put('/*', renderer.not_found, renderer.serve);
   router.delete('/*', renderer.not_found, renderer.serve);
-
 
   return router;
 

@@ -16,11 +16,12 @@
     "url": "https://github.com/futureboyHQ/website/issues"
   },
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
-    "build:dev": "yarn run clean && yarn run compile:dev",
+    "build": "yarn run clean && yarn run copy-assets && yarn run compile",
+    "build:dev": "yarn run clean && yarn run copy-assets && yarn run compile:dev",
     "clean": "rimraf dist",
     "compile": "babel src -d dist --copy-files",
     "compile:dev": "babel src -d dist -s --copy-files",
+    "copy-assets": "/bin/sh assets.sh",
     "lint": "eslint src test",
     "lint:fix": "yarn run lint -- --fix",
     "start": "better-npm-run start",

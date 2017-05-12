@@ -6,6 +6,7 @@
 
 const project = require('./project.config');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const __DEV__ = project.globals.__DEV__;
 const __PROD__ = project.globals.__PROD__;
 const __TEST__ = project.globals.__TEST__;
@@ -18,8 +19,7 @@ const webpack_config = {
   entry: [project.paths.src()],
   output: {
     path: project.paths.dist(),
-    filename: 'bundle.js',
-    //filename: '[name].[hash].js',
+    filename: 'bundle.[hash].js',
     //chunkFilename: '[id].[chunkhash].js'
   },
   module: {},
@@ -48,6 +48,12 @@ webpack_config.module.loaders = [{
 webpack_config.plugins.push(
   new webpack.DefinePlugin(project.globals)
 );
+
+if(__PROD__){
+  webpack_config.plugins.push(
+    new UglifyJSPlugin()
+  );
+}
 
 // if(__DEV__){
 //   console.log('Enabling plugins for live development (HMR, NoErrors).');

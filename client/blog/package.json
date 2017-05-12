@@ -9,7 +9,7 @@
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "build:dev": "yarn run clean && yarn run compile:dev",
-    "clean": "rimraf dist",
+    "clean": "node bin/clean",
     "compile": "better-npm-run compile",
     "compile:dev": "better-npm-run compile:dev",
     "lint": "eslint bin build config server src tests",
@@ -27,6 +27,7 @@
     "compile": {
       "command": "node bin/compile",
       "env": {
+        "NODE_ENV": "production",
         "DEBUG": "app:*"
       }
     },
@@ -45,7 +46,7 @@
       }
     },
     "deploy": {
-      "command": "npm run lint && npm run test && npm run clean && npm run compile",
+      "command": "npm run lint && npm run clean && npm run compile",
       "env": {
         "DEBUG": "app:*"
       }
@@ -117,6 +118,7 @@
     "mocha": "^3.0.1",
     "nodemon": "^1.10.2",
     "rimraf": "^2.6.1",
+    "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
   }

@@ -80,14 +80,6 @@ function mapDispatchToProps(dispatch, ownProps) {
               query: data.query
             }).then(res => {
               dispatch(receive_articles(cache, data.query, res.body));
-
-              // McGiver Stuff
-              let quote_of_day = document.getElementsByClassName('quoteOfDay');
-              if(quote_of_day[0]) {
-                let contentContainer = quote_of_day[0].parentNode;
-                contentContainer.style.margin = '-150px 0 0 0';
-                contentContainer.removeChild(quote_of_day[0]);
-              }
             });
         }
       };

@@ -34,44 +34,45 @@ const render = () => {
       document.getElementsByClassName('filters')[0]
     );
   }
+
   // Newsletter Form
   if(window.location.pathname.match(/^\/(vision|team)/)){
-    console.log('rendering that sweet form');
     ReactDOM.render(
       <Provider store={store}>
         <NewsletterFormContainer />
       </Provider>,
       document.getElementsByClassName('emailForm')[0]
     );
-  }else{
-    console.log("where's my sweet form?");
   }
-  // Navigation Menus
-  ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
-  a(document.getElementsByClassName('exploreSection')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='navlinks' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
-  a(document.getElementsByClassName('filterBy')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='authors' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
-  a(document.getElementsByClassName('resonateWith')).forEach((e) => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <NavLinksContainer type='subjects' render_type='navigation' />
-      </Provider>,
-      e
-    );
-  });
+
+  if(document.getElementsByClassName('hamburger').length){
+    ReactDOM.render(<HamburgerIcon />, document.getElementsByClassName('hamburger')[0]);
+
+    a(document.getElementsByClassName('exploreSection')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='navlinks' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+    a(document.getElementsByClassName('filterBy')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='authors' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+    a(document.getElementsByClassName('resonateWith')).forEach((e) => {
+      ReactDOM.render(
+        <Provider store={store}>
+          <NavLinksContainer type='subjects' render_type='navigation' />
+        </Provider>,
+        e
+      );
+    });
+  }
 };
 
 /**

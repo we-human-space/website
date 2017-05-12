@@ -284,7 +284,13 @@ a:hover, a:active, a:focus {
 .ulBlock li a {
   outline: 0;
   text-decoration: none;
-  color: #e5d9ff
+  color: #e5d9ff;
+}
+
+.ulBlock li .navSubscribe {
+  outline: 0;
+  text-decoration: none;
+  color: #8D45F2;
 }
 
 .socialMediaMenu360 {
@@ -392,13 +398,13 @@ a:hover, a:active, a:focus {
 	display: inline;
 }
 
-.postCategories span {
+.postCategories {
 	color: #8D45F2;
 	font-size: 0.7rem;
 }
 
-.postCategories a {
-	font-size: 0.8rem;
+.postCategories {
+	font-size: 0.7rem;
 	font-weight: 700;
 	letter-spacing: 0.04rem;
 	text-transform: uppercase;
@@ -675,6 +681,11 @@ a:hover, a:active, a:focus {
     border-radius: 1px;
   }
 
+  .ulBlock li .navSubscribe:hover {
+    border-bottom: solid 2px #8D45F2;
+    border-radius: 1px;
+  }
+
   .socialMediaMenu360 {
     display: none;
   }
@@ -803,8 +814,6 @@ a:hover, a:active, a:focus {
     height: 80px;
   }
 
-
-
   .logoFuture {
     padding-top: 2px;
     width: 90px;
@@ -916,6 +925,21 @@ a:hover, a:active, a:focus {
 		display: block;
 	}
 
+	.ctaSubscribe {
+    color: #8D45F2;
+		position: absolute;
+		top: 53px;
+		left: 845px;
+		font-size: 0.9rem;
+		font-weight: 400;
+		letter-spacing: 0.1rem;
+		color: #8D45F2;
+	}
+
+	.ctaSubscribe:hover {
+		border-bottom: solid 1px #8D45F2;
+	}
+
   .ulTop1024 {
     position: absolute;
     top: 53px;
@@ -926,18 +950,22 @@ a:hover, a:active, a:focus {
     padding: 0;
     margin: 0;
     z-index: 3;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     letter-spacing: 0.1rem;
     font-weight: 400;
 		text-decoration: none;
 		list-style: none;
 		/*width: 50%;*/
-		width: 630px;
+		width: 600px;
   }
 
 	.ulTop1024 li a:hover {
 		border-bottom: solid 1px #e5d9ff;
 	}
+
+  .navSubscribe.liActive {
+    border-bottom: solid 1px #8D45F2;
+  }
 
   .liActive {
     border-bottom: solid 1px #e5d9ff;
@@ -1196,8 +1224,6 @@ a:hover, a:active, a:focus {
 	/*-------QUOTE OF DAY-----*/
 
 	.quoteOfDay {
-		/*margin-top: 125px;
-		margin-bottom: 150px;*/
 		padding: 0 10px;
 		letter-spacing: 0.12rem;
 		text-align: left;
@@ -1208,10 +1234,16 @@ a:hover, a:active, a:focus {
 		align-items: center;
 		flex-wrap: wrap;
 		margin-top: 50px;
+
+	}
+
+	.quoteOfDayPlacement {
+		width: 75%;
+		max-width: 1075px;
 	}
 
 	.quoteOfDay h2 {
-		font-size: 2.5rem;
+		font-size: 2rem;
 		width: 100%;
 	}
 
@@ -1232,13 +1264,13 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX {
-		margin: 200px 0;
+		margin: 100px 0;
 		position: relative;
 		display:inline-block;
 	}
 
 	.imgWIDER750PX {
-		margin: 200px 0;
+		margin: 100px 0;
 		position: relative;
 		display:inline-block;
 	}
@@ -1376,10 +1408,6 @@ a:hover, a:active, a:focus {
 		border-bottom: solid 2px #8D45F2;
 	}
 
-
-
-
-
 }
 
 @media (min-width: 1175px) {
@@ -1387,7 +1415,17 @@ a:hover, a:active, a:focus {
 	.ulTop1024 {
 		top: 50px;
 		font-size: 1rem;
-		width: 750px;
+		width: 730px;
+	}
+
+	.ctaSubscribe {
+    color: #8D45F2;
+		position: absolute;
+		top: 50px;
+		left: 982px;
+		font-size: 1rem;
+		font-weight: 400;
+		letter-spacing: 0.1rem;
 	}
 
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import config from '../../config';
+import FeedQuote from './FeedQuote';
+import quotes from '../../static/quotes.json';
 import FeedPage from './FeedPage';
 
 export default class Feed extends React.Component {
@@ -80,6 +82,8 @@ export default class Feed extends React.Component {
   }
 
   render() {
+    const quote = quotes[this.props.subject] ? quotes[this.props.subject].quote : quotes['default'].quote;
+    const source = quotes[this.props.subject] ? quotes[this.props.subject].source : quotes['default'].source;
     const pages = Object.keys(this.props.pages).reverse().map((p) => (this.props.pages[p]));
     const list = pages.map((page, i) => {
       return (
@@ -88,7 +92,10 @@ export default class Feed extends React.Component {
     });
     return (
       <div>
-        { list }
+        <FeedQuote quote={quote} source={source} />
+        <div>
+          { list }
+        </div>
       </div>
     );
   }
@@ -100,6 +107,7 @@ Feed.propTypes = {
   isRefreshing: PropTypes.func.isRequired,
   fetchArticles: PropTypes.func.isRequired,
   expireFeed: PropTypes.func.isRequired,
+  subject: PropTypes.string.isRequired,
   pages: PropTypes.objectOf(function(props, propName, componentName) {
     let error;
     let page = props[propName];

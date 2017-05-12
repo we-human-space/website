@@ -1,0 +1,54 @@
+
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"Futura PT W02 Book";*/
+    src:url("../fonts/futura/1062020/94fe45a6-9447-4224-aa0f-fa09fe58c702.eot?#iefix");
+    src:url("../fonts/futura/1062020/94fe45a6-9447-4224-aa0f-fa09fe58c702.eot?#iefix") format("eot"),url("../fonts/futura/1062020/cb9d11fa-bd41-4bd9-8b8f-34ccfc8a80a2.woff2") format("woff2"),url("../fonts/futura/1062020/475da8bf-b453-41ee-ab0e-bd9cb250e218.woff") format("woff"),url("../fonts/futura/1062020/4d6d50ec-b049-44ba-a001-e847c3e2dc79.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"FuturaPTW02-BookOblique";*/
+    src:url("../fonts/futura/1062023/43c362cf-735e-49be-a047-7c3c9138fc77.eot?#iefix");
+    src:url("../fonts/futura/1062023/43c362cf-735e-49be-a047-7c3c9138fc77.eot?#iefix") format("eot"),url("../fonts/futura/1062023/7e1aaf09-e2d9-4714-b30f-4fff4d989977.woff2") format("woff2"),url("../fonts/futura/1062023/85e71ffa-900f-4735-9f38-d867dd4c135d.woff") format("woff"),url("../fonts/futura/1062023/4d5804fe-ff27-412f-b700-a8172b6953fc.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"Futura PT W02 Medium";*/
+    src:url("../fonts/futura/1062074/9a9fb331-0d04-4a0f-94d6-4c7c9132678e.eot?#iefix");
+    src:url("../fonts/futura/1062074/9a9fb331-0d04-4a0f-94d6-4c7c9132678e.eot?#iefix") format("eot"),url("../fonts/futura/1062074/91597685-99ad-4a3c-81b0-84491562b714.woff2") format("woff2"),url("../fonts/futura/1062074/717bc962-d7ad-40ef-b37b-808824c7f061.woff") format("woff"),url("../fonts/futura/1062074/dfe1dfa8-1fb9-4c68-a199-4f31e702d3c5.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"FuturaPTW02-MediumObliq";*/
+    src:url("../fonts/futura/1062077/decf7965-f2ae-4e84-a80a-b7a8ee74ab6b.eot?#iefix");
+    src:url("../fonts/futura/1062077/decf7965-f2ae-4e84-a80a-b7a8ee74ab6b.eot?#iefix") format("eot"),url("../fonts/futura/1062077/35474f68-467d-415d-8ff4-891ef36607d6.woff2") format("woff2"),url("../fonts/futura/1062077/3a7b44e4-ba0b-430a-939b-cdc53c35548d.woff") format("woff"),url("../fonts/futura/1062077/4102b9c9-33e0-40ca-ab05-b8d9fedc50f3.ttf") format("truetype");
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"Futura PT W02 Demi";*/
+    src:url("../fonts/futura/1062050/d478a532-3f55-4761-ac1c-b7d3454835d6.eot?#iefix");
+    src:url("../fonts/futura/1062050/d478a532-3f55-4761-ac1c-b7d3454835d6.eot?#iefix") format("eot"),url("../fonts/futura/1062050/84271cfa-205f-47c6-8e88-1e5fa4e29838.woff2") format("woff2"),url("../fonts/futura/1062050/00bf84ce-30bd-41b2-9405-995fafc11b7c.woff") format("woff"),url("../fonts/futura/1062050/be2562bb-473d-4636-a3b2-f338075d0fc9.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+@font-face{
+    font-family:"futura-pt";
+    /*font-family:"Futura PT W02 Bold";*/
+    src:url("../fonts/futura/1062014/16bff171-df86-4e58-83ee-8b4c1762aaf2.eot?#iefix");
+    src:url("../fonts/futura/1062014/16bff171-df86-4e58-83ee-8b4c1762aaf2.eot?#iefix") format("eot"),url("../fonts/futura/1062014/eefb4a0a-90e8-4703-994a-d58c1de8687e.woff2") format("woff2"),url("../fonts/futura/1062014/29e68c1f-8f9c-43cd-80fb-de4056f5caab.woff") format("woff"),url("../fonts/futura/1062014/48214a02-9862-4152-b085-3b1a72b23e94.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
