@@ -18,12 +18,11 @@ function mapDispatchToProps(dispatch, ownProps) {
         .then(() => { window.location = '/subscribed'; })
         .catch((err) => {
           console.log(err);
-          window.location = '/error';
-          // if(err.status === 400){
-          //   window.location = '/error';
-          // }else{
-          //   window.location = '/error';
-          // }
+          if(err.status === 400){
+            window.location = '/already-subscribed';
+          }else{
+            window.location = '/error';
+          }
         });
     }
   };

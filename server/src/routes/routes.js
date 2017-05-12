@@ -28,6 +28,8 @@ module.exports = (function() {
 
   router.get('/vision', renderer.render, renderer.serve);
 
+  router.get('/already-subscribed', renderer.render, renderer.serve);
+
   router.get('/subscribed', renderer.render, renderer.serve);
 
   router.get('/error', renderer.render, renderer.serve);
@@ -43,6 +45,8 @@ module.exports = (function() {
   // AJAX Data Requests
 
   router.post('/feed/', handlers.feed);
+
+  router.post('/subscribe', handlers.newsletter.subscribe);
 
   // Testing Endpoints
 

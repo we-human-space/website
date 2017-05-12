@@ -59,7 +59,7 @@ function armageddon(req, res){
     if(err){
       res.sendStatus(500);
     }else{
-      req.html = data;
+      req.html = data.toString();
       serve(req, res, ()=>{ res.sendStatus(500); });
     }
   });

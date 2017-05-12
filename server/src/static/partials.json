@@ -7,6 +7,7 @@
     "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
     "^/blog/([a-zA-Z0-9\\-]{10,})$": "article",
     "^/subscribed": "subscribed",
+    "^/already-subscribed": "already-subscribed",
     "^/error": "error",
     "404": "404"
   },
@@ -20,8 +21,11 @@
       "partials": ["head"]
     },
     "error": {
-      "path": "partials/500.html",
-      "stylesheet": "/assets/css/404.css",
+      "path": "partials/error.html",
+      "assets": {
+        "styles": ["/assets/css/404.css"],
+        "scripts": {}
+      },
       "partials": ["head"]
     },
     "500": {
@@ -57,9 +61,20 @@
       },
       "partials": ["head", "footer_marketing", "navbar"]
     },
+    "already-subscribed": {
+      "path": "partials/emailAlreadyDatabase.html",
+      "assets": {
+        "styles": ["/assets/css/joinedNewsletterNIGHT.css"],
+        "scripts": {}
+      },
+      "partials": ["head"]
+    },
     "subscribed": {
       "path": "partials/joinedNewsletter.html",
-      "stylesheet": "/assets/css/joinedNewsletterNIGHT.css",
+      "assets": {
+        "styles": ["/assets/css/joinedNewsletterNIGHT.css"],
+        "scripts": {}
+      },
       "partials": ["head"]
     },
     "weeklypurpose": {
