@@ -36,7 +36,7 @@
   },
   "betterScripts": {
     "dev:src": {
-      "command": "yarn run build:dev && nodemon --watch src --exec yarn run dev:dist",
+      "command": "nodemon --watch src --exec yarn run dev:dist",
       "env": {
         "NODE_ENV": "development",
         "DEBUG": "app:*"
