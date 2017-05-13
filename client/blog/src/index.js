@@ -10,7 +10,6 @@ import NewsletterFormContainer from './containers/newsletter/NewsletterFormConta
 
 // Browser Window Configuration
 window.onload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
-window.onbeforeunload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
 
 // Store Configuration
 const store = configure_store(window.__PRELOADED_STATE__);
