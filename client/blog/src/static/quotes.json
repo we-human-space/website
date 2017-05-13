@@ -1,0 +1,34 @@
+{
+  "Books": {
+    "quote": "Look at what you read, and you’ll know who you are. Here’s our book digest if you want to expand your mind!",
+    "source": ""
+  },
+  "Consciousness": {
+    "quote": "We hope that our personal and spiritual growth experiences will inspire you to tame your fears, and live with purpose.",
+    "source": ""
+  },
+  "Good Food": {
+    "quote": "You are what you eat. Here are the recipes we’ve tested for you to be healthy, develop your taste, and enjoy life!",
+    "source": ""
+  },
+  "Music": {
+    "quote": "Refine your taste in several genres, discover proper electronic music, and add fresh tracks to your playlist!",
+    "source": ""
+  },
+  "Startup journey": {
+    "quote": "From “here we come” to “nope, we fucked up” we’re sharing everything on our journey to help the world live with purpose. First milestone: 10,000 subs for phase-one!",
+    "source": ""
+  },
+  "Visual Arts": {
+    "quote": "Some inspiration for your dream place, drawings, designs, and photographs!",
+    "source": ""
+  },
+  "Travel": {
+    "quote": "Learn about Philippe and Sacha’s best realizations as they backpack through Europe and Oceania!",
+    "source": ""
+  },
+  "default": {
+    "quote": "Transparency & radical honesty are principles we've trained ourselves to live by. Here, you'll learn about our journey to live from the heart & fulfill our dream: Help the world live with purpose.",
+    "source": "From Maat, with Love"
+  }
+}

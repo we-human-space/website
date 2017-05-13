@@ -1,5 +1,3 @@
-"use strict";
-
 import fs from 'fs';
 import path from 'path';
 import chokidar from 'chokidar';
@@ -8,7 +6,7 @@ import yaml from 'js-yaml';
 import Ajv from 'ajv';
 import config from '../../config';
 import fswrapper from '../filesystem/index';
-import auschema from '../secure/validation/article-upload.json';
+import auschema from './uploader-yaml.schema.json';
 import hash from '../secure/hash';
 import mailer from '../mail/mailer';
 import models from '../../models/index';
@@ -146,19 +144,19 @@ function validate_folder(data) {
             if(!content) content = file;
             else {
               rejected = true;
-              reject(new Error("Multiple html files uploaded"));
+              reject(new Error('Multiple html files uploaded'));
             }
           }else if(file.match(YAML_REGEXP)){
             if(!yaml_file) yaml_file = file;
             else {
               rejected = true;
-              reject(new Error("Multiple yaml files uploaded"));
+              reject(new Error('Multiple yaml files uploaded'));
             }
           }else if(file.match(THUMBNAIL_EXT_REGEXP)){
             if(!thumbnail) thumbnail = file;
             else {
               rejected = true;
-              reject(new Error("Multiple thumbnail files uploaded"));
+              reject(new Error('Multiple thumbnail files uploaded'));
             }
           }else if(file.match(IMAGE_EXT_REGEXP)){
             images.push(file);
@@ -167,9 +165,9 @@ function validate_folder(data) {
       });
       if(!rejected){
         //Check if any file is missing
-        if(!content) reject(new Error("No html file uploaded"));
-        else if(!thumbnail) reject(new Error("No image file uploaded"));
-        else if(!yaml_file) reject(new Error("No yaml file uploaded"));
+        if(!content) reject(new Error('No html file uploaded'));
+        else if(!thumbnail) reject(new Error('No image file uploaded'));
+        else if(!yaml_file) reject(new Error('No yaml file uploaded'));
         else {
           //Return paths of important files
           data.files = {
@@ -239,7 +237,7 @@ function generate_article(data) {
   var article = new Article();
   for(let key in content){
     if(content.hasOwnProperty(key)){
-      if(key === "author"){
+      if(key === 'author'){
         article[key] = content[key]._id;
       }else{
         article[key] = content[key];
@@ -255,7 +253,7 @@ function generate_article(data) {
 
 function sanitize_title(title) {
   return title.toLowerCase()
-              .replace("'", "")
+              .replace('"', '')
               .match(/[a-z]+/g)
               .join('-');
 }
@@ -266,7 +264,7 @@ function move(data){
   var files = [];
   for(let key in data.files){
     if(data.files.hasOwnProperty(key)){
-      if(key === "images"){
+      if(key === 'images'){
         files = files.concat(
           data.files[key].map((f) => {
             return path.join(data.folder, f);
@@ -295,13 +293,13 @@ function move(data){
       let new_path;
       let extname = path.extname(file);
       //Renaming file
-      if(extname === ".html"){
-        new_path = path.join(ARTICLE_DIR, data.article.hash, "index.html");
+      if(extname === '.html'){
+        new_path = path.join(ARTICLE_DIR, data.article.hash, 'index.html');
       }else if(old_path.match(THUMBNAIL_EXT_REGEXP)){
         new_path = path.join(ARTICLE_DIR, data.article.hash, `thumbnail${extname}`);
       }else if(old_path.match(IMAGE_EXT_REGEXP)){
         new_path = path.join(ARTICLE_DIR, data.article.hash, path.basename(old_path));
-      }else if(extname === ".yaml"){
+      }else if(extname === '.yaml'){
         return Promise.resolve();
       }
       return new Promise((resolve, reject) => {
@@ -318,20 +316,20 @@ function move(data){
 }
 
 function persist(data) {
-  console.log(`Persisting "${data.article.title}" to database`);
+  console.log(`Persisting '${data.article.title}' to database`);
   data.article.setPaging();
   data.article.setPropsToCache();
   return data.article.save()
   .then(() => {
     return Article.findOne({hash: data.article.hash});
   }).then((a) => {
-    if(a === null) return Promise.reject(new Error("Article was not persisted to database"));
+    if(a === null) return Promise.reject(new Error('Article was not persisted to database'));
     else return Promise.resolve(data);
   });
 }
 
 function clear_files(data) {
-  console.log("Clearing old files");
+  console.log('Clearing old files');
   let promises = [];
   if(data.folder){
     promises.push(fswrapper.remove(data.folder));
@@ -353,17 +351,17 @@ function clear_processing(data){
 
 function notify_success(data) {
   if(config.upload.notify.success){
-    console.log("Emailing upload success notification");
+    console.log('Emailing upload success notification');
     console.log(data.recipients);
     return mailer.renderAndSend({
       to: data.recipients,
-      subject: "New Article Successfully Uploaded",
+      subject: 'New Article Successfully Uploaded',
       path: path.join(__dirname, '../../../static/emails/upload-success.html'),
       data: {
         article: data.content
       }
     }).then((res) => {
-      console.log("Successfully emailed upload success notification");
+      console.log('Successfully emailed upload success notification');
 
       if(__DEV__ || __TEST__){
         return Promise.resolve({result: res, error: null, data: data});
@@ -371,7 +369,7 @@ function notify_success(data) {
         return Promise.resolve(res);
       }
     }).catch((err) => {
-      console.log("Failed to email upload success notification");
+      console.log('Failed to email upload success notification');
 
       if(__DEV__ || __TEST__){
         return Promise.reject({result: null, error: err, data: data});
@@ -381,7 +379,7 @@ function notify_success(data) {
     });
   }else{
     if(__DEV__ || __TEST__){
-      return Promise.resolve({result: "Success notification is disabled", error: null, data: data});
+      return Promise.resolve({result: 'Success notification is disabled', error: null, data: data});
     }else{
       return Promise.resolve();
     }
@@ -391,27 +389,27 @@ function notify_success(data) {
 
 function notify_failure(data) {
   if(config.upload.notify.failure){
-    console.log("Emailing upload failure notification");
+    console.log('Emailing upload failure notification');
     console.log(data.recipients);
     let error = data.error;
     data.error = undefined;
     return mailer.renderAndSend({
       to: data.recipients,
-      subject: "New Article Failed to Upload",
+      subject: 'New Article Failed to Upload',
       path: path.join(__dirname, '../../../static/emails/upload-failure.html'),
       data: {
         data: JSON.stringify(data, null, 2),
         error: error.toString()
       }
     }).then((res) => {
-      console.log("Successfully emailed upload failure notification");
+      console.log('Successfully emailed upload failure notification');
       if(__DEV__ || __TEST__){
         return Promise.resolve({result: res, error: null, data: data});
       }else{
         return Promise.resolve(res);
       }
     }).catch((err) => {
-      console.log("Failed to email upload failure notification");
+      console.log('Failed to email upload failure notification');
       if(__DEV__ || __TEST__){
         return Promise.reject({result: null, error: err, data: data});
       }else{
@@ -420,7 +418,7 @@ function notify_failure(data) {
     });
   }else{
     if(__DEV__ || __TEST__){
-      return Promise.resolve({result: "Failure notification is disabled", error: null, data: data});
+      return Promise.resolve({result: 'Failure notification is disabled', error: null, data: data});
     }else{
       return Promise.resolve();
     }

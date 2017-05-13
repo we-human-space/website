@@ -49,6 +49,7 @@ const update_versionning = (version) => {
   return read_and_write_to_json_file(version_file, (versions) => {
     if(!versions) versions = [];
     if(versions.indexOf(version) === -1) versions.push(version);
+    console.log(`Updated versionning file. Currently cached versions: \n  ${versions.join('\n  ')}`);
     return versions;
   });
 };
@@ -58,6 +59,7 @@ const update_compiled = (versions) => {
   return read_and_write_to_json_file(compiled_file, (compiled) => {
     if(!compiled) compiled = {};
     compiled.bundle = `/app/${versions[versions.length - 1]}`;
+    console.log(`Updated compiled.json with bundle = '${compiled.bundle}'`);
     return compiled;
   });
 };

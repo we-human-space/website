@@ -3,13 +3,25 @@
     "^/$": "root",
     "^/team$": "team",
     "^/vision$": "vision",
+    "^/weeklypurpose$": "weeklypurpose",
     "^/blog/(\\?.+=.+(&(.+=.+))*)?$": "blog",
     "^/blog/([a-zA-Z0-9\\-]{10,})$": "article",
+    "^/subscribed": "subscribed",
+    "^/already-subscribed": "already-subscribed",
+    "^/error": "error",
     "404": "404"
   },
   "partials": {
     "404": {
       "path": "partials/404.html",
+      "assets": {
+        "styles": ["/assets/css/404.css"],
+        "scripts": {}
+      },
+      "partials": ["head"]
+    },
+    "error": {
+      "path": "partials/error.html",
       "assets": {
         "styles": ["/assets/css/404.css"],
         "scripts": {}
@@ -49,6 +61,30 @@
       },
       "partials": ["head", "footer_marketing", "navbar"]
     },
+    "already-subscribed": {
+      "path": "partials/emailAlreadyDatabase.html",
+      "assets": {
+        "styles": ["/assets/css/joinedNewsletterNIGHT.css"],
+        "scripts": {}
+      },
+      "partials": ["head"]
+    },
+    "subscribed": {
+      "path": "partials/joinedNewsletter.html",
+      "assets": {
+        "styles": ["/assets/css/joinedNewsletterNIGHT.css"],
+        "scripts": {}
+      },
+      "partials": ["head"]
+    },
+    "weeklypurpose": {
+      "path": "partials/subscribe.html",
+      "assets": {
+        "styles": ["/assets/css/subscribe.css"],
+        "scripts": {"foot": ["{{bundle}}"]}
+      },
+      "partials": ["head", "foot", "navbar"]
+    },
     "blog": {
       "type": "body",
       "path": "partials/feed.html",
@@ -56,7 +92,7 @@
         "styles": ["/assets/css/blogNIGHT.css"],
         "scripts": {"foot": ["{{bundle}}"]}
       },
-      "partials": ["head", "foot", "navbar"]
+      "partials": ["head", "footer_bare", "navbar"]
     },
     "article": {
       "type": "body",
@@ -72,7 +108,7 @@
       "path": "partials/header.html",
       "javascript": [],
       "assets": {
-        "styles": ["/assets/css/normalize.css"],
+        "styles": ["/assets/css/fonts.css", "/assets/css/normalize.css"],
         "scripts": {"head": ["https://use.typekit.net/rer0env.js"]}
       },
       "partials": []
@@ -80,6 +116,15 @@
     "foot": {
       "type": "foot",
       "path": "partials/footer.html",
+      "assets": {
+        "styles": [],
+        "scripts": {}
+      },
+      "partials": []
+    },
+    "footer_bare": {
+      "type": "foot",
+      "path": "partials/footerBare.html",
       "assets": {
         "styles": [],
         "scripts": {}
