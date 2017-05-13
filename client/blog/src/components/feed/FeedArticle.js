@@ -28,7 +28,7 @@ export default function FeedArticle(props){
                     </div>
                   </div>
                   <div className='readMORE'>
-                    <span>Read more</span>
+                    <span>{props.article.readMore}</span>
                   </div>
                 </div>
               </a>
@@ -79,8 +79,8 @@ FeedArticle.propTypes = {
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,
       mime: PropTypes.string.isRequired
-    })
+    }),
+    readMore: PropTypes.string.isRequired
   }).isRequired,
-  img_class: PropTypes.string.isRequired,
-  summary_class: PropTypes.string.isRequired
+  img_class: PropTypes.string.isRequired
 };
