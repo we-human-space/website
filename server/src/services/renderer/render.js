@@ -23,21 +23,25 @@ function render(req, res, next){
   if(!key || res.status === 404){
     not_found(req, res, next);
   }else{
-    req.partial = views.requests[key];
+    req.partial = key;
     return render_page(req, res, next)
     .catch(catch_render_error(req, res, next));
   }
 }
 
 function not_found(req, res, next){
-  req.partial = views.requests["404"];
+  req.partial = "404";
   return render_page(req, res, next)
   .catch(catch_render_error(req, res, next));
 }
 
 function get_request_key(req){
-  return Object.keys(views.requests)
-         .find(regexp => req.path.match(regexp));
+  console.log(req.get('host'));
+  let routing = views.routing(req.get('host'));
+  return routing[
+           Object.keys(routing)
+             .find(regexp => req.path.match(regexp))
+         ];
 }
 
 function catch_render_error(req, res, next){
@@ -73,7 +77,7 @@ function render_page(req, res, next){
     req.partial = "404";
     data = {
       preloaded_state: "{}",
-      not_found: views.requests[get_request_key(req)] === "article" ? "article": "page"
+      not_found: get_request_key(req) === "article" ? "article": "page"
     };
   }else{
     console.log("render: view found");
