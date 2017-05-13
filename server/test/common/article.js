@@ -1,5 +1,4 @@
 const fs = require('fs');
-const http = require('http');
 const spawn = require('child_process').spawn;
 const crypto = require('crypto');
 const write_yaml = require('write-yaml');
@@ -7,44 +6,51 @@ const fswrapper = require('../../dist/services/filesystem/index');
 
 const wikipedia = supertest.agent('https://en.wikipedia.org/');
 const default_thumbnails = [
-  {width:1600,height:900, src:'1600x900.jpg'},
-  {width:500,height:500, src:'500x500.jpg'},
+  {width:1600,height:900, src:'1600x900.jpg', subtitle: 'This is a test subtitle'},
+  {width:500,height:500, src:'500x500.jpg', subtitle: 'This is a test subtitle'},
   {width:1500,height:750, src:'1500x750.png'},
   {width:500,height:750, src:'500x750.png'}
 ];
-const extnames = ["png", "jpg", "jpeg", "gif"];
 const tags = [
-  "test-tag-1",
-  "test-tag-2",
-  "test-tag-3",
-  "test-tag-4",
-  "test-tag-5",
-  "test-tag-6",
-  "test-tag-7",
-  "test-tag-8",
-  "test-tag-9",
-  "test-tag-10",
+  'test-tag-1',
+  'test-tag-2',
+  'test-tag-3',
+  'test-tag-4',
+  'test-tag-5',
+  'test-tag-6',
+  'test-tag-7',
+  'test-tag-8',
+  'test-tag-9',
+  'test-tag-10',
 ];
 const categories = [
-  "TestCategory1",
-  "TestCategory2",
-  "TestCategory3",
-  "TestCategory4",
-  "TestCategory5",
-  "TestCategory6",
-  "TestCategory7",
-  "TestCategory8",
-  "TestCategory9",
-  "TestCategory10"
+  'TestCategory1',
+  'TestCategory2',
+  'TestCategory3',
+  'TestCategory4',
+  'TestCategory5',
+  'TestCategory6',
+  'TestCategory7',
+  'TestCategory8',
+  'TestCategory9',
+  'TestCategory10'
 ];
 const subjects = [
-  "Books",
-  "Consciousness",
-  "Good Food",
-  "Music",
-  "Startup journey",
-  "Travel",
-  "Visual Arts"
+  'Books',
+  'Consciousness',
+  'Good Food',
+  'Music',
+  'Startup journey',
+  'Travel',
+  'Visual Arts'
+];
+
+const readMore = [
+  'Learn',
+  'Listen',
+  'Watch',
+  'Reflect',
+  'Discover'
 ];
 
 module.exports = function generate(author) {
@@ -56,7 +62,7 @@ module.exports = function generate(author) {
   .then((articles) => {
     wiki_article = articles.wiki_article;
     generated_article = articles.generated_article;
-    folder = crypto.createHash('md5').update(JSON.stringify(generated_article, 2)).digest("hex");
+    folder = crypto.createHash('md5').update(JSON.stringify(generated_article, 2)).digest('hex');
     absolute_folder = path.join(__dirname, 'tmp', folder);
     return mkdir(absolute_folder);
   }).then(() => {
@@ -103,11 +109,12 @@ function generate_article(author){
             thumbnail: default_thumbnails[Math.floor(Math.random()*default_thumbnails.length)],
             summary: wiki_article.extract.length > 100
                      ? wiki_article.extract.substr(0,100)
-                     : wiki_article.extract
+                     : wiki_article.extract,
+            readMore: readMore[Math.floor(Math.random()*readMore.length)]
           }
         });
       }else{
-        return Promise.reject(new Error("Improper format provided"));
+        return Promise.reject(new Error('Improper format provided'));
       }
     });
 }
@@ -122,7 +129,7 @@ function mkdir(folder){
 }
 
 function clear_files(folder) {
-  console.log("Clearing old files");
+  console.log('Clearing old files');
   let promises = [
     fswrapper.remove(folder),
     fswrapper.remove(`${folder}.zip`)

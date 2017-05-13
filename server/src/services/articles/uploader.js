@@ -213,7 +213,8 @@ function validate_yaml(data) {
           author: a,
           tags: fields.tags,
           thumbnail: fields.thumbnail,
-          summary: fields.summary
+          summary: fields.summary,
+          readMore: fields.readMore
         };
         if(fields.createdAt && !isNaN(new Date(fields.createdAt).getTime())){
           data.content.createdAt = fields.createdAt;

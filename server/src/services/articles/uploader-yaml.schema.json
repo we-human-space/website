@@ -1,5 +1,5 @@
 {
-  "required": ["title","author","subject","category","tags","summary","thumbnail"],
+  "required": ["title","author","subject","category","tags","summary","readMore","thumbnail"],
   "properties": {
     "title": {
       "type": "string",
@@ -26,9 +26,13 @@
       "type": "string",
       "maxLength": 500
     },
+    "readMore": {
+      "type": "string",
+      "enum": ["Learn", "Listen", "Watch", "Reflect", "Discover"]
+    },
     "createdAt": {
       "type": "string",
-      "format": "date",
+      "format": "date"
     },
     "thumbnail": {
       "required": ["width", "height"],
