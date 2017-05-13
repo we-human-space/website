@@ -9,7 +9,7 @@ import views from './partials/index';
 
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
 const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
-views.compiled = require_or_fallback(COMPILED_INDEX_FILE, {});
+require_or_fallback(views, 'compiled', COMPILED_INDEX_FILE, views.compiled);
 watch_views(COMPILED_INDEX_FILE, 'compiled');
 
 module.exports = {
@@ -59,7 +59,7 @@ function armageddon(req, res){
     if(err){
       res.sendStatus(500);
     }else{
-      req.html = data;
+      req.html = data.toString();
       serve(req, res, ()=>{ res.sendStatus(500); });
     }
   });
@@ -182,31 +182,25 @@ function render_file([page, assets, data]) {
   return mustache.render(page.content, render_data, page.partials);
 }
 
-/**
- * This function was created because array iteration with Mustache seemingly didn't work
- * Instead the strings are concatenated here
- **/
-function makeshift_template_iterator(type, items){
-  return items.reduce((acc, i) => {
-    if(type === 'script'){
-      return `${acc}<script src="${i}"></script>\n`;
-    }else if(type === 'style'){
-      return `${acc}<link rel="stylesheet" href="${i}">\n`;
-    }
-  }, '');
-}
-
 function serve(req, res, next){
   if(req.html) res.send(req.html);
   else next();
 }
 
-function require_or_fallback(required, fallback) {
-  try{
-    return require(required);
-  }catch(err){
-    return fallback;
-  }
+function require_or_fallback(target, prop, path, fallback = {}) {
+  fs.readFile(path, 'utf8', function (err, data) {
+    if(err){
+      target[prop] = fallback;
+    }else{
+      try{
+        target[prop] = JSON.parse(data);
+      }catch(e){
+        target[prop] = fallback;
+      }
+    }
+    console.log(target[prop]);
+    console.log(`Updated views[${prop}].`);
+  });
 }
 
 /**
@@ -216,26 +210,34 @@ function require_or_fallback(required, fallback) {
  **/
 function watch_views(path, prop) {
   var last = Date.now();
+
   // Watching the filesystem for changes in the partials.json config file
   console.log(`Starting ${path} config file watcher...`);
   chokidar
     .watch(
-      path, { depth: 1, awaitWriteFinish: { stabilityThreshold: 2000, pollInterval: 100 } }
+      path, { depth: 1, awaitWriteFinish: { stabilityThreshold: 2000, pollInterval: 1000 } }
     )
-    .on('change', () => {
-      console.log(`Changes detected on ${path} config file, updating...`);
+    .on('add', () => {
+      console.log(`Changes detected on ${path} config file.`);
       last = Date.now();
-      views[prop] = require_or_fallback(path);
+      require_or_fallback(views, prop, path, views[prop]);
+    })
+    .on('change', () => {
+      console.log(`Changes detected on ${path} config file.`);
+      last = Date.now();
+      require_or_fallback(views, prop, path, views[prop]);
     })
     .on('error', (error) => { console.log(error); });
-  console.log(`Watching ${path} config file`);
+
   // This is because I don't fully trust the filesystem watch capabilities of NodeJS
   setInterval(() => {
     let curr = Date.now();
-    if(last - curr >= config.views.update_interval){
+    if(curr - last >= config.views.update_interval){
       console.log(`Polling interval reached for ${path} config file, updating...`);
       last = Date.now();
-      views = require_or_fallback(path);
+      require_or_fallback(views, prop, path, views[prop]);
     }
   }, config.views.update_interval);
+
+  console.log(`Watching ${path} config file`);
 }

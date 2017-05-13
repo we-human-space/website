@@ -1,6 +1,7 @@
 import express from 'express';
 import renderer from '../services/renderer/render';
-import blog from '../handlers/blog/index';
+import handlers from '../handlers/index';
+
 
 module.exports = (function() {
 
@@ -16,15 +17,25 @@ module.exports = (function() {
 
   router.get('/vision', renderer.render, renderer.serve);
 
-  router.get('/a/:article', blog.articles.read, renderer.render, renderer.serve);
+  router.get('/weeklypurpose', renderer.render, renderer.serve);
+
+  router.get('/already-subscribed', renderer.render, renderer.serve);
+
+  router.get('/subscribed', renderer.render, renderer.serve);
+
+  router.get('/a/:article', handlers.articles.read, renderer.render, renderer.serve);
+
+  router.get('/error', renderer.render, renderer.serve);
 
   // API Routes
 
-  router.post('/api/feed/', blog.feed);
+  router.post('/api/feed/', handlers.feed);
 
-  router.get('/api/test/uploader/report', blog.articles.test.report);
+  router.post('/api/subscribe', handlers.newsletter.subscribe);
 
-  router.get('/api/test/uploader/clear', blog.articles.test.clear);
+  router.get('/api/test/uploader/report', handlers.articles.test.report);
+
+  router.get('/api/test/uploader/clear', handlers.articles.test.clear);
 
   // 404 Catchers
 

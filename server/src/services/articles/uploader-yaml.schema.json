@@ -1,4 +1,5 @@
 {
+  "required": ["title","author","subject","category","tags","summary","readMore","thumbnail"],
   "properties": {
     "title": {
       "type": "string",
@@ -25,8 +26,16 @@
       "type": "string",
       "maxLength": 500
     },
+    "readMore": {
+      "type": "string",
+      "enum": ["Learn", "Listen", "Watch", "Reflect", "Discover"]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date"
+    },
     "thumbnail": {
-      "type": "object",
+      "required": ["width", "height"],
       "properties": {
         "width": {
           "type": "integer",
@@ -35,6 +44,10 @@
         "height": {
           "type": "integer",
           "minimum": 200
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 100
         }
       }
     }

@@ -14,6 +14,8 @@ module.exports = (function() {
 
   router.get('/a/:article', blog.articles.read, renderer.render, renderer.serve);
 
+  router.get('/error', renderer.render, renderer.serve);
+
   // 404 Catchers
 
   router.get('/*', renderer.not_found, renderer.serve);

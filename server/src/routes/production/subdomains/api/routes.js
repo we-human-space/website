@@ -1,6 +1,6 @@
 import express from 'express';
 import renderer from '../services/renderer/render';
-import blog from '../handlers/blog/index';
+import handlers from '../handlers/index';
 
 module.exports = (function() {
 
@@ -8,11 +8,11 @@ module.exports = (function() {
 
   // API Routes
 
-  router.post('/api/feed/', blog.feed);
+  router.post('/feed/', handlers.feed);
 
-  router.get('/api/test/uploader/report', blog.articles.test.report);
+  router.get('/test/uploader/report', handlers.articles.test.report);
 
-  router.get('/api/test/uploader/clear', blog.articles.test.clear);
+  router.get('/test/uploader/clear', handlers.articles.test.clear);
 
   // 404 Catchers
 
@@ -23,7 +23,6 @@ module.exports = (function() {
   router.put('/*', renderer.not_found, renderer.serve);
 
   router.delete('/*', renderer.not_found, renderer.serve);
-
 
   return router;
 

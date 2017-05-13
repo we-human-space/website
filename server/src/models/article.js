@@ -39,9 +39,11 @@ var ArticleSchema = new Schema({
   category: {type:String, required: true, unique: false},
   summary: {type:String, required: true, unique: false},
   author: {type: Schema.Types.ObjectId, ref: 'Author'},
+  readMore: {type:String, required: true, enum: ['Learn', 'Listen', 'Watch', 'Reflect', 'Discover']},
   tags: [{type:String, index: true}],
   thumbnail: {
     mime: {type:String, required: true},
+    subtitle: {type:String},
     width: {type:Number, required: true, unique: false},
     height: {type:Number, required: true, unique: false},
   }
@@ -399,6 +401,7 @@ ArticleSchema.methods.export = function(){
     category: this.category,
     author: typeof this.author === "object" && this.author ? this.author.export() : null,
     summary: this.summary,
+    readMore: this.readMore,
     thumbnail: {
       ...(this.thumbnail),
       src: `/blog/${this.hash}/thumbnail${this.thumbnail.mime}`,

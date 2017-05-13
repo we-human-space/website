@@ -66,7 +66,7 @@ function feed(state = initial_state.feed, action) {
 function query(state = initial_state.query, action){
   switch(action.type) {
   case ActionTypes.UPDATE_QUERY:
-    return { ...state };
+    return { ...(action.payload.query) };
   default:
     return state;
   }
@@ -82,19 +82,11 @@ function update_pages(state, action) {
 }
 
 function update_feed(state, action) {
-  console.log('update_feed');
-  console.log(action.payload.match);
-  console.log(window.location.search);
-  console.log(state[window.location.search]);
   let match = action.payload.match;
-  let search = Array.isArray(state[window.location.search])
-               ? state[window.location.search].slice()
-               : [];
   let newfeed = {
     ...state,
     [window.location.search]: { ...(state[window.location.search]), ...match }
   };
-  console.log(newfeed);
   return newfeed;
 }
 
