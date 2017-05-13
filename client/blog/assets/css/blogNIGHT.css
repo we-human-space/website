@@ -235,7 +235,7 @@ a:hover, a:active, a:focus {
 }
 
 .menuContainer320 {
-  padding-top: 60px;
+  padding-top: 30px;
   background-color: #221f29;
   /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
@@ -349,8 +349,13 @@ a:hover, a:active, a:focus {
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 }
+
+
+	.quoteOfDayPlacement {
+		width: 90%;
+	}
 
 .quoteOfDay h2 {
 	width: 100%;
@@ -375,7 +380,15 @@ a:hover, a:active, a:focus {
 }
 
 .postIMG {
-	text-align: center;
+	text-align: left;
+}
+
+.imgLESS750PX {
+	/*padding: 0 5%;*/
+}
+
+.imgWIDER750PX {
+	/*padding: 0 5%;*/
 }
 
 .imgLESS750PX img {
@@ -396,6 +409,7 @@ a:hover, a:active, a:focus {
 
 .postTitle h1 {
 	display: inline;
+	font-size: 1.4rem;
 }
 
 .postCategories {
@@ -406,7 +420,7 @@ a:hover, a:active, a:focus {
 .postCategories {
 	font-size: 0.7rem;
 	font-weight: 700;
-	letter-spacing: 0.04rem;
+	letter-spacing: 0.08rem;
 	text-transform: uppercase;
 	color: #8D45F2;
 }
@@ -415,17 +429,15 @@ a:hover, a:active, a:focus {
 	letter-spacing: 0.06rem;
 	line-height: 1.8rem;
 	font-weight: 500;
+	margin-bottom: 10px;
 }
 
 .postReadBtn a {
-	color: #8D45F2;
-	border-bottom: solid 2px #8D45F2;
-	font-weight: 500;
-}
-
-.postReadBtn a span {
 	font-size: 0.7rem;
-	font-weight: 500;
+	font-weight: 700;
+	letter-spacing: 0.08rem;
+	text-transform: uppercase;
+	color: #8D45F2;
 }
 
 
@@ -721,6 +733,7 @@ a:hover, a:active, a:focus {
 
 	.quote768 {
 		display: block;
+
 	}
 
 	.quoteOfDay {
@@ -736,6 +749,10 @@ a:hover, a:active, a:focus {
 		align-items: center;
 		flex-wrap: wrap;
 		margin-top: 50px;
+	}
+
+	.quoteOfDayPlacement {
+		width: 85%;
 	}
 
 	.quoteOfDay h2 {
@@ -762,11 +779,21 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX img {
-		width: 70%;
+		width: 100%;
+		max-width: 400px;
 	}
 
 	.imgWIDER750PX img {
 		width: 100%;
+		max-width: 500px;
+	}
+
+	.imgLESS750PX {
+		margin: 0 10%;
+	}
+
+	.imgWIDER750PX {
+		margin: 0 10%;
 	}
 
 	.postData {
@@ -784,11 +811,12 @@ a:hover, a:active, a:focus {
 
 	.postTitle {
 		width: 70%;
-		font-size: 1.5rem;
 	}
 
 	.postTitle h1 {
 		margin-bottom: 15px;
+		font-size: 1.6rem;
+		letter-spacing: 0.07rem;
 	}
 
 	.postSummary {
@@ -1227,6 +1255,218 @@ a:hover, a:active, a:focus {
 		padding: 0 10px;
 		letter-spacing: 0.12rem;
 		text-align: left;
+		line-height: 2.6rem;
+		height: 80vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-top: 50px;
+
+	}
+
+	.quoteOfDayPlacement {
+		width: 75%;
+		max-width: 1075px;
+	}
+
+	/*.quoteOfDay h2 {
+		font-size: 1.5rem;
+		width: 100%;
+	}*/
+
+	.quoteAuthor {
+		/*margin-top: -100px;*/
+		font-weight: 600;
+		/*font-size: 1.4rem;*/
+	}
+
+	/*----ARTICLE-----*/
+
+	.lower1024 {
+		display: none;
+	}
+
+	.upper1024 {
+		display: none;
+	}
+
+	.imgLESS750PX {
+		margin: 100px 0;
+		position: relative;
+		display:inline-block;
+	}
+
+	.imgWIDER750PX {
+		margin: 100px 0;
+		position: relative;
+		display:inline-block;
+	}
+
+	.post {
+		width: 100%;
+	}
+
+	.postTitle {
+		width: 80%;
+		/*font-size: 1.5rem;*/
+	}
+
+	.postTitle h1 {
+		margin: 0 0 30px 0;
+	}
+
+	.widerSummaryFlex {
+		width: 50%;
+	}
+
+	.imgWIDER750PX {
+		/*padding: 0 20%;*/
+	}
+
+	.imgLESS750PX img {
+		/*width: 100%;*/
+		max-width: 100%;
+	}
+
+  .imgWIDER750PX img {
+		width: 100%;
+		max-width: 750px;
+  }
+
+	.imgLESS750PX:hover .upper1024 {
+		border: solid 40px transparent;
+		width: 100%;
+		height: 100%;
+		position:absolute;
+		top: 0;
+		left: 0;
+		background-color: transparent;
+		display:inline-block;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		text-align:center;
+	}
+
+	.imgWIDER750PX:hover .upper1024 {
+		border: solid 40px transparent;
+		width: 100%;
+		height: 100%;
+		position:absolute;
+		top: 0;
+		left: 0;
+		background-color: transparent;
+		display:inline-block;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		box-sizing:border-box;
+		text-align:center;
+	}
+
+
+	.overlayPlacement {
+		height: 100%;
+	}
+
+	.superAnchor {
+		background-color: #221f29;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+
+	.anchorPLACEMENT {
+		display: block;
+		align-items: center;
+		text-align: center;
+	}
+
+	.articleTITLE {
+		display: flex;
+		justify-content: center;
+	}
+
+	.articleTitlePLACEMENT {
+		font-size: 1.2rem;
+		width: 80%;
+		margin-bottom: 40px;
+	}
+
+	.articleTitlePLACEMENT h1 {
+		margin: 0;
+	}
+
+	.articleCATEGORIES {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+
+	.articleCategoriesPLACEMENT {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.04rem;
+		text-transform: uppercase;
+		color: #8D45F2;
+	}
+
+	.articleSUMMARY {
+		display: flex;
+		justify-content: center;
+	}
+
+	.articleSummaryPLACEMENT {
+		width: 60%;
+		margin-bottom: 20px;
+	}
+
+	.articleSummaryPLACEMENT h4 {
+		font-size: 1rem;
+		letter-spacing: 0.08rem;
+		line-height: 1.6rem;
+		font-weight: 500;
+		margin: 0;
+	}
+
+	.readMORE {
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08rem;
+		text-transform: uppercase;
+		color: #8D45F2;
+	}
+
+	.readMORE span {
+		/*border-bottom: solid 2px #8D45F2;*/
+	}
+
+}
+
+@media (min-width: 1375px) {
+
+	.ulTop1024 {
+		top: 50px;
+		font-size: 1rem;
+		width: 730px;
+	}
+
+	.ctaSubscribe {
+    color: #8D45F2;
+		position: absolute;
+		top: 50px;
+		left: 982px;
+		font-size: 1rem;
+		font-weight: 400;
+		letter-spacing: 0.1rem;
+	}
+
+	.quoteOfDay {
+		padding: 0 10px;
+		letter-spacing: 0.12rem;
+		text-align: left;
 		line-height: 3.1rem;
 		height: 80vh;
 		display: flex;
@@ -1293,11 +1533,13 @@ a:hover, a:active, a:focus {
 	}
 
 	.imgLESS750PX img {
+		max-width: 700px;
 		width: 100%;
 	}
 
   .imgWIDER750PX img {
-    max-width: 1050px;
+		width: 100%;
+		max-width: 1050px;;
   }
 
 	.imgLESS750PX:hover .upper1024 {
@@ -1397,36 +1639,16 @@ a:hover, a:active, a:focus {
 		margin: 0;
 	}
 
-	.readMORE {
+	/*.readMORE {
 		width: 100%;
 		color: #8D45F2;
 		font-weight: 500;
-		/*margin-bottom: 40px;*/
-	}
-
+		margin-bottom: 40px;
+	}*/
+/*
 	.readMORE span {
 		border-bottom: solid 2px #8D45F2;
-	}
-
-}
-
-@media (min-width: 1175px) {
-
-	.ulTop1024 {
-		top: 50px;
-		font-size: 1rem;
-		width: 730px;
-	}
-
-	.ctaSubscribe {
-    color: #8D45F2;
-		position: absolute;
-		top: 50px;
-		left: 982px;
-		font-size: 1rem;
-		font-weight: 400;
-		letter-spacing: 0.1rem;
-	}
+	}*/
 
 
   .colRight {

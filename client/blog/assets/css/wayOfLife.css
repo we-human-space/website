@@ -236,7 +236,7 @@ header {
 }
 
 .menuContainer320 {
-  padding-top: 60px;
+  padding-top: 30px;
   background-color: #221f29;
   /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
@@ -354,7 +354,10 @@ header {
   background-color: transparent;
 	display: flex;
 	justify-content: center;
+}
 
+.sectionMemberSpacing {
+	margin: 200px 0;
 }
 
 .sectionWidth {
@@ -362,7 +365,7 @@ header {
 }
 
 .principles {
-  margin-top: 60px;
+  margin-top: 140px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -726,7 +729,9 @@ header {
 		margin-left: 9%;
 	}
 
-	.
+	/*.sectionMember {
+		margin: 200px;
+	}*/
 
 	.crewSubtitle {
 		text-align: left;
@@ -767,12 +772,12 @@ header {
 	.crewDescription {
 		text-align: left;
 		margin-top: 40px;
-		line-height: 2.23rem;
-		font-size: 1.7rem;
+		line-height: 2.15rem;
+		font-size: 1.5rem;
 	}
 
 	.sectionThree {
-		margin-top: -100px;
+		margin-top: 100px;
 	}
 
 
@@ -825,9 +830,24 @@ header {
 	}
 
 	.sectionOne {
+
 	  margin-top: -110px;
 	  text-align: center;
 	  background-color: transparent;
+	}
+
+	.crewDescription {
+		line-height: 2.23rem;
+		font-size: 1.7rem;
+		letter-spacing: 0.05rem;
+	}
+
+	.sectionMemberSpacing {
+		margin: 250px 0;
+	}
+
+	.crewDescription p {
+		margin: 2rem 0;
 	}
 
 	.thisSeek {
@@ -1269,11 +1289,13 @@ header {
 	}
 
 	.visionExplain {
-		width: 900px;
+		width: 650px;
 	}
 
+
+
 	.crewDescription {
-		width: 800px;
+		width: 750px;
 	}
 
 	.sectionWidth {
@@ -1282,11 +1304,11 @@ header {
 
 	.sectionTwo {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-start;
 	}
 
 	.sectionThree {
-		margin-top: -300px;
+		/*margin-top: -300px;*/
 	}
 
 	.bottom {
@@ -1294,13 +1316,13 @@ header {
 	}
 
 	.imgExplainPlacement {
-		margin-bottom: 400px;
+		margin: 0;
 	}
 
 
 }
 
-@media (min-width: 1175px) {
+@media (min-width: 1375px) {
 
 
 
@@ -1316,9 +1338,17 @@ header {
 		display: none;
 	}
 
+	/*.sectionRight {
+		margin-left: 50%;
+	}*/
+
 
 	.sectionOne {
 		margin-top: -120px;
+	}
+
+	.sectionMemberSpacing {
+		margin: 350px 0;
 	}
 
 
