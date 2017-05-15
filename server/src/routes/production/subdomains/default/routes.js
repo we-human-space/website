@@ -1,5 +1,5 @@
 import express from 'express';
-import renderer from '../services/renderer/render';
+import renderer from '../../../services/renderer/render';
 
 module.exports = (function() {
 

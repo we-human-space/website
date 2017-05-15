@@ -1,8 +1,7 @@
-import path from 'path';
 import config from './config';
 import models from './models/index';
 import uploader from './services/articles/uploader';
-import HTTPServer from 'routes/HTTPServer';
+import HTTPServer from './routes/HTTPServer';
 
 // CMS Service
 uploader.watch();

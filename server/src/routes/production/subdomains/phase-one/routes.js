@@ -1,6 +1,6 @@
 import express from 'express';
-import renderer from '../services/renderer/render';
-import blog from '../handlers/blog/index';
+import renderer from '../../../services/renderer/render';
+import blog from '../../../handlers/blog/index';
 
 module.exports = (function() {
 

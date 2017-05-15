@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import chokidar from 'chokidar';
-const spawn = require('child_process').spawn;
+import child_process from 'child_process';
 import yaml from 'js-yaml';
 import Ajv from 'ajv';
 import config from '../../config';
@@ -10,6 +10,8 @@ import auschema from './uploader-yaml.schema.json';
 import hash from '../secure/hash';
 import mailer from '../mail/mailer';
 import models from '../../models/index';
+
+const spawn = child_process.spawn;
 const Article = models.Article;
 const Author = models.Author;
 

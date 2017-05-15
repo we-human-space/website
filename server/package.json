@@ -98,6 +98,7 @@
     "co": "4.6.0",
     "consolidate": "0.14.5",
     "express": "4.14.0",
+    "express-subdomain": "^1.0.5",
     "hooker": "^0.2.3",
     "ip": "1.1.5",
     "js-yaml": "3.8.3",

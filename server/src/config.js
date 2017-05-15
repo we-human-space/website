@@ -24,15 +24,15 @@ config.global = {
 
 config.paths = {
   base: base,
-  root: base.bind(null, config.dir_root),
-  config: base.bind(null, config.dir_config),
-  src: base.bind(null, config.dir_src),
-  dist: base.bind(null, config.dir_dist),
-  views: base.bind(null, config.dir_views)
+  root: base.bind(null, config.global.dir_root),
+  config: base.bind(null, config.global.dir_config),
+  src: base.bind(null, config.global.dir_src),
+  dist: base.bind(null, config.global.dir_dist),
+  views: base.bind(null, config.global.dir_views)
 };
 
 function base () {
-  const args = [config.path_base].concat([].slice.call(arguments));
+  const args = [config.global.path_base].concat([].slice.call(arguments));
   return path.resolve.apply(path, args);
 }
 
