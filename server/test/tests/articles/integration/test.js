@@ -1,12 +1,11 @@
 "use strict";
 
-const path = require("path");
 const database = require('../../../common/database');
 const fswrapper = require('../../../../dist/services/filesystem/index');
 const stop = require('../../../common/stop');
 const Author = models.Author;
 
-const context = __dirname;
+const CURR_DIR = __dirname;
 const INSERT_DATA = 'insert.json';
 const REMOVE_DATA = 'remove.json';
 const SOURCE_PATH = path.join(__dirname, "./{{filename}}.zip");
@@ -16,7 +15,7 @@ var articles = [];
 var authors;
 
 before(function(done){
-  database.query(context, INSERT_DATA)
+  database.query(CURR_DIR, INSERT_DATA)
   .then(dump)
   .then(() => {
     done();
@@ -29,18 +28,18 @@ before(function(done){
 after(function(done){
   new Promise((resolve, reject) => {
     server
-      .get('/test/uploader/clear')
+      .get(routing['uploader/report'])
       .expect(200)
       .end(function(err, res) {
         if(err) reject(err);
         else resolve(res);
       });
   }).then(() => {
-    return database.query(context, REMOVE_DATA);
+    return database.query(CURR_DIR, REMOVE_DATA);
   }).then(() => {
     done();
   }).catch((err) => {
-    return database.query(context, REMOVE_DATA)
+    return database.query(CURR_DIR, REMOVE_DATA)
     .then(() => {
       console.log(err);
       done(err);
@@ -101,7 +100,7 @@ function upload(data){
 function get_report(data){
   return new Promise((resolve, reject) => {
     server
-      .get("/test/uploader/report")
+      .get(routing['uploader/report'])
       .send(data)
       .end(function(err, res) {
         //Request error

@@ -1,6 +1,6 @@
 "use strict";
 
-const common = require("./common/index");
+require("./test.config.js");
 const tests = require("./tests.json");
 
 function importTest(name, path) {

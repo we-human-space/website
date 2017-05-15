@@ -12,7 +12,7 @@
         "config": false,
         "path": false,
         "models": false,
-        "xss": false,
-        "server": false
+        "server": false,
+        "routing": false
     }
 }

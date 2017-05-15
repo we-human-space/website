@@ -33,7 +33,7 @@ before(function(done){
 after(function(done){
   new Promise((resolve, reject) => {
     server
-      .get('/test/uploader/clear')
+      .get(routing['uploader/clear'])
       .expect(200)
       .end(function(err, res) {
         if(err) reject(err);
@@ -85,7 +85,7 @@ function upload(data){
 function get_report(data){
   return new Promise((resolve, reject) => {
     server
-      .get("/test/uploader/report")
+      .get(routing['uploader/report'])
       .send(data)
       .end(function(err, res) {
         //Request error
