@@ -54,7 +54,7 @@ function catch_render_error(req, res, next){
 }
 
 function armageddon(req, res){
-  fs.readFile(config.paths.view(views.partials['500'].path), (err, data) => {
+  fs.readFile(config.paths.views(views.partials['500'].path), (err, data) => {
     if(err){
       res.sendStatus(500);
     }else{
@@ -92,7 +92,7 @@ function detail_page(key){
   return {
     key,
     type: views.partials[key].type,
-    path: config.paths.view('articles', views.partials[key].path),
+    path: config.paths.views(views.partials[key].path),
     content: undefined
   };
 }
