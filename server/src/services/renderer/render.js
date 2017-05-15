@@ -72,12 +72,14 @@ function render_page(req, res, next){
     req.partial = '404';
     data = {
       preloaded_state: '{}',
+      routing: views.routes(),
       not_found: get_request_key(req) === 'article' ? 'article': 'page'
     };
   }else{
     console.log('render: view found');
     data = {
       ...req.data,
+      routing: views.routes(),
       preloaded_state: data_loaders.preloaded_state(req)
     };
   }
@@ -157,7 +159,7 @@ function read_file([page, assets, data]) {
   return fswrapper.read(page.path)
   .then((content) => {
     if(page.key == 'article_content'){
-      content = content.replace(/\/blog\/article\//g, `/blog/${data.article.hash}/`);
+      content = content.replace(/\/{{hash}}\//g, `/${data.article.hash}/`);
     }
     page.content = content;
     return Promise.resolve([page, assets, data]);

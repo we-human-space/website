@@ -40,7 +40,7 @@
 
         <div class="emailForm">
           <h3 class="learning">We're learning to live with purpose, so will you :)</h3>
-            <form action="joinedNewsletter.html">
+            <form>
               <input class="nameInputBottom firstNameInput" type="text" name="firstName" placeholder="Enter your first name" required>
               <!-- <input class="nameInputBottom lastNameInput" type="text" name="lastName" placeholder="Enter your last name" required > -->
               <div class="emailInputBottomPlacement">
@@ -55,14 +55,9 @@
 <span class="copyBottom">Or, if you're not sure yet, you can go back to</span>
     <div class="socialMediaBottom">
         <div class="allThreeIcons">
-            <a href="/blog/">phase-one.maat.space</a>
+            <a href="{{routing['phase-one']}}">phase-one.maat.space</a>
         </div>
     </div>
 </div>
 
-{{#scripts}}
-  <script src="{{.}}"></script>
-{{/scripts}}
-
-</body>
-</html>
+{{> foot}}

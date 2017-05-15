@@ -5,7 +5,7 @@
           <span class="bottomMarketing320">PS: If you've read this far, you're ready to learn more about living your purpose. Join the ride to get your weekly dose of golden nuggets from me and other members of the dream team!</span>
           <span class="bottomMarketing1024">PS: If you've read this far, you're ready to learn more about living your purpose.<br>Join the ride to get your weekly dose of golden nuggets from me and other members of the dream team!</span>
           <div class="ctaSubscribeBottom">
-            <a href="subscribe.html" class="ctaSubscribeBottom">Sign me up :)</a>
+            <a href="{{routing.weeklypurpose}}" class="ctaSubscribeBottom">Sign me up :)</a>
           </div>
         </div>
     </div>
@@ -13,14 +13,16 @@
 <span class="copyBottom">More of the Good Stuff</span>
     <div class="socialMediaBottom">
         <div class="allThreeIcons">
-            <a target="_blank" href="https://www.youtube.com" class="youtubeBtm"><img class="socialIconsBtm" src="../../assets/img/Youtube-lilac.svg" alt=""></a>
-            <a target="_blank" href="https://www.instagram.com/futureboy_hq/" class="instagramBtm"><img class="socialIconsBtm" src="../../assets/img/Instagram-lilac.svg" alt=""></a>
-            <a target="_blank" href="https://www.behance.net" class="behanceBtm"><img class="socialIconsBtm" src="../../assets/img/Behance-lilac.svg" alt=""></a>
+            <a target="_blank" href="https://www.youtube.com" class="youtubeBtm"><img class="socialIconsBtm" src="/assets/img/Youtube-lilac.svg" alt=""></a>
+            <a target="_blank" href="https://www.instagram.com/futureboy_hq/" class="instagramBtm"><img class="socialIconsBtm" src="/assets/img/Instagram-lilac.svg" alt=""></a>
+            <a target="_blank" href="https://www.behance.net" class="behanceBtm"><img class="socialIconsBtm" src="/assets/img/Behance-lilac.svg" alt=""></a>
         </div>
     </div>
 </div>
 
-  <script src="/app/bundle.js"></script>
+{{#scripts}}
+  <script src="{{.}}"></script>
+{{/scripts}}
 
 </body>
 </html>
