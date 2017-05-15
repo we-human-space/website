@@ -44,6 +44,9 @@ futura
 # Configuration folder
 .config
 
+# NGINX Symbolic Links
+sites-enabled
+
 # mac images
 .DS_Store
 
