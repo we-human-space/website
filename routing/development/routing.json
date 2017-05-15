@@ -1,0 +1,13 @@
+{
+  "phase-one": "/",
+  "team": "/team",
+  "vision": "/vision",
+  "weeklypurpose": "/weeklypurpose",
+  "subscribed": "/subscribed",
+  "already-subscribed": "/already-subscribed",
+  "article": "/a/{{hash}}",
+  "error": "/error",
+  "feed": "/api/feed/",
+  "uploader/report": "/api/test/uploader/report",
+  "uploader/clear": "/api/test/uploader/clear"
+}

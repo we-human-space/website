@@ -4,14 +4,12 @@ import path from 'path';
 import mongo_sanitize from 'mongo-sanitize';
 import config from '../../config';
 import hash from '../../services/secure/hash';
-import xss from '../../services/secure/xss';
 import fswrapper from '../../services/filesystem/index';
 import uploader from '../../services/articles/uploader';
-import renderer from '../../services/renderer/render';
 import models from '../../models/index';
 const Article = models.Article;
 
-const ARTICLE_DIR = path.join(__dirname, '../../', config.views.path, config.views.articles.path);
+const ARTICLE_DIR = config.paths.views('articles');
 
 module.exports = {
   read: read,

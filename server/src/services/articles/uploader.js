@@ -13,8 +13,8 @@ import models from '../../models/index';
 const Article = models.Article;
 const Author = models.Author;
 
-const UPLOAD_PATH = path.join(__dirname, '../../../', config.views.path, config.views.articles.uploads);
-const ARTICLE_DIR = path.join(__dirname, '../../../', config.views.path, config.views.articles.path);
+const UPLOAD_PATH = config.paths.views('uploads/*.zip');
+const ARTICLE_DIR = config.paths.views('articles');
 const IMAGE_EXT_REGEXP = /\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const THUMBNAIL_EXT_REGEXP = /thumbnail\.(gif|jpg|jpeg|jpe|png|svg|bmp|tiff)/;
 const HTML_REGEXP = /.*\.(html|hml)/;

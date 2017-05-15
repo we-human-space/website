@@ -1,16 +1,11 @@
 import fs from 'fs';
-import path from 'path';
 import mustache from 'mustache';
-import chokidar from 'chokidar';
 import fswrapper from '../filesystem/index';
 import config from '../../config';
 import data_loaders from './data';
-import views from './partials/index';
+import views from '../../../routing/index';
 
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
-const COMPILED_INDEX_FILE = path.join(__dirname, '../../../../', '.config/server/compiled.json');
-require_or_fallback(views, 'compiled', COMPILED_INDEX_FILE, views.compiled);
-watch_views(COMPILED_INDEX_FILE, 'compiled');
 
 module.exports = {
   render: render,
@@ -30,7 +25,7 @@ function render(req, res, next){
 }
 
 function not_found(req, res, next){
-  req.partial = "404";
+  req.partial = '404';
   return render_page(req, res, next)
   .catch(catch_render_error(req, res, next));
 }
@@ -59,7 +54,7 @@ function catch_render_error(req, res, next){
 }
 
 function armageddon(req, res){
-  fs.readFile(path.join(config.views.path, views.partials["500"].path), (err, data) => {
+  fs.readFile(config.paths.view(views.partials['500'].path), (err, data) => {
     if(err){
       res.sendStatus(500);
     }else{
@@ -72,15 +67,15 @@ function armageddon(req, res){
 function render_page(req, res, next){
   console.log(`render: ${req.partial}`);
   let data;
-  if(!views.partials[req.partial] || req.partial === "404"){
-    console.log("render: view not found; render as 404");
-    req.partial = "404";
+  if(!views.partials[req.partial] || req.partial === '404'){
+    console.log('render: view not found; render as 404');
+    req.partial = '404';
     data = {
-      preloaded_state: "{}",
-      not_found: get_request_key(req) === "article" ? "article": "page"
+      preloaded_state: '{}',
+      not_found: get_request_key(req) === 'article' ? 'article': 'page'
     };
   }else{
-    console.log("render: view found");
+    console.log('render: view found');
     data = {
       ...req.data,
       preloaded_state: data_loaders.preloaded_state(req)
@@ -97,7 +92,7 @@ function detail_page(key){
   return {
     key,
     type: views.partials[key].type,
-    path: path.join(config.views.path, views.partials[key].path),
+    path: config.paths.view('articles', views.partials[key].path),
     content: undefined
   };
 }
@@ -189,59 +184,4 @@ function render_file([page, assets, data]) {
 function serve(req, res, next){
   if(req.html) res.send(req.html);
   else next();
-}
-
-function require_or_fallback(target, prop, path, fallback = {}) {
-  fs.readFile(path, 'utf8', function (err, data) {
-    if(err){
-      target[prop] = fallback;
-    }else{
-      try{
-        target[prop] = JSON.parse(data);
-      }catch(e){
-        target[prop] = fallback;
-      }
-    }
-    console.log(target[prop]);
-    console.log(`Updated views[${prop}].`);
-  });
-}
-
-/**
- * Watches the filesystem for any externally-triggered changes in configuration
- * This prevents the need for complex asynchronous operations each time a
- * variably-named asset name is requested by a user (essentially every time).
- **/
-function watch_views(path, prop) {
-  var last = Date.now();
-
-  // Watching the filesystem for changes in the partials.json config file
-  console.log(`Starting ${path} config file watcher...`);
-  chokidar
-    .watch(
-      path, { depth: 1, awaitWriteFinish: { stabilityThreshold: 2000, pollInterval: 1000 } }
-    )
-    .on('add', () => {
-      console.log(`Changes detected on ${path} config file.`);
-      last = Date.now();
-      require_or_fallback(views, prop, path, views[prop]);
-    })
-    .on('change', () => {
-      console.log(`Changes detected on ${path} config file.`);
-      last = Date.now();
-      require_or_fallback(views, prop, path, views[prop]);
-    })
-    .on('error', (error) => { console.log(error); });
-
-  // This is because I don't fully trust the filesystem watch capabilities of NodeJS
-  setInterval(() => {
-    let curr = Date.now();
-    if(curr - last >= config.views.update_interval){
-      console.log(`Polling interval reached for ${path} config file, updating...`);
-      last = Date.now();
-      require_or_fallback(views, prop, path, views[prop]);
-    }
-  }, config.views.update_interval);
-
-  console.log(`Watching ${path} config file`);
 }
