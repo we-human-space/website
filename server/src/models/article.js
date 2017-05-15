@@ -186,7 +186,6 @@ ArticleSchema.statics.validatePage = function(page) {
 };
 
 ArticleSchema.statics.filterArticles = function(payload) {
-  console.log(payload);
   if(payload.action == "REFRESH"){
     if(payload.cached) {
       let minpage = payload.cached.index === 10
@@ -215,7 +214,7 @@ ArticleSchema.statics.getQueryResultsAndProcessMatchPages = function(payload, op
   return this.getQueryResults(payload.query, op, page)
   .then((matches) => {
     match = matches;
-    let match_pages = Object.keys(matches);
+    let match_pages = Object.keys(match).map(p => parseInt(p));
     if(payload.cached){
       // Check if there is a need for pages to be sent to the frontend
       let new_pages = match_pages.filter(p => payload.cached.pages.findIndex((i) => i == p) == -1);
@@ -253,7 +252,7 @@ ArticleSchema.statics.getQueryResults = function(query, op, page) {
             result.count += matches[page].length;
             return result;
           }
-        }, cached);
+        }, cached).pages;
       });
     }else{
       return Promise.resolve(cached.pages);
