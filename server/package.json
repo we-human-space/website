@@ -32,6 +32,7 @@
     "deploy": "better-npm-run deploy",
     "deploy:dev": "better-npm-run deploy:dev",
     "deploy:prod": "better-npm-run deploy:prod",
+    "deploy:no-test": "better-npm-run deploy:no-test",
     "codecov": "cat coverage/*/lcov.info | codecov"
   },
   "betterScripts": {
@@ -62,11 +63,10 @@
         "DEBUG": "app:*"
       }
     },
-    "deploy:prod": {
-      "command": "yarn run deploy",
+    "deploy:no-test": {
+      "command": "nodemon --watch src --exec yarn run build",
       "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
+        "NODE_ENV": "production"
       }
     },
     "start": {
