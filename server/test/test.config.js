@@ -37,6 +37,6 @@ global.path = path;
 global.assert = require('assert');
 global.supertest = require('supertest');
 global.config = config;
-global.models = require('../../dist/models/index');
+global.models = require('../dist/models/index');
 global.routing = require(config.paths.root(`routing/${config.global.env}/routing.json`));
 global.server = supertest.agent(`${config.global.host}:${config.global.port}`);

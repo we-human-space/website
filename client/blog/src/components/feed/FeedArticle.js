@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import config from '../../config';
 
 export default function FeedArticle(props){
-  let article_base_url = config.routing['article'].replace('{{hash}}', props.article.hash);
+  const article_url = (u) => config.routing['article'].replace('{{hash}}', u);
   return (
     <div className='article'>
       <div className='postIMG'>
         <div className={props.img_class}>
-          <a href={props.article.url}><img src={`${article_base_url}/thumbnail${props.article.thumbnail.mime}`} alt='' /></a>
+          <a href={article_url(props.article.url)}>
+            <img src={`${article_url(props.article.hash)}/thumbnail${props.article.thumbnail.mime}`} alt='' />
+          </a>
           <div className='upper1024'>
             <div className='overlayPlacement'>
 
-              <a href={props.article.url} className='superAnchor'>
+              <a href={article_url(props.article.url)} className='superAnchor'>
                 <div className='anchorPLACEMENT'>
                   <div className='articleTITLE'>
                     <div className='articleTitlePLACEMENT'>

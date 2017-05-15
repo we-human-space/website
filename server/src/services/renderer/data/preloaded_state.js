@@ -6,6 +6,7 @@ const Author = models.Author;
 
 export default function preloaded_state(req){
   return serialize({
+    page: req.partial, 
     fetching: {
       refresh: false,
       initial: false,

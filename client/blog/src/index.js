@@ -8,17 +8,18 @@ import HamburgerIcon from './components/navmenu/HamburgerIcon';
 import NavLinksContainer from './containers/navmenu/NavLinksContainer';
 import NewsletterFormContainer from './containers/newsletter/NewsletterFormContainer';
 
-// Browser Window Configuration
-window.onload = () => { document.body.scrollTop = document.documentElement.scrollTop = 0; };
+window.onload = () => { window.scrollTo(0, 0); };
+window.onscroll = () => { window.scrollTo(0, 0); setTimeout(() => { window.onscroll = null; }, 200); };
 
 // Store Configuration
+const PAGE = window.__PRELOADED_STATE__.page;
 const store = configure_store(window.__PRELOADED_STATE__);
 
 const render = () => {
   // Feed and articles
-  if(window.location.pathname.match(/^\/blog\//)){
+  if(PAGE === 'feed' || PAGE === 'article'){
     // Feed only
-    if(window.location.pathname.match(/^\/blog\/$/)){
+    if(PAGE === 'feed'){
       ReactDOM.render(
         <Provider store={store}>
           <FeedContainer />
@@ -26,6 +27,7 @@ const render = () => {
         document.getElementById('feed')
       );
     }
+    // Filters
     ReactDOM.render(
       <Provider store={store}>
         <NavLinksContainer type='subjects' render_type='filter' />
@@ -35,7 +37,7 @@ const render = () => {
   }
 
   // Newsletter Form
-  if(window.location.pathname.match(/^\/(vision|team)/)){
+  if(PAGE === 'vision' || PAGE === 'team' || PAGE === 'weeklypurpose'){
     ReactDOM.render(
       <Provider store={store}>
         <NewsletterFormContainer />

@@ -2,7 +2,7 @@
   "^/team$": "team",
   "^/vision$": "vision",
   "^/weeklypurpose$": "weeklypurpose",
-  "^/(\\?.+=.+(&(.+=.+))*)?$": "blog",
+  "^/(\\?.+=.+(&(.+=.+))*)?$": "feed",
   "^/a/([a-zA-Z0-9\\-]{10,})$": "article",
   "^/subscribed": "subscribed",
   "^/already-subscribed": "already-subscribed",
