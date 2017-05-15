@@ -8,7 +8,7 @@ global.__TEST__ = global.__ENV__ === 'test';
 
 const config = raw[process.NODE_ENV || 'development'];
 
-config.routing = require(`../../../routing/${global.__ENV__}`);
+config.routing = require(`./static/routing/${global.__ENV__}/routing.json`);
 
 config.global = {
   env: process.env.NODE_ENV || 'development',

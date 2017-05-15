@@ -62,7 +62,9 @@ client/blog/views/uploads/*
 
 # Compiled JS
 client/blog/dist
+client/blog/src/static/routing
 server/dist
+
 
 # Coverage
 coverage
