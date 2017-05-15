@@ -13,7 +13,7 @@ config.global = {
   env: process.env.NODE_ENV || 'development',
   path_base: path.resolve(__dirname, '..'),
   server_port: 3000,
-  dir_root: '../../',
+  dir_root: '../',
   dir_config: '../../.config',
   dir_src: 'src',
   dir_dist: 'dist',

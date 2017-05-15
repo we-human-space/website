@@ -3,8 +3,8 @@ import mustache from 'mustache';
 import fswrapper from '../filesystem/index';
 import config from '../../config';
 import data_loaders from './data';
-import views from '../../../routing/index';
 
+const views = require(config.paths.root('routing/index'));
 const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
 
 module.exports = {
