@@ -2,11 +2,11 @@ import fs from 'fs';
 import chokidar from 'chokidar';
 import config from '../../../config';
 import partials from './partials.json';
-import api from './production/api/partials.json';
-import base from './production/default/partials.json';
-import phaseone from './production/phase-one/partials.json';
-import weeklypurpose from './production/weeklypurpose/partials.json';
-import localhost from './development/partials.json';
+import api from './production/api/requests.json';
+import base from './production/default/requests.json';
+import phaseone from './production/phase-one/requests.json';
+import weeklypurpose from './production/weeklypurpose/requests.json';
+import localhost from './development/requests.json';
 
 const DEV_ROUTES = require(config.paths.root('routing/development/routing.json'));
 const PROD_ROUTES = require(config.paths.root('routing/production/routing.json'));

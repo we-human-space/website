@@ -1,6 +1,6 @@
 import express from 'express';
-import renderer from '../../../services/renderer/render';
-import blog from '../../../handlers/blog/index';
+import renderer from '../../../../services/renderer/render';
+import handlers from '../../../../handlers/index';
 
 module.exports = (function() {
 
@@ -12,7 +12,7 @@ module.exports = (function() {
 
   router.get('/', renderer.render, renderer.serve);
 
-  router.get('/a/:article', blog.articles.read, renderer.render, renderer.serve);
+  router.get('/a/:article', handlers.articles.read, renderer.render, renderer.serve);
 
   router.get('/error', renderer.render, renderer.serve);
 

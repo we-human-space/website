@@ -30,8 +30,8 @@ class HTTPServer {
   }
 
   start() {
-    this.props.port = this.props.port || 80;
-    this.express.listen(this.props.port, function() {
+    this.props.port = this.props.port || 8080;
+    this.express.listen(this.props.port, () => {
       console.log(`Listening to port ${this.props.port}`);
     });
   }
