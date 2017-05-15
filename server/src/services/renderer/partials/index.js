@@ -5,7 +5,7 @@ import phaseone from './production/phase-one/partials.json';
 import weeklypurpose from './production/weeklypurpose/partials.json';
 import localhost from './development/partials.json';
 
-function routing(host){
+function requests(host){
   if(__DEV__ || __TEST__){
     return localhost;
   }else if(__PROD__){
@@ -26,7 +26,7 @@ function routing(host){
 
 const render_config = {
   partials,
-  routing
+  requests
 };
 
 export default render_config;

@@ -37,7 +37,7 @@ function not_found(req, res, next){
 
 function get_request_key(req){
   console.log(req.get('host'));
-  let routing = views.routing(req.get('host'));
+  let routing = views.requests(req.get('host'));
   return routing[
            Object.keys(routing)
              .find(regexp => req.path.match(regexp))
