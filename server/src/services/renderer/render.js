@@ -79,7 +79,7 @@ function render_page(req, res, next){
     console.log('render: view found');
     data = {
       ...req.data,
-      routing: views.routes(),
+      routing: { ...views.routes() },
       preloaded_state: data_loaders.preloaded_state(req)
     };
   }
@@ -153,6 +153,9 @@ function render_children([page, assets, data]) {
 }
 
 function read_file([page, assets, data]) {
+  if(page.key == 'article'){
+    data.routing.article = data.routing.article.replace('{{hash}}', data.article.hash);
+  }
   if(page.key == 'article_content'){
     page.path = page.path.replace('{{hash}}', data.article.hash);
   }

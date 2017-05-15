@@ -403,7 +403,7 @@ ArticleSchema.methods.export = function(){
     readMore: this.readMore,
     thumbnail: {
       ...(this.thumbnail),
-      src: `/blog/${this.hash}/thumbnail${this.thumbnail.mime}`,
+      src: `thumbnail${this.thumbnail.mime}`,
       class: this.thumbnail.width < 750 ? 'articleImgPlacementLESS750PX' : 'articleImgPlacementWIDER750PX'
     }
   };
