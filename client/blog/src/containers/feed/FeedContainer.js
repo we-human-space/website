@@ -7,6 +7,7 @@ import {
   request_refresh_articles,
   receive_refresh_articles
 } from '../../redux/actions/index';
+import config from '../../config';
 
 var cache;
 var query;
@@ -87,7 +88,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     fetchArticles: () => {
       dispatch(request_articles(cache, query));
       return superagent
-        .post(`/feed/`)
+        .post(config.routing['feed'])
         .send({
           // cache + no query => initial already requested
           // cache + query + no cursor => pages already cached, but query not cached, so ask initial
@@ -102,7 +103,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     expireFeed: () => {
       dispatch(request_refresh_articles(cache));
       return superagent
-        .post(`/feed/`)
+        .post(config.routing['feed'])
         .send({
           action: cache ? 'REFRESH' : 'REQUEST_INITIAL',
           cached: cache,

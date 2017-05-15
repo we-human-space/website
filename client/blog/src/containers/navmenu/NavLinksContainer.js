@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import NavLinks from '../../components/navmenu/NavLinks';
 import { author_link, nav_link, subject_link } from './link-helper';
 import {update_query, request_articles, receive_articles} from '../../redux/actions/index';
+import config from '../../config';
 
 const helpers = {
   'authors': author_link,
@@ -68,7 +69,7 @@ function mapDispatchToProps(dispatch, ownProps) {
 
           // Updating articles
           return superagent
-            .post(`/feed/`)
+            .post(`${config.routing['feed']}`)
             .send({
               // cache + no query => initial already requested
               // cache + query + no cursor => pages already cached, but query not cached, so ask initial

@@ -1,3 +1,4 @@
+import config from '../../config';
 
 export function author_link(authors, render_type) {
   return {
@@ -6,8 +7,8 @@ export function author_link(authors, render_type) {
       text: authors[id].firstname,
       query: {author: id},
       title: `M A A T - Articles by ${authors[id].firstname}`,
-      url: `/blog/?author=${authors[id]._id}`,
-      location: {pathname: '/blog/', search: `author=${authors[id]._id}`},
+      url: `${config.routing['phase-one']}?author=${authors[id]._id}`,
+      location: {pathname: `${config.routing['phase-one']}`, search: `author=${authors[id]._id}`},
       render_type: render_type
     })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),
     class: 'filterBy',
@@ -20,7 +21,7 @@ export function author_link(authors, render_type) {
 export function nav_link(links, render_type) {
   return {
     links: links.map((link) => {
-      let pathname = link.key.toLowerCase() === 'blog' ? `/${link.key.toLowerCase()}/` : `/${link.key.toLowerCase()}`;
+      let pathname = link.key;
       return {
         ...link,
         url: pathname,
@@ -39,8 +40,8 @@ export function subject_link(subjects, render_type) {
   return {
     links: subjects.map((link) => ({
       ...link,
-      url: `/blog/?subject=${encodeURI(link.text)}`,
-      location: {pathname: '/blog/', search: `subject=${encodeURI(link.text)}`},
+      url: `${config.routing['phase-one']}?subject=${encodeURI(link.text)}`,
+      location: {pathname: `${config.routing['phase-one']}`, search: `subject=${encodeURI(link.text)}`},
       title: `M A A T - Resonate with ${link.text}`,
       render_type: render_type
     })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),

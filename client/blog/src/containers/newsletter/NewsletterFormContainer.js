@@ -1,6 +1,7 @@
 import superagent from 'superagent';
 import { connect } from 'react-redux';
 import NewsletterForm from '../../components/newsletter/NewsletterForm';
+import config from '../../config';
 
 const NewsletterFormContainer = connect(
   mapStateToProps,
@@ -13,15 +14,15 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onSubmit: function(data){
       return superagent
-        .post(`/subscribe`)
+        .post(config.routing['weeklypurpose'])
         .send(data)
-        .then(() => { window.location = '/subscribed'; })
+        .then(() => { window.location = config.routing['subscribed']; })
         .catch((err) => {
           console.log(err);
           if(err.status === 400){
-            window.location = '/already-subscribed';
+            window.location = config.routing['already-subscribed'];
           }else{
-            window.location = '/error';
+            window.location = config.routing['error'];
           }
         });
     }
