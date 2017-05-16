@@ -11,7 +11,7 @@ const context = __dirname;
 const INSERT_DATA = 'insert.json';
 const REMOVE_DATA = 'remove.json';
 const SOURCE_PATH = path.join(__dirname, "../../common/tmp/{{filename}}.zip");
-const DESTINATION_PATH = config.paths.views("/uploads/{{filename}}.zip");
+const DESTINATION_PATH = config.paths.views("uploads/{{filename}}.zip");
 
 var articles = [];
 var clears = [];
