@@ -1,17 +1,18 @@
 import path from 'path';
-import raw from '../../../.config/client/index';
+// import raw from '../../../.config/client/index';
+// const config = raw[__ENV__];
 
-global.__ENV__ = process.NODE_ENV || 'development';
-global.__PROD__ = global.__ENV__ === 'production';
-global.__DEV__ = global.__ENV__ === 'development';
-global.__TEST__ = global.__ENV__ === 'test';
+let ENV = process.env.NODE_ENV || 'development';
+global.__PROD__ = ENV === 'production';
+global.__DEV__ = ENV === 'development';
+global.__TEST__ = ENV === 'test';
 
-const config = raw[process.NODE_ENV || 'development'];
+const config = {};
 
-config.routing = require(`./static/routing/${global.__ENV__}/routing.json`);
+config.routing = require(`./static/routing/${ENV}/routing.json`);
 
 config.global = {
-  env: process.env.NODE_ENV || 'development',
+  env: ENV,
   path_base: path.resolve(__dirname, '..'),
   server_port: 3000,
   dir_root: '../../',
@@ -36,5 +37,10 @@ function base () {
   const args = [config.global.path_base].concat([].slice.call(arguments));
   return path.resolve.apply(path, args);
 }
+
+config.feed = {
+  'refresh_timeout': __PROD__ ? 300000 : 15000,
+  'scroll_point': 1000
+};
 
 export default config;

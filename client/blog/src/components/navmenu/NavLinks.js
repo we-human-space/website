@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const SUBSCRIPTION_PATHNAME = __DEV__ ? 'weeklypurpose' : '';
-const SUBSCRIPTION_HOSTNAME = __PROD__ ? 'weeklypurpose.maat.space' : '';
+import config from '../../config';
 
 export default class NavLinks extends React.Component{
 
@@ -19,7 +17,7 @@ export default class NavLinks extends React.Component{
     if(this.props.class === 'resonateWith'){
       return (
         <li>
-          <a href={`${SUBSCRIPTION_HOSTNAME}/${SUBSCRIPTION_PATHNAME}`}
+          <a href={config.routing['weeklypurpose']}
             className={this.subscribeIsActive() ? 'navSubscribe liActive' : 'navSubscribe'}>
             Subscribe
           </a>
@@ -30,6 +28,7 @@ export default class NavLinks extends React.Component{
 
   render(){
     const list = this.props.links.map((link) => {
+      console.log(link.url);
       return (
         <li key={link.key}>
           <a href={link.url}
@@ -60,7 +59,7 @@ export default class NavLinks extends React.Component{
               { list }
             </ul>
           </div>
-          <div><a className='ctaSubscribe' href='weeklypurpose.maat.space'>Subscribe</a></div>
+          <div><a className='ctaSubscribe' href={config.routing['weeklypurpose']}>Subscribe</a></div>
         </div>
       );
     }

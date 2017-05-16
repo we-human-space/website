@@ -19,13 +19,13 @@ export function author_link(authors, render_type) {
 }
 
 export function nav_link(links, render_type) {
+  console.log(config.routing);
   return {
     links: links.map((link) => {
-      let pathname = link.key;
       return {
         ...link,
-        url: pathname,
-        location: {pathname: pathname},
+        url: config.routing[link.key],
+        location: {pathname: config.routing[link.key].replace(/.*maat\.space/, '')},
         render_type: render_type
       };
     }).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),
@@ -41,7 +41,7 @@ export function subject_link(subjects, render_type) {
     links: subjects.map((link) => ({
       ...link,
       url: `${config.routing['phase-one']}?subject=${encodeURI(link.text)}`,
-      location: {pathname: `${config.routing['phase-one']}`, search: `subject=${encodeURI(link.text)}`},
+      location: {pathname: `${config.routing['phase-one'].replace(/.*maat\.space/, '')}`, search: `subject=${encodeURI(link.text)}`},
       title: `M A A T - Resonate with ${link.text}`,
       render_type: render_type
     })).filter((e1, i, a) => a.findIndex((e2, j) => e2.key === e1.key && i === j) !== -1 ? 1 : 0).sort(sort_by_key),

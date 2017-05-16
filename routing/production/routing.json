@@ -1,13 +1,13 @@
 {
-  "phase-one": "phase-one.maat.space/",
-  "article": "phase-one.maat.space/a/{{hash}}",
-  "team": "maat.space/team",
-  "vision": "maat.space/vision",
-  "weeklypurpose": "weeklypurpose.maat.space/",
-  "subscribed": "weeklypurpose.maat.space/subscribed",
-  "already-subscribed": "weeklypurpose.maat.space/already-subscribed",
+  "phase-one": "http://phase-one.maat.space/",
+  "article": "http://phase-one.maat.space/a/{{hash}}",
+  "team": "http://maat.space/team",
+  "vision": "http://maat.space/vision",
+  "weeklypurpose": "http://weeklypurpose.maat.space/",
+  "subscribed": "http://weeklypurpose.maat.space/subscribed",
+  "already-subscribed": "http://weeklypurpose.maat.space/already-subscribed",
   "error": "/error",
-  "feed": "api.maat.space/feed/",
-  "uploader/report": "api.maat.space/test/uploader/report",
-  "uploader/clear": "api.maat.space/test/uploader/clear"
+  "feed": "http://api.maat.space/feed/",
+  "uploader/report": "http://api.maat.space/test/uploader/report",
+  "uploader/clear": "http://api.maat.space/test/uploader/clear"
 }

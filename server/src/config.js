@@ -1,12 +1,12 @@
 import path from 'path';
 import raw from '../../.config/server/index';
 
-global.__ENV__ = process.NODE_ENV || 'development';
+global.__ENV__ = process.env.NODE_ENV || 'development';
 global.__PROD__ = __ENV__ == 'production';
 global.__DEV__ = __ENV__ == 'development';
 global.__TEST__ = __ENV__ == 'test';
 
-const config = raw[process.NODE_ENV || 'development'];
+const config = raw[process.env.NODE_ENV || 'development'];
 
 config.global = {
   port: 8080,
