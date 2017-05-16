@@ -20,7 +20,8 @@ export function subscribe(req, res) {
       return Promise.reject(err);
     }
   }).then((validated) => {
-    return freshmail.addSubscriber(validated.email, config.freshmail.newsletter.main.hash, 2, 1);
+    const newsletter = config.freshmail.newsletter.main;
+    return freshmail.addSubscriber(validated.email, newsletter.hash, 2, 1, {firstname: validated.firstname});
   }).then(() => {
     res.sendStatus(200);
   }).catch((err) => {

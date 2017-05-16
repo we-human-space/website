@@ -28,7 +28,6 @@ export default class NavLinks extends React.Component{
 
   render(){
     const list = this.props.links.map((link) => {
-      console.log(link.url);
       return (
         <li key={link.key}>
           <a href={link.url}

@@ -14,7 +14,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     onSubmit: function(data){
       return superagent
-        .post(config.routing['weeklypurpose'])
+        .post(config.routing['subscribe'])
         .send(data)
         .then(() => { window.location = config.routing['subscribed']; })
         .catch((err) => {

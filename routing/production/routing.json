@@ -3,11 +3,10 @@
   "team": "/team",
   "vision": "/vision",
   "weeklypurpose": "/weeklypurpose",
+  "subscribe": "/api/subscribe",
   "subscribed": "/subscribed",
   "already-subscribed": "/already-subscribed",
   "article": "/a/{{hash}}",
   "error": "/error",
-  "feed": "/api/feed/",
-  "uploader/report": "/api/test/uploader/report",
-  "uploader/clear": "/api/test/uploader/clear"
+  "feed": "/api/feed/"
 }
