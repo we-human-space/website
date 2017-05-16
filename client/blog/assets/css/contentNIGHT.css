@@ -7,7 +7,6 @@ html, body {
   /*padding-bottom: 50px;*/
 }
 
-
 input {
   outline: none;
   color: #e5d9ff;
@@ -237,7 +236,7 @@ a:hover, a:active, a:focus {
 }
 
 .menuContainer320 {
-  padding-top: 60px;
+  padding-top: 30px;
   background-color: #221f29;
   /*background-image: url(../img/Pheasant-3percent.png);
   background-position: center;
@@ -353,8 +352,8 @@ a:hover, a:active, a:focus {
 .articleData {
 	padding-left: 8%;
 	padding-right: 8%;
-	text-align: center;
-	margin-top: 40px;
+	text-align: left;
+	margin-top: 50px;
 }
 
 .postTitle {
@@ -414,6 +413,7 @@ a:hover, a:active, a:focus {
 	justify-content: center;
 	font-size: 0.8rem;
 	letter-spacing: 0.08rem;
+	margin-top: 10px;
 }
 
 .quoteInText {
@@ -815,12 +815,18 @@ a:hover, a:active, a:focus {
 			max-width: 1050px;
 		}
 
+		.imgSubtitle {
+			font-weight: 500;
+			font-size: 1rem;
+			letter-spacing: 0.1rem;
+		}
+
 
 		.articleData {
 			display: flex;
 			justify-content: center;
 			text-align: left;
-			margin-top: 50px;
+			margin-top: 60px;
 		}
 
 		.articleDataPlacement {
@@ -834,18 +840,17 @@ a:hover, a:active, a:focus {
 		}
 
 		.postCategories span {
-			font-size: 0.7rem;
+			font-size: 0.8rem;
 			font-weight: 700;
-			letter-spacing: 0.04rem;
+			letter-spacing: 0.08rem;
 			text-transform: uppercase;
 			color: #8D45F2;
 		}
 
-
 		.text {
 			margin-top: 60px;
-			line-height: 2.23rem;
-			font-size: 1.7rem;
+			line-height: 2.15rem;
+			font-size: 1.5rem;
 			font-weight: 300;
 		}
 
@@ -857,6 +862,7 @@ a:hover, a:active, a:focus {
 			font-weight: 500;
 			letter-spacing: 0.06rem;
 		}
+
 
 		.bottom {
 		  margin-top: 50px;
@@ -1013,15 +1019,17 @@ a:hover, a:active, a:focus {
       color: #8D45F2;
       position: absolute;
       top: 53px;
-      left: 842px;
+      left: 845px;
       font-size: 0.9rem;
       font-weight: 400;
       letter-spacing: 0.1rem;
+			color: #8D45F2;
     }
 
     .ctaSubscribe:hover {
-      border-bottom: solid 1px #8D45F2;
+    	border-bottom: solid 1px #8D45F2;
     }
+
 
 		.ulTop1024 {
 	    position: absolute;
@@ -1349,7 +1357,7 @@ a:hover, a:active, a:focus {
 
 
 
-		@media (min-width: 1175px) {
+		@media (min-width: 1375px) {
 
 			.ulTop1024 {
 				top: 50px;
@@ -1364,6 +1372,11 @@ a:hover, a:active, a:focus {
 				font-size: 1rem;
 				font-weight: 400;
 				letter-spacing: 0.1rem;
+			}
+
+			.text {
+				font-size: 1.7rem;
+				line-height: 2.23rem;
 			}
 
 		  .colRight {
