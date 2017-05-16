@@ -118,6 +118,15 @@
     },
     "partials": []
   },
+  "footer_article": {
+    "type": "foot",
+    "path": "partials/footerContent.html",
+    "assets": {
+      "styles": [],
+      "scripts": {}
+    },
+    "partials": []
+  },
   "footer_marketing": {
     "type": "foot",
     "path": "partials/footerMarketing.html",

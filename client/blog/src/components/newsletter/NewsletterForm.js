@@ -68,7 +68,7 @@ class NewsletterForm extends React.Component {
             required='true'
           />
         </div>
-        <input className='joinBtnBottom' type='submit' value='Join Us!' />
+        <input className='joinBtnBottom' type='submit' value="I'm in!" />
       </form>
     );
   }
