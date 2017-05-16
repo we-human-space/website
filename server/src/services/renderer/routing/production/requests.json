@@ -1,0 +1,11 @@
+{
+  "^/team$": "team",
+  "^/vision$": "vision",
+  "^/weeklypurpose$": "weeklypurpose",
+  "^/(\\?.+=.+(&(.+=.+))*)?$": "feed",
+  "^/a/([a-zA-Z0-9\\-]{10,})$": "article",
+  "^/subscribed": "subscribed",
+  "^/already-subscribed": "already-subscribed",
+  "^/error": "error",
+  "404": "404"
+}
