@@ -19,7 +19,6 @@ export function author_link(authors, render_type) {
 }
 
 export function nav_link(links, render_type) {
-  console.log(config.routing);
   return {
     links: links.map((link) => {
       return {

@@ -46,7 +46,6 @@ function summarize_cache(state){
 function mapStateToProps(state, ownProps) {
   cache = summarize_cache(state);
   let links = helpers[ownProps.type](state.entities[ownProps.type], ownProps.render_type);
-  console.log(JSON.stringify(links));
   return links;
 }
 
