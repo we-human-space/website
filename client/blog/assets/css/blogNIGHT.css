@@ -227,7 +227,7 @@ a:hover, a:active, a:focus {
   position: fixed;
   z-index: 8;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 .menuContainer768 {
@@ -244,7 +244,7 @@ a:hover, a:active, a:focus {
   height: 88vh;
   display: flex;
   justify-content: center;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   letter-spacing: 0.07rem;
   line-height: 1.6rem;
   font-weight: 600;
@@ -285,6 +285,10 @@ a:hover, a:active, a:focus {
   outline: 0;
   text-decoration: none;
   color: #e5d9ff;
+}
+
+.ulBlock li a:active {
+  border: solid 1px #e5d9ff;
 }
 
 .ulBlock li .navSubscribe {
@@ -364,7 +368,7 @@ a:hover, a:active, a:focus {
 .quoteAuthor {
 	/*margin-top: -100px;*/
 	font-weight: 500;
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 
 /*------ARTICLE-------*/
