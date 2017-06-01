@@ -70,7 +70,7 @@
       "styles": ["/assets/css/subscribe.css"],
       "scripts": {"foot": ["{{bundle}}"]}
     },
-    "partials": ["head", "foot", "navbar"]
+    "partials": ["head", "foot"]
   },
   "feed": {
     "type": "body",
