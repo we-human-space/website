@@ -9,15 +9,14 @@ export default class NavLinks extends React.Component{
   }
 
   subscribeIsActive() {
-    return (__DEV__ && window.location.pathname === 'weeklypurpose') ||
-           (__PROD__ && window.location.hostname === 'weeklypurpose.maat.space');
+    return window.__PRELOADED_STATE__.page === 'weeklydose';
   }
 
   renderSubscribe() {
     if(this.props.class === 'resonateWith'){
       return (
         <li>
-          <a href={config.routing['weeklypurpose']}
+          <a href={config.routing['weeklydose']}
             className={this.subscribeIsActive() ? 'navSubscribe liActive' : 'navSubscribe'}>
             Subscribe
           </a>
@@ -58,7 +57,7 @@ export default class NavLinks extends React.Component{
               { list }
             </ul>
           </div>
-          <div><a className='ctaSubscribe' href={config.routing['weeklypurpose']}>Subscribe</a></div>
+          <div><a className='ctaSubscribe' href={config.routing['weeklydose']}>Subscribe</a></div>
         </div>
       );
     }

@@ -4,7 +4,15 @@ import { createLogger } from 'redux-logger';
 import reducer from '../reducers/index';
 
 export default function configure_store(preloadedState) {
-  if(__DEV__ || __TEST__) {
+  if(__PROD__) {
+    return createStore(
+      reducer,
+      preloadedState,
+      applyMiddleware(
+        thunkMiddleware
+      )
+    );
+  }else{
     const loggerMiddleware = createLogger();
     return createStore(
       reducer,
@@ -12,14 +20,6 @@ export default function configure_store(preloadedState) {
       applyMiddleware(
         thunkMiddleware,
         loggerMiddleware
-      )
-    );
-  }else{
-    return createStore(
-      reducer,
-      preloadedState,
-      applyMiddleware(
-        thunkMiddleware
       )
     );
   }

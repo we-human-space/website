@@ -64,7 +64,7 @@
     },
     "partials": ["head"]
   },
-  "weeklypurpose": {
+  "weeklydose": {
     "path": "partials/subscribe.html",
     "assets": {
       "styles": ["/assets/css/subscribe.css"],

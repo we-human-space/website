@@ -7,9 +7,9 @@
 const project = require('./project.config');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const __DEPLOY__ = project.globals.__DEPLOY__;
 const __DEV__ = project.globals.__DEV__;
 const __PROD__ = project.globals.__PROD__;
-const __TEST__ = project.globals.__TEST__;
 
 
 const webpack_config = {
@@ -25,7 +25,7 @@ const webpack_config = {
   module: {},
   plugins: [],
   /* DEV TOOLS */
-  devtool: __DEV__ ? 'eval-cheap-module-source-map' : 'source-map'
+  devtool: __DEV__ || __DEPLOY__ ? 'eval-cheap-module-source-map' : 'source-map'
 };
 
 /* ENTRY POINTS */

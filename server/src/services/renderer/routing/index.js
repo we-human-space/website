@@ -2,13 +2,11 @@ import fs from 'fs';
 import chokidar from 'chokidar';
 import config from '../../../config';
 import partials from './partials.json';
-// import api from './production/api/requests.json';
-// import base from './production/default/requests.json';
-// import phaseone from './production/phase-one/requests.json';
-// import weeklypurpose from './production/weeklypurpose/requests.json';
+import deployment from './deployment/requests.json';
 import localhost from './development/requests.json';
 import production from './production/requests.json';
 
+const DEPLOY_ROUTES = require(config.paths.root('routing/deployment/routing.json'));
 const DEV_ROUTES = require(config.paths.root('routing/development/routing.json'));
 const PROD_ROUTES = require(config.paths.root('routing/production/routing.json'));
 const COMPILED_INDEX_FILE = config.paths.config('server/compiled.json');
@@ -16,31 +14,20 @@ const COMPILED_INDEX_FILE = config.paths.config('server/compiled.json');
 function requests(){
   if(__DEV__ || __TEST__){
     return localhost;
+  }else if(__DEPLOY__){
+    return deployment;
   }else if(__PROD__){
     return production;
   }
-  // if(__DEV__ || __TEST__){
-  //   return localhost;
-  // }else if(__PROD__){
-  //   switch(host){
-  //   case 'maat.space':
-  //     return base;
-  //   case 'api.maat.space':
-  //     return api;
-  //   case 'phase-one.maat.space':
-  //     return phaseone;
-  //   case 'weeklypurpose.maat.space':
-  //     return weeklypurpose;
-  //   default:
-  //     return base;
-  //   }
-  // }
 }
 
 function routes(key){
   if(__DEV__ || __TEST__){
     if(key) return DEV_ROUTES[key];
     else return DEV_ROUTES;
+  }else if(__DEPLOY__){
+    if(key) return DEPLOY_ROUTES[key];
+    else return DEPLOY_ROUTES;
   }else if(__PROD__){
     if(key) return PROD_ROUTES[key];
     else return PROD_ROUTES;

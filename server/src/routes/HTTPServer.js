@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import root from './routes';
+import deploy from './deployment/routes';
 import dev from './development/routes';
 import prod from './production/routes';
 
@@ -15,6 +16,8 @@ class HTTPServer {
     this.express.use('/', root);
     if(__DEV__ || __TEST__){
       this.express.use('/', dev);
+    }else if(__DEPLOY__){
+      this.express.use('/', deploy);
     }else if(__PROD__){
       this.express.use('/', prod);
     }

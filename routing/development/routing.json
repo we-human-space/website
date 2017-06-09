@@ -1,14 +1,13 @@
 {
-  "phase-one": "/",
-  "team": "/team",
-  "vision": "/vision",
-  "weeklypurpose": "/weeklypurpose",
-  "subscribe": "/api/subscribe",
-  "subscribed": "/subscribed",
-  "already-subscribed": "/already-subscribed",
-  "article": "/a/{{hash}}",
+  "quest": "http://quest.human.space/",
+  "article": "http://quest.human.space/a/{{hash}}",
+  "team": "http://team.human.space",
+  "vision": "http://vision.human.space",
+  "weeklydose": "http://weeklydose.human.space/",
+  "subscribed": "http://weeklydose.human.space/subscribed",
+  "already-subscribed": "http://weeklydose.human.space/already-subscribed",
   "error": "/error",
-  "feed": "/api/feed/",
-  "uploader/report": "/api/test/uploader/report",
-  "uploader/clear": "/api/test/uploader/clear"
+  "feed": "http://api.human.space/feed/",
+  "uploader/report": "http://api.human.space/test/uploader/report",
+  "uploader/clear": "http://api.human.space/test/uploader/clear"
 }

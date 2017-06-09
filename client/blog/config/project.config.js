@@ -52,6 +52,7 @@ config.globals = {
     'NODE_ENV': JSON.stringify(config.env)
   },
   '__ENV__': config.env,
+  '__DEPLOY__': config.env === 'deployment',
   '__DEV__': config.env === 'development',
   '__PROD__': config.env === 'production',
   '__TEST__': config.env === 'test'

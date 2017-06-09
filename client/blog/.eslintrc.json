@@ -16,6 +16,7 @@
     },
     "globals": {
       "__ENV__"      : false,
+      "__DEPLOY__"   : false,
       "__DEV__"      : false,
       "__TEST__"     : false,
       "__PROD__"     : false,

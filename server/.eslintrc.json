@@ -13,6 +13,7 @@
     },
     "globals": {
         "__DEV__": false,
+        "__DEPLOY__": false,
         "__PROD__": false,
         "__TEST__": false,
         "__ENV__": false

@@ -8,6 +8,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "yarn run copy:routing && yarn run clean && yarn run compile",
+    "build:deploy": "yarn run build:dev",
     "build:dev": "yarn run copy:routing && yarn run clean && yarn run compile:dev",
     "clean": "node bin/clean",
     "compile": "better-npm-run compile",

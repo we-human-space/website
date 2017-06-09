@@ -17,7 +17,7 @@ module.exports = (function() {
 
   router.get('/vision', renderer.render, renderer.serve);
 
-  router.get('/weeklypurpose', renderer.render, renderer.serve);
+  router.get('/weeklydose', renderer.render, renderer.serve);
 
   router.get('/already-subscribed', renderer.render, renderer.serve);
 
