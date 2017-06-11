@@ -51,11 +51,11 @@ config.globals = {
   'process.env': {
     'NODE_ENV': JSON.stringify(config.env)
   },
-  '__ENV__': config.env,
-  '__DEPLOY__': config.env === 'deployment',
-  '__DEV__': config.env === 'development',
-  '__PROD__': config.env === 'production',
-  '__TEST__': config.env === 'test'
+  '__ENV__': JSON.stringify(config.env),
+  '__DEPLOY__': JSON.stringify(config.env === 'deployment'),
+  '__DEV__': JSON.stringify(config.env === 'development'),
+  '__PROD__': JSON.stringify(config.env === 'production'),
+  '__TEST__': JSON.stringify(config.env === 'test')
 };
 
 function base () {

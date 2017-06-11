@@ -1,18 +1,14 @@
 import path from 'path';
 // import raw from '../../../.config/client/index';
 // const config = raw[__ENV__];
-
-let ENV = process.env.NODE_ENV || 'development';
-global.__PROD__ = ENV === 'production';
-global.__DEV__ = ENV === 'development';
-global.__TEST__ = ENV === 'test';
+const __ENV__ = process.env.NODE_ENV || 'development';
 
 const config = {};
 
-config.routing = require(`./static/routing/${ENV}/routing.json`);
+config.routing = require(`./static/routing/${__ENV__}/routing.json`);
 
 config.global = {
-  env: ENV,
+  env: __ENV__,
   path_base: path.resolve(__dirname, '..'),
   server_port: 3000,
   dir_root: '../../',
