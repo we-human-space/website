@@ -18,7 +18,7 @@ export default function preloaded_state(req){
       pages: {},
       authors: Author.getCachedAuthors(true),
       navlinks: [
-        {key: 'phase-one',text: 'Phase-One'},
+        {key: 'quest',text: 'The Quest'},
         {key: 'team', text: 'Team'},
         {key: 'vision', text: 'Vision'}
       ]

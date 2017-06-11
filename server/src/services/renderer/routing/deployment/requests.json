@@ -6,6 +6,6 @@
   "^/quest/a/([a-zA-Z0-9\\-]{10,})$": "article",
   "^/weeklydose/subscribed": "subscribed",
   "^/weeklydose/already-subscribed": "already-subscribed",
-  "^/.*/error": "error",
+  "^/(.*/)?error": "error",
   "404": "404"
 }
