@@ -1,8 +1,8 @@
 {
-  "phase-one": "/",
+  "quest": "/",
   "team": "/team",
   "vision": "/vision",
-  "weeklypurpose": "/weeklypurpose",
+  "weeklydose": "/weeklypurpose",
   "subscribe": "/api/subscribe",
   "subscribed": "/subscribed",
   "already-subscribed": "/already-subscribed",
