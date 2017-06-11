@@ -50,21 +50,20 @@
         "DEBUG": "app:*"
       }
     },
-    "deploy": {
+    "deploy:test": {
       "command": "yarn run build && yarn run lint && yarn run test && yarn run build",
       "env": {
         "DEBUG": "app:*"
       }
     },
-    "deploy:dev": {
-      "command": "yarn run lint && yarn run dev",
+    "deploy": {
+      "command": "nodemon --watch src --exec \"yarn run build && node --version && node dist/server.js\"",
       "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
+        "NODE_ENV": "deployment"
       }
     },
-    "deploy:no-test": {
-      "command": "nodemon --watch src --exec yarn run build",
+    "prod": {
+      "command": "nodemon --watch src --exec yarn run build && node --version && node dist/server.js",
       "env": {
         "NODE_ENV": "production"
       }

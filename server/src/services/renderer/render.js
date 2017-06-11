@@ -72,7 +72,7 @@ function render_page(req, res, next){
     req.partial = '404';
     data = {
       preloaded_state: '{}',
-      routing: views.routes(),
+      routing: { ...views.routes() },
       not_found: get_request_key(req) === 'article' ? 'article': 'page'
     };
   }else{
