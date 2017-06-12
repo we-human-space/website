@@ -1,7 +1,7 @@
 {
   "^/team$": "team",
   "^/vision$": "vision",
-  "^/weeklypurpose$": "weeklypurpose",
+  "^/weeklydose$": "weeklydose",
   "^/(\\?.+=.+(&(.+=.+))*)?$": "feed",
   "^/a/([a-zA-Z0-9\\-]{10,})$": "article",
   "^/subscribed": "subscribed",

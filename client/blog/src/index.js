@@ -37,7 +37,7 @@ const render = () => {
   }
 
   // Newsletter Form
-  if(PAGE === 'vision' || PAGE === 'team' || PAGE === 'weeklypurpose'){
+  if(PAGE === 'vision' || PAGE === 'team' || PAGE === 'weeklydose'){
     ReactDOM.render(
       <Provider store={store}>
         <NewsletterFormContainer />

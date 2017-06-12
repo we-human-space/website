@@ -8,9 +8,11 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "yarn run copy:routing && yarn run clean && yarn run compile",
-    "build:dev": "yarn run copy:routing && yarn run clean && yarn run compile:dev",
+    "build:deploy": "yarn run copy:routing && yarn run clean && yarn run compile:deploy",
+    "build:dev": "yarn run copy:routing && yarn run cl  ean && yarn run compile:dev",
     "clean": "node bin/clean",
     "compile": "better-npm-run compile",
+    "compile:deploy": "better-npm-run compile:deploy",
     "compile:dev": "better-npm-run compile:dev",
     "copy:routing": "cp -r ../../routing ./src/static",
     "lint": "eslint bin build config server src tests",
@@ -28,15 +30,19 @@
     "compile": {
       "command": "node bin/compile",
       "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
+        "NODE_ENV": "production"
+      }
+    },
+    "compile:deploy": {
+      "command": "node bin/compile",
+      "env": {
+        "NODE_ENV": "deployment"
       }
     },
     "compile:dev": {
       "command": "node bin/compile",
       "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "app:*"
+        "NODE_ENV": "development"
       }
     },
     "dev": {

@@ -1,3 +1,6 @@
 FROM nginx:alpine
 
+ARG MAAT_ENV
+
+COPY nginx/${MAAT_ENV}/*.conf /etc/nginx/
 RUN rm -f /etc/nginx/conf.d/default.conf;

@@ -8,7 +8,7 @@ module.exports = (function() {
 
   const router = express.Router();
 
-  const ALLOWED_ORIGINS = /.*(human|maat)\.space/;
+  const ALLOWED_ORIGINS = /.*deploy\.(human|maat)\.space/;
   const CORS_OPTIONS = {
     origin: (origin, callback) => {
       if(origin.match(ALLOWED_ORIGINS)) callback(null, true);

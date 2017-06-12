@@ -1,7 +1,0 @@
-{
-  "^/$": "weeklypurpose",
-  "^/subscribed": "subscribed",
-  "^/already-subscribed": "already-subscribed",
-  "^/error": "error",
-  "404": "404"
-}

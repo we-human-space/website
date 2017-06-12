@@ -2,8 +2,9 @@ import path from 'path';
 import raw from '../../.config/server/index';
 
 global.__ENV__ = process.env.NODE_ENV || 'development';
-global.__PROD__ = __ENV__ == 'production';
+global.__DEPLOY__ = __ENV__ == 'deployment';
 global.__DEV__ = __ENV__ == 'development';
+global.__PROD__ = __ENV__ == 'production';
 global.__TEST__ = __ENV__ == 'test';
 
 const config = raw[process.env.NODE_ENV || 'development'];

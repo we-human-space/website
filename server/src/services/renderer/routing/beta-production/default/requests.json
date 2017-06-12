@@ -1,6 +1,0 @@
-{
-  "^/team$": "team",
-  "^/vision$": "vision",
-  "^/error": "error",
-  "404": "404"
-}
