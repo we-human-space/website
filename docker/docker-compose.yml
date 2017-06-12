@@ -52,7 +52,7 @@ services:
         - MAAT_ENV=${MAAT_ENV}
     container_name: futurenginx
     ports:
-      - "8888:80"
+      - "${NGINX_PORT}:80"
     depends_on:
       - server
     links:
