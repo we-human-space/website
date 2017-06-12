@@ -5,7 +5,7 @@ import config from '../../config';
 import data_loaders from './data';
 import views from './routing/index';
 
-const COMPILED_NAME_REGEX = /^\{\{(.*)\}\}$/;
+const COMPILED_NAME_REGEX = /\{\{(.*)\}\}/;
 
 module.exports = {
   render: render,
@@ -123,7 +123,7 @@ function set_assets(key, assets = { styles: [], scripts: { head: [], foot: [] } 
 function compile_name(name) {
   let is_to_compile = name.match(COMPILED_NAME_REGEX);
   return is_to_compile && views.compiled && views.compiled[is_to_compile[1]]
-         ? views.compiled[is_to_compile[1]]
+         ? name.replace(is_to_compile[0], views.compiled[is_to_compile[1]])
          : name;
 }
 
