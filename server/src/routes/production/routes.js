@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import renderer from '../../services/renderer/render';
 import handlers from '../../handlers/index';
 
@@ -6,6 +7,18 @@ import handlers from '../../handlers/index';
 module.exports = (function() {
 
   const router = express.Router();
+
+  const ALLOWED_ORIGINS = /.*(human|maat)\.space/;
+  const CORS_OPTIONS = {
+    origin: (origin, callback) => {
+      if(origin.match(ALLOWED_ORIGINS)) callback(null, true);
+      else callback(new Error('Not allowed by CORS'));
+    }
+  };
+
+  // AJAX Preflight Response
+
+  router.options('*', cors(CORS_OPTIONS));
 
   // Page Renderers
 
@@ -27,15 +40,13 @@ module.exports = (function() {
 
   router.get('/*/error', renderer.render, renderer.serve);
 
+  router.get('/error', renderer.render, renderer.serve);
+
   // API Routes
 
-  router.post('/api/feed/', handlers.feed);
+  router.post('/api/feed/', cors(CORS_OPTIONS), handlers.feed);
 
-  router.post('/api/subscribe', handlers.newsletter.subscribe);
-
-  router.get('/api/test/uploader/report', handlers.articles.test.report);
-
-  router.get('/api/test/uploader/clear', handlers.articles.test.clear);
+  router.post('/api/subscribe', cors(CORS_OPTIONS), handlers.newsletter.subscribe);
 
   // 404 Catchers
 

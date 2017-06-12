@@ -4,6 +4,7 @@
   "team": "http://team.human.space",
   "vision": "http://vision.human.space",
   "weeklydose": "http://weeklydose.human.space/",
+  "subscribe": "http://api.human.space/subscribe",
   "subscribed": "http://weeklydose.human.space/subscribed",
   "already-subscribed": "http://weeklydose.human.space/already-subscribed",
   "error": "/error",
