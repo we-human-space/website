@@ -29,10 +29,10 @@ const partials = {
     },
     partials: []
   },
-  index: {
-    path: 'partials/index.html',
+  landing: {
+    path: 'partials/humanspace.html',
     assets: {
-      styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/main.css`],
+      styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/humanspace.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}/{{bundle}}`]}
     },
     partials: ['head', 'foot', 'navbar']
@@ -102,7 +102,7 @@ const partials = {
     javascript: [],
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/fonts.css`, `${ASSET_HOSTS[__ENV__]}/assets/css/normalize.css`],
-      scripts: {head: ['https://use.typekit.net/rer0env.js']}
+      scripts: {}
     },
     partials: []
   },

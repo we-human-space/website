@@ -1,11 +1,12 @@
 {
-  "^/team$": "team",
-  "^/vision$": "vision",
-  "^/weeklydose$": "weeklydose",
-  "^/(\\?.+=.+(&(.+=.+))*)?$": "feed",
-  "^/a/([a-zA-Z0-9\\-]{10,})$": "article",
-  "^/subscribed": "subscribed",
-  "^/already-subscribed": "already-subscribed",
-  "^/error": "error",
+  "^/$": "landing",
+  "^/team/$": "team",
+  "^/vision/$": "vision",
+  "^/weeklydose/$": "weeklydose",
+  "^/quest/(\\?.+=.+(&(.+=.+))*)?$": "feed",
+  "^/quest/a/([a-zA-Z0-9\\-]{10,})$": "article",
+  "^/weeklydose/subscribed": "subscribed",
+  "^/weeklydose/already-subscribed": "already-subscribed",
+  "^/(.*/)?error": "error",
   "404": "404"
 }

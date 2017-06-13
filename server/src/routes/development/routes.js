@@ -9,21 +9,23 @@ module.exports = (function() {
 
   // Page Renderers
 
-  router.get('/@:username', (req,res) => { res.redirect(`/?author="${req.params.username}"`); });
-
   router.get('/', renderer.render, renderer.serve);
 
-  router.get('/team', renderer.render, renderer.serve);
+  router.get('/quest/@:username', (req,res) => { res.redirect(`/quest/?author="${req.params.username}"`); });
 
-  router.get('/vision', renderer.render, renderer.serve);
+  router.get('/quest/', renderer.render, renderer.serve);
 
-  router.get('/weeklydose', renderer.render, renderer.serve);
+  router.get('/team/', renderer.render, renderer.serve);
 
-  router.get('/already-subscribed', renderer.render, renderer.serve);
+  router.get('/vision/', renderer.render, renderer.serve);
 
-  router.get('/subscribed', renderer.render, renderer.serve);
+  router.get('/weeklydose/', renderer.render, renderer.serve);
 
-  router.get('/a/:article', handlers.articles.read, renderer.render, renderer.serve);
+  router.get('/weeklydose/already-subscribed', renderer.render, renderer.serve);
+
+  router.get('/weeklydose/subscribed', renderer.render, renderer.serve);
+
+  router.get('/quest/a/:article', handlers.articles.read, renderer.render, renderer.serve);
 
   router.get('/error', renderer.render, renderer.serve);
 

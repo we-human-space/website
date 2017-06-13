@@ -1,4 +1,5 @@
 {
+  "landing": "http://human.space/",
   "quest": "http://quest.human.space/",
   "article": "http://quest.human.space/a/{{hash}}",
   "team": "http://team.human.space",
