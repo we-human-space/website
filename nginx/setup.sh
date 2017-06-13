@@ -1,8 +1,11 @@
 CURR_DIR=$(pwd);
 
-echo "Creating the site-enabled folder";
 if [ ! -d "../nginx/$MAAT_ENV/sites-enabled" ]; then
+  echo "Creating the site-enabled folder";
   mkdir -p "../nginx/$MAAT_ENV/sites-enabled";
+else
+  echo "Cleaning the site-enabled folder";
+  rm -rf "../nginx/$MAAT_ENV/sites-enabled/*";
 fi
 
 echo "Setting NGINX site-enabled symbolic links";
