@@ -52,6 +52,10 @@
       drift.SNIPPET_VERSION = '0.3.1';
       drift.load('nnham4rhu8iv');
     </script>
+    <script>
+      window.onload = () => { window.scrollTo(0, 0); };
+      window.onscroll = () => { window.scrollTo(0, 0); setTimeout(() => { window.onscroll = null; }, 200);};
+    </script>
     <script>window.__PRELOADED_STATE__ = {{{preloaded_state}}}</script>
   {{#scripts}}
     <script src="{{.}}"></script>

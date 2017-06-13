@@ -24,6 +24,8 @@ module.exports = (function() {
 
   router.get('/', renderer.render, renderer.serve);
 
+  router.get('/maat/', renderer.render, renderer.serve);
+
   router.get('/quest/@:username', (req,res) => { res.redirect(`/?author="${req.params.username}"`); });
 
   router.get('/quest/', renderer.render, renderer.serve);

@@ -8,12 +8,10 @@ import HamburgerIcon from './components/navmenu/HamburgerIcon';
 import NavLinksContainer from './containers/navmenu/NavLinksContainer';
 import NewsletterFormContainer from './containers/newsletter/NewsletterFormContainer';
 
-window.onload = () => { window.scrollTo(0, 0); };
-window.onscroll = () => { window.scrollTo(0, 0); setTimeout(() => { window.onscroll = null; }, 200); };
-
 // Store Configuration
 const PAGE = window.__PRELOADED_STATE__.page;
 const store = configure_store(window.__PRELOADED_STATE__);
+
 
 const render = () => {
   // Feed and articles
@@ -38,11 +36,15 @@ const render = () => {
 
   // Newsletter Form
   if(PAGE === 'vision' || PAGE === 'team' || PAGE === 'weeklydose'){
+    const e = document.getElementsByClassName('emailForm')[0];
     ReactDOM.render(
       <Provider store={store}>
-        <NewsletterFormContainer />
+        <NewsletterFormContainer
+          submitText={e.getAttribute('submitText')}
+          submitClass={e.getAttribute('submitClass')}
+        />
       </Provider>,
-      document.getElementsByClassName('emailForm')[0]
+      e
     );
   }
 

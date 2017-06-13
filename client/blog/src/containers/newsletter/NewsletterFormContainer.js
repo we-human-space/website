@@ -8,7 +8,7 @@ const NewsletterFormContainer = connect(
   mapDispatchToProps
 )(NewsletterForm);
 
-function mapStateToProps(state, ownProps) { return {}; }
+function mapStateToProps(state, ownProps) { return {...ownProps}; }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {

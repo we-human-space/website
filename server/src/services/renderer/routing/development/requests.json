@@ -1,5 +1,6 @@
 {
   "^/$": "landing",
+  "^/maat/$": "maat/landing",
   "^/team/$": "team",
   "^/vision/$": "vision",
   "^/weeklydose/$": "weeklydose",

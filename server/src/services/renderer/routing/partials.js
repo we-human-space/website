@@ -35,7 +35,15 @@ const partials = {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/humanspace.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}/{{bundle}}`]}
     },
-    partials: ['head', 'foot', 'navbar']
+    partials: ['head', 'footer_bare', 'navbar']
+  },
+  'maat/landing': {
+    path: 'partials/maatspace.html',
+    assets: {
+      styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/maatspace.css`],
+      scripts: {}
+    },
+    partials: ['head', 'footer_bare', 'navbar']
   },
   team: {
     path: 'partials/theCrew.html',
@@ -63,9 +71,9 @@ const partials = {
     partials: ['head']
   },
   subscribed: {
-    path: 'partials/joinedNewsletter.html',
+    path: 'partials/joinedWeeklyDose.html',
     assets: {
-      styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/joinedNewsletterNIGHT.css`],
+      styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/joinedWeeklyDose.css`],
       scripts: {}
     },
     partials: ['head']
@@ -76,7 +84,7 @@ const partials = {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/subscribe.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
     },
-    partials: ['head', 'foot']
+    partials: ['head', 'footer_bare']
   },
   feed: {
     type: 'body',

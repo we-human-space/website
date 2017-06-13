@@ -1,5 +1,6 @@
 {
   "landing": "http://deploy.human.space/",
+  "maat/landing": "http://deploy.maat.space/",
   "quest": "http://quest.deploy.human.space/",
   "article": "http://quest.deploy.human.space/a/{{hash}}",
   "team": "http://team.deploy.human.space",

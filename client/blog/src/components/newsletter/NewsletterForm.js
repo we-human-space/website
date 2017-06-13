@@ -68,14 +68,19 @@ class NewsletterForm extends React.Component {
             required='true'
           />
         </div>
-        <input className='joinBtnBottom' type='submit' value="I'm in!" />
+        <input
+          className={`joinBtnBottom ${this.props.submitClass || ''}`}
+          type='submit' value={this.props.submitText || "I'm in!"}
+        />
       </form>
     );
   }
 }
 
 NewsletterForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  submitText: PropTypes.string,
+  submitClass: PropTypes.string
 };
 
 export default NewsletterForm;
