@@ -71,6 +71,7 @@ function render_page(req, res, next){
     console.log('render: view not found; render as 404');
     req.partial = '404';
     data = {
+      title: '404',
       preloaded_state: '{}',
       routing: { ...views.routes() },
       not_found: get_request_key(req) === 'article' ? 'article': 'page'
@@ -79,6 +80,7 @@ function render_page(req, res, next){
     console.log('render: view found');
     data = {
       ...req.data,
+      title: views.partials[req.partial].title || 'H U M A N S P A C E',
       routing: { ...views.routes() },
       preloaded_state: data_loaders.preloaded_state(req)
     };

@@ -7,6 +7,7 @@ const ASSET_HOSTS = {
 const partials = {
   '404': {
     path: 'partials/404.html',
+    title: '404',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/404.css`],
       scripts: {}
@@ -15,6 +16,7 @@ const partials = {
   },
   error: {
     path: 'partials/error.html',
+    title: '500',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/404.css`],
       scripts: {}
@@ -23,6 +25,7 @@ const partials = {
   },
   '500': {
     path: 'static/500.html',
+    title: '500',
     assets: {
       styles: [],
       scripts: {}
@@ -31,6 +34,7 @@ const partials = {
   },
   landing: {
     path: 'partials/humanspace.html',
+    title: 'H U M A N S P A C E',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/humanspace.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}/{{bundle}}`]}
@@ -39,6 +43,7 @@ const partials = {
   },
   'maat/landing': {
     path: 'partials/maatspace.html',
+    title: 'M A A T',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/maatspace.css`],
       scripts: {}
@@ -47,6 +52,7 @@ const partials = {
   },
   team: {
     path: 'partials/theCrew.html',
+    title: 'The Dream Team // M A A T',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/theCrewNIGHT.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
@@ -56,6 +62,7 @@ const partials = {
   vision: {
     type: 'body',
     path: 'partials/wayOfLife.html',
+    title: 'Vision // M A A T',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/wayOfLife.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
@@ -64,6 +71,7 @@ const partials = {
   },
   'already-subscribed': {
     path: 'partials/emailAlreadyDatabase.html',
+    title: 'L O V E',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/joinedNewsletterNIGHT.css`],
       scripts: {}
@@ -72,6 +80,7 @@ const partials = {
   },
   subscribed: {
     path: 'partials/joinedWeeklyDose.html',
+    title: 'T R U S T',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/joinedWeeklyDose.css`],
       scripts: {}
@@ -80,6 +89,7 @@ const partials = {
   },
   weeklydose: {
     path: 'partials/subscribe.html',
+    title: 'Y O U R  W E E K L Y D O S E',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/subscribe.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
@@ -89,6 +99,7 @@ const partials = {
   feed: {
     type: 'body',
     path: 'partials/feed.html',
+    title: 'The Quest // H U M A N S P A C E',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/blogNIGHT.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
@@ -98,6 +109,7 @@ const partials = {
   article: {
     type: 'body',
     path: 'partials/article.html',
+    title: 'The Quest // H U M A N S P A C E',
     assets: {
       styles: [`${ASSET_HOSTS[__ENV__]}/assets/css/contentNIGHT.css`],
       scripts: {foot: [`${ASSET_HOSTS[__ENV__]}{{bundle}}`]}
