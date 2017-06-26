@@ -46,6 +46,33 @@ h3 {
   margin: 0;
 }
 
+iframe {
+  width: 320px;
+  height: 180px;
+}
+
+input {
+  font-family: "futura-pt",sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.08rem;
+  border: none;
+
+}
+
+.what {
+  position: fixed;
+  left: 18%;
+  bottom: 30px;
+}
+
+#button {
+  width: 200px;
+  background-color: #000;
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-align: center;
+}
+
 .feather {
   display: flex;
   justify-content: center;
@@ -58,12 +85,25 @@ h3 {
   width: 90%;
 }
 
-
-.section10 {
+.section9 {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+.section10 {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.black {
+  background-color: #000;
+  z-index: 2;
+  color: #fff;
 }
 
 .emailForm {
@@ -174,9 +214,47 @@ h3 {
 	100%{color: #F57AE5;}
 }
 
+
+
+@media (min-width: 359px) {
+
+  .what {
+    position: fixed;
+    left: 22%;
+    bottom: 30px;
+  }
+
+}
+
+@media (min-width: 370px) {
+
+  .what {
+    position: fixed;
+    left: 25%;
+    bottom: 30px;
+  }
+
+}
+
 @media (min-width: 600px) {
+
+  #button {
+    width: 300px;
+    background-color: #000;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
   h1 {
     font-size: 2rem;
+  }
+
+  .section10 {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 
@@ -236,8 +314,60 @@ h3 {
 
 }
 
+@media (min-width: 750px) {
+
+  .what {
+    position: fixed;
+    left: 35%;
+    bottom: 30px;
+  }
+
+  #button {
+    width: 300px;
+    background-color: #000;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  iframe {
+    width: 640px;
+    height: 320px;
+  }
+
+}
+
+
 
 @media (min-width: 1375px) {
+
+  .what {
+    position: fixed;
+    left: 42%;
+    bottom: 30px;
+  }
+
+  #button {
+    width: 300px;
+    background-color: #000;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .section10 {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+
+  iframe {
+    width: 1080px;
+    height: 640px;
+  }
 
   /*.marketing {
   	height: 100vh;
