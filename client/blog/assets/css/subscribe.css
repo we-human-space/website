@@ -111,6 +111,34 @@ input {
   align-items: center;
 }
 
+.section8 {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+.section8 h1 {
+  font-size: 2rem;
+}
+
+.section8 h2 {
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  font-weight: 500;
+}
+
+.allCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px;
+
+}
+
 .black {
   background-color: #000;
   z-index: 2;
