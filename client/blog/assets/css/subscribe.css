@@ -42,7 +42,7 @@ h1 {
 }
 
 h3 {
-  color: #000;
+  /*color: #000;*/
   margin: 0;
 }
 
@@ -96,6 +96,23 @@ input {
   width: 90%;
 }
 
+.articleData {
+	padding-left: 8%;
+	padding-right: 8%;
+	text-align: left;
+	margin-top: 50px;
+}
+
+.text {
+	margin-top: 40px;
+	text-align: left;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 1.8rem;
+	font-size: 18px;
+	letter-spacing: 0.05rem;
+}
+
 .section9 {
   height: 100vh;
   display: flex;
@@ -144,6 +161,7 @@ input {
   text-align: center;
   font-size: 1.3rem;
   letter-spacing: 0.08rem;
+  margin-bottom: 100px;
 	/*font-weight: 600;*/
 }
 
@@ -232,8 +250,9 @@ input {
 }
 
 .instagramBtm {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -323,8 +342,11 @@ input {
 	background-color: #000;
 }
 
-
 .rainbow {
+
+  /*font-weight: 500;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;*/
    /* Chrome, Safari, Opera */
   -webkit-animation: rainbow 5s infinite;
 
@@ -371,6 +393,10 @@ input {
 
 
 @media (min-width: 600px) {
+
+  .articleData {
+    text-align: left;
+  }
 
   #button {
     width: 300px;
@@ -450,6 +476,30 @@ input {
 }
 
 @media (min-width: 750px) {
+
+  .articleData {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    margin-top: 60px;
+  }
+
+  .articleDataPlacement {
+    max-width: 700px;
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+
+  .text {
+    margin-top: 60px;
+    line-height: 2.15rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+
+  .text p {
+    margin: 2rem 0;
+  }
 
 
   #button {
@@ -544,7 +594,7 @@ input {
 	}
 
 	.copyBottom {
-		font-size: 1rem;
+		font-size: 1.3rem;
 	}
 
 
