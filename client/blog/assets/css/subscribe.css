@@ -96,7 +96,7 @@ input {
   width: 90%;
 }
 
-.articleData {
+.article {
 	padding-left: 8%;
 	padding-right: 8%;
 	text-align: left;
@@ -394,7 +394,7 @@ input {
 
 @media (min-width: 600px) {
 
-  .articleData {
+  .article {
     text-align: left;
   }
 
@@ -477,14 +477,14 @@ input {
 
 @media (min-width: 750px) {
 
-  .articleData {
+  .article {
     display: flex;
     justify-content: center;
     text-align: left;
     margin-top: 60px;
   }
 
-  .articleDataPlacement {
+  .articlePlacement {
     max-width: 700px;
     padding-left: 8%;
     padding-right: 8%;
