@@ -1,0 +1,3 @@
+[submodule "client/dream"]
+	path = client/dream
+	url = https://github.com/we-human-space/dream
